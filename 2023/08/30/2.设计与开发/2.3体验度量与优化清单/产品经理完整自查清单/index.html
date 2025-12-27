@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2023/08/30/2.设计与开发/2.3体验度量与优化清单/产品经理完整自查清单/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品经理完整自查清单">
+<meta property="og:url" content="https://chinapmcc.com/2023/08/30/2.%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/2.3%E4%BD%93%E9%AA%8C%E5%BA%A6%E9%87%8F%E4%B8%8E%E4%BC%98%E5%8C%96%E6%B8%85%E5%8D%95/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E5%AE%8C%E6%95%B4%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2023-08-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-29T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="自查清单">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            产品经理完整自查清单 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">产品经理完整自查清单</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-30</span>
+        <span class="mobile">2023-08-30</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-08-30</span>
+            <span class="mobile">2023-08-30</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">02🎨设计与开发</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/2-3%E4%BD%93%E9%AA%8C%E5%BA%A6%E9%87%8F%E4%B8%8E%E4%BC%98%E5%8C%96%E6%B8%85%E5%8D%95/">2.3体验度量与优化清单</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95/">自查清单</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>25 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>《产品经理完整自查清单》是一份全面且系统的产品管理工具，旨在帮助产品经理在产品开发、设计、上线以及运营的各个阶段进行细致的自查与评估。这份清单涵盖了从用户需求分析到产品上线准备的各个环节，确保产品经理在每一个关键节点都能做出精准的决策，避免潜在的风险，并提升产品的整体质量和用户体验。</p>
+<p>总的来说，《产品经理完整自查清单》是一份实用性强、覆盖面广的工具，适合所有希望提升产品管理能力、确保产品高质量交付的产品经理使用。通过这份清单，产品经理可以更加自信地应对各种挑战，推动产品从构思到实现的每一个环节，最终打造出真正符合市场需求和用户期望的优秀产品。</p>
+<h2 id="1、📋产品需求"><a href="#1、📋产品需求" class="headerlink" title="1、📋产品需求"></a>1、📋产品需求</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> B[一、产品需求]:::level2
+    B --> B1["1.1 判断需求真伪"]:::level3
+    B1 --> B11["1.1.1 是谁在什么样的场景下产生的什么诉求，希望用什么方法解决什么问题"]:::level4
+    B1 --> B12["1.1.2 是否需要进一步调研相关用户/需求提出方，是否需要数据佐证"]:::level4
+    B1 --> B13["1.1.3 是否符合当前核心业务场景、是否符合用户画像和用户故事"]:::level4
+    B1 --> B14["1.1.4 是否存在类似竞品，是否完成竞品分析"]:::level4
+    B1 --> B15["1.1.5 当前方案是否是同类场景下的共性诉求"]:::level4
+
+    B --> B2["1.2 量化收益"]:::level3
+    B2 --> B21["1.2.1 对核心业务的贡献程度，尽可能量化"]:::level4
+    B2 --> B22["1.2.2 对核心用户的影响程度，尽可能量化"]:::level4
+
+    B --> B3["1.3 判断可行性"]:::level3
+    B3 --> B31["1.3.1 当前业务是否可以支持"]:::level4
+    B3 --> B32["1.3.2 当前技术是否可以支持"]:::level4
+
+    B --> B4["1.4 风险评估"]:::level3
+    B4 --> B41["1.4.1 功能风险"]:::level4
+    B4 --> B42["1.4.2 外部风险"]:::level4
+    B41 --> B411["1.4.1.1 是否完整梳理当前规划内容下线后的影响点"]:::level4
+    B41 --> B412["1.4.1.2 是否已预估业务高峰数据爆发量级，及其处理措施"]:::level4
+    B41 --> B413["1.4.1.3 是否已计划好功能上线后的验证方法"]:::level4
+    B41 --> B414["1.4.1.4 是否存在关联功能的改造点"]:::level4
+    B42 --> B421["1.4.2.1 是否存在负面舆情风险"]:::level4
+    B42 --> B422["1.4.2.2 是否存在法律及合规风险"]:::level4
+    B42 --> B423["1.4.2.3 是否引发诸如骚扰、欺诈等安全隐患"]:::level4
+
+    B --> B5["1.5 排定优先级"]:::level3
+    B5 --> B51["1.5.1 用户覆盖度"]:::level4
+    B5 --> B52["1.5.2 使用频率"]:::level4
+    B5 --> B53["1.5.3 对核心场景的影响"]:::level4
+    B5 --> B54["1.5.4 对核心用户的影响"]:::level4
+    B5 --> B55["1.5.5 实际收益的高低"]:::level4
+    B5 --> B56["1.5.6 对KPI的影响"]:::level4
+    B5 --> B57["1.5.7 实现难度的高低"]:::level4
+    B5 --> B58["1.5.8 产品成长时机"]:::level4</pre>
+<h2 id="2、🗂️信息架构"><a href="#2、🗂️信息架构" class="headerlink" title="2、🗂️信息架构"></a>2、🗂️信息架构</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> C[二、信息架构]:::level2
+    C --> C1["2.1 信息架构设计"]:::level3
+    C1 --> C11["2.1.1 设计时是否结合了用户画像、用户习惯、业务场景等因素"]:::level4
+    C1 --> C12["2.1.2 架构层次是否清晰，是否足够扁平，是否容易使用户理解"]:::level4
+    C1 --> C13["2.1.3 所有信息均需要进行重要级评定，以决定在界面和功能中的重要程度"]:::level4
+    C1 --> C14["2.1.4 信息分类是否合理，一定要“高内聚，低耦合”"]:::level4
+    C1 --> C15["2.1.5 架构拓展性是否足够大，后续对信息模块进行增删改查时，是否容易施行"]:::level4</pre>
+<h2 id="3、➡️产品流程"><a href="#3、➡️产品流程" class="headerlink" title="3、➡️产品流程"></a>3、➡️产品流程</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> D[三、产品流程]:::level2
+    D --> D1["3.1 流程图基础"]:::level3
+    D1 --> D11["3.1.1 流程设计是否结合了用户画像、用户习惯、业务场景、竞品等因素"]:::level4
+    D1 --> D12["3.1.2 主干流程是否最简化，是否覆盖了足够多的场景"]:::level4
+    D1 --> D13["3.1.3 是否有特殊流程(分支流程、逆向流程)"]:::level4
+    D1 --> D14["3.1.4 是否有异常流程"]:::level4
+
+    D --> D2["3.2 数据流转节点"]:::level3
+    D2 --> D21["3.2.1 操作节点是否足够精简易理解"]:::level4
+    D2 --> D22["3.2.2 是否考虑了操作节点的客错性(二次确认、撤销操作)"]:::level4
+    D2 --> D23["3.2.3 数据交互点是否依赖其他系统"]:::level4
+
+    D --> D3["3.3 流程图规范"]:::level3
+    D3 --> D31["3.3.1 特殊、异常流程是否需要增加切换流程的引导，避免流程断头"]:::level4
+    D3 --> D32["3.3.2 相关流程的用户体验路径是否一致"]:::level4
+    D3 --> D33["3.3.3 各图形形状/字号统一。
+    重点内容可特殊标识，关键节点增加注释说明"]:::level4
+    D3 --> D34["3.3.4 流程均以开始框开始，以结束框结束，避免断头风险"]:::level4
+    D3 --> D35["3.3.5 流程图从左到右、从上到下排列"]:::level4
+    D3 --> D36["3.3.6 流程线尽量不要交叉"]:::level4
+    D3 --> D37["3.3.7 流程完成后是否进行了场景验证，是否符合用户预期"]:::level4</pre>
+<h2 id="4、💻交互设计"><a href="#4、💻交互设计" class="headerlink" title="4、💻交互设计"></a>4、💻交互设计</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+    classDef level5 fill:#f3e5f5,stroke:#9c27b0;
+
+    A[产品经理完整自查清单]:::level1 --> E[四、交互设计]:::level2
+    E --> E1["4.1 页面流"]:::level3
+    E1 --> E11["4.1.1 页面跳转的描述说明是否完整。是否需要页面流转图辅助说明"]:::level4
+    E1 --> E12["4.1.2 页面内容是否完整，是否符合信息架构设计，是否存在缺失"]:::level4
+    E1 --> E13["4.1.3 页面是否存在空值状态"]:::level4
+    E1 --> E14["4.1.4 页面加载状态展示的loading图是否友好，是否可打断加载状态"]:::level4
+    E1 --> E15["4.1.5 页面加载状态是否可操作部分原生控件(移动端)"]:::level4
+    E1 --> E16["4.1.6 页面的逆向操作是否有完整的路径，返回是否会造成死循环"]:::level4
+    E1 --> E17["4.1.7 页面的跳转是否需要转场动效"]:::level4
+    E1 --> E18["4.1.8 是否添加全局特效的交互操作,iOS右滑返回"]:::level4
+    E1 --> E19["4.1.9 移动端单页面中的功能是否有冗余，单页面主功能仅限一个"]:::level4
+    E1 --> E110["4.1.10 后端web页尽量在一个页面中展示更多相关信息，单页面可完成多次相关操作"]:::level4
+
+    E --> E2["4.2 文案"]:::level3
+    E2 --> E21["4.2.1 是否易理解，是否有歧义，是否有错别字"]:::level4
+    E2 --> E22["4.2.2 句式、用词是否准确一致"]:::level4
+    E2 --> E23["4.2.3 文案是否与产品调性一致"]:::level4
+
+    E --> E3["4.3 数据展示"]:::level3
+    E3 --> E31["4.3.1 展示数据是否使用的是服务器数据，或使用的是本地缓存数据"]:::level4
+    E3 --> E32["4.3.2 展示数据是否是初次加载读取的静态数据，或实时、定时展示的动态数据"]:::level4
+    E3 --> E33["4.3.3 是否规划数据为空时的展示效果，是否增加用户引导"]:::level4
+    E3 --> E34["4.3.4 是否规划数据字数超长展示效果，是否有超长限制"]:::level4
+    E3 --> E35["4.3.5 对过期的缓存数据是否需要告知用户刷新(活动过期)"]:::level4
+    E3 --> E36["4.3.6 是否规划数据极限值的展示效果"]:::level4
+    E3 --> E37["4.3.7 是否规划数值的特定展示格式"]:::level4
+    E3 --> E38["4.3.8 是否存在敏感数据，敏感数据如何展示"]:::level4
+    E3 --> E39["4.3.9 是否对特殊内容进行过滤、标记(敏感、违禁的词语)"]:::level4
+    E3 --> E310["4.3.10 前置场景的不同是否对当前展示数据产生影响，不同场景是否需要展示不同数据"]:::level4
+    E3 --> E311["4.3.11 移动端从后台唤醒应用时，是否需要刷新当前页面数据"]:::level4
+
+    E --> E4["4.4 数据表单"]:::level3
+    E4 --> E41["4.4.1 数据按什么规则排序"]:::level4
+    E4 --> E42["4.4.2 数据是根据什么搜索规则筛选出"]:::level4
+    E4 --> E43["4.4.3 数据展示是否分页，单页展示数据量是否有限制"]:::level4
+
+    E --> E5["4.5 控件"]:::level3
+    E5 --> E51["4.5.1 控件是否符合用户认知"]:::level4
+    E5 --> E52["4.5.2 全局控件样式是否具有一致性"]:::level4
+    E5 --> E53["4.5.3 全局控件交互行为是否具有一致性"]:::level4
+    E5 --> E54["4.5.4 控件的不可用状态如何展示"]:::level4
+    E5 --> E55["4.5.5 是否周全地考虑了所有操作成功的反馈"]:::level4
+    E5 --> E56["4.5.6 是否周全地考虑了所有操作失败的反馈"]:::level4
+    E5 --> E57["4.5.7 操作过程中是否允许取消"]:::level4
+    E5 --> E58["4.5.8 是否设计了必要且合理的动效"]:::level4
+    E5 --> E59["4.5.9 待操作按钮在当前界面中是否明确"]:::level4
+    E5 --> E510["4.5.10 待操作按钮是否易操作"]:::level4
+    E5 --> E511["4.5.11 控件触发的提示类型是否恰当(小红点、Toast、弹窗)"]:::level4
+    E5 --> E512["4.5.12 控件触发的功能过程中是否可以随时取消(下载新版本、上传文件)"]:::level4
+
+    E --> E6["4.6 文字输入"]:::level3
+    E6 --> E61["4.6.1 输入文字前是否有默认值，是否有输入提示"]:::level4
+    E6 --> E62["4.6.2 输入焦点丢失和存在时是否有展示内容的差异"]:::level4
+    E6 --> E63["4.6.3 输入文字是否存在极限长度或最低长度"]:::level4
+    E6 --> E64["4.6.4 输入文字是否可存在特殊字符，若用户输入如何处理"]:::level4
+    E6 --> E65["4.6.5 输入文字是否存在对敏感词(密码、存款金额等)、违禁词的禁用或过滤展示"]:::level4
+    E6 --> E66["4.6.6 输入文字后是否需要一键清空操作"]:::level4
+    E6 --> E67["4.6.7 输入文字后是否显示辅助结果(辅助词)，辅助词的搜索规则"]:::level4
+    E6 --> E68["4.6.8 输入文字后遇到流程打断的情况是否保留输入记录(断网、关闭页面等)"]:::level4
+    E6 --> E69["4.6.9 是否针对输入的内容指定键盘类型，数字键盘，英文键盘(移动端)"]:::level4
+    E6 --> E610["4.6.10 是否说明了键盘唤起后需要页面的滚动来避免输入框的遮挡(移动端)"]:::level4
+
+    E --> E7["4.7 图片输入"]:::level3
+    E7 --> E71["4.7.1 是否强制要求上传图片的必须参数(尺寸、格式等)"]:::level4
+    E7 --> E72["4.7.2 是否设置了不符合尺寸的提示，图片过大或过小，格式错误等"]:::level4
+    E7 --> E73["4.7.3 是否提供上传完成图片的预览"]:::level4
+    E7 --> E74["4.7.4 是否提供了再次编辑操作，引导是否明显"]:::level4
+    E7 --> E75["4.7.5 上传失败的情况是否给予用户提示，引导再次上传"]:::level4
+    E7 --> E76["4.7.6 上传完成后遇到流程打断的情况是否保留已上传的记录(断网、关闭页面等)"]:::level4
+
+
+    E --> E8["4.8 账号角色"]:::level3
+    E8 --> E81["4.8.1 是否存在不同登录状态下展示内容或操作有不同(登录、未登录、账号异常状态)"]:::level4
+    E8 --> E82["4.8.2 是否存在不同用户状态下展示内容或操作有不同(非会员，不同等级的会员，特殊付费会员等)"]:::level4
+    E8 --> E83["4.8.3 是否考虑多账号切换，切换时，本地缓存数据是否需要同步清空"]:::level4
+    E8 --> E84["4.8.4 是否允许多终端同时登录同一账号， 若允许，操作同一数据时是否产生冲突"]:::level4
+
+
+    E --> E9["4.9 网络状况"]:::level3
+    E9 --> E91["4.9.1 WiFi网络、移动网络(4G)"]:::level4
+    E9 --> E92["4.9.2 连接超时多久为超时"]:::level4
+    E9 --> E93["4.9.3 无网络显示什么内容？是否给予用户友好引导检查网络或重试按钮"]:::level4
+    E9 --> E94["4.9.4 网络变化从WiFi到4G网络环境时是否需要提示"]:::level4
+
+    E --> E10["4.10 服务器问题"]:::level3
+    E10 --> E101["4.10.1 服务器出问题返回数据失败时，是否给予用户友好提示或重试按钮"]:::level4
+
+    E --> E111["4.11 旧版本兼容"]:::level3
+    E111 --> E1111["4.11.1 是否存在高低版本兼容问题(浏览器页面缓存、APP旧版本)"]:::level4
+
+    E --> E122["4.12 硬件设备"]:::level3
+    E122 --> E1221["4.12.1 横竖屏是否有横屏展示的需要，如不需要需要锁定竖屏"]:::level4
+    E122 --> E1222["4.12.2 分辨率高低分辨率情况下是否会有适配问题，是否备注清楚"]:::level4
+    E122 --> E1223["4.12.3 SD卡Android手机，没有SD卡、SD卡储存已满、储存位置等情况是否考虑并备注"]:::level4
+    E122 --> E1224["4.12.4 硬件不同，手机物理按键的不同衍生不同操作"]:::level4
+    E122 --> E1225["4.12.5 系统版本的不同是否同步支持。iOS、Android、Windows及其不同版本"]:::level4
+
+    E --> E133["4.13 硬件权限"]:::level3
+    E133 --> E1331["4.13.1 定位提示是否打开定位"]:::level4
+    E133 --> E1332["4.13.2 相机提示是否打开相机"]:::level4
+    E133 --> E1333["4.13.3 闪光灯提示是否调用闪光灯"]:::level4
+    E133 --> E1334["4.13.4 蓝牙提示是否打开蓝牙"]:::level4
+    E133 --> E1335["4.13.5 设备数据是否需要调用，步数、心率等，主要在iOS设备中"]:::level4
+
+    E --> E144["4.14 阅读模式"]:::level3
+    E144 --> E1441["4.14.1 夜间/日间模式是否考虑光线较暗的场景"]:::level4
+    E144 --> E1442["4.14.2 编辑模式下出现意外情况是否提示保存或自动保存已填信息"]:::level4
+    E144 --> E1443["4.14.3 无痕模式不记录用户所有操作信息(实际是否记录根据数据需求来看)"]:::level4
+    E144 --> E1444["4.14.4 无图模式节约用户流量，加快页面加载速度"]:::level4</pre>
+<h2 id="5、🖌️原型设计"><a href="#5、🖌️原型设计" class="headerlink" title="5、🖌️原型设计"></a>5、🖌️原型设计</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> F[五、原型设计]:::level2
+
+    F --> F1["5.1 新增"]:::level3
+    F1 --> F11["5.1.1 增加这个是否有必要"]:::level4
+    F1 --> F12["5.1.2 谁可以增加，谁不能增加"]:::level4
+    F1 --> F13["5.1.3 什么时候可以增加，什么时候不可以增加"]:::level4
+    F1 --> F14["5.1.4 在哪里增加(入口)"]:::level4
+    F1 --> F15["5.1.5 增加的内容是什么"]:::level4
+    F1 --> F16["5.1.6 怎样增加，主流程是怎样的，其中有哪些异常情况"]:::level4
+    F1 --> F17["5.1.7 点击增加后信息提示"]:::level4
+    F1 --> F18["5.1.8 增加条件是什么"]:::level4
+    F1 --> F19["5.1.9 增加是否有限制条件"]:::level4
+    F1 --> F110["5.1.10 哪些情况不允许添加"]:::level4
+    F1 --> F111["5.1.11 添加过程中输入参数有哪些"]:::level4
+    F1 --> F112["5.1.12 是否必填"]:::level4
+    F1 --> F113["5.1.13 支持批量添加吗"]:::level4
+    F1 --> F114["5.1.14 如何操作提示用户"]:::level4
+    F1 --> F115["5.1.15 增加是否进入到编辑状态"]:::level4
+    F1 --> F116["5.1.16 编辑状态是否支持删除"]:::level4
+    F1 --> F117["5.1.17 点击确认提交后，在当前页面提交后再返回，返回到哪里"]:::level4
+    F1 --> F118["5.1.18 支持连续添加吗，应该如何设置"]:::level4
+    F1 --> F119["5.1.19 增加类型:文本、图片、视频、GIF ?"]:::level4
+    F1 --> F120["5.1.20 上传文件是否有格式限制"]:::level4
+    F1 --> F121["5.1.21 上传文件是否要显示格式信息，格式提示"]:::level4
+    F1 --> F122["5.1.22 上传文件后是否显示文件名，怎样显示"]:::level4
+    F1 --> F123["5.1.23 上传后是否允许重复上传，覆盖上传，取消上传"]:::level4
+    F1 --> F124["5.1.24 是否可以批量上传，批量上传后如何显示"]:::level4
+
+    F --> F2["5.2 删除"]:::level3
+    F2 --> F21["5.2.1 删除这个是否有必要"]:::level4
+    F2 --> F22["5.2.2 谁可以删除，谁不能删除"]:::level4
+    F2 --> F23["5.2.3 什么时候可以删除，什么时候不可以删除"]:::level4
+    F2 --> F24["5.2.4 在哪里删除(入口)"]:::level4
+    F2 --> F25["5.2.5 删除的内容是什么，什么内容不支持删除"]:::level4
+    F2 --> F26["5.2.6 怎样删除，主流程是怎样的，其中有哪些异常情况"]:::level4
+    F2 --> F27["5.2.7 点击删除后是否需要二次确认"]:::level4
+    F2 --> F28["5.2.8 删除条件是什么"]:::level4
+    F2 --> F29["5.2.9 删除后是否可以快速撤销"]:::level4
+    F2 --> F210["5.2.10 删除到一半就停止(例如断网)，被删除内容怎么处理?"]:::level4
+    F2 --> F211["5.2.11 删除后是否进入回收站，是否支持恢复"]:::level4
+    F2 --> F212["5.2.12 是否支持批量删除，如何操作，如何提示"]:::level4
+    F2 --> F213["5.2.13 在增加过程中是否支持批量删除"]:::level4
+    F2 --> F214["5.2.14 全部删除后是否存在边界问题"]:::level4
+
+    F --> F3["5.3 修改"]:::level3
+    F3 --> F31["5.3.1 修改这个是否有必要"]:::level4
+    F3 --> F32["5.3.2 谁可以改，谁不能改"]:::level4
+    F3 --> F33["5.3.3 什么时候可以改，什么时候不可以改"]:::level4
+    F3 --> F34["5.3.4 在哪里改(入口)"]:::level4
+    F3 --> F35["5.3.5 改的对象有哪些，哪些内容不能改"]:::level4
+    F3 --> F36["5.3.6 怎样改，主流程是怎样的，其中有哪些异常情况"]:::level4
+    F3 --> F37["5.3.7 改的条件是什么"]:::level4
+    F3 --> F38["5.3.8 修改的限制条件是什么"]:::level4
+    F3 --> F39["5.3.9 哪些参数可以编辑，哪些参数不可编辑"]:::level4
+    F3 --> F310["5.3.10 是否支持批量修改"]:::level4
+    F3 --> F311["5.3.11 修改过程中如何取消修改"]:::level4
+    F3 --> F312["5.3.12 修改后支持撤销吗"]:::level4
+    F3 --> F313["5.3.13 修改提交有二次确认吗"]:::level4
+    F3 --> F314["5.3.14 修改是否涉及数据转移"]:::level4
+
+    F --> F4["5.4 查询"]:::level3
+    F4 --> F41["5.4.1 查的入口在哪里"]:::level4
+    F4 --> F42["5.4.2 异常情况怎样显示"]:::level4
+    F4 --> F43["5.4.3 查找对象是什么"]:::level4
+    F4 --> F44["5.4.4 字段有哪些支持查"]:::level4
+    F4 --> F45["5.4.5 查找条件:按权限?按类别?按数量?"]:::level4
+    F4 --> F46["5.4.6 查找方式:搜索、筛选(标签、类别、时间)"]:::level4
+    F4 --> F47["5.4.7 查找结果:有屏蔽需求?对查找结果进行哪些操作?"]:::level4
+    F4 --> F48["5.4.8 搜索类型:id、昵称、身份证号、手机号等"]:::level4
+    F4 --> F49["5.4.9 匹配方式:精准匹配、模糊匹配等"]:::level4
+    F4 --> F410["5.4.10 查找结果如何展示，如何排序，没找到怎么办"]:::level4
+    F4 --> F411["5.4.11 打开结果展示方式如何，新标签页？当页？弹窗？详情是否可以继续点击跳转？"]:::level4
+
+    F --> F5["5.5 显示"]:::level3
+    F5 --> F51["5.5.1 显示这个是否有必要"]:::level4
+    F5 --> F52["5.5.2 针对不同人显示内容是否相同，不同权限显示是否相同，不同角色显示是否相同"]:::level4
+    F5 --> F53["5.5.3 什么时候显示，什么时候不显示，显示多久"]:::level4
+    F5 --> F54["5.5.4 在哪里显示"]:::level4
+    F5 --> F55["5.5.5 显示包括哪些元素：按钮、数据、文本、图表、视频"]:::level4
+    F5 --> F56["5.5.6 怎样显示"]:::level4
+    F5 --> F57["5.5.7 敏感数据如何显示，如何配置，(隐藏？权限设置？)"]:::level4
+    F5 --> F58["5.5.8 显示内容的优先级"]:::level4
+    F5 --> F59["5.5.9 显示的层级关系"]:::level4
+    F5 --> F510["5.5.10 页面显示元素状态有哪些，常态？鼠标悬浮态？点击？选中？"]:::level4
+    F5 --> F511["5.5.11 显示的顺序如何，时间顺序？修改时间？类别？不同权重算总分"]:::level4
+    F5 --> F512["5.5.12 列表显示样式，分页，响应式布局"]:::level4
+    F5 --> F513["5.5.13 列表是否支持快捷筛选"]:::level4
+    F5 --> F514["5.5.14 显示的元素数量范围，分页？显示数量修改控件？"]:::level4
+
+    F --> F6["5.6 算法"]:::level3
+    F6 --> F61["5.6.1 多久算一次"]:::level4
+    F6 --> F62["5.6.2 哪些数据参与计算"]:::level4
+    F6 --> F63["5.6.3 参数的限制"]:::level4
+    F6 --> F64["5.6.4 量变化的规则，实时更新？自动拉取？推送？隔天更新？"]:::level4
+    F6 --> F65["5.6.5 需要什么条件"]:::level4
+    F6 --> F66["5.6.6 哪些信息需要默认保存，自动填充？"]:::level4
+    F6 --> F67["5.6.7 需要什么统计"]:::level4
+    F6 --> F68["5.6.8 数量变化规则"]:::level4
+
+    F --> F7["5.7 传输"]:::level3
+    F7 --> F71["5.7.1 传输内容：文本、图片、视频、数据等"]:::level4
+    F7 --> F72["5.7.2 哪些需要传，哪些不需要传"]:::level4
+    F7 --> F73["5.7.3 手动传，还是自动传"]:::level4
+    F7 --> F74["5.7.4 传输的内容"]:::level4
+    F7 --> F75["5.7.5 传输的方向"]:::level4
+
+    F --> F8["5.8 异常"]:::level3
+    F8 --> F81["5.8.1 数据的边界？"]:::level4
+    F8 --> F82["5.8.2 空状态？显示的上下限？"]:::level4
+    F8 --> F83["5.8.3 显示边界？权限阻隔？"]:::level4
+    F8 --> F84["5.8.4 网络异常？
+    不稳定、WiFi和4G网络"]:::level4
+    F8 --> F85["5.8.5 网络异常？
+    中断：电话、短信、push. 电量低系统提示、闪退、杀进程、后台"]:::level4
+    F8 --> F86["5.8.6 账号异常
+    登录、注册、更换设备、那个号是否互斥"]:::level4
+    F8 --> F87["5.8.7 中断、失败、超出限制怎么办？"]:::level4
+    F8 --> F88["5.8.8 业务关联的边缘场景怎么处理？"]:::level4</pre>
+<h2 id="6、💡产品辅助"><a href="#6、💡产品辅助" class="headerlink" title="6、💡产品辅助"></a>6、💡产品辅助</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> G[6. 产品辅助]:::level2
+
+    G --> G1["6.1 数据埋点"]:::level3
+    G1 --> G11["6.1.1 是否存在用户漏斗埋点需求"]:::level4
+    G1 --> G12["6.1.2 是否存在运营数据报表需求"]:::level4
+    G1 --> G13["6.1.3 是否定义功能可用性标准"]:::level4
+
+    G --> G2["6.2 通知机制"]:::level3
+    G2 --> G21["6.2.1 操作交互是否需要触发推送消息，推送内容是什么，推送时间节点是什么"]:::level4
+    G2 --> G22["6.2.2 是否确定当前通知的类型(短信、推送、微信消息)"]:::level4
+    G2 --> G23["6.2.3 是否确定当前通知的失效策略"]:::level4</pre>
+<h2 id="7、🚀产品上线"><a href="#7、🚀产品上线" class="headerlink" title="7、🚀产品上线"></a>7、🚀产品上线</h2><pre class="mermaid">graph LR
+    classDef level1 fill:#f9d5e5,stroke:#c2185b;
+    classDef level2 fill:#e3f2fd,stroke:#1976d2;
+    classDef level3 fill:#e8f5e9,stroke:#388e3c;
+    classDef level4 fill:#fff3e0,stroke:#fbc02d;
+
+    A[产品经理完整自查清单]:::level1 --> H[7. 产品上线]:::level2
+
+    H --> H1["7.1 上线准备"]:::level3
+    H1 --> H11["7.1.1 研发每次准备好上线失败的对策，回滚等"]:::level4
+    H1 --> H12["7.1.2 客户端版本更新是否强制，新版本功能描述文案及应用商店图、新的欢迎页、新的功能引导页"]:::level4
+    H1 --> H13["7.1.3 版本上线时间是否确定，是否要同步通知其他相关部门人员（运营等）"]:::level4
+    H1 --> H14["7.1.4 更新维护好产品手册/操作手册，做好业务人员培训工作"]:::level4</pre>
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 产品经理完整自查清单</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2023-08-30 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-08-30 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2023/08/30/2.设计与开发/2.3体验度量与优化清单/产品经理完整自查清单/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E8%87%AA%E6%9F%A5%E6%B8%85%E5%8D%95/">#自查清单</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/04/17/1.%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/1.1%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5%E4%B8%8E%E8%81%8C%E4%B8%9A%E5%90%AF%E8%88%AA/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%A5%E6%87%82%E7%B3%BB%E5%88%97/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%A5%E6%87%82%E7%9A%84%E6%8A%80%E6%9C%AF%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%8F%91%E5%B8%83%E7%AD%96%E7%95%A5%EF%BC%89/" title="产品经理该懂的技术（软件发布策略）" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/12/software-release-plan.png" alt="产品经理该懂的技术（软件发布策略）" class="!max-w-none">
+  <span class="title">产品经理该懂的技术（软件发布策略）</span>
+</a><a class="recommended-article-item" href="/2025/06/02/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%8C%87%E5%8D%97/" title="Hexo网站安装插件指南" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="Hexo网站安装插件指南" class="!max-w-none">
+  <span class="title">Hexo网站安装插件指南</span>
+</a><a class="recommended-article-item" href="/2024/02/02/4.%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4.2%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7%E9%93%BE%E4%B8%8E%E5%BA%94%E7%94%A8/%E7%94%A8AI%E7%BB%98%E5%88%B6%E5%9B%BE%E8%A1%A8%E6%9D%A5%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87/" title="用AI绘制各类图表，大大提升你的工作效率" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/file-20250807141114033.png" alt="用AI绘制各类图表，大大提升你的工作效率" class="!max-w-none">
+  <span class="title">用AI绘制各类图表，大大提升你的工作效率</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/04/17/1.%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/1.1%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5%E4%B8%8E%E8%81%8C%E4%B8%9A%E5%90%AF%E8%88%AA/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%A5%E6%87%82%E7%B3%BB%E5%88%97/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E8%AF%A5%E6%87%82%E7%9A%84%E6%8A%80%E6%9C%AF%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%8F%91%E5%B8%83%E7%AD%96%E7%95%A5%EF%BC%89/" title="产品经理该懂的技术（软件发布策略）" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/12/software-release-plan.png" alt="产品经理该懂的技术（软件发布策略）" class="!max-w-none">
+  <span class="title">产品经理该懂的技术（软件发布策略）</span>
+</a><a class="recommended-article-item" href="/2025/06/02/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%8C%87%E5%8D%97/" title="Hexo网站安装插件指南" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="Hexo网站安装插件指南" class="!max-w-none">
+  <span class="title">Hexo网站安装插件指南</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2023/09/08/1.%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/1.2%E5%B8%82%E5%9C%BA%E5%88%86%E6%9E%90%E4%B8%8E%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1/%E5%85%85%E7%94%B5%E6%A1%A9%E5%87%BA%E6%B5%B7%E5%BF%85%E6%8E%A5OCPP%E5%8D%8F%E8%AE%AE%EF%BC%8C%E6%9D%83%E5%A8%81%E9%A6%96%E6%8E%A8%E4%B8%AD%E8%8B%B1%E5%8F%8C%E8%AF%AD%E7%89%88%E6%96%87%E6%A1%A3/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">充电桩出海必接OCPP协议，权威首推中英双语版文档</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2023/08/22/%E7%94%9F%E4%BA%A7%E5%8A%9B/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%8F%AF%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E8%BD%AF%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">Windows系统下可永久免费使用软件的方法</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">产品经理完整自查清单</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%F0%9F%93%8B%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82"><span class="nav-text">1、📋产品需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%F0%9F%97%82%EF%B8%8F%E4%BF%A1%E6%81%AF%E6%9E%B6%E6%9E%84"><span class="nav-text">2、🗂️信息架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E2%9E%A1%EF%B8%8F%E4%BA%A7%E5%93%81%E6%B5%81%E7%A8%8B"><span class="nav-text">3、➡️产品流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%F0%9F%92%BB%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1"><span class="nav-text">4、💻交互设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%F0%9F%96%8C%EF%B8%8F%E5%8E%9F%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="nav-text">5、🖌️原型设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%F0%9F%92%A1%E4%BA%A7%E5%93%81%E8%BE%85%E5%8A%A9"><span class="nav-text">6、💡产品辅助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%F0%9F%9A%80%E4%BA%A7%E5%93%81%E4%B8%8A%E7%BA%BF"><span class="nav-text">7、🚀产品上线</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

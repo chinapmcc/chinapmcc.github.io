@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/developer/development/programmer.html"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="程序员版块 - 中国独立开发者项目列表">
+<meta property="og:url" content="https://chinapmcc.com/developer/Development/Programmer.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-10-31T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="开发者">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            程序员版块 - 中国独立开发者项目列表 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="page-template-container">
+	
+
+	
+
+	<div class="page-template-content markdown-body">
+		
+		<h1>程序员版块 - 中国独立开发者项目列表</h1>
+		
+
+		<h2 id="中国独立开发者项目列表（程序员版）"><a href="#中国独立开发者项目列表（程序员版）" class="headerlink" title="中国独立开发者项目列表（程序员版）"></a>中国独立开发者项目列表（程序员版）</h2><h3 id="程序员版和主版面的区别："><a href="#程序员版和主版面的区别：" class="headerlink" title="程序员版和主版面的区别："></a>程序员版和主版面的区别：</h3><ul>
+<li>程序员版：用户是程序员，会用命令行，知道 <code>npm install</code> 等。列表里的产品是开源博客&#x2F;命令行工具等</li>
+<li>主版面：用户不是程序员，产品是 网站&#x2F;App&#x2F;桌面端应用 必须打开即用</li>
+</ul>
+<!--
+**为什么开这个列表**：
+Issue 和 PR 里偶尔有人提交一些不错的东西，但打开一看，不是普通用户能用的东西，
+而是要用命令行 `npm install` 以及需要写一些代码。
+没法加到主版面里去，不是因为不好，只是因为类型不合。
+但是我觉得这些项目也需要曝光度，所以单独开这一个列表。
+
+程序员版开始于 2019 年 4 月 11 号, 主版面开始于 2018 年 3 月
+-->
+
+<h3 id="2025-年-11-月-3-号添加"><a href="#2025-年-11-月-3-号添加" class="headerlink" title="2025 年 11 月 3 号添加"></a>2025 年 11 月 3 号添加</h3><h4 id="L1nSn0w-广州-Github"><a href="#L1nSn0w-广州-Github" class="headerlink" title="L1nSn0w(广州) - Github"></a>L1nSn0w(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/lin-snow" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/lin-snow/Ech0" >Ech0<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：新一代开源、自托管、专注思想流动的轻量级联邦发布平台，支持 ActivityPub 协议、PWA、CLI 管理与跨端适配 - <a class="link"   target="_blank" rel="noopener" href="https://echo.soopy.cn/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-9-月-25-号添加"><a href="#2025-年-9-月-25-号添加" class="headerlink" title="2025 年 9 月 25 号添加"></a>2025 年 9 月 25 号添加</h3><h4 id="KAY53N-Github"><a href="#KAY53N-Github" class="headerlink" title="KAY53N - Github"></a>KAY53N - <a class="link"   target="_blank" rel="noopener" href="https://github.com/KAY53N/rusty-req" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/KAY53N/rusty-req" >Rusty-Req<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Rust 和 Python 的高性能异步请求库，适用于需要高吞吐量并发 HTTP 请求的场景。核心并发逻辑使用 Rust 实现，并通过 PyO3 和 maturin 封装为 Python 模块，将 Rust 的性能优势与 Python 的易用性结合。</li>
+</ul>
+<h3 id="2025-年-9-月-24-号添加"><a href="#2025-年-9-月-24-号添加" class="headerlink" title="2025 年 9 月 24 号添加"></a>2025 年 9 月 24 号添加</h3><h4 id="hzn6426-Github"><a href="#hzn6426-Github" class="headerlink" title="hzn6426 - Github"></a>hzn6426 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/hzn6426" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/ifrog/snapper-boot" >Snapper 权限系统微服务版<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：专注系统数据权限（数据权限、业务权限、列权限），让权限更简单，让数据更安全</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/ifrog/snapper-standalone" >Snapper 权限单机版<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：专注系统数据权限，让权限更简单，让数据更安全 - <a class="link"   target="_blank" rel="noopener" href="https://admin.baomibing.com/user/login" >演示地址<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 演示账号 ximen&#x2F;123456</li>
+</ul>
+<h3 id="2025-年-9-月-4-号添加"><a href="#2025-年-9-月-4-号添加" class="headerlink" title="2025 年 9 月 4 号添加"></a>2025 年 9 月 4 号添加</h3><h4 id="ChiruMori-辽宁-Github"><a href="#ChiruMori-辽宁-Github" class="headerlink" title="ChiruMori(辽宁) - Github"></a>ChiruMori(辽宁) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ChiruMori/EffectMidi" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/ChiruMori/EffectMidi" >EffectMidi<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：PC+开发板控制MIDI键盘灯（需用户自行接线烧录）- <a class="link"   target="_blank" rel="noopener" href="https://mori.plus/archives/effect-midi-01" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-8-月-22-号添加"><a href="#2025-年-8-月-22-号添加" class="headerlink" title="2025 年 8 月 22 号添加"></a>2025 年 8 月 22 号添加</h3><h4 id="Safe3-武汉"><a href="#Safe3-武汉" class="headerlink" title="Safe3(武汉)"></a>Safe3(武汉)</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://waf.uusec.com/" >南墙-WEB应用防火墙<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：工业级免费、高性能、高扩展，支持 AI 和语义引擎的 Web 应用和 API 安全防护产品</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://om.uusec.com/" >OpenResty Manager<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：现代化、安全、美观的主机管理面板，OpenResty Edge 的开源替代品</li>
+</ul>
+<h3 id="2025-年-8-月-21-号添加"><a href="#2025-年-8-月-21-号添加" class="headerlink" title="2025 年 8 月 21 号添加"></a>2025 年 8 月 21 号添加</h3><h4 id="Mao-Kaiyue-Github"><a href="#Mao-Kaiyue-Github" class="headerlink" title="Mao Kaiyue - Github"></a>Mao Kaiyue - <a class="link"   target="_blank" rel="noopener" href="https://github.com/MKY508" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/MKY508/QueryGPT" >QueryGPT<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：自然语言数据库查询系统。基于 OpenInterpreter 开发，让非技术人员也能用中文查询数据库。比如问”上个月销售最好的产品是什么”，系统会自动执行查询并生成图表。目前在生产环境稳定运行，每天处理上百次查询请求</li>
+</ul>
+<h3 id="2025-年-8-月-8-号添加"><a href="#2025-年-8-月-8-号添加" class="headerlink" title="2025 年 8 月 8 号添加"></a>2025 年 8 月 8 号添加</h3><h4 id="草梅友仁-Github-博客"><a href="#草梅友仁-Github-博客" class="headerlink" title="草梅友仁 - Github, 博客"></a>草梅友仁 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.cmyr.ltd/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen/caomei-auth" >草梅 Auth<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：草梅 Auth 是基于 Nuxt 全栈框架的统一登录平台。支持 OAuth2.0 协议，集成邮箱、用户名、手机号、验证码、社交媒体等多种登录注册方式 - <a class="link"   target="_blank" rel="noopener" href="https://auth-docs.cmyr.dev/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-8-月-8-号添加-1"><a href="#2025-年-8-月-8-号添加-1" class="headerlink" title="2025 年 8 月 8 号添加"></a>2025 年 8 月 8 号添加</h3><h4 id="lizhichao-Github"><a href="#lizhichao-Github" class="headerlink" title="lizhichao - Github"></a>lizhichao - <a class="link"   target="_blank" rel="noopener" href="https://github.com/lizhichao" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gorm.vicsdf.com/" >根据 sql ddl 生成 gorm model<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：支持 mysql 和 pgsql ，根据 int bigint 自动映射到 go 对应的类型。由浏览器 wasm 执行 可以离线使用</li>
+</ul>
+<h3 id="2025-年-8-月-4-号添加"><a href="#2025-年-8-月-4-号添加" class="headerlink" title="2025 年 8 月 4 号添加"></a>2025 年 8 月 4 号添加</h3><h4 id="何夕2077-武汉-GIthub-小宇宙"><a href="#何夕2077-武汉-GIthub-小宇宙" class="headerlink" title="何夕2077 (武汉)- GIthub 小宇宙"></a>何夕2077 (武汉)- <a class="link"   target="_blank" rel="noopener" href="https://github.com/justlovemaki" >GIthub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> <a class="link"   target="_blank" rel="noopener" href="https://www.xiaoyuzhoufm.com/podcast/683c62b7c1ca9cf575a5030e" >小宇宙<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/justlovemaki/AIClient-2-API" >AIClient-2-API<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：模拟Gemini CLI和Kiro 客户端请求，兼容OpenAI API。可每日千次Gemini模型请求， 免费使用Kiro内置Claude模型。通过API轻松接入任何客户端，让AI开发更高效！</li>
+</ul>
+<h3 id="2025-年-7-月-26-号添加"><a href="#2025-年-7-月-26-号添加" class="headerlink" title="2025 年 7 月 26 号添加"></a>2025 年 7 月 26 号添加</h3><h4 id="Ch3nyang-南京-Github-博客"><a href="#Ch3nyang-南京-Github-博客" class="headerlink" title="Ch3nyang(南京) - Github, 博客"></a>Ch3nyang(南京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/wcy-dt" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.ch3nyang.top/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/WCY-dt/ponghub" >PongHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：服务状态监控网站，旨在帮助用户监控和验证服务的可用性。使用 GitHub Actions + GitHub Pages，一键部署、无需服务器。</li>
+</ul>
+<h3 id="2025-年-7-月-24-号添加"><a href="#2025-年-7-月-24-号添加" class="headerlink" title="2025 年 7 月 24 号添加"></a>2025 年 7 月 24 号添加</h3><h4 id="胡图图不涂涂-GitHub"><a href="#胡图图不涂涂-GitHub" class="headerlink" title="胡图图不涂涂-GitHub"></a>胡图图不涂涂-<a class="link"   target="_blank" rel="noopener" href="https://github.com/hukdoesn" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/opsre/LiteOps" >LiteOps<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：CI&#x2F;CD 平台（专注实用性）。只解决真问题 —— 自动化构建、部署 一体化平台。开源轻量级DevOps平台 - <a class="link"   target="_blank" rel="noopener" href="https://liteops.ext4.cn/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-7-月-10-号添加"><a href="#2025-年-7-月-10-号添加" class="headerlink" title="2025 年 7 月 10 号添加"></a>2025 年 7 月 10 号添加</h3><h4 id="Space-Time-Github-博客"><a href="#Space-Time-Github-博客" class="headerlink" title="Space Time - Github, 博客"></a>Space Time - <a class="link"   target="_blank" rel="noopener" href="https://github.com/SpaceTimee" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.spacetimee.xyz/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/SpaceTimee/Sheas-Cealer-Droid" >Cealer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：安卓端 SNI 伪造工具，无需代理即可合法加速 Github, Steam, Pixiv 等网站的直连，让你的网络冲浪畅快无阻</li>
+</ul>
+<h3 id="2025-年-7-月-4-号添加"><a href="#2025-年-7-月-4-号添加" class="headerlink" title="2025 年 7 月 4 号添加"></a>2025 年 7 月 4 号添加</h3><h4 id="欲饮琵琶码上催-Github"><a href="#欲饮琵琶码上催-Github" class="headerlink" title="欲饮琵琶码上催 - Github"></a>欲饮琵琶码上催 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ajiho" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://laravel.wiki/" >Laravel 中文网<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：全球最流行的PHP框架 Laravel 的中文文档</li>
+</ul>
+<h3 id="2025-年-7-月-1-号添加"><a href="#2025-年-7-月-1-号添加" class="headerlink" title="2025 年 7 月 1 号添加"></a>2025 年 7 月 1 号添加</h3><h4 id="RainbowBird-洛灵-上海-Github-博客"><a href="#RainbowBird-洛灵-上海-Github-博客" class="headerlink" title="RainbowBird | 洛灵 (上海) - Github, 博客"></a>RainbowBird | 洛灵 (上海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/luoling8192" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.luoling.moe/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/groupultra/telegram-search" >Telegram Search<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：功能强大的 Telegram 聊天记录搜索工具，支持向量搜索和语义匹配</li>
+</ul>
+<h3 id="2025-年-6-月-27-号添加"><a href="#2025-年-6-月-27-号添加" class="headerlink" title="2025 年 6 月 27 号添加"></a>2025 年 6 月 27 号添加</h3><h4 id="sing1ee-上海"><a href="#sing1ee-上海" class="headerlink" title="sing1ee(上海)"></a>sing1ee(上海)</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gemini-cli.xyz/docs/" >Gemini CLI Docs<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Gemini CLI 相关技术文档和开发者资源（持续更新）</li>
+</ul>
+<h3 id="2025-年-6-月-24-号添加"><a href="#2025-年-6-月-24-号添加" class="headerlink" title="2025 年 6 月 24 号添加"></a>2025 年 6 月 24 号添加</h3><h4 id="Xiao-zaiyi-广西-Github"><a href="#Xiao-zaiyi-广西-Github" class="headerlink" title="Xiao-zaiyi(广西) - Github"></a>Xiao-zaiyi(广西) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiao-zaiyi/illa-helper" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiao-zaiyi/illa-helper" >浸入式学语言助手<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于”可理解输入”理论的浏览器扩展，帮助你在日常网页浏览中自然地学习语言 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiao-zaiyi/illa-helper/blob/master/README_ZH.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-6-月-3-号添加"><a href="#2025-年-6-月-3-号添加" class="headerlink" title="2025 年 6 月 3 号添加"></a>2025 年 6 月 3 号添加</h3><h4 id="IndieMakerKevin-成都-Github"><a href="#IndieMakerKevin-成都-Github" class="headerlink" title="IndieMakerKevin(成都) - Github"></a>IndieMakerKevin(成都) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/PennyJoly" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/PennyJoly/NuxtPro" >NuxtPro开源版本<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：企业级 SaaS 出海模板（基于 Nuxt3），预集成 Stripe&#x2F;Cream 支付、谷歌登录、多语言路由和SEO工具。快速构建 SSR 的全球化Web应用，开箱即用。1 小时内快速完成 MVP 开发，验证需求，并出海创收 - <a class="link"   target="_blank" rel="noopener" href="https://nuxtpro.com/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2025-年-5-月-21-号添加"><a href="#2025-年-5-月-21-号添加" class="headerlink" title="2025 年 5 月 21 号添加"></a>2025 年 5 月 21 号添加</h3><h4 id="韩数-Github"><a href="#韩数-Github" class="headerlink" title="韩数 - Github"></a>韩数 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/hanshuaikang" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/hanshuaikang/AI-Media2Doc" >AI-Media2Doc<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：一键将视频和音频转化为小红书&#x2F;公众号&#x2F;知识笔记&#x2F;思维导图等各种风格的文档</li>
+</ul>
+<h3 id="2025-年-5-月-17-号添加"><a href="#2025-年-5-月-17-号添加" class="headerlink" title="2025 年 5 月 17 号添加"></a>2025 年 5 月 17 号添加</h3><h4 id="WeNext-Github"><a href="#WeNext-Github" class="headerlink" title="WeNext - Github"></a>WeNext - <a class="link"   target="_blank" rel="noopener" href="https://github.com/weijunext" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://nexty.dev/" >Nexty.dev<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 多场景全栈 SaaS 开发模板。主要特性：1. 内置完整的一次性支付和订阅支付加积分、续订更新积分和退订扣积分的流程</li>
+</ul>
+<ol start="2">
+<li>内置可视化界面管理定价卡片的管理功能，轻松且安全地创建和修改你的定价卡片</li>
+<li>内置高级CMS模块，不仅支持必备的文章信息，还支持设置置顶、文章状态和访问权限，适用于免费博客和付费newsletter场景</li>
+<li>提供 AI Demo，帮助不熟悉AI功能开发的开发者快速学习和应用</li>
+</ol>
+<h3 id="2025-年-5-月-13-号添加"><a href="#2025-年-5-月-13-号添加" class="headerlink" title="2025 年 5 月 13 号添加"></a>2025 年 5 月 13 号添加</h3><h4 id="masz"><a href="#masz" class="headerlink" title="masz"></a>masz</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.ui2vue.cn/" >ui2vue<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：生成 vue3 代码的工具网站，支持拖拽&amp;编辑方式添加组件，可直接导出vue3代码</li>
+</ul>
+<h3 id="2025-年-5-月-11-号添加"><a href="#2025-年-5-月-11-号添加" class="headerlink" title="2025 年 5 月 11 号添加"></a>2025 年 5 月 11 号添加</h3><h4 id="草梅友仁-Github-博客-1"><a href="#草梅友仁-Github-博客-1" class="headerlink" title="草梅友仁 - Github, 博客"></a>草梅友仁 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.cmyr.ltd/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen/afdian-linker" >afdian-linker<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：集成了爱发电 API，提供统一的订单管理、赞助支付和外部查询能力。基于 Nuxt 3 &amp; TypeScript 的全栈项目。</li>
+</ul>
+<h3 id="2025-年-5-月-10-号添加"><a href="#2025-年-5-月-10-号添加" class="headerlink" title="2025 年 5 月 10 号添加"></a>2025 年 5 月 10 号添加</h3><h4 id="xiaohanyu-github"><a href="#xiaohanyu-github" class="headerlink" title="xiaohanyu - github"></a>xiaohanyu - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiaohanyu" >github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://yamlresume.dev/" >YAMLResume<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Resumes as Code in YAML，用 YAML 格式来撰写简历并生成精美专业的 PDF</li>
+</ul>
+<h3 id="2025-年-5-月-9-号添加"><a href="#2025-年-5-月-9-号添加" class="headerlink" title="2025 年 5 月 9 号添加"></a>2025 年 5 月 9 号添加</h3><h4 id="Crayon-GitHub"><a href="#Crayon-GitHub" class="headerlink" title="Crayon - GitHub"></a>Crayon - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ZhuoZhuoCrayon" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/ZhuoZhuoCrayon/throttled-py" >throttled-py<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Python 限流工具，支持多种算法（固定窗口，滑动窗口，令牌桶，漏桶 &amp; GCRA）及存储（Redis、内存），高性能</li>
+</ul>
+<h3 id="2025-年-4-月-30-号添加"><a href="#2025-年-4-月-30-号添加" class="headerlink" title="2025 年 4 月 30 号添加"></a>2025 年 4 月 30 号添加</h3><h4 id="ysykzheng-github"><a href="#ysykzheng-github" class="headerlink" title="ysykzheng - github"></a>ysykzheng - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ysykzheng" >github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://textreadtts.com/" >TextReadTTS.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：免费文本转语音接口（Free TTS API），免费额度有限</li>
+</ul>
+<h4 id="鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter"><a href="#鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter" class="headerlink" title="鸭鸭「カモ」(厦门) - GitHub, 个人网页, X(Twitter)"></a>鸭鸭「カモ」(厦门) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/" >个人网页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/JinchengFang" >X(Twitter)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio/Sundry" >Sundry<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：WinGet 本地清单管理工具，让您更方便地查看、移除清单。</li>
+</ul>
+<h3 id="2025-年-4-月-29-号添加"><a href="#2025-年-4-月-29-号添加" class="headerlink" title="2025 年 4 月 29 号添加"></a>2025 年 4 月 29 号添加</h3><h4 id="IndieMakerKevin-成都-Twitter"><a href="#IndieMakerKevin-成都-Twitter" class="headerlink" title="IndieMakerKevin(成都) - Twitter"></a>IndieMakerKevin(成都) - <a class="link"   target="_blank" rel="noopener" href="https://x.com/PennyJoly" >Twitter<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://nuxtpro.com/" >NuxtPro<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于Nuxt3的企业级SaaS出海模板，预集成Stripe&#x2F;Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用.</li>
+</ul>
+<h3 id="2025-年-4-月-25-号添加"><a href="#2025-年-4-月-25-号添加" class="headerlink" title="2025 年 4 月 25 号添加"></a>2025 年 4 月 25 号添加</h3><h4 id="西风逍遥游-湾区-Github"><a href="#西风逍遥游-湾区-Github" class="headerlink" title="西风逍遥游(湾区) - Github"></a>西风逍遥游(湾区) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/sunxfancy/SSUI" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/sunxfancy/SSUI" >SSUI<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于安全 Python 脚本的 stable diffusion AI 绘图工具，可以根据脚本中函数的类型自动生成 UI 界面，能方便快捷地复现其他用户的工作流</li>
+</ul>
+<h3 id="2025-年-4-月-22-号添加"><a href="#2025-年-4-月-22-号添加" class="headerlink" title="2025 年 4 月 22 号添加"></a>2025 年 4 月 22 号添加</h3><h4 id="zhtyyx-上海-Github"><a href="#zhtyyx-上海-Github" class="headerlink" title="zhtyyx(上海) - Github"></a>zhtyyx(上海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhtyyx" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhtyyx/ioe" >ioe 库存管理系统<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Django 开发的综合性库存管理系统，专为零售商店、小型仓库和商品销售场所设计。系统提供了完整的商品管理、库存跟踪、销售记录、会员管理和数据分析功能，帮助企业高效管理库存和销售流程</li>
+</ul>
+<h3 id="2025-年-4-月-15-号添加"><a href="#2025-年-4-月-15-号添加" class="headerlink" title="2025 年 4 月 15 号添加"></a>2025 年 4 月 15 号添加</h3><h4 id="daya0576-上海-博客"><a href="#daya0576-上海-博客" class="headerlink" title="daya0576(上海) - 博客"></a>daya0576(上海) - <a class="link"   target="_blank" rel="noopener" href="https://changchen.me/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/daya0576/beaverhabits" >beaverhabits<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：无需设定目标的习惯追踪工具。基于 Python 开发的自托管习惯追踪 Web 应用，帮助用户轻松记录和管理日常习惯。它提供适配移动端的直观界面，专注于习惯的持续养成，而非单纯追求目标达成，让养成好习惯变得更自然</li>
+</ul>
+<h3 id="2025-年-3-月-17-号添加"><a href="#2025-年-3-月-17-号添加" class="headerlink" title="2025 年 3 月 17 号添加"></a>2025 年 3 月 17 号添加</h3><h4 id="dodid-Github"><a href="#dodid-Github" class="headerlink" title="dodid - Github"></a>dodid - <a class="link"   target="_blank" rel="noopener" href="https://github.com/dodid" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/dodid/pac-proxy-manager" >PAC代理自动配置管理器<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：管理代理自动配置文件（PAC），支持灵活的代理规则设置</li>
+</ul>
+<h3 id="2025-年-2-月-10-号添加"><a href="#2025-年-2-月-10-号添加" class="headerlink" title="2025 年 2 月 10 号添加"></a>2025 年 2 月 10 号添加</h3><h4 id="yvling-合肥-Github-博客"><a href="#yvling-合肥-Github-博客" class="headerlink" title="yvling(合肥) - Github, 博客"></a>yvling(合肥) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/yv1ing" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.yvling.cn/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/yv1ing/MollyAudit" >茉莉审计<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：LangChain 驱动的自动代码审计工具</li>
+</ul>
+<h3 id="2025-年-1-月-12-号添加"><a href="#2025-年-1-月-12-号添加" class="headerlink" title="2025 年 1 月 12 号添加"></a>2025 年 1 月 12 号添加</h3><h4 id="鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-1"><a href="#鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-1" class="headerlink" title="鸭鸭「カモ」(厦门) - GitHub, 个人网页, X(Twitter)"></a>鸭鸭「カモ」(厦门) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/" >个人网页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/JinchengFang" >X(Twitter)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ Sitemap Creator (<a class="link"   target="_blank" rel="noopener" href="https://github.com/marketplace/actions/sitemap-creator-stable" >Stable<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://github.com/marketplace/actions/sitemap-creator-pre-release" >Pre-Release<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>)：用 GitHub Action 🚀 在你的仓库中创建和更新网站地图</li>
+</ul>
+<h3 id="2024-年-12-月-28-号添加"><a href="#2024-年-12-月-28-号添加" class="headerlink" title="2024 年 12 月 28 号添加"></a>2024 年 12 月 28 号添加</h3><h4 id="javayhu-Github-Twitter"><a href="#javayhu-Github-Twitter" class="headerlink" title="javayhu - Github, Twitter"></a>javayhu - <a class="link"   target="_blank" rel="noopener" href="https://github.com/javayhu" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://x.com/javay_hu" >Twitter<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/javayhu/free-directory-boilerplate" >Free Directory Boilerplate<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源的导航站模板，Nextjs + Authjs + Sanity + ShadcnUI</li>
+</ul>
+<h3 id="2024-年-12-月-23-号添加"><a href="#2024-年-12-月-23-号添加" class="headerlink" title="2024 年 12 月 23 号添加"></a>2024 年 12 月 23 号添加</h3><h4 id="喻灵-合肥-Github-博客"><a href="#喻灵-合肥-Github-博客" class="headerlink" title="喻灵(合肥) - Github, 博客"></a>喻灵(合肥) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/yv1ing" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://yvling.cn/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/yv1ing/MollyBlog" >MollyBlog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：个人博客系统（简单易用）</li>
+</ul>
+<h3 id="2024-年-11-月-15-号添加"><a href="#2024-年-11-月-15-号添加" class="headerlink" title="2024 年 11 月 15 号添加"></a>2024 年 11 月 15 号添加</h3><h4 id="xtthaop-北京-Github-博客"><a href="#xtthaop-北京-Github-博客" class="headerlink" title="xtthaop(北京) - Github, 博客"></a>xtthaop(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xtthaop" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://zxctb.top/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xtthaop/zxnote-web" >知行笔记 - Note, Share, Possess<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源内容管理系统，可组合开源博客 <a class="link"   target="_blank" rel="noopener" href="https://github.com/xtthaop/zxblog-web" >知行博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 搭建个人博客，记录，分享，拥有！</li>
+</ul>
+<h3 id="2024-年-11-月-3-号添加"><a href="#2024-年-11-月-3-号添加" class="headerlink" title="2024 年 11 月 3 号添加"></a>2024 年 11 月 3 号添加</h3><h4 id="d2learn-Github-论坛"><a href="#d2learn-Github-论坛" class="headerlink" title="d2learn - Github, 论坛"></a>d2learn - <a class="link"   target="_blank" rel="noopener" href="https://github.com/d2learn" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://forum.d2learn.org/category/9/xlings" >论坛<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/d2learn/xlings" >xlings<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>： 一个 <code>⌈软件安装、一键环境配置、AI代码提示、实时编译运行、教程教学项目搭建和管理⌋</code> 编程学习和课程搭建工具🛠️ - <a class="link"   target="_blank" rel="noopener" href="https://d2learn.org/xlings" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024-年-10-月-28-号添加"><a href="#2024-年-10-月-28-号添加" class="headerlink" title="2024 年 10 月 28 号添加"></a>2024 年 10 月 28 号添加</h3><h4 id="草梅友仁-Github-博客-2"><a href="#草梅友仁-Github-博客-2" class="headerlink" title="草梅友仁 - Github, 博客"></a>草梅友仁 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.cmyr.ltd/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/CaoMeiYouRen/rss-impact-server" >RSS Impact<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：RSS Impact 是一个支持 Hook 的 RSS 订阅工具，支持 推送通知、Webhook 、下载、BitTorrent、AI 大模型 等多种形式的 Hook 。<br>为什么做这个工具：在使用 RSS 的过程中，我产生了一些需求，例如 推送通知、AI 总结、下载图片、下载 BitTorrent 等，为此还分别写了不同的工具。<br>然后我就意识到，这些需求都可以概括为 <code>RSS 轮询</code> + <code>执行某个操作</code>，因此，将这些操作抽象出来，作为一个 Hook，是更合适的选择，也更容易复用。</li>
+</ul>
+<h3 id="2024-年-10-月-13-号添加"><a href="#2024-年-10-月-13-号添加" class="headerlink" title="2024 年 10 月 13 号添加"></a>2024 年 10 月 13 号添加</h3><h4 id="阿凯呵-博客"><a href="#阿凯呵-博客" class="headerlink" title="阿凯呵 - 博客"></a>阿凯呵 - <a class="link"   target="_blank" rel="noopener" href="https://www.sodair.top/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/loxi-opensource/luna-swapping" >LunaSwapping<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源的 AI 换脸应用解决方案。1 张照片快速生成高质量 AI 写真照，提供小程序端、服务端、管理后全套代码。内置 10万+ 高清写真模板，可自定义模板管理。提供基础 AI 换脸能力，可构建等多场景玩法。</li>
+</ul>
+<h3 id="2024-年-10-月-7-号添加"><a href="#2024-年-10-月-7-号添加" class="headerlink" title="2024 年 10 月 7 号添加"></a>2024 年 10 月 7 号添加</h3><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Awesome-Iwb/Awesome-Iwb/" >Awesome-Iwb<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：一体机和电子白板实用软件合集</li>
+</ul>
+<h3 id="2024-年-10-月-2-号添加"><a href="#2024-年-10-月-2-号添加" class="headerlink" title="2024 年 10 月 2 号添加"></a>2024 年 10 月 2 号添加</h3><h4 id="鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-2"><a href="#鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-2" class="headerlink" title="鸭鸭「カモ」(厦门) - GitHub, 个人网页, X(Twitter)"></a>鸭鸭「カモ」(厦门) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/" >个人网页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/JinchengFang" >X(Twitter)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio/Fufu_Dev_Tools/" >芙芙工具箱开发工具<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：芙芙工具箱的开发工具包，可以进行一些代码检查和连续尝试操作，后续也会添加更多的功能。</li>
+</ul>
+<h3 id="2024-年-8-月-5-号添加"><a href="#2024-年-8-月-5-号添加" class="headerlink" title="2024 年 8 月 5 号添加"></a>2024 年 8 月 5 号添加</h3><h4 id="OpenDataLab-上海-Github"><a href="#OpenDataLab-上海-Github" class="headerlink" title="OpenDataLab(上海) - Github"></a>OpenDataLab(上海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendatalab" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendatalab/labelU" >LabelU<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源标注工具（轻量级）- <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendatalab/labelU/blob/main/README_zh-CN.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendatalab/LabelLLM" >LabelLLM<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：大模型对话标注平台（开源免费）- <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendatalab/LabelLLM/wiki/README%E2%80%90zh" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024-年-7-月-22-号添加"><a href="#2024-年-7-月-22-号添加" class="headerlink" title="2024 年 7 月 22 号添加"></a>2024 年 7 月 22 号添加</h3><h4 id="ufo5260987423-Github"><a href="#ufo5260987423-Github" class="headerlink" title="ufo5260987423 - Github"></a>ufo5260987423 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ufo5260987423" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/ufo5260987423/scheme-langserver" >scheme-langserver<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：主打 Scheme 语言局部变量自动补全的语言服务器，还有类型推断功能。</li>
+</ul>
+<h3 id="2024-年-7-月-17-号添加"><a href="#2024-年-7-月-17-号添加" class="headerlink" title="2024 年 7 月 17 号添加"></a>2024 年 7 月 17 号添加</h3><h4 id="Zen-Huifer-Github"><a href="#Zen-Huifer-Github" class="headerlink" title="Zen Huifer - Github"></a>Zen Huifer - <a class="link"   target="_blank" rel="noopener" href="http://github.com/huifer" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/pychfarm_admin/go-iot-platform" >go-iot-platform<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Go IoT 平台，高效、可扩展的物联网解决方案，用 Go 语言开发。专注于提供稳定、可靠的 MQTT 客户端管理，以及对 MQTT上报数据的全面处理和分析 - <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/pychfarm_admin/go-iot-platform/milestones/202872" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/iot-ecology/go-iot-platform" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年7月15号添加"><a href="#2024年7月15号添加" class="headerlink" title="2024年7月15号添加"></a>2024年7月15号添加</h3><h4 id="0x676e67-Github"><a href="#0x676e67-Github" class="headerlink" title="0x676e67 - Github"></a>0x676e67 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/0x676e67" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/0x676e67/reqwest-impersonate" >reqwest-impersonate<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简单而强大的 Rust HTTP&#x2F;WebSocket 客户端（模拟 TLS&#x2F;JA3&#x2F;JA4&#x2F;HTTP2 指纹）</li>
+</ul>
+<h3 id="2024年6月28号添加"><a href="#2024年6月28号添加" class="headerlink" title="2024年6月28号添加"></a>2024年6月28号添加</h3><h4 id="LeoCodeEasy-Github"><a href="#LeoCodeEasy-Github" class="headerlink" title="LeoCodeEasy - Github"></a>LeoCodeEasy - <a class="link"   target="_blank" rel="noopener" href="https://github.com/LeoCodeEasy" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://tinrh.vercel.app/" >tinrh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：无需路由即可实现页面切换，适用于Vue3</li>
+</ul>
+<h3 id="2024年6月25号添加"><a href="#2024年6月25号添加" class="headerlink" title="2024年6月25号添加"></a>2024年6月25号添加</h3><h4 id="鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-3"><a href="#鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-3" class="headerlink" title="鸭鸭「カモ」(厦门) - GitHub, 个人网页, X(Twitter)"></a>鸭鸭「カモ」(厦门) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/" >个人网页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/JinchengFang" >X(Twitter)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8: <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio/GitHub-Labels-Manager/" >GitHub Labels Manager<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：自动帮你复制仓库标签、获取仓库标签、清空已有标签的工具 - 因与 <a class="link"   target="_blank" rel="noopener" href="https://cli.github.com/manual/gh_label_clone" >GitHub Cil<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 重复关闭</li>
+</ul>
+<h3 id="2024年6月4号添加"><a href="#2024年6月4号添加" class="headerlink" title="2024年6月4号添加"></a>2024年6月4号添加</h3><h4 id="0x676e67-Github-1"><a href="#0x676e67-Github-1" class="headerlink" title="0x676e67 - Github"></a>0x676e67 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/0x676e67" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/0x676e67/vproxy" >vproxy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简单而强大的 Rust HTTP&#x2F;Socks5 代理，允许使用从 CIDR 地址计算的 IP 绑定发起网络请求 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/0x676e67/vproxy" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年5月29号添加"><a href="#2024年5月29号添加" class="headerlink" title="2024年5月29号添加"></a>2024年5月29号添加</h3><h4 id="鬼画符-主页"><a href="#鬼画符-主页" class="headerlink" title="鬼画符 - 主页"></a>鬼画符 - <a class="link"   target="_blank" rel="noopener" href="http://www.guanleiming.com/" >主页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnx3/translate" >translate.js<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：两行 JS 实现 HTML 全自动翻译。无需改动页面、无语言配置文件、无 API Key、对 SEO 友好！</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnx3/templatespider" >templatespider<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：扒网站工具，看好哪个网站，指定好 URL，自动扒下来做成HTML模版。所见网站，皆可为我所用！</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnx3/wangmarket" >wangmarket<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：私有化部署自己的 SAAS 云建站系统，后台开通管理网站，每个网站独立管理。不需任何服务器及后端知识。一台1核2G 服务器可建上万独立网站。</li>
+</ul>
+<h3 id="2024年5月23号添加"><a href="#2024年5月23号添加" class="headerlink" title="2024年5月23号添加"></a>2024年5月23号添加</h3><h4 id="LIGHT-CHASER-Github"><a href="#LIGHT-CHASER-Github" class="headerlink" title="LIGHT CHASER - Github"></a>LIGHT CHASER - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiaopujun" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xiaopujun/light-chaser" >xiaopujun(DAGU)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源、免费、简单、高效的 Web 端数据可视化设计工具。可用于数据分析、数据看板、数据大屏等（内置蓝图事件编辑器）</li>
+</ul>
+<h3 id="2024年5月17号添加"><a href="#2024年5月17号添加" class="headerlink" title="2024年5月17号添加"></a>2024年5月17号添加</h3><h4 id="lalilu-深圳-Github"><a href="#lalilu-深圳-Github" class="headerlink" title="lalilu (深圳) - Github"></a>lalilu (深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/cy745" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/cy745/LMusic" >LMusic<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简洁好看，回归听歌本质的本地音乐播放器</li>
+</ul>
+<h3 id="2024年5月6号添加"><a href="#2024年5月6号添加" class="headerlink" title="2024年5月6号添加"></a>2024年5月6号添加</h3><h4 id="Bess-Croft-武汉-Github-博客"><a href="#Bess-Croft-武汉-Github-博客" class="headerlink" title="Bess Croft(武汉) - Github, 博客"></a>Bess Croft(武汉) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/besscroft" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://besscroft.com/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/besscroft/PicImpact" >PicImpact<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：摄影佬专用 ⌈相片集⌋，基于 Next.js 开发。</li>
+</ul>
+<h4 id="rookie-luochao-Github"><a href="#rookie-luochao-Github" class="headerlink" title="rookie-luochao - Github"></a>rookie-luochao - <a class="link"   target="_blank" rel="noopener" href="https://github.com/rookie-luochao" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/rookie-luochao/openapi-ui" >openapi-ui<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 基于 swagger&#x2F;openapi 规范的接口文档和接口测试工具, 支持后端框架接入，平替 swagger-ui，欢迎 pr 一起共同建设</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/rookie-luochao/go-openapi-ui" >go-openapi-ui<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> openapi-ui 的 golang 实现，支持常用 golang 后端开发框架，例如：gin、fiber、echo(欢迎提 pr 补充其他 golang 后端框架)，欢迎补充其他编程语言的后端框架接入包</li>
+</ul>
+<h3 id="2024年4月28号添加"><a href="#2024年4月28号添加" class="headerlink" title="2024年4月28号添加"></a>2024年4月28号添加</h3><h4 id="kisslove-Github"><a href="#kisslove-Github" class="headerlink" title="kisslove - Github"></a>kisslove - <a class="link"   target="_blank" rel="noopener" href="https://github.com/kisslove/web-monitoring" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://hubing.online/" >前端性能监控平台<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：日活跃、用户行为记录、访问日志、JS 错误日志、API 请求详情、访问性能评估，开发者和运营必须关心的各种数据（开源）</li>
+</ul>
+<h3 id="2024年4月26号添加"><a href="#2024年4月26号添加" class="headerlink" title="2024年4月26号添加"></a>2024年4月26号添加</h3><h4 id="zhangdi-Github"><a href="#zhangdi-Github" class="headerlink" title="zhangdi - Github"></a>zhangdi - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhangdi168" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhangdi168/VitePressSimple" >VitePressSimple<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>:基于 Wails2 开发的 Vitepress 可视化写作、可视化配置编辑的客户端工具，助力独立开发者快速搭建自己的产品手册或博客（开源、免费！） - <a class="link"   target="_blank" rel="noopener" href="http://vpsimple.xiaod.co/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h4 id="zyronon-Github-博客"><a href="#zyronon-Github-博客" class="headerlink" title="zyronon - Github, 博客"></a>zyronon - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zyronon" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/user/377887729139502/posts" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://zyronon.gitee.io/douyin/" >douyin<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Vue3 + Pinia + Vite5 仿抖音，完全度90% (Imitate TikTok with 90% completeness) <a class="link"   target="_blank" rel="noopener" href="https://github.com/zyronon/douyin" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年4月25号添加"><a href="#2024年4月25号添加" class="headerlink" title="2024年4月25号添加"></a>2024年4月25号添加</h3><h4 id="qwqcode-杭州-Github"><a href="#qwqcode-杭州-Github" class="headerlink" title="qwqcode(杭州) - Github"></a>qwqcode(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/qwqcode" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://artalk.js.org/" >Artalk<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源博客评论系统 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ArtalkJS/Artalk" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年4月22号添加"><a href="#2024年4月22号添加" class="headerlink" title="2024年4月22号添加"></a>2024年4月22号添加</h3><h4 id="鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-4"><a href="#鸭鸭「カモ」-厦门-GitHub-个人网页-X-Twitter-4" class="headerlink" title="鸭鸭「カモ」(厦门) - GitHub, 个人网页, X(Twitter)"></a>鸭鸭「カモ」(厦门) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/" >个人网页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/JinchengFang" >X(Twitter)<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://duckduckstudio.github.io/yazicbs.github.io/Tools/chinese_git/" >中文 Git<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：用中文命令操作 Git，使不熟悉英文的用户更轻松地使用 Git</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/DuckDuckStudio/power_by_akasha_terminal" >Power by 虚空终端<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简单的命令行装饰配置，把 Windows 终端变成虚空终端(或其他自定义内容)</li>
+</ul>
+<h3 id="2024年4月19号添加"><a href="#2024年4月19号添加" class="headerlink" title="2024年4月19号添加"></a>2024年4月19号添加</h3><h4 id="wujunwei928-北京-Github"><a href="#wujunwei928-北京-Github" class="headerlink" title="wujunwei928(北京) - Github"></a>wujunwei928(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/wujunwei928" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/wujunwei928/edge-tts-go" >edge-tts-go<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于微软 Edge 浏览器的大声朗读接口，开发的 TTS 文字转语音 Golang 工具，包含晓晓、云扬、云希等”网红主播”。</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/wujunwei928/parse-video" >parse-video<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Golang 短视频去水印工具：抖音,皮皮虾,火山,微视,最右,快手,全民小视频,皮皮搞笑,西瓜视频,虎牙,梨视频,Acfun,好看视频等</li>
+</ul>
+<h3 id="2024年4月15号添加"><a href="#2024年4月15号添加" class="headerlink" title="2024年4月15号添加"></a>2024年4月15号添加</h3><h4 id="Hu-Shenghao-南京-Github"><a href="#Hu-Shenghao-南京-Github" class="headerlink" title="Hu Shenghao (南京) - Github"></a>Hu Shenghao (南京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/hushenghao" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/hushenghao/AndroidEasterEggs" >Easter Eggs<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Android 系统复活节彩蛋集合 App，包含了所有 Android 版本的系统彩蛋，并兼容到 Android 5.0 系统</li>
+</ul>
+<h3 id="2024年4月9号添加"><a href="#2024年4月9号添加" class="headerlink" title="2024年4月9号添加"></a>2024年4月9号添加</h3><h4 id="lonnywong-Github-博客"><a href="#lonnywong-Github-博客" class="headerlink" title="lonnywong - Github, 博客"></a>lonnywong - <a class="link"   target="_blank" rel="noopener" href="https://github.com/trzsz/trzsz" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://trzsz.github.io/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/trzsz/trzsz" >trzsz<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：trzsz ( trz &#x2F; tsz ) 优秀的文件传输工具，和 lrzsz ( rz &#x2F; sz ) 类似的、兼容 tmux 的文件传输工具 - <a class="link"   target="_blank" rel="noopener" href="https://trzsz.github.io/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年3月18号添加"><a href="#2024年3月18号添加" class="headerlink" title="2024年3月18号添加"></a>2024年3月18号添加</h3><h4 id="程序员鱼皮-Github"><a href="#程序员鱼皮-Github" class="headerlink" title="程序员鱼皮 - Github"></a>程序员鱼皮 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/liyupi" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liyupi/yuindex" >Yuindex<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：极客范儿的浏览器主页 Vue 3 + Node.js 全栈项目，自实现 web 终端 + 命令系统</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liyupi/yu-auto-reply" >AI 自动回复工具<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：可用于知识星球的 AI 问答机器人</li>
+</ul>
+<p>﻿</p>
+<h3 id="2024年3月13号添加"><a href="#2024年3月13号添加" class="headerlink" title="2024年3月13号添加"></a>2024年3月13号添加</h3><h4 id="chaos-zhu-GitHub"><a href="#chaos-zhu-GitHub" class="headerlink" title="chaos-zhu GitHub"></a>chaos-zhu <a class="link"   target="_blank" rel="noopener" href="https://github.com/chaos-zhu" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/chaos-zhu/easynode" >EasyNode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简易的个人 Linux 服务器 ssh 管理面板(webSSH&amp;webSFTP)。多服务器管理; 通过 WebSocket 实时更新服务器基本信息: 系统、公网IP、CPU、内存、硬盘、网卡等；基于浏览器解决SSH&amp;SFTP跨端烦恼——Web SSH&amp;Web SFTP - <a class="link"   target="_blank" rel="noopener" href="https://github.com/chaos-zhu/easynode" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年3月9号添加"><a href="#2024年3月9号添加" class="headerlink" title="2024年3月9号添加"></a>2024年3月9号添加</h3><h4 id="work7z-GitHub"><a href="#work7z-GitHub" class="headerlink" title="work7z GitHub"></a>work7z <a class="link"   target="_blank" rel="noopener" href="https://github.com/work7z" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8: <a class="link"   target="_blank" rel="noopener" href="https://github.com/work7z/LafTools" >LafTools工具箱<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：免费安全开源跨平台的程序员工具箱，涵盖各类转换加解密解析等功能，还提供常用开发手册和资源页。除此之外，还将不断融入AI、笔记、时间管理等功能加入到这个工具箱，旨在帮助程序员更快更好的完成手头上的工作，期待成为程序员界的瑞士军刀 - <a class="link"   target="_blank" rel="noopener" href="https://my.laf-tools.com/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2024年2月2日添加"><a href="#2024年2月2日添加" class="headerlink" title="2024年2月2日添加"></a>2024年2月2日添加</h3><hr>
+<h4 id="beavailable-Github"><a href="#beavailable-Github" class="headerlink" title="beavailable - Github"></a>beavailable - <a class="link"   target="_blank" rel="noopener" href="https://github.com/beavailable" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/beavailable/apt.sh" >apt.sh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：为 msys2 中的 pacman 提供一个用户友好的 shell 包装器</li>
+</ul>
+<h3 id="2024年1月22日添加"><a href="#2024年1月22日添加" class="headerlink" title="2024年1月22日添加"></a>2024年1月22日添加</h3><hr>
+<h4 id="Zen-Huifer-浙江-Github"><a href="#Zen-Huifer-浙江-Github" class="headerlink" title="Zen Huifer(浙江) - Github"></a>Zen Huifer(浙江) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/huifer" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/pychfarm_admin/env-manager" >env-manager<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：可视化的方式快捷切换环境</li>
+</ul>
+<h3 id="2024年1月12日添加"><a href="#2024年1月12日添加" class="headerlink" title="2024年1月12日添加"></a>2024年1月12日添加</h3><hr>
+<h4 id="Aooohan-北京-主页"><a href="#Aooohan-北京-主页" class="headerlink" title="Aooohan(北京) - 主页"></a>Aooohan(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/aooohan" >主页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/version-fox/vfox" >VersionFox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：跨平台、可拓展的 SDK 版本管理工具, 支持 Nodejs、Java、Dart、Flutter 等多种SDK.</li>
+</ul>
+<h3 id="2023年12月18日添加"><a href="#2023年12月18日添加" class="headerlink" title="2023年12月18日添加"></a>2023年12月18日添加</h3><hr>
+<h4 id="mengxianliang-北京-主页"><a href="#mengxianliang-北京-主页" class="headerlink" title="mengxianliang(北京) - 主页"></a>mengxianliang(北京) - <a class="link"   target="_blank" rel="noopener" href="https://mengxianliang.com/" >主页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/mengxianliang/XLUIKit" >XLUIKit<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：iOS UI 工具集</li>
+</ul>
+<h3 id="2023年12月11日添加"><a href="#2023年12月11日添加" class="headerlink" title="2023年12月11日添加"></a>2023年12月11日添加</h3><hr>
+<h4 id="heygsc-Github"><a href="#heygsc-Github" class="headerlink" title="heygsc - Github"></a>heygsc - <a class="link"   target="_blank" rel="noopener" href="https://github.com/heygsc" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://ultra-button-docs.pages.dev/" >按钮样式库<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Vue 的按钮样式库，效果丰富。</li>
+</ul>
+<h3 id="2023年12月8日添加"><a href="#2023年12月8日添加" class="headerlink" title="2023年12月8日添加"></a>2023年12月8日添加</h3><hr>
+<h4 id="Meekdai-杭州-Github-博客"><a href="#Meekdai-杭州-Github-博客" class="headerlink" title="Meekdai(杭州) - Github, 博客"></a>Meekdai(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Meekdai/" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://meekdai.com/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Meekdai/Gmeek" >Gmeek<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：超轻量级个人博客框架，只需 2 步配置轻松搭建。</li>
+</ul>
+<h4 id="jianchang512-青岛-Github"><a href="#jianchang512-青岛-Github" class="headerlink" title="jianchang512(青岛) - Github"></a>jianchang512(青岛) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/jianchang512" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/jianchang512/pyvideotrans" >pyvideotrans<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：视频翻译和配音桌面软件，可将视频从一种语言翻译为另一种语言并配音，集成 OpenAI Whisper 语音识别、OpenAI-TTS&#x2F;edgeTTS 语音合成、Google&#x2F;Deepl&#x2F;ChatGPT&#x2F;Baidu 字幕翻译、音视频分离合并等功能</li>
+</ul>
+<h3 id="2023年11月27日添加"><a href="#2023年11月27日添加" class="headerlink" title="2023年11月27日添加"></a>2023年11月27日添加</h3><hr>
+<h4 id="Leo-Song-上海-Github"><a href="#Leo-Song-上海-Github" class="headerlink" title="Leo Song(上海) - Github"></a>Leo Song(上海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/LHRUN/bubble" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://bubble-awesome-profile.vercel.app/" >Bubble<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：收录 Github Profile 和 Readme Component 的网站</li>
+</ul>
+<h3 id="2023年11月2日添加"><a href="#2023年11月2日添加" class="headerlink" title="2023年11月2日添加"></a>2023年11月2日添加</h3><hr>
+<h3 id="changwu-Github"><a href="#changwu-Github" class="headerlink" title="changwu - Github"></a>changwu - <a class="link"   target="_blank" rel="noopener" href="https://github.com/changwu/" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h3><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/changwu/cvparser" >专注私有部署的智能简历解析系统<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于自然语言处理和机器学习的高精准度简历解析系统，生产环境中海量简历解析检验，稳健性和智能性得到一致肯定。一次购买、永久许可。市面上唯一可以私有云部署（本地部署）一键安装试用的智能简历解析系统，数据安全完全掌握在自己手里。</li>
+</ul>
+<h3 id="2023年9月6日添加"><a href="#2023年9月6日添加" class="headerlink" title="2023年9月6日添加"></a>2023年9月6日添加</h3><hr>
+<h4 id="gngpp-Github"><a href="#gngpp-Github" class="headerlink" title="gngpp - Github"></a>gngpp - <a class="link"   target="_blank" rel="noopener" href="https://github.com/gngpp" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/gngpp/opengpt" >opengpt<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：逆向工程的 <code>ChatGPT</code> 代理（绕过 Cloudflare 403 Access Denied） - <a class="link"   target="_blank" rel="noopener" href="https://github.com/gngpp/opengpt/blob/main/README_zh.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/gngpp/xunlei" >xunlei<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：<code>Linux</code> 迅雷下载服务（支持OpenWrt&#x2F;Alpine&#x2F;Docker）- <a class="link"   target="_blank" rel="noopener" href="https://github.com/gngpp/xunlei/blob/main/README.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年8月21日添加"><a href="#2023年8月21日添加" class="headerlink" title="2023年8月21日添加"></a>2023年8月21日添加</h3><hr>
+<h4 id="HildaM-广东-Github"><a href="#HildaM-广东-Github" class="headerlink" title="HildaM(广东) - Github"></a>HildaM(广东) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/HildaM" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/HildaM/sparkdesk-api" >SparkDesk-api<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：讯飞星火大模型 Python API</li>
+</ul>
+<h4 id="百年孤独-成都-Github"><a href="#百年孤独-成都-Github" class="headerlink" title="百年孤独(成都) - Github"></a>百年孤独(成都) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/everydoc" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/everydoc/jrebel-license-server" >JRebel 激活服务<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 SpringBoot 的 JRebel 激活服务，支持Docker，也可直接使用我提供的地址（只支持IPv6） - <a class="link"   target="_blank" rel="noopener" href="https://jrebel.imjcker.com:1314/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年8月12日添加"><a href="#2023年8月12日添加" class="headerlink" title="2023年8月12日添加"></a>2023年8月12日添加</h3><hr>
+<h4 id="hncboy-杭州-Github"><a href="#hncboy-杭州-Github" class="headerlink" title="hncboy(杭州) - Github"></a>hncboy(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/hncboy" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/hncboy/ai-beehive" >AI 蜂巢<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Java 使用 Spring Boot 3 和 JDK 17，支持的功能有 ChatGPT、OpenAi Image、Midjourney、NewBing、文心一言等等</li>
+</ul>
+<h4 id="kingwrcy-Github"><a href="#kingwrcy-Github" class="headerlink" title="kingwrcy - Github"></a>kingwrcy - <a class="link"   target="_blank" rel="noopener" href="https://github.com/kingwrcy" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://mblog.club/" >mblog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 开源自部署的个人微博平台,支持单人&#x2F;多人&#x2F;评论&#x2F;审核,支持markdown,支持前后分离&#x2F;不分离 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/mblog-backend/backend" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h4 id="zcf0508-Github"><a href="#zcf0508-Github" class="headerlink" title="zcf0508 - Github"></a>zcf0508 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zcf0508" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://hook.huali.cafe/" >vue-hook-optimizer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：用来分析和展示 Vue3 组件中变量和函数的调用关系，便于重构代码 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zcf0508/vue-hook-optimizer" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年8月4日添加"><a href="#2023年8月4日添加" class="headerlink" title="2023年8月4日添加"></a>2023年8月4日添加</h3><hr>
+<h4 id="Morestrive-Github"><a href="#Morestrive-Github" class="headerlink" title="Morestrive - Github"></a>Morestrive - <a class="link"   target="_blank" rel="noopener" href="https://github.com/more-strive" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://yft.design/" >vue-fabric-design<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Canvas 的开源版”创客贴”，在线生成名片、海报、宣传单，支持 文字、图片、形状、线条、二维码 、条形码等 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/dromara/yft-design" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年8月2日添加"><a href="#2023年8月2日添加" class="headerlink" title="2023年8月2日添加"></a>2023年8月2日添加</h3><hr>
+<h4 id="WuKongIM-Github"><a href="#WuKongIM-Github" class="headerlink" title="WuKongIM - Github"></a>WuKongIM - <a class="link"   target="_blank" rel="noopener" href="https://github.com/tangtaoit" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><p>✓ <a class="link"   target="_blank" rel="noopener" href="https://tangsengdaodao.com/" >唐僧叨叨<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：仿 Telegram 的自研开源聊天软件 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/TangSengDaoDao/TangSengDaoDaoServer" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h3 id="2023年8月1日添加"><a href="#2023年8月1日添加" class="headerlink" title="2023年8月1日添加"></a>2023年8月1日添加</h3><hr>
+<h4 id="kalcaddle-杭州-Github"><a href="#kalcaddle-杭州-Github" class="headerlink" title="kalcaddle(杭州) - Github"></a>kalcaddle(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/kalcaddle" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/kalcaddle/kodbox" >kodbox<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：支持各种云存储的云盘系统,便捷快速搭建团队或企业网盘</li>
+</ul>
+<h3 id="2023年7月31日添加"><a href="#2023年7月31日添加" class="headerlink" title="2023年7月31日添加"></a>2023年7月31日添加</h3><hr>
+<h4 id="RockChinQ-桂林-Github"><a href="#RockChinQ-桂林-Github" class="headerlink" title="RockChinQ(桂林) - Github"></a>RockChinQ(桂林) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/RockChinQ" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/RockChinQ/QChatGPT/blob/master/README.md" >QChatGPT<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：😎高稳定性、🐒低耦合、🧩支持插件的 ChatGPT New Bing QQ 机器人🤖</li>
+</ul>
+<h3 id="2023年7月29日添加"><a href="#2023年7月29日添加" class="headerlink" title="2023年7月29日添加"></a>2023年7月29日添加</h3><hr>
+<h4 id="JingMatrix-Github"><a href="#JingMatrix-Github" class="headerlink" title="JingMatrix - Github"></a>JingMatrix - <a class="link"   target="_blank" rel="noopener" href="https://github.com/JingMatrix" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/JingMatrix/ChromeXt" >ChromeXt<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：让用户可以在基于 Chromium 或 WebView 的浏览器上运行用户脚本以及打开开发者工具的 Xposed 模块 - <a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1TV4y1b7zR/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年7月23日添加"><a href="#2023年7月23日添加" class="headerlink" title="2023年7月23日添加"></a>2023年7月23日添加</h3><hr>
+<h4 id="Sunrisepeak-Github-Bilibili-知乎"><a href="#Sunrisepeak-Github-Bilibili-知乎" class="headerlink" title="Sunrisepeak - Github, Bilibili, 知乎"></a>Sunrisepeak - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Sunrisepeak" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://space.bilibili.com/65858958" >Bilibili<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/people/SPeakShen" >知乎<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8:  <a class="link"   target="_blank" rel="noopener" href="https://github.com/Sunrisepeak/DStruct" >DStruct<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：🔥 一个<strong>易于移植&#x2F;使用&#x2F;学习且结构简洁</strong>的<strong>数据结构模板库</strong></li>
+<li>:clock8:  <a class="link"   target="_blank" rel="noopener" href="https://github.com/Sunrisepeak/DSVisual" >DSVisual<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：一个<strong>数据结构可视化</strong>组件库</li>
+</ul>
+<h3 id="2023年7月22号添加"><a href="#2023年7月22号添加" class="headerlink" title="2023年7月22号添加"></a>2023年7月22号添加</h3><hr>
+<h4 id="Tw93-Github-Twitter-博客"><a href="#Tw93-Github-Twitter-博客" class="headerlink" title="Tw93 - Github, Twitter, 博客"></a>Tw93 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/tw93" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/HiTw93" >Twitter<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://tw93.fun/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/tw93/Pake" >Pake<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：利用 Rust 轻松构建轻量级桌面应用</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://weekly.tw93.fun/" >潮流周刊<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：潮流技术资讯，好用开源工具推荐的周刊</li>
+</ul>
+<h3 id="2023年7月12号添加"><a href="#2023年7月12号添加" class="headerlink" title="2023年7月12号添加"></a>2023年7月12号添加</h3><hr>
+<h4 id="Leafer-北京-Github"><a href="#Leafer-北京-Github" class="headerlink" title="Leafer(北京) - Github"></a>Leafer(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/leaferjs/ui" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.leaferjs.com/" >LeaferJS<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>： 绚丽多彩的 HTML5 Canvas 2D 图形渲染引擎， 可结合 AI 绘图、生成界面，能让你拥有瞬间创建100万个图形的超强能力，免费开源、易学易用、场景丰富 - <a class="link"   target="_blank" rel="noopener" href="https://leaferjs.com/ui/blog/2023-06-28.html" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年6月29号添加"><a href="#2023年6月29号添加" class="headerlink" title="2023年6月29号添加"></a>2023年6月29号添加</h3><hr>
+<h4 id="tomsun28-绵阳-Github"><a href="#tomsun28-绵阳-Github" class="headerlink" title="tomsun28(绵阳) - Github."></a>tomsun28(绵阳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/tomsun28" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>.</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://hertzbeat.com/" >HertzBeat<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：<a class="link"   target="_blank" rel="noopener" href="https://github.com/dromara/hertzbeat" >开源实时监控工具<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> + <a class="link"   target="_blank" rel="noopener" href="https://console.tancloud.cn/" >云服务<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, 支持对应用网站，数据库，操作系统，中间件，云原生，网络等的监控告警通知，类似于 Zabbix 和 Prometheus - <a class="link"   target="_blank" rel="noopener" href="https://github.com/dromara/hertzbeat" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年6月16号添加"><a href="#2023年6月16号添加" class="headerlink" title="2023年6月16号添加"></a>2023年6月16号添加</h3><hr>
+<h4 id="Fangnan700-合肥-Github-博客"><a href="#Fangnan700-合肥-Github-博客" class="headerlink" title="Fangnan700(合肥) - Github, 博客"></a>Fangnan700(合肥) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Fangnan700" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.yvling.icu/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Fangnan700/ChangePicBed" >ChangePicBed<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：批量导出语雀文档、批量更换图床 - <a class="link"   target="_blank" rel="noopener" href="https://blog.yvling.icu/2023/06/15/Markdown%E5%9B%BE%E7%89%87%E6%89%B9%E9%87%8F%E6%8D%A2%E5%9B%BE%E5%BA%8A/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年4月30号添加"><a href="#2023年4月30号添加" class="headerlink" title="2023年4月30号添加"></a>2023年4月30号添加</h3><hr>
+<h4 id="cxxsucks-徐州"><a href="#cxxsucks-徐州" class="headerlink" title="cxxsucks(徐州)"></a>cxxsucks(徐州)</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/cxxsucks/orient/releases/tag/v0.3.1" >orient<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Linux, macOS 与 Windows 上的<em>命令行</em>文件检索工具，含有<code>find</code>以及<code>Everything</code>的各种功能，外加内容查找、上下层目录查找等 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/cxxsucks/orient" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年4月27号添加"><a href="#2023年4月27号添加" class="headerlink" title="2023年4月27号添加"></a>2023年4月27号添加</h3><hr>
+<h4 id="jahnli-Github"><a href="#jahnli-Github" class="headerlink" title="jahnli - Github"></a>jahnli - <a class="link"   target="_blank" rel="noopener" href="https://github.com/jahnli" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/jahnli/awesome-flutter-plugins" >awesome-flutter-plugins<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：好用的Flutter插件以便更效率的开发 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/jahnli/awesome-flutter-plugins" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年4月7号添加"><a href="#2023年4月7号添加" class="headerlink" title="2023年4月7号添加"></a>2023年4月7号添加</h3><hr>
+<h4 id="KissesJun-GitHub"><a href="#KissesJun-GitHub" class="headerlink" title="KissesJun - GitHub"></a>KissesJun - <a class="link"   target="_blank" rel="noopener" href="https://github.com/GWillS163" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/GWillS163/howUseAIInAppEnginnering" >MASystem<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 ChatGPT+plantUML 的 软件工程 UML 图生成工具（demo，后续版本未开源）</li>
+</ul>
+<h3 id="2023年3月19号添加"><a href="#2023年3月19号添加" class="headerlink" title="2023年3月19号添加"></a>2023年3月19号添加</h3><hr>
+<h4 id="J。z-广州-Github"><a href="#J。z-广州-Github" class="headerlink" title="J。z(广州) - Github"></a>J。z(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jezemy/MASystem" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jezemy/MASystem" >MASystem<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于知识图谱的中文医疗问答系统</li>
+</ul>
+<h3 id="2023年3月2号添加"><a href="#2023年3月2号添加" class="headerlink" title="2023年3月2号添加"></a>2023年3月2号添加</h3><hr>
+<h4 id="S1NH-博客"><a href="#S1NH-博客" class="headerlink" title="S1NH - 博客"></a>S1NH - <a class="link"   target="_blank" rel="noopener" href="http://s1nh.org/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/duchengyao/gpu-based-image-stitching" >gpu-based-image-stitching<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：快速图像拼接算法 -  <a class="link"   target="_blank" rel="noopener" href="http://s1nh.org/post/A-survey-on-image-mosaicing-techniques/" >介绍1<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="http://s1nh.org/post/image-stitching-post-process/" >介绍2<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年2月23号添加"><a href="#2023年2月23号添加" class="headerlink" title="2023年2月23号添加"></a>2023年2月23号添加</h3><hr>
+<h4 id="方楠-合肥-Github-博客"><a href="#方楠-合肥-Github-博客" class="headerlink" title="方楠(合肥) - Github, 博客"></a>方楠(合肥) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Fangnan700" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.yvling.top/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Fangnan700/AI-aides" >AI-aides<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：接入了 ChatGPT 的人工智能助手。</li>
+</ul>
+<h3 id="2023年2月10号添加"><a href="#2023年2月10号添加" class="headerlink" title="2023年2月10号添加"></a>2023年2月10号添加</h3><hr>
+<h4 id="一刀-杭州-Github"><a href="#一刀-杭州-Github" class="headerlink" title="一刀(杭州) - Github"></a>一刀(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/laosanyuan" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/laosanyuan/DaoLang" >DaoLang<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简单易用的 C# 客户端多语言国际化应用框架</li>
+</ul>
+<h3 id="2023年1月26号添加"><a href="#2023年1月26号添加" class="headerlink" title="2023年1月26号添加"></a>2023年1月26号添加</h3><hr>
+<h4 id="Robert1037-清远-Github-博客"><a href="#Robert1037-清远-Github-博客" class="headerlink" title="Robert1037(清远) - Github, 博客"></a>Robert1037(清远) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Robert1037" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://rbtblog.com/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://rbtblog.com/posts/SHA256%E7%AE%97%E6%B3%95%E7%9A%84C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0/" >sha256full&#x2F;fast&#x2F;min<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：C 实现轻量命令行执行的 SHA256 散列值计算程序，加进用户路径可快捷 hash 字符串或文件</li>
+</ul>
+<h3 id="2023年1月24号添加"><a href="#2023年1月24号添加" class="headerlink" title="2023年1月24号添加"></a>2023年1月24号添加</h3><hr>
+<h4 id="soonxf-wuhu-Github-博客"><a href="#soonxf-wuhu-Github-博客" class="headerlink" title="soonxf(wuhu) - Github, 博客"></a>soonxf(wuhu) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/soonxf" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="http://blog.340200.xyz/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/soonxf/Micro-Firewall" >微型防火墙<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简单的 Linux web 防火墙</li>
+</ul>
+<h3 id="2023年1月23号添加"><a href="#2023年1月23号添加" class="headerlink" title="2023年1月23号添加"></a>2023年1月23号添加</h3><hr>
+<h4 id="Tsonglew-杭州-Github"><a href="#Tsonglew-杭州-Github" class="headerlink" title="Tsonglew(杭州) - Github"></a>Tsonglew(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/tsonglew" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/tsonglew/intellij-etcdhelper" >intellij-etcdhelper<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：支持 JetBrains 全家桶的 etcd GUI 插件 - <a class="link"   target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/19924-etcdhelper" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年1月13号添加"><a href="#2023年1月13号添加" class="headerlink" title="2023年1月13号添加"></a>2023年1月13号添加</h3><hr>
+<h4 id="dsy4567-Github"><a href="#dsy4567-Github" class="headerlink" title="dsy4567 - Github"></a>dsy4567 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/dsy4567" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=dsy4567.4399-on-vscode" >4399 on vscode<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> - 在 VScode 上玩 4399 小游戏, 帮助你劳逸结合, 提高开发效率</li>
+</ul>
+<h3 id="2023年1月11日添加"><a href="#2023年1月11日添加" class="headerlink" title="2023年1月11日添加"></a>2023年1月11日添加</h3><hr>
+<h4 id="liudf0716-北京-Github-推特"><a href="#liudf0716-北京-Github-推特" class="headerlink" title="liudf0716(北京) - Github, 推特"></a>liudf0716(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/liudf0716" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/staylightblow8" >推特<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liudf0716/apfree_wifidog" >apfree-wifidog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 高性能轻量级的 portal 解决方案。</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liudf0716/xfrpc" >xfrpc<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: C 语言实现的内网穿透客户端，配合 frp 服务端使用。</li>
+</ul>
+<h4 id="opensug-北京-Github-博客"><a href="#opensug-北京-Github-博客" class="headerlink" title="opensug(北京) - Github, 博客"></a>opensug(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/opensug/wp-opensug"  title="https:&#x2F;&#x2F;github.com&#x2F;opensug&#x2F;wp-opensug">Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.opensug.org/"  title="https:&#x2F;&#x2F;www.opensug.org">博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/opensug/"  title="https:&#x2F;&#x2F;wordpress.org&#x2F;plugins&#x2F;opensug&#x2F;">openSug - WordPress插件<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：为访问者提供搜索建议，方便用户搜索 - <a class="link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/opensug/"  title="https:&#x2F;&#x2F;wordpress.org&#x2F;plugins&#x2F;opensug&#x2F;">更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2023年1月9日添加"><a href="#2023年1月9日添加" class="headerlink" title="2023年1月9日添加"></a>2023年1月9日添加</h3><hr>
+<h4 id="释慧利-上海-Github"><a href="#释慧利-上海-Github" class="headerlink" title="释慧利(上海) - Github"></a>释慧利(上海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/shihuili1218" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8:  <a class="link"   target="_blank" rel="noopener" href="https://github.com/shihuili1218/klein" >Klein<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Paxos 的分布式集合工具库，包括分布式 ArrayList、分布式 HashMap、分布式缓存、分布式锁等。</li>
+</ul>
+<h3 id="2023年1月7日添加"><a href="#2023年1月7日添加" class="headerlink" title="2023年1月7日添加"></a>2023年1月7日添加</h3><hr>
+<h4 id="geektcp-深圳-Github"><a href="#geektcp-深圳-Github" class="headerlink" title="geektcp(深圳) - Github"></a>geektcp(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/geektcp" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓  <a class="link"   target="_blank" rel="noopener" href="https://github.com/geektcp/Namjagbarwa-wow" >Namjagbarwa-wow<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：开源魔兽世界项目</li>
+</ul>
+<h3 id="2022年12月4日添加"><a href="#2022年12月4日添加" class="headerlink" title="2022年12月4日添加"></a>2022年12月4日添加</h3><hr>
+<h4 id="KID-joker-Github"><a href="#KID-joker-Github" class="headerlink" title="KID-joker - Github"></a>KID-joker - <a class="link"   target="_blank" rel="noopener" href="https://github.com/KID-joker" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/KID-joker/proxy-web-storage" >proxy-web-storage<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 借助 proxy，扩展了 web storage 的功能，使用起来，更加方便快捷，也更加强大。主要功能为保持值类型不变，可直接操控 Object、Array，支持监听数据变化和设置过期时间。</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/KID-joker/npm-deprecated-check" >npm-deprecated-check<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 检查当前项目、全局或者指定安装包是否已弃用。</li>
+</ul>
+<h3 id="2022年11月12日添加"><a href="#2022年11月12日添加" class="headerlink" title="2022年11月12日添加"></a>2022年11月12日添加</h3><hr>
+<h4 id="zhennann（健哥-郑州）-Github"><a href="#zhennann（健哥-郑州）-Github" class="headerlink" title="zhennann（健哥&#x2F;郑州） - Github"></a>zhennann（健哥&#x2F;郑州） - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhennann" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhennann/cabloy" >CabloyJS<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 自带工作流引擎的 Node.js 全栈框架，面向开发者的低代码开发平台，更是一款兼具低代码的开箱即用和专业代码的灵活定制的 PAAS 平台</li>
+</ul>
+<h3 id="2022年5月18日添加"><a href="#2022年5月18日添加" class="headerlink" title="2022年5月18日添加"></a>2022年5月18日添加</h3><hr>
+<h4 id="haoziqaq-成都-无锡-Github"><a href="#haoziqaq-成都-无锡-Github" class="headerlink" title="haoziqaq(成都&#x2F;无锡) - Github"></a>haoziqaq(成都&#x2F;无锡) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/haoziqaq" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/varletjs/varlet" >Varlet UI<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Vue3 开发的 Material 风格移动端组件库。</li>
+</ul>
+<h3 id="2022年3月12号添加"><a href="#2022年3月12号添加" class="headerlink" title="2022年3月12号添加"></a>2022年3月12号添加</h3><hr>
+<h4 id="mnikn-广州-Github"><a href="#mnikn-广州-Github" class="headerlink" title="mnikn(广州) - Github"></a>mnikn(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/mnikn" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/mnikn/general-data-manager" >General Data Manager<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：通用配置数据管理软件，能够根据数据格式自定义定制对应的编辑面板。支持 JSON 数据的可视化</li>
+</ul>
+<h3 id="2022年2月21号添加"><a href="#2022年2月21号添加" class="headerlink" title="2022年2月21号添加"></a>2022年2月21号添加</h3><hr>
+<h4 id="Yxliam-广州-Github"><a href="#Yxliam-广州-Github" class="headerlink" title="Yxliam(广州) - Github"></a>Yxliam(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Yxliam" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.toolbon.com/" >优工具<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：在线工具箱</li>
+</ul>
+<h3 id="2022年1月29号添加"><a href="#2022年1月29号添加" class="headerlink" title="2022年1月29号添加"></a>2022年1月29号添加</h3><hr>
+<h4 id="谢宇恒-深圳-主页-Github"><a href="#谢宇恒-深圳-主页-Github" class="headerlink" title="谢宇恒(深圳) - 主页, Github"></a>谢宇恒(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://xieyuheng.com/" >主页<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/xieyuheng" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://cicada-lang.org/" >蝉语<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：形式化数学定理的程序语言。</li>
+</ul>
+<h3 id="2021年11月11号添加"><a href="#2021年11月11号添加" class="headerlink" title="2021年11月11号添加"></a>2021年11月11号添加</h3><hr>
+<h4 id="Eson-广州-Github-博客"><a href="#Eson-广州-Github-博客" class="headerlink" title="Eson(广州) - Github, 博客"></a>Eson(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/itiwll" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.esonwong.com/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://network-rc.esonwong.com/" >Network RC<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Network RC 是运行在树莓派和浏览器上的网络遥控车软件 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/itiwll/network-rc/blob/master/README-cn.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2021年11月6号添加"><a href="#2021年11月6号添加" class="headerlink" title="2021年11月6号添加"></a>2021年11月6号添加</h3><hr>
+<h4 id="xnat9-成都-Github"><a href="#xnat9-成都-Github" class="headerlink" title="xnat9(成都) - Github"></a>xnat9(成都) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnat9" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnat9/tiny" >tiny<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：小巧的 Java 应用微内核框架, 可用于构建小工具项目，web 项目，各种大大小小的项目</li>
+</ul>
+<h3 id="2021年10月28号添加"><a href="#2021年10月28号添加" class="headerlink" title="2021年10月28号添加"></a>2021年10月28号添加</h3><hr>
+<h4 id="Mizhousoft-赣州-Github"><a href="#Mizhousoft-赣州-Github" class="headerlink" title="Mizhousoft(赣州) - Github"></a>Mizhousoft(赣州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/mizhousoft" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://open.mizhousoft.com/" >开源选型<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：为 Java、Golang、前端、Swift、Android 开发人员提供业界流行的组件</li>
+</ul>
+<h3 id="2021年10月23号添加"><a href="#2021年10月23号添加" class="headerlink" title="2021年10月23号添加"></a>2021年10月23号添加</h3><hr>
+<h4 id="xnat9-成都-Github-1"><a href="#xnat9-成都-Github-1" class="headerlink" title="xnat9(成都) - Github"></a>xnat9(成都) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnat9" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xnat9/grule" >GRule<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：自创 Groovy DSL 动态规则(rule)执行引擎, 流程引擎. 特色 风控系统, 规则引擎, 动态接口配置(低代码)</li>
+</ul>
+<h3 id="2021年8月26号添加"><a href="#2021年8月26号添加" class="headerlink" title="2021年8月26号添加"></a>2021年8月26号添加</h3><hr>
+<h4 id="montisan-长沙-Github"><a href="#montisan-长沙-Github" class="headerlink" title="montisan(长沙) - Github"></a>montisan(长沙) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/montisan" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.geekeditor.com/" >极客编辑器<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：所见即所得（WYSIWYG）富文本沉浸式深度写作编辑器，它注重效率创作，可多开文档编辑，同时支持Markdown语法输入。它重视写作者内容隐私及数据安全，目前已支持浏览器本地、Github及Gitee仓库文档存储，支持 Github、Gitee 仓库图片资源存储。在线版访问：<a class="link"   target="_blank" rel="noopener" href="https://www.geekeditor.com/" >https://www.geekeditor.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 。当前，编辑器除了支持常用内容块外，并支持了代码块、LaTex数学公式、Mermaid图表、Drawio制图，可以一键复制到微信公众号、知乎及掘金等平台发布。此外，编辑器支持了截图粘贴以及本地图片文件拖拽至编辑区任意位置等便捷功能。</li>
+</ul>
+<h3 id="2021年5月20号添加"><a href="#2021年5月20号添加" class="headerlink" title="2021年5月20号添加"></a>2021年5月20号添加</h3><hr>
+<h4 id="beavailable-Github-1"><a href="#beavailable-Github-1" class="headerlink" title="beavailable - Github"></a>beavailable - <a class="link"   target="_blank" rel="noopener" href="https://github.com/beavailable" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/beavailable/share" >share<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：分享文件和文本，用这一个工具就够了！</li>
+</ul>
+<h3 id="2021年4月13号添加"><a href="#2021年4月13号添加" class="headerlink" title="2021年4月13号添加"></a>2021年4月13号添加</h3><hr>
+<h4 id="xiejiahe-珠海-Github"><a href="#xiejiahe-珠海-Github" class="headerlink" title="xiejiahe(珠海) - Github"></a>xiejiahe(珠海) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xjh22222228" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xjh22222228/boomb" >Boomb<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Github 轻松管理您的存储图库</li>
+</ul>
+<h3 id="2021年1月2号添加"><a href="#2021年1月2号添加" class="headerlink" title="2021年1月2号添加"></a>2021年1月2号添加</h3><hr>
+<h4 id="yanhuihang（广州）-Gitee"><a href="#yanhuihang（广州）-Gitee" class="headerlink" title="yanhuihang（广州） - Gitee"></a>yanhuihang（广州） - <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/yanhuihang/" >Gitee<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://gitee.com/yanhuihang/Bilibili" >哔哩哔哩舆论工具<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：哔哩哔哩视频网弹幕发送者查看器（本来是加密的，解密了一下）</li>
+</ul>
+<h3 id="2020年10月24号添加"><a href="#2020年10月24号添加" class="headerlink" title="2020年10月24号添加"></a>2020年10月24号添加</h3><hr>
+<h4 id="RiverTwilight-成都-Github-博客"><a href="#RiverTwilight-成都-Github-博客" class="headerlink" title="RiverTwilight(成都) - Github, 博客"></a>RiverTwilight(成都) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/RiverTwilight" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.yungeeker.com/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://blog.yungeeker.com/" >NBlog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：支持多语言和评论的静态 Markdown 博客系统，无需服务器，响应式 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/RiverTwilight/NBlog" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2020年9月23号添加"><a href="#2020年9月23号添加" class="headerlink" title="2020年9月23号添加"></a>2020年9月23号添加</h3><hr>
+<h4 id="Strawmanbobi-南京-Gitlab"><a href="#Strawmanbobi-南京-Gitlab" class="headerlink" title="Strawmanbobi(南京) - Gitlab,"></a>Strawmanbobi(南京) - <a class="link"   target="_blank" rel="noopener" href="http://strawmanbobi.wicp.net/irext" >Gitlab<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>,</h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://cc.irext.net/" >IRext<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：万能红外遥控解决方案，全球唯一开源万能红外遥控码库+编解码方案（IRext open source organization）</li>
+</ul>
+<h3 id="2020年9月5号添加"><a href="#2020年9月5号添加" class="headerlink" title="2020年9月5号添加"></a>2020年9月5号添加</h3><hr>
+<h4 id="Writeup007-Github"><a href="#Writeup007-Github" class="headerlink" title="Writeup007 - Github"></a>Writeup007 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Writeup007" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Writeup007/windows-tail" >Windows 版 tail 命令<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：Windows 版 tail 命令，可在 CMD 下直接使用，解决 Windows 日志查看问题。</li>
+</ul>
+<h3 id="2020年7月15号添加"><a href="#2020年7月15号添加" class="headerlink" title="2020年7月15号添加"></a>2020年7月15号添加</h3><hr>
+<h4 id="Elliot-杭州-GitHub"><a href="#Elliot-杭州-GitHub" class="headerlink" title="Elliot(杭州) - GitHub"></a>Elliot(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/elliotreborn" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://socode.pro/extension/" >SOCODE.PRO<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：在浏览器地址栏中快捷、舒适地搜索多种类型的编程文档。</li>
+</ul>
+<h3 id="2020年6月30号添加"><a href="#2020年6月30号添加" class="headerlink" title="2020年6月30号添加"></a>2020年6月30号添加</h3><hr>
+<h4 id="doho-北京-Github"><a href="#doho-北京-Github" class="headerlink" title="doho(北京) - Github"></a>doho(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zwh1666258377" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/tigergraph/gitbook2spa" >gitbook2spa<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：将 Gitbook 导出的原数据转换成单页面应用的工具，像素级还原。 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/tigergraph/gitbook2spa" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2020年4月14号添加"><a href="#2020年4月14号添加" class="headerlink" title="2020年4月14号添加"></a>2020年4月14号添加</h3><hr>
+<h4 id="Jezemy-广州-Github"><a href="#Jezemy-广州-Github" class="headerlink" title="Jezemy(广州) - Github"></a>Jezemy(广州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jezemy" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jezemy/VideoSubScanPlayer" >视频字幕翻译器<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：自动翻译内嵌字幕的视频播放器</li>
+</ul>
+<h3 id="2020年4月5号添加"><a href="#2020年4月5号添加" class="headerlink" title="2020年4月5号添加"></a>2020年4月5号添加</h3><hr>
+<h4 id="Writeup007-Github-1"><a href="#Writeup007-Github-1" class="headerlink" title="Writeup007 - Github"></a>Writeup007 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Writeup007/weibo_Hot_Search" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Writeup007/weibo_Hot_Search" >微博热搜爬虫<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：每天定时爬取微博热搜榜的内容，留下互联网人的记忆。</li>
+</ul>
+<h3 id="2020年3月4号添加"><a href="#2020年3月4号添加" class="headerlink" title="2020年3月4号添加"></a>2020年3月4号添加</h3><hr>
+<h4 id="huifer-杭州-Github"><a href="#huifer-杭州-Github" class="headerlink" title="huifer(杭州) - Github"></a>huifer(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/huifer" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/huifer/planar_algorithm" >平面算法<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 平面几何算法</li>
+</ul>
+<h3 id="2020年2月29号添加"><a href="#2020年2月29号添加" class="headerlink" title="2020年2月29号添加"></a>2020年2月29号添加</h3><hr>
+<h4 id="Captain-深圳-Github"><a href="#Captain-深圳-Github" class="headerlink" title="Captain(深圳) - Github"></a>Captain(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/timi-liuliang" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/timi-liuliang/echo" >Echo<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：新建中的跨平台游戏引擎</li>
+</ul>
+<h3 id="2020年1月16号添加"><a href="#2020年1月16号添加" class="headerlink" title="2020年1月16号添加"></a>2020年1月16号添加</h3><hr>
+<h4 id="SanJin-北京-Github-博客"><a href="#SanJin-北京-Github-博客" class="headerlink" title="SanJin(北京) - Github, 博客"></a>SanJin(北京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/sanjinhub" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://geek.lc/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/hacklcx/HFish" >HFish<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：国内最好用的开源蜜罐框架系统 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/hacklcx/HFish/blob/master/README.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/sanjinhub/hexo-theme-geek" >Hexo-Geek主题<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：更符合 Geek 精神的极简主题 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/sanjinhub/hexo-theme-geek/blob/master/README.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2020年1月8号添加"><a href="#2020年1月8号添加" class="headerlink" title="2020年1月8号添加"></a>2020年1月8号添加</h3><hr>
+<h4 id="MagicLu-青岛-GitHub-博客"><a href="#MagicLu-青岛-GitHub-博客" class="headerlink" title="MagicLu(青岛) - GitHub,博客"></a>MagicLu(青岛) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/MagicLu550" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>,<a class="link"   target="_blank" rel="noopener" href="http://blog.noyark.net/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8: <a class="link"   target="_blank" rel="noopener" href="https://github.com/MagicLu550/wenyan-lang_jvm" >文言文编程语言: WenYan-Lang Java编译器<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 实现了对于文言文编程语言在JVM上运行</li>
+</ul>
+<h3 id="2020年1月7号添加"><a href="#2020年1月7号添加" class="headerlink" title="2020年1月7号添加"></a>2020年1月7号添加</h3><hr>
+<h4 id="Hancel-Lin-深圳-GitHub-博客"><a href="#Hancel-Lin-深圳-GitHub-博客" class="headerlink" title="Hancel.Lin(深圳) - GitHub, 博客"></a>Hancel.Lin(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/imlinhanchao" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="http://hancel.org/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/imlinhanchao/chinese_holiday_spider_module" >国家节假日解析爬虫<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：从国务院网站解析获取国家节假日公布页面的节假日安排。</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/imlinhanchao/ngx_proxy_wiki" >维基百科全站镜像<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：通过 Nginx 反向代理制作维基百科全站镜像的配置档</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.npmjs.com/package/github-picbed" >GitHub Page 图床<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：借助于 GitHub Page 和 GitHub Api 做图床 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/imlinhanchao/github-picbed" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.npmjs.com/package/translator-promise" >Google 翻译 node 库<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：通过模拟请求实现 Google 翻译功能 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/imlinhanchao/translator-promise" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.npmjs.com/package/vitepress-script-preview" >VitePress JS 代码预览插件<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：VitePress 插件，增加一个可预览 JS 代码执行结果的 markdown 容器。 - <a class="link"   target="_blank" rel="noopener" href="https://imlinhanchao.github.io/vitepress-script-preview/" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2019年12月17号添加"><a href="#2019年12月17号添加" class="headerlink" title="2019年12月17号添加"></a>2019年12月17号添加</h3><hr>
+<h4 id="Easy-微博-GitHub"><a href="#Easy-微博-GitHub" class="headerlink" title="Easy - 微博, GitHub"></a>Easy - <a class="link"   target="_blank" rel="noopener" href="https://weibo.com/easy" >微博<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/easychen" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="http://sc.ftqq.com/" >Server酱<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：接口超级简单的微信模板消息推送服务</li>
+</ul>
+<h3 id="2019年12月5号添加"><a href="#2019年12月5号添加" class="headerlink" title="2019年12月5号添加"></a>2019年12月5号添加</h3><hr>
+<h4 id="inspurer-Github"><a href="#inspurer-Github" class="headerlink" title="inspurer - Github"></a>inspurer - <a class="link"   target="_blank" rel="noopener" href="https://github.com/inspurer" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/inspurer/WorkAttendanceSystem" >刷脸考勤系统<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 dlib 和 OpenCV 的 PC 端刷脸考勤系统</li>
+</ul>
+<h4 id="Jiang-Xuan-Hangzhou-Github"><a href="#Jiang-Xuan-Hangzhou-Github" class="headerlink" title="Jiang-Xuan(Hangzhou) - Github"></a>Jiang-Xuan(Hangzhou) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jiang-Xuan" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/Jiang-Xuan/tuchuang.space" >tuchuang.space<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：测试驱动的开源图床系统, 免费存储图片</li>
+</ul>
+<h3 id="2019年11月21号添加"><a href="#2019年11月21号添加" class="headerlink" title="2019年11月21号添加"></a>2019年11月21号添加</h3><hr>
+<h4 id="不怕天黑-杭州-Github-博客"><a href="#不怕天黑-杭州-Github-博客" class="headerlink" title="不怕天黑(杭州) - Github, 博客"></a>不怕天黑(杭州) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/liujingxing" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://juejin.im/user/590af762a22b9d0057a6eaca/posts" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liujingxing/RxHttp" >RxHttp<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：一条链发送任意请求，让你眼前一亮的 Http 请求框架</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/liujingxing/RxLife" >RxLife<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：一行代码解决 RxJava 内存泄漏，一款轻量级别的 RxJava 生命周期管理库</li>
+</ul>
+<h3 id="2019年11月4号添加"><a href="#2019年11月4号添加" class="headerlink" title="2019年11月4号添加"></a>2019年11月4号添加</h3><hr>
+<h4 id="何辉-深圳-Github"><a href="#何辉-深圳-Github" class="headerlink" title="何辉(深圳) - Github"></a>何辉(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/qq475742653" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="http://www.headset.xin/BIOSREP/" >皕杰报表<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：做后台 + ECharts 做前端集成演示：所有数据皆出后台报表获取，构造成 ECharts 所需要的 JSON 数组（一维数据、二维数据、三维数据等），传给前端的 ECharts，支持大屏显示、实时刷新。展示了24类，上百张 ECharts 报表</li>
+</ul>
+<h3 id="2019年10月13号添加"><a href="#2019年10月13号添加" class="headerlink" title="2019年10月13号添加"></a>2019年10月13号添加</h3><hr>
+<h4 id="panjf2000-潘少-Github-博客"><a href="#panjf2000-潘少-Github-博客" class="headerlink" title="panjf2000(潘少) - Github, 博客"></a>panjf2000(潘少) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/panjf2000" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://taohuawu.club/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/panjf2000/gnet" >gnet<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：高性能且轻量级的 Go 网络框架</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/panjf2000/ants" >ants<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：高性能的 Go 协程池，已在字节跳动的线上使用</li>
+</ul>
+<h3 id="2019年9月15号添加"><a href="#2019年9月15号添加" class="headerlink" title="2019年9月15号添加"></a>2019年9月15号添加</h3><hr>
+<h4 id="magiclu-青岛-Github-博客"><a href="#magiclu-青岛-Github-博客" class="headerlink" title="magiclu(青岛) - Github,博客"></a>magiclu(青岛) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/MagicLu550" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>,<a class="link"   target="_blank" rel="noopener" href="http://blog.noyark.net/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/MagicLu550/plugin4j" >plugin4j<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：简易的统一规范插件开发框架</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/jsmod2-java-c/JSmod2-Core" >JSmod2<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于游戏 SCP: 秘密实验室创作的Java插件开发框架</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/MagicLu550/edclass4j" >edclass4j<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 AES 加密的字节码加密解密API和远程授权控制程序</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/noyark-system/noyark_oaml_java" >oaml<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：oaml 配置文件规范解析器</li>
+</ul>
+<h3 id="2019年7月7号添加"><a href="#2019年7月7号添加" class="headerlink" title="2019年7月7号添加"></a>2019年7月7号添加</h3><hr>
+<h4 id="andyesfly-Github"><a href="#andyesfly-Github" class="headerlink" title="andyesfly - Github"></a>andyesfly - <a class="link"   target="_blank" rel="noopener" href="https://github.com/andyesfly" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>:clock8: <a class="link"   target="_blank" rel="noopener" href="http://dipiper.tech/" >dipiper<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>: 基于 Node.js 的财经数据接口包，为量化投资提供数据来源，满足金融量化分析师和学习数据分析的人在数据获取方面的需求</li>
+</ul>
+<h3 id="2019年7月5号添加"><a href="#2019年7月5号添加" class="headerlink" title="2019年7月5号添加"></a>2019年7月5号添加</h3><hr>
+<h4 id="ddzy-东莞-Github"><a href="#ddzy-东莞-Github" class="headerlink" title="ddzy(东莞) - Github"></a>ddzy(东莞) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ddzy" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/ddzy/fe-necessary-book" >fe-necessary-book<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：为前端开发者提供的<code>优质书籍</code>和程序员们的<code>码农长寿指南</code>(<em><strong>pdf</strong></em>)</li>
+</ul>
+<h3 id="2019年6月15号添加"><a href="#2019年6月15号添加" class="headerlink" title="2019年6月15号添加"></a>2019年6月15号添加</h3><hr>
+<h4 id="ICKelin-深圳-Github"><a href="#ICKelin-深圳-Github" class="headerlink" title="ICKelin(深圳) - Github"></a>ICKelin(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/ICKelin" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="http://www.notr.tech/" >Notr<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：独立开发的内网穿透服务</li>
+</ul>
+<h4 id="Akkariin-Github-博客"><a href="#Akkariin-Github-博客" class="headerlink" title="Akkariin - Github, 博客"></a>Akkariin - <a class="link"   target="_blank" rel="noopener" href="https://github.com/kasuganosoras" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.natfrp.org/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://blog.natfrp.org/" >Cloudflare Workers Blog<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：利用 Cloudflare workers 边缘计算服务和 Github Pages 实现的无服务器博客系统 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/kasuganosoras/cloudflare-worker-blog" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.natfrp.org/" >Sakura Frp<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：基于 Frp 的免费内网穿透平台</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/kasuganosoras/Pigeon" >Pigeon<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：轻量化的留言板 &#x2F; 记事本 &#x2F; 社交系统 &#x2F; 博客</li>
+</ul>
+<h3 id="2019年5月21号添加"><a href="#2019年5月21号添加" class="headerlink" title="2019年5月21号添加"></a>2019年5月21号添加</h3><hr>
+<h4 id="ChineseBQB-Github"><a href="#ChineseBQB-Github" class="headerlink" title="ChineseBQB - Github"></a>ChineseBQB - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhaoolee/ChineseBQB" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://zhaoolee.github.io/ChineseBQB/" >ChineseBQB<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：中国人聊天表情包大集合, 收录表情包的仓库, 所有收录的表情包均可在线查看下载! - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhaoolee/ChineseBQB/blob/master/README.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<hr>
+<h4 id="CloudOpenDevOps-Github"><a href="#CloudOpenDevOps-Github" class="headerlink" title="CloudOpenDevOps - Github"></a>CloudOpenDevOps - <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendevops-cn/opendevops" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="http://www.opendevops.cn/" >opendevops<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：CODO 是为用户提供企业多混合云、自动化运维、完全开源的云管理平台 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/opendevops-cn/opendevops" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2019年4月20号添加"><a href="#2019年4月20号添加" class="headerlink" title="2019年4月20号添加"></a>2019年4月20号添加</h3><hr>
+<h4 id="xiaohulu-GitHub"><a href="#xiaohulu-GitHub" class="headerlink" title="xiaohulu - GitHub"></a>xiaohulu - <a class="link"   target="_blank" rel="noopener" href="https://github.com/blocklang" >GitHub<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/blocklang/blocklang-installer" >BlockLang-Installer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：自动化部署工具，专用于部署 Spring boot 项目</li>
+</ul>
+<h3 id="2019年4月19号添加"><a href="#2019年4月19号添加" class="headerlink" title="2019年4月19号添加"></a>2019年4月19号添加</h3><hr>
+<h4 id="xianfeng92-Github"><a href="#xianfeng92-Github" class="headerlink" title="xianfeng92 - Github"></a>xianfeng92 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xianfeng92" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/xianfeng92/Love-Ethereum" >Love-Ethereum<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：关于区块链技术的学习项目 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/xianfeng92/Love-Ethereum/blob/master/version/Frontier.md" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2019年4月15号添加"><a href="#2019年4月15号添加" class="headerlink" title="2019年4月15号添加"></a>2019年4月15号添加</h3><hr>
+<h4 id="yutiansut-Github"><a href="#yutiansut-Github" class="headerlink" title="yutiansut - Github"></a>yutiansut - <a class="link"   target="_blank" rel="noopener" href="https://github.com/yutiansut" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/quantaxis/quantaxis" >QUANTAXIS<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：股票&#x2F;期货&#x2F;多市场的闭环解决方案</li>
+</ul>
+<h4 id="zhanghuanchong-Github"><a href="#zhanghuanchong-Github" class="headerlink" title="zhanghuanchong - Github"></a>zhanghuanchong - <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhanghuanchong" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhanghuanchong/icon-workshop" >icon-workshop<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：移动应用图标生成工具，一键生成所有尺寸的应用图标</li>
+</ul>
+<h3 id="2019年4月12号添加"><a href="#2019年4月12号添加" class="headerlink" title="2019年4月12号添加"></a>2019年4月12号添加</h3><hr>
+<h4 id="star7th-深圳-Github"><a href="#star7th-深圳-Github" class="headerlink" title="star7th(深圳) - Github"></a>star7th(深圳) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/star7th" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://www.showdoc.cc/" >ShowDoc<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：非常适合 IT 团队的在线API文档、技术文档工具 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/star7th/showdoc" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h3 id="2019年4月11号添加"><a href="#2019年4月11号添加" class="headerlink" title="2019年4月11号添加"></a>2019年4月11号添加</h3><hr>
+<h4 id="Wang-Shidong-Github"><a href="#Wang-Shidong-Github" class="headerlink" title="Wang Shidong - Github"></a>Wang Shidong - <a class="link"   target="_blank" rel="noopener" href="https://github.com/wsdjeg" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://spacevim.org/" >SpaceVim<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：模块化、支持多种编程语言的 Vim 开发环境 - <a class="link"   target="_blank" rel="noopener" href="https://github.com/SpaceVim/SpaceVim" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h4 id="Aquanlerou-Github-博客"><a href="#Aquanlerou-Github-博客" class="headerlink" title="Aquanlerou - Github, 博客"></a>Aquanlerou - <a class="link"   target="_blank" rel="noopener" href="https://github.com/aquanlerou" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://blog.eunji.cn/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/aquanlerou/WeHalo" >WeHalo<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：WeHalo 简约风 的微信小程序版博客 :sparkles:</li>
+</ul>
+<h4 id="Qeesung-Github-微博"><a href="#Qeesung-Github-微博" class="headerlink" title="Qeesung - Github, 微博"></a>Qeesung - <a class="link"   target="_blank" rel="noopener" href="https://github.com/qeesung" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.weibo.com/qeesuny" >微博<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/qeesung/image2ascii.git" >Image2ASCII<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> : 图片转化为 ASCII 码的命令行工具</li>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="https://github.com/qeesung/asciiplayer" >ASCIIPlayer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> : 图片，GIF，视屏 ASCII 转化播放命令行工具</li>
+</ul>
+<h4 id="袁慠棱-南京-Github-博客"><a href="#袁慠棱-南京-Github-博客" class="headerlink" title="袁慠棱(南京) - Github, 博客"></a>袁慠棱(南京) - <a class="link"   target="_blank" rel="noopener" href="https://github.com/alengYuan" >Github<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>, <a class="link"   target="_blank" rel="noopener" href="http://slothindie.org/" >博客<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></h4><ul>
+<li>✓ <a class="link"   target="_blank" rel="noopener" href="http://lemontea.slothindie.org/" >LemonTea<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>：极简且特别的静态网站生成器 - <a class="link"   target="_blank" rel="noopener" href="http://lemontea.slothindie.org/book/index.html" >更多介绍<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+
+	</div>
+
+	<div class="page-template-comments">
+		
+	</div>
+</div>
+
+<div class="paginator">
+	
+</div>
+  
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

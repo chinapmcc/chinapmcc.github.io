@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2025/06/23/5.资源与持续成长/5.2职业发展与认证/项目管理金典宝库：pmp考证一站式攻略/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目管理金典宝库：PMP考证一站式攻略">
+<meta property="og:url" content="https://chinapmcc.com/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-06-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-22T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="项目管理">
+<meta property="article:tag" content="PMP">
+<meta property="article:tag" content="PMBOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            项目管理金典宝库：PMP考证一站式攻略 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://storage.chinapmcc.com/2025/06/PMBOK14.png" alt="项目管理金典宝库：PMP考证一站式攻略" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">项目管理金典宝库：PMP考证一站式攻略</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-06-23</span>
+        <span class="mobile">2025-06-23</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-06-23</span>
+            <span class="mobile">2025-06-23</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/05%E2%99%BB%EF%B8%8F%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/">05♻️资源与持续成长</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/05%E2%99%BB%EF%B8%8F%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5-2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/">5.2职业发展与认证</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PMP/">PMP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PMBOK/">PMBOK</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>5 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h3 id="Project-Management-Professional-PMP"><a href="#Project-Management-Professional-PMP" class="headerlink" title="Project Management Professional (PMP)"></a>Project Management Professional (PMP)</h3><p>Demonstrate your ability to lead projects in any industry with this globally recognized certification. 通过这项全球公认的认证，证明您有能力领导任何行业的项目。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/PMPCertification.png"
+                     
+                ></p>
+<h3 id="什么是PMP认证？"><a href="#什么是PMP认证？" class="headerlink" title="什么是PMP认证？"></a>什么是PMP认证？</h3><p>The PMP acknowledges candidates skilled at managing the people, processes, and business priorities of professional projects. PMI, the world’s leading authority on project management, created the PMP to recognize project managers who have proven they have project leadership experience and expertise in any way of working.<br>PMP 认可擅长管理专业项目的人员、流程和业务优先事项的候选人。PMI 是世界领先的项目管理权威机构，它创建了 PMP，以表彰那些证明自己在任何工作方式上都具有项目领导经验和专业知识的项目经理。</p>
+<p>To obtain PMP certification, a project manager must meet certain requirements and then pass a 180-question exam. The PMP exam was created by project leaders for project leaders, so each test question can be related to real-life project management experiences.<br>要获得 PMP 认证，项目经理必须满足某些要求，然后通过 180 道题的考试。PMP考试是由项目负责人为项目负责人创建的，因此每个测试问题都可以与现实生活中的项目管理经验相关。</p>
+<p>The PMP Exam is available in the following languages: Arabic, Chinese (Simplified + Traditional), English, French, German, Hebrew, Indonesian, Italian, Japanese, Korean, Polish (Poland), Portuguese (Brazilian), Russian, Spanish (Mexico + Spain), and Turkish.<br>PMP 考试提供以下语言版本：阿拉伯语、中文（简体 + 繁体）、英语、法语、德语、希伯来语、印度尼西亚语、意大利语、日语、韩语、波兰语（波兰）、葡萄牙语（巴西）、俄语、西班牙语（墨西哥 + 西班牙）和土耳其语。</p>
+<p><strong>PMP认证证明您在以下方面具有很高的技能：</strong></p>
+<ul>
+<li><p>Motivating people and teams through all phases of a successful project. 在成功项目的各个阶段激励人员和团队。</p>
+</li>
+<li><p>Using predictive, agile and hybrid approaches to determine which way of working is best for each project. 使用预测性、敏捷性和混合性方法来确定哪种工作方式最适合每个项目。</p>
+</li>
+<li><p>Highlighting the success of a project and its impact on overall strategic organizational goals. 突出项目的成功及其对整体战略组织目标的影响。</p>
+</li>
+</ul>
+<h3 id="为什么要获得PMP认证？"><a href="#为什么要获得PMP认证？" class="headerlink" title="为什么要获得PMP认证？"></a>为什么要获得PMP认证？</h3><p>The PMP is ranked as the top project management certification in North America by CIO Magazine because it demonstrates that you have the specific skills employers seek, a dedication to excellence, and the capacity to perform at the highest levels.</p>
+<p>PMP 被 CIO 杂志评为北美顶级项目管理认证，因为它表明您拥有雇主寻求的特定技能、追求卓越的奉献精神以及执行最高水平的能力。</p>
+<p>In fact, research indicates that employers will need to fill nearly 2.3 million new project-oriented roles each year through 2030.</p>
+<p>事实上，研究表明，到 2030 年，雇主每年将需要填补近 230 万个新的项目导向职位。</p>
+<p>With demand for project managers at an all-time high, there has never been a better time to earn your PMP certification.</p>
+<p>随着对项目经理的需求空前高涨，现在是获得 PMP 认证的最佳时机。</p>
+<table>
+<thead>
+<tr>
+<th>9000万人</th>
+<th>2500万人</th>
+<th>1200万人</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Project management employees currently in project-based industries across the world.</td>
+<td>New project management professionals needed to meet global talent demands by 2030.</td>
+<td>New employees driven by expansion, and a growth of 13 million by retirements.</td>
+</tr>
+<tr>
+<td>目前在全球以项目为基础的行业中的项目管理员工。</td>
+<td>到 2030 年，需要新的项目管理专业人员来满足全球人才需求。</td>
+<td>扩张推动了新员工，退休人数增长了 1300 万。</td>
+</tr>
+</tbody></table>
+<h3 id="我有资格参加PMP考试吗？"><a href="#我有资格参加PMP考试吗？" class="headerlink" title="我有资格参加PMP考试吗？"></a>我有资格参加PMP考试吗？</h3><p>获得 PMP 认证是一项承诺。这是它有价值的部分原因。如果你有实际的项目管理经验，你已经完成了最难的部分。在申请之前，请确保您满足以下PMP认证要求之一：</p>
+<ul>
+<li><p>Four-Year College &#x2F; University Degree 四年制学院&#x2F;大学学位</p>
+</li>
+<li><p>36 months of experience leading projects within the past eight years 36 个月在过去八年内领导项目的经验</p>
+</li>
+<li><p>35 hours of project management education&#x2F;training or CAPM(®) certification 35小时的项目管理教育&#x2F;培训或CAPM (®) 认证</p>
+</li>
+</ul>
+<hr>
+<p><strong>或者</strong></p>
+<hr>
+<ul>
+<li><p>High School or Secondary School Diploma 高中或中学文凭</p>
+</li>
+<li><p>60 months of experience leading projects within the past eight years 在过去八年内有60个月的项目领导经验</p>
+</li>
+<li><p>35 hours of project management education&#x2F;training or CAPM(®) certification 35小时的项目管理教育&#x2F;培训或CAPM (®) 认证</p>
+</li>
+</ul>
+<h3 id="PMP认证的费用是多少？"><a href="#PMP认证的费用是多少？" class="headerlink" title="PMP认证的费用是多少？"></a>PMP认证的费用是多少？</h3><p>获得 PMP 需要支付考试费。</p>
+<table>
+<thead>
+<tr>
+<th>Member(会员)</th>
+<th>Non-Member(非会员)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$405.00</td>
+<td>$575.00</td>
+</tr>
+</tbody></table>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619175613743.png"
+                     
+                ></p>
+<h3 id="PMP考试攻略目录"><a href="#PMP考试攻略目录" class="headerlink" title="PMP考试攻略目录"></a>PMP考试攻略目录</h3><pre><code>00.购买费用与版权声明
+01.考试报名及考场规则
+02.PMBOK教材与考纲
+03.讲解与知识点总结
+04.PMP模拟真题合集
+05.PMP十大工具模板
+06.音频视频培训资料
+</code></pre>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619175721073.png"
+                     
+                ></p>
+<h3 id="查看及使用方法"><a href="#查看及使用方法" class="headerlink" title="查看及使用方法"></a>查看及使用方法</h3><h4 id="WEB端分享查看"><a href="#WEB端分享查看" class="headerlink" title="WEB端分享查看"></a>WEB端分享查看</h4><p><a class="link"   target="_blank" rel="noopener" href="https://ru6mvrhypf.feishu.cn/wiki/space/7365841534220140548" >https://ru6mvrhypf.feishu.cn/wiki/space/7365841534220140548<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h4 id="移动端分享查看"><a href="#移动端分享查看" class="headerlink" title="移动端分享查看"></a>移动端分享查看</h4><table>
+<thead>
+<tr>
+<th>微信扫码<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619180247873.png"
+                      alt="image.png"
+                ><br><br></th>
+<th>浏览器扫码<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619180317219.png"
+                      alt="image.png"
+                ><br><br></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619180337432.png"
+                      alt="image.png"
+                ><br></td>
+<td><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/20250619180358436.png"
+                      alt="image.png"
+                ><br></td>
+</tr>
+</tbody></table>
+<p><strong>如有疑问：关注公众号➔发消息➔联系反馈 或 发私信</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/ChinaPMCC-wechat.png"
+                      style="zoom:50%;" 
+                ></p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 项目管理金典宝库：PMP考证一站式攻略</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2025-06-23 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-06-23 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2025/06/23/5.资源与持续成长/5.2职业发展与认证/项目管理金典宝库：PMP考证一站式攻略/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">#项目管理</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PMP/">#PMP</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PMBOK/">#PMBOK</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2023/11/20/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%8C%87%E5%8D%97%EF%BC%88PMBOK%E6%8C%87%E5%8D%97%EF%BC%89%E7%AC%AC%E4%B8%83%E7%89%88%EF%BC%88%E4%B8%AD%E6%96%87PDF%EF%BC%89%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%8F%96/" title="项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/06/PMBOK7.jpg" alt="项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取" class="!max-w-none">
+  <span class="title">项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取</span>
+</a><a class="recommended-article-item" href="/2023/07/21/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86PMBOK%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88PDF%EF%BC%89%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%8F%96/" title="项目管理PMBOK第六版（中文版PDF）免费获取" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="项目管理PMBOK第六版（中文版PDF）免费获取" class="!max-w-none">
+  <span class="title">项目管理PMBOK第六版（中文版PDF）免费获取</span>
+</a><a class="recommended-article-item" href="/2024/08/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E4%B8%93%E4%B8%9A%E4%BA%BA%E5%91%98%E8%83%BD%E5%8A%9B%E8%AF%84%E4%BB%B7(CSPM)%E5%85%8D%E8%80%83%E6%8D%A2%E8%AF%81%E6%B5%81%E7%A8%8B/" title="项目管理专业人员能力评价(CSPM)免考换证流程" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/07/file-20250727202642208.png" alt="项目管理专业人员能力评价(CSPM)免考换证流程" class="!max-w-none">
+  <span class="title">项目管理专业人员能力评价(CSPM)免考换证流程</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2023/11/20/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%8C%87%E5%8D%97%EF%BC%88PMBOK%E6%8C%87%E5%8D%97%EF%BC%89%E7%AC%AC%E4%B8%83%E7%89%88%EF%BC%88%E4%B8%AD%E6%96%87PDF%EF%BC%89%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%8F%96/" title="项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/06/PMBOK7.jpg" alt="项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取" class="!max-w-none">
+  <span class="title">项目管理知识体系指南（PMBOK指南）第七版（中文PDF）免费获取</span>
+</a><a class="recommended-article-item" href="/2023/07/21/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86PMBOK%E7%AC%AC%E5%85%AD%E7%89%88%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88PDF%EF%BC%89%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%8F%96/" title="项目管理PMBOK第六版（中文版PDF）免费获取" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="项目管理PMBOK第六版（中文版PDF）免费获取" class="!max-w-none">
+  <span class="title">项目管理PMBOK第六版（中文版PDF）免费获取</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/07/02/4.%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4.3%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%B8%93%E9%A2%98%E6%B4%9E%E5%AF%9F/%E6%8A%B5%E5%88%B6%E7%99%BE%E5%BA%A6%20%E5%88%BB%E4%B8%8D%E5%AE%B9%E7%BC%93/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">❌抵制百度 刻不容缓</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/06/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E9%83%A8%E7%BD%B2%E5%9C%A8GitHub%20Pages%E4%B8%8A%E7%9A%84%E5%90%8C%E4%B8%80%E7%BD%91%E7%AB%99%E5%8D%9A%E5%AE%A2/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">多个域名访问部署在GitHub Pages上的同一网站博客</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">项目管理金典宝库：PMP考证一站式攻略</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-Management-Professional-PMP"><span class="nav-text">Project Management Professional (PMP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPMP%E8%AE%A4%E8%AF%81%EF%BC%9F"><span class="nav-text">什么是PMP认证？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%8E%B7%E5%BE%97PMP%E8%AE%A4%E8%AF%81%EF%BC%9F"><span class="nav-text">为什么要获得PMP认证？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E6%9C%89%E8%B5%84%E6%A0%BC%E5%8F%82%E5%8A%A0PMP%E8%80%83%E8%AF%95%E5%90%97%EF%BC%9F"><span class="nav-text">我有资格参加PMP考试吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP%E8%AE%A4%E8%AF%81%E7%9A%84%E8%B4%B9%E7%94%A8%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-text">PMP认证的费用是多少？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5%E7%9B%AE%E5%BD%95"><span class="nav-text">PMP考试攻略目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">查看及使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WEB%E7%AB%AF%E5%88%86%E4%BA%AB%E6%9F%A5%E7%9C%8B"><span class="nav-text">WEB端分享查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%88%86%E4%BA%AB%E6%9F%A5%E7%9C%8B"><span class="nav-text">移动端分享查看</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

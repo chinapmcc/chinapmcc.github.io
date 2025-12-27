@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/page/4/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ChinaPMCC">
+<meta property="og:url" content="https://chinapmcc.com/page/4/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            产品社区营(ChinaPMCC)™️ - 一个产品交流学习的平台，以创造用户价值为使命！连接产品与市场，共筑包容创新之境。
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+	<style>
+    .home-article-item,
+    .sidebar-links,
+    .sidebar-content,
+    a.page-number,
+    a.extend,
+    .sidebar-links .links:hover,
+    .right-bottom-tools,
+    footer.footer {
+        background-color: var(--background-color-transparent-80) !important;
+    }
+    .right-bottom-tools:hover,
+    a.page-number:hover,
+    a.extend:hover {
+        background-color: var(--primary-color) !important;
+    }
+    .site-info,
+    .home-article-sticky-label {
+        background-color: var(--background-color-transparent-15) !important;
+    }
+    .home-article-sticky-label {
+        backdrop-filter: none !important;
+    }
+    .home-banner-background {
+        filter: blur(15px);
+    }
+</style>
+
+<div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
+    <img src="/images/blogSpaces-light.jpg" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
+    <img src="/images/blogSpaces-dark.jpg" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
+</div>
+
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                <h1>
+                产品社区营(ChinaPMCC)™️
+                </h1>
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="active"
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+			<div class="home-sidebar-container">
+    <div class="sticky-container sticky">
+        
+        
+            
+                <div class="sidebar-links">
+                    <div class="site-info">
+                        <div class="site-name">产品社区营(ChinaPMCC)™️</div>
+                        
+                            <div class="announcement">
+                                欢迎关注评论(Ctrl+D)
+                            </div>
+                        
+                    </div>
+                    
+                        
+                            
+                                <a class="links" href="/archives">
+                                    
+                                        <i class="fa-regular fa-archive icon-space"></i>
+                                    
+                                    <span class="link-name">Archives</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/tags">
+                                    
+                                        <i class="fa-regular fa-tags icon-space"></i>
+                                    
+                                    <span class="link-name">Tags</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/categories">
+                                    
+                                        <i class="fa-regular fa-folder icon-space"></i>
+                                    
+                                    <span class="link-name">Categories</span>
+                                </a>
+                            
+                        
+                    
+                </div>
+            
+            <div class="sidebar-content"  marginTop >
+                <div class="avatar flex justify-center">
+    <img src="/images/chinapmcc-logo.png">
+</div>
+                <div class="author flex flex-col justify-center my-2.5 mx-0">
+    <div class="name">xuliyaoPro</div>
+    
+        <div class="label">过期程序员</div>
+    
+</div>
+                <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+            </div>
+        
+
+    </div>
+</div>
+
+			
+
+			<div class="main-content">
+				<div class="home-content-container">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/">
+                            <img src="https://storage.chinapmcc.com/2025/06/PMBOK14.png" alt="项目管理金典宝库：PMP考证一站式攻略" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/">
+                            项目管理金典宝库：PMP考证一站式攻略
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            Project Management Professional (PMP)Demonstrate your ability to lead projects in any industry with this globally recognized certification. 通过这项全球公认的认证，证明您有能力领导任何行业的项目。
+
+什么是PMP认证？The PMP acknowledg...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Jun 23 2025 00:00:00 GMT+0800">
+                
+                    2025-06-23
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/05%E2%99%BB%EF%B8%8F%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/">05♻️资源与持续成长</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/05%E2%99%BB%EF%B8%8F%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5-2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/">5.2职业发展与认证</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/PMP/">PMP</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/PMBOK/">PMBOK</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/">阅读全文<span class="seo-reader-text">项目管理金典宝库：PMP考证一站式攻略</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/06/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E9%83%A8%E7%BD%B2%E5%9C%A8GitHub%20Pages%E4%B8%8A%E7%9A%84%E5%90%8C%E4%B8%80%E7%BD%91%E7%AB%99%E5%8D%9A%E5%AE%A2/">
+                            <img src="https://storage.chinapmcc.com/2025/06/Cloudflare-page-rules.png" alt="多个域名访问部署在GitHub Pages上的同一网站博客" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E9%83%A8%E7%BD%B2%E5%9C%A8GitHub%20Pages%E4%B8%8A%E7%9A%84%E5%90%8C%E4%B8%80%E7%BD%91%E7%AB%99%E5%8D%9A%E5%AE%A2/">
+                            多个域名访问部署在GitHub Pages上的同一网站博客
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            通过多域名访问 GitHub Pages 同一网站博客，具有以下优点：
+多域名优点
+提升可用性：通过多个域名指向同一博客，即使主域名出现问题（如解析错误、被封禁等），用户仍可以通过其他域名访问，提高网站的可用性。
+提升搜索引擎收录：多个域名可以增加网站在搜索引擎中的曝光率，尤其是当不同域名被不同搜索引擎收录时。
+品牌个性化访问：设立博客网站品牌，让用户更容易记住访问，提升用户体验。
+备份和迁...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Jun 20 2025 00:00:00 GMT+0800">
+                
+                    2025-06-20
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/GitHubPages/">GitHubPages</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Cloudflare/">Cloudflare</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E5%A4%9A%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE/">多域名访问</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E9%83%A8%E7%BD%B2%E5%9C%A8GitHub%20Pages%E4%B8%8A%E7%9A%84%E5%90%8C%E4%B8%80%E7%BD%91%E7%AB%99%E5%8D%9A%E5%AE%A2/">阅读全文<span class="seo-reader-text">多个域名访问部署在GitHub Pages上的同一网站博客</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/06/16/%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/%E8%99%9A%E6%8B%9F%E7%94%B5%E5%8E%82%E5%BB%BA%E8%AE%BE%E5%85%A8%E6%B5%81%E7%A8%8B%E6%9D%83%E5%A8%81%E8%A7%A3%E8%AF%BB%EF%BC%9A%E8%B5%84%E8%B4%A8%E3%80%81%E7%A0%94%E5%8F%91%E3%80%81%E6%B3%A8%E5%86%8C%E3%80%81%E8%81%9A%E5%90%88%E3%80%81%E8%AE%A4%E8%AF%81%E3%80%81%E7%9B%91%E6%B5%8B%E4%B8%8E%E9%80%80%E5%87%BA/">
+                            <img src="https://img.chinapmcc.dpdns.org/B.6.1/%E8%99%9A%E6%8B%9F%E7%94%B5%E5%8E%82%E6%90%AD%E5%BB%BA%E5%85%A8%E6%B5%81%E7%A8%8B%E8%A7%A3%E8%AF%BB2025.06.svg" alt="虚拟电厂建设全流程权威解读：资质、研发、注册、聚合、认证、监测与退出" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/16/%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/%E8%99%9A%E6%8B%9F%E7%94%B5%E5%8E%82%E5%BB%BA%E8%AE%BE%E5%85%A8%E6%B5%81%E7%A8%8B%E6%9D%83%E5%A8%81%E8%A7%A3%E8%AF%BB%EF%BC%9A%E8%B5%84%E8%B4%A8%E3%80%81%E7%A0%94%E5%8F%91%E3%80%81%E6%B3%A8%E5%86%8C%E3%80%81%E8%81%9A%E5%90%88%E3%80%81%E8%AE%A4%E8%AF%81%E3%80%81%E7%9B%91%E6%B5%8B%E4%B8%8E%E9%80%80%E5%87%BA/">
+                            虚拟电厂建设全流程权威解读：资质、研发、注册、聚合、认证、监测与退出
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            引言网络上关于虚拟电厂的文章泛泛，没有做深入的解读，导致业内人士找不到高质量文档，外行人士不知所云无从下手的局面。各省市的政策推动下，市场的参与者下一步必将参与其中，也包括我们已布局虚拟电厂业务。
+下面以浙江省虚拟电厂为例，给你全面解读下搭建一个虚拟电厂需要哪些步骤以及工作量全貌。怕你看文章累，最后有总结的高清脑图可免费获取，感谢关注+点赞+收藏
+参考解读文档：
+
+浙江省虚拟电厂运营管理细则...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Jun 16 2025 00:00:00 GMT+0800">
+                
+                    2025-06-16
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E8%99%9A%E6%8B%9F%E7%94%B5%E5%8E%82/">虚拟电厂</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/VPP/">VPP</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/16/%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/%E8%99%9A%E6%8B%9F%E7%94%B5%E5%8E%82%E5%BB%BA%E8%AE%BE%E5%85%A8%E6%B5%81%E7%A8%8B%E6%9D%83%E5%A8%81%E8%A7%A3%E8%AF%BB%EF%BC%9A%E8%B5%84%E8%B4%A8%E3%80%81%E7%A0%94%E5%8F%91%E3%80%81%E6%B3%A8%E5%86%8C%E3%80%81%E8%81%9A%E5%90%88%E3%80%81%E8%AE%A4%E8%AF%81%E3%80%81%E7%9B%91%E6%B5%8B%E4%B8%8E%E9%80%80%E5%87%BA/">阅读全文<span class="seo-reader-text">虚拟电厂建设全流程权威解读：资质、研发、注册、聚合、认证、监测与退出</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/multi-end-free-internet-use/">
+                            多端畅享：免费上网新体验（使用）
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            <p>Here’s something encrypted, password is required to continue reading.</p>
+
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Jun 13 2025 00:00:00 GMT+0800">
+                
+                    2025-06-13
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%93%A1%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/">📡网络通讯</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/multi-end-free-internet-use/">阅读全文<span class="seo-reader-text">多端畅享：免费上网新体验（使用）</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/multi-end-free-internet-show/">
+                            多端畅享：免费上网新体验（展示）
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            打开星际之门，即使被阻止的情况下也能正常工作。
+无需购买，免费使用（没有订阅，没有会员）
+无需注册，一键连接（打开软件，点击连接即用）
+无需设置，简单易用（无需配置，寻找通道）
+多端支持，开源软件（Android、iOS、Windows、MacOS）
+没有限速，视频流畅（刷视频不卡顿，体验较好）
+
+如果你平时需要上网查阅技术、论文等资料，不得不使用的情况可借用此方法，如非必要请勿使用。
+iO...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Jun 13 2025 00:00:00 GMT+0800">
+                
+                    2025-06-13
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%93%A1%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/">📡网络通讯</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/multi-end-free-internet-show/">阅读全文<span class="seo-reader-text">多端畅享：免费上网新体验（展示）</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/06/06/%E5%AE%9E%E7%94%A8%E5%A2%9E%E5%BC%BA/iOS%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%88%B0APP%EF%BC%9F%E6%95%99%E4%BD%A0%E6%97%A0%E6%9D%A1%E4%BB%B6%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BAApple%20ID/">
+                            <img src="https://img.chinapmcc.dpdns.org/A.7.2/iOSApps.jpg" alt="iOS下载不到APP？教你无条件注册美区Apple ID" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/06/%E5%AE%9E%E7%94%A8%E5%A2%9E%E5%BC%BA/iOS%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%88%B0APP%EF%BC%9F%E6%95%99%E4%BD%A0%E6%97%A0%E6%9D%A1%E4%BB%B6%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BAApple%20ID/">
+                            iOS下载不到APP？教你无条件注册美区Apple ID
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            有些”时髦”的APP无法下载？或者之前老的教程报错「目前无法完成你的请求，此时无法创建你的账户」
+本文章一步步教你注册美国苹果账号，步骤简单，截图详细，不怕你不会~
+
+免费注册美区Apple ID
+无需美国信用卡
+无需美国IP
+无需海外网络
+无需海外手机号
+
+漂亮区ID优点：
+
+数据存放在美区的iCloud，非云上贵州
+可开通美国AppleTV、Apple Music、Apple One等
+...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Jun 06 2025 00:00:00 GMT+0800">
+                
+                    2025-06-06
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%AA%E5%AE%9E%E7%94%A8%E5%A2%9E%E5%BC%BA/">💪实用增强</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Free/">Free</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E8%B4%A6%E5%8F%B7%E6%B3%A8%E5%86%8C/">账号注册</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/AppleID/">AppleID</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/iOS/">iOS</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/06/%E5%AE%9E%E7%94%A8%E5%A2%9E%E5%BC%BA/iOS%E4%B8%8B%E8%BD%BD%E4%B8%8D%E5%88%B0APP%EF%BC%9F%E6%95%99%E4%BD%A0%E6%97%A0%E6%9D%A1%E4%BB%B6%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BAApple%20ID/">阅读全文<span class="seo-reader-text">iOS下载不到APP？教你无条件注册美区Apple ID</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/02/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%8C%87%E5%8D%97/">
+                            Hexo网站安装插件指南
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            插件市场Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。 在 Hexo 中有两种形式的插件：
+脚本（Scripts）如果你的插件相对简单，建议使用脚本。 你只需将 JavaScript 文件放入 scripts 文件夹，Hexo 就会在初始化时加载它们。
+插件（Packages）如果您的代码很复杂或者您想将其发布到 NPM，建议使用插件。 首先，在node_modul...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Jun 02 2025 00:00:00 GMT+0800">
+                
+                    2025-06-02
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Hexo/">Hexo</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Hexo%E6%8F%92%E4%BB%B6/">Hexo插件</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/02/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%8C%87%E5%8D%97/">阅读全文<span class="seo-reader-text">Hexo网站安装插件指南</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/06/01/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/">
+                            Hexo常见命令快速指南
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            Welcome to Hexo! 
+Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+1、init1$ hexo init [folder]
+
+新建...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Jun 01 2025 00:00:00 GMT+0800">
+                
+                    2025-06-01
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Hexo/">Hexo</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Hexo%E5%91%BD%E4%BB%A4/">Hexo命令</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/06/01/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/">阅读全文<span class="seo-reader-text">Hexo常见命令快速指南</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/05/30/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9C%A8Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E4%B8%AD%E6%B7%BB%E5%8A%A0Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
+                            <img src="https://img.chinapmcc.dpdns.org/A.7.5/Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F.png" alt="在Hexo博客网站中添加Waline评论系统" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/05/30/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9C%A8Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E4%B8%AD%E6%B7%BB%E5%8A%A0Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
+                            在Hexo博客网站中添加Waline评论系统
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            引言​	在构建个人博客的过程中，与读者建立互动是至关重要的一环。一个良好的评论系统不仅可以让读者留下他们的见解和反馈，还能增强社区感和归属感。​	今天，我们就来介绍如何为你的 Hexo 博客网站添加 Waline 评论系统。一款简洁美观的界面设计、高效稳定的性能和强大的评论管理功能脱颖而出。无论是表情包支持、Markdown 编辑器，还是黑夜模式，Waline 都能满足你的需求。支持主流的博...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri May 30 2025 00:00:00 GMT+0800">
+                
+                    2025-05-30
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Free/">Free</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/GitHub/">GitHub</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">评论系统</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Waline/">Waline</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/LeanCloud/">LeanCloud</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/05/30/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9C%A8Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E4%B8%AD%E6%B7%BB%E5%8A%A0Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">阅读全文<span class="seo-reader-text">在Hexo博客网站中添加Waline评论系统</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+                    
+                
+
+                
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2025/05/26/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB%EF%BC%9A%E9%85%8D%E5%9B%BE%E4%B8%8D%E6%B1%82%E4%BA%BA%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96/">
+                            <img src="https://img.chinapmcc.dpdns.org/A.7.5/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB.png" alt="图床存储分享：配图不求人，免费图床搭建与提速优化" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                        </a>
+                    </div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2025/05/26/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB%EF%BC%9A%E9%85%8D%E5%9B%BE%E4%B8%8D%E6%B1%82%E4%BA%BA%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96/">
+                            图床存储分享：配图不求人，免费图床搭建与提速优化
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            引言写文章配图，配视频是博客的灵魂，所谓图床不稳，写作心累。告别404！本文利用GitHub+Cloudflare+PicList的完美组合，手把手教你搭建永不消失的免费图床，优化图片加载速度，提升博客体验。
+图床是什么？图床是指用于存储和分享图片的网络服务或平台。用户可以将图片上传到图床，图床会为图片生成一个可外链的地址链接，这个链接可以直接嵌入到网页、博客、论坛帖子、文档等各种支持图片显...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon May 26 2025 00:00:00 GMT+0800">
+                
+                    2025-05-26
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Free/">Free</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/CDN%E5%8A%A0%E9%80%9F/">CDN加速</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Cloudflare/">Cloudflare</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/%E5%9B%BE%E5%BA%8A/">图床</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/PicList/">PicList</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/05/26/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB%EF%BC%9A%E9%85%8D%E5%9B%BE%E4%B8%8D%E6%B1%82%E4%BA%BA%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96/">阅读全文<span class="seo-reader-text">图床存储分享：配图不求人，免费图床搭建与提速优化</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator px-7 py-5">
+        <div class="paginator">
+	<a class="extend prev" rel="prev" href="/page/3/"><i class="fa-regular fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa-regular fa-angle-right"></i></a>
+</div>
+  
+    </div>
+</div>
+
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

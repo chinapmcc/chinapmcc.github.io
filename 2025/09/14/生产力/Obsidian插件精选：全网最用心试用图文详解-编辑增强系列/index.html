@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2025/09/14/生产力/obsidian插件精选：全网最用心试用图文详解-编辑增强系列/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Obsidian插件精选：全网最用心试用图文详解-编辑增强系列">
+<meta property="og:url" content="https://chinapmcc.com/2025/09/14/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E7%BC%96%E8%BE%91%E5%A2%9E%E5%BC%BA%E7%B3%BB%E5%88%97/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-09-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-13T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="Obsidian">
+<meta property="article:tag" content="扩展程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Obsidian插件精选：全网最用心试用图文详解-编辑增强系列 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://storage.chinapmcc.com/2025/09/file-20250904171835692.png" alt="Obsidian插件精选：全网最用心试用图文详解-编辑增强系列" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">Obsidian插件精选：全网最用心试用图文详解-编辑增强系列</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-09-14</span>
+        <span class="mobile">2025-09-14</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-09-14</span>
+            <span class="mobile">2025-09-14</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%9A%80%E7%94%9F%E4%BA%A7%E5%8A%9B%E8%BD%AF%E4%BB%B6/">🚀生产力软件</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Obsidian/">Obsidian</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F/">扩展程序</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>11 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>宝子们，今天来给大家安利一波超好用的Obsidian插件，这可是我用了之后直呼“好用到哭”的宝藏工具啊😭！</p>
+<p>作为一个重度笔记爱好者，我一直在寻找能让笔记编辑更高效、更有趣的方法，Obsidian的这些插件简直是我的福音！</p>
+<p>🌟 <strong>编辑工具栏</strong>：我最近在写一篇论文，用到了Editing Toolbar这个插件，它简直就是Obsidian里的“Word编辑器”，完全不需要记那些复杂的Markdown命令，所见即所得，格式化文本、创建列表、插入代码块……一键搞定，写作体验直接拉满！</p>
+<p>🎨 <strong>绘图工具</strong>：写论文的时候，我还需要画一些思维导图和图表来整理思路。Excalidraw这个手绘风格的白板工具就派上了大用场，可以在笔记里直接画出各种图表、思维导图，特别适合像我这种喜欢用图来整理思路的人。还有Diagrams（Draw.io），流程图、网络图、UML图……各种专业图表都能轻松搞定，简直是理工科宝子的必备神器！</p>
+<p>📈 <strong>图表工具</strong>：做项目的时候，Kanban插件更是项目管理的好帮手，把任务按看板管理，一目了然，再也不用担心任务堆积如山了。LaTeX Suite更是理科生的福音，写论文、做笔记，公式编辑、编译预览，一气呵成！</p>
+<p>📝 <strong>文本编辑增强</strong>：Enhanced Editing和Multi Column Markdown这两个插件，更是让文本编辑和排版变得超顺手，文本颜色、折叠、多列布局……各种小功能，让笔记看起来既美观又实用。最后的makemd，更是把笔记组织和个性化做到了极致，数据库、公式、双向关联……功能强大到让人惊叹！<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250904171835692.png"
+                     
+                ><br>总之，这些插件真的让我在笔记的世界里如鱼得水，效率飞升！如果你也在用Obsidian，一定不要错过这些宝藏插件哦，赶紧去试试吧，相信我，用了之后你会感谢我的！</p>
+<pre class="mermaid">flowchart TD
+
+    A[Obsidian 插件精选<br>编辑增强系列] --> B1[编辑工具]
+
+    A --> B2[绘图工具]
+
+    A --> B3[任务管理]
+
+    A --> B4[文本编辑辅助]
+
+    A --> B6[布局归类]
+
+  
+  
+
+    B1 --> C1[Editing Toolbar<br>富文本编辑器 所见即所得]
+
+    B2 --> C2[Excalidraw<br>手绘风格白板工具]
+
+    B2 --> C3[Diagrams<br>流程图与专业图表工具]
+
+    B3 --> C4[Kanban<br>看板任务管理工具]
+
+    B4 --> C5[LaTeX Suite <br>数学编辑工具]
+
+    B4 --> C6[Enhanced Editing<br>文本快捷编辑辅助工具]
+
+    B6 --> C7[Multi Column Markdown<br>文本多列布局]
+
+    B6 --> C8[makemd<br>笔记组织与个性化工具]
+
+  
+
+    style A fill:#B332A8,color:white
+
+    style B1 fill:#e6e6fa
+
+    style B2 fill:#e6e6fa
+
+    style B3 fill:#e6e6fa
+
+    style B4 fill:#e6e6fa
+
+    style B6 fill:#e6e6fa
+
+    style C1 fill:#f0f8ff
+
+    style C2 fill:#f0f8ff
+
+    style C3 fill:#f0f8ff
+
+    style C4 fill:#f0f8ff
+
+    style C5 fill:#f0f8ff
+
+    style C6 fill:#f0f8ff
+
+    style C7 fill:#f0f8ff
+
+    style C8 fill:#f0f8ff</pre>
+
+<h3 id="1-Editing-Toolbar"><a href="#1-Editing-Toolbar" class="headerlink" title="1. Editing Toolbar"></a>1. Editing Toolbar</h3><blockquote>
+<p>版本：3.1.18<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/PKM-er/obsidian-editing-toolbar" >https://github.com/PKM-er/obsidian-editing-toolbar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：Obsidian Editing Toolbar是一个提供类似于 MS-Word 的工具栏的插件，并增加了一个最小的和用户友好的文本编辑器模式，以获得更顺畅的写作&#x2F;编辑体验。不需要记住复杂的 markdown 命令，类似于富文本编辑器的所见即所得。 这个插件是专门为那些希望有一个简单的文本编辑器来帮助标记他们的笔记设计的。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-editing-toolbar-3.1.18.rar" >obsidian-editing-toolbar-3.1.18.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250828160556488.png"
+                      alt="Editing Toolbar"
+                ></p>
+</blockquote>
+<h4 id="功能点："><a href="#功能点：" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>格式化文本</strong>：快速设置文本的粗体、斜体、下划线等格式。</li>
+<li><strong>列表创建</strong>：一键生成有序列表和无序列表。</li>
+<li><strong>代码块插入</strong>：方便地插入和编辑代码块。</li>
+<li><strong>链接和引用</strong>：轻松创建内部和外部链接，以及引用笔记。</li>
+<li><strong>块引用</strong>：支持创建块引用，方便进行讨论和反馈。</li>
+<li><strong>表格编辑</strong>：提供表格创建和编辑工具，简化表格操作。</li>
+<li><strong>任务列表</strong>：管理待办事项，支持任务的完成和未完成状态。</li>
+<li><strong>高亮标注</strong>：可对文本内容进行背景色、字体颜色、以及段落标注。</li>
+</ul>
+<h4 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h4><p>选中文本后，用编辑工具栏操作，如添加删除线，颜色等。</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/EditingToolbar.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="2-Excalidraw"><a href="#2-Excalidraw" class="headerlink" title="2. Excalidraw"></a>2. Excalidraw</h3><blockquote>
+<p>版本：2.15.0<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/zsviczian/obsidian-excalidraw-plugin" >https://github.com/zsviczian/obsidian-excalidraw-plugin<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：Excalidraw 是一个集成到 Obsidian 编辑器中的手绘风格白板工具。它允许用户在笔记中直接创建和编辑手绘图表、思维导图、草图等，增强了笔记的视觉表达能力。Obsidian-Excalidraw 插件将 <a class="link"   target="_blank" rel="noopener" href="https://excalidraw.com/" >Excalidraw<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 这一功能丰富的草图工具集成到 Obsidian 中。您可以在您的库中存储和编辑 Excalidraw 文件，可以将图形嵌入到文档中，还可以在 Excalidraw 中链接到文档和其他图形。<br>下载插件： <a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-excalidraw-2.15.0.rar" >obsidian-excalidraw-2.15.0.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250828163155121.png"
+                      alt="Excalidraw"
+                ></p>
+</blockquote>
+<h4 id="功能点：-1"><a href="#功能点：-1" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>手绘风格图形</strong>：提供手绘风格的图形绘制功能。</li>
+<li><strong>图形编辑</strong>：支持对图形进行移动、缩放、删除等编辑操作。</li>
+<li><strong>文本编辑</strong>：可以在图形中添加和编辑文本。</li>
+<li><strong>颜色和样式</strong>：提供多种颜色和样式选择，自定义图形外观。</li>
+<li><strong>撤销和重做</strong>：支持撤销和重做操作，方便修改图形。</li>
+<li><strong>导入和导出</strong>：支持将图形导入和导出为 Excalidraw 格式。</li>
+<li><strong>协作功能</strong>：允许多个用户同时编辑同一个图形。</li>
+</ul>
+<h4 id="使用方法：-1"><a href="#使用方法：-1" class="headerlink" title="使用方法："></a>使用方法：</h4><p>点击创建，在仓库根目录新建一个<code>Excalidraw</code>文件夹，可在画板绘制图形，图表，流程等等。</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/Excalidraw.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="3-Diagrams（Draw-io）"><a href="#3-Diagrams（Draw-io）" class="headerlink" title="3. Diagrams（Draw.io）"></a>3. Diagrams（Draw.io）</h3><blockquote>
+<p>版本：1.5.4<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/zapthedingbat/drawio-obsidian" >https://github.com/zapthedingbat/drawio-obsidian<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：将draw.io集成到Obsidian笔记应用中，允许用户直接在Obsidian中创建和编辑图表。draw.io是一个流行的在线图表工具，支持流程图、网络图、UML图等多种图表类型。图表将创建为 SVG 文件（但也支持 .drawio 扩展名）。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-drawio-1.5.4.rar" >obsidian-drawio-1.5.4.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250828182052018.png"
+                      alt="Diagrams"
+                ></p>
+</blockquote>
+<h4 id="功能点：-2"><a href="#功能点：-2" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>创建图表</strong>：在Obsidian中直接创建流程图、网络图、UML图等。</li>
+<li><strong>编辑图表</strong>：对图表进行编辑、保存和更新。</li>
+<li><strong>图表库</strong>：访问draw.io的图表库，使用预设的图形和模板。</li>
+<li><strong>同步功能</strong>：与draw.io账户同步，方便在不同设备间使用。</li>
+<li><strong>嵌入图表</strong>：将创建的图表嵌入到Obsidian笔记中。</li>
+<li><strong>导出图表</strong>：将图表导出为多种格式，如PNG、JPEG、SVG等。</li>
+<li><strong>离线使用</strong>：支持在没有网络连接的情况下使用draw.io。</li>
+</ul>
+<h4 id="使用方法：-2"><a href="#使用方法：-2" class="headerlink" title="使用方法："></a>使用方法：</h4><p>点击创建，图表将为 SVG 文件，可在白板中绘制流程图、时序图等等。</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/Diagrams.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="4-Kanban"><a href="#4-Kanban" class="headerlink" title="4. Kanban"></a>4. Kanban</h3><blockquote>
+<p>版本：2.0.51<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/mgmeyers/obsidian-kanban" >https://github.com/mgmeyers/obsidian-kanban<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：obsidian-kanban 是一个Obsidian插件，它允许用户在Obsidian中创建基于Markdown的看板（Kanban）板。看板是一种流行的项目管理工具，可以帮助用户组织任务和项目进度。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-kanban-2.0.51.rar" >obsidian-kanban-2.0.51.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250829111407454.png"
+                      alt="Kanban"
+                ></p>
+</blockquote>
+<h4 id="功能点：-3"><a href="#功能点：-3" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>创建看板</strong>：在Obsidian中创建和管理看板。</li>
+<li><strong>任务管理</strong>：添加、移动和完成看板上的任务。</li>
+<li><strong>自定义列</strong>：根据需要自定义看板的列。</li>
+<li><strong>Markdown支持</strong>：使用Markdown语法来格式化任务内容。</li>
+</ul>
+<h4 id="使用方法：-3"><a href="#使用方法：-3" class="headerlink" title="使用方法："></a>使用方法：</h4><p>在空白处，右键创建新看板，可按敏捷看板创建列：待办、进行中、完成进行管理任务项目。</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/Kanban.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="5-LaTeX-Suite"><a href="#5-LaTeX-Suite" class="headerlink" title="5. LaTeX Suite"></a>5. LaTeX Suite</h3><blockquote>
+<p>版本：1.9.8<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/artisticat1/obsidian-latex-suite/" >https://github.com/artisticat1/obsidian-latex-suite/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：LaTeX-Suite 是一个为 Vim 编辑器设计的插件，它提供了一套完整的工具和功能来编写、编译和查看 LaTeX 文档。它旨在简化 LaTeX 文档的编辑流程，提高编写效率。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-latex-suite-1.9.8.rar" >obsidian-latex-suite-1.9.8.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250904170043293.png"
+                     
+                ></p>
+</blockquote>
+<h4 id="功能点：-4"><a href="#功能点：-4" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>语法高亮</strong>：为 LaTeX 代码提供语法高亮显示。</li>
+<li><strong>自动补全</strong>：支持命令、环境和引用的自动补全功能。</li>
+<li><strong>编译支持</strong>：集成了对 LaTeX 编译器的支持，如 pdflatex、xelatex 等。</li>
+<li><strong>错误检查</strong>：提供编译错误的跳转和显示功能。</li>
+<li><strong>导航功能</strong>：支持在文档中快速跳转到章节、引用和标签定义。</li>
+<li><strong>实时预览</strong>：在编辑器中实时预览 LaTeX 文档的编译结果。</li>
+<li><strong>段落格式化</strong>：自动格式化段落，符合 LaTeX 的排版要求。</li>
+<li><strong>代码折叠</strong>：支持代码折叠，便于管理和查看大型文档。</li>
+</ul>
+<h4 id="使用方法：-4"><a href="#使用方法：-4" class="headerlink" title="使用方法："></a>使用方法：</h4><p>根据勾股定理，巴拉巴拉……</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/LaTeXSuite.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="6-Enhanced-Editing"><a href="#6-Enhanced-Editing" class="headerlink" title="6. Enhanced Editing"></a>6. Enhanced Editing</h3><blockquote>
+<p>版本：0.6.4<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/obsidian-canzi/Enhanced-editing" >https://github.com/obsidian-canzi/Enhanced-editing<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：EnhancedEditing 是一个 Obsidian 插件，  旨在增强 Obsidian 的文本编辑能力。它提供了一系列的编辑辅助功能，使得用户在 Obsidian 中的文本编辑体验 更加流畅和高效。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-enhanced-editing-0.6.4.rar" >obsidian-enhanced-editing-0.6.4.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250829144752360.png"
+                      alt="Enhanced-editing"
+                ></p>
+</blockquote>
+<h4 id="功能点：-5"><a href="#功能点：-5" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>文本颜色</strong>：允许用户自定义文本颜色，以突出显示或区分不同部分的内容。</li>
+<li><strong>文本折叠</strong>：支持折叠标题段落，帮助用户管理视图，专注于当前编辑的内容。</li>
+<li><strong>文本去空格</strong>：自动去除文本中多余的空格，包括行首、行尾以及单词间的多余空格。</li>
+<li><strong>文本加空格</strong>：在需要的地方添加空格，例如在中文和英文字符之间。</li>
+<li><strong>批量去空行</strong>：删除文档中的空白行，使内容更加紧凑。</li>
+<li><strong>批量加空行</strong>：在标题与文本之间加空白行，以增强文档的可读性。</li>
+<li><strong>荧光笔</strong>：高亮显示文本，用于标记重要信息或待办事项。</li>
+<li><strong>上标</strong>：为文本添加上标格式，适用于科学记数法和特殊标记。</li>
+<li><strong>下标</strong>：为文本添加下标格式，常用于化学公式和数学表达式。</li>
+</ul>
+<h4 id="使用方法：-5"><a href="#使用方法：-5" class="headerlink" title="使用方法："></a>使用方法：</h4><p>点击右下角状态栏菜单来激活使用格式刷功能及实用增强命令。</p>
+<p><video src="https://storage.chinapmcc.com/2025/09/EnhancedEditing.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="7-Multi-Column-Markdown"><a href="#7-Multi-Column-Markdown" class="headerlink" title="7. Multi Column Markdown"></a>7. Multi Column Markdown</h3><blockquote>
+<p>版本：0.9.1<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/ckRobinson/multi-column-markdown" >https://github.com/ckRobinson/multi-column-markdown<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：Multi-Column Markdown 是一个 Obsidian 插件，它允许用户在 Obsidian 的编辑器中创建多列布局的 Markdown 文档。这个插件模拟了传统的报纸或杂志布局，使得用户可以更有效地组织和展示信息。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-multi-column-markdown-0.9.1.rar" >obsidian-multi-column-markdown-0.9.1.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250829155621338.png"
+                      alt="Multi-Column"
+                ></p>
+</blockquote>
+<h4 id="功能点：-6"><a href="#功能点：-6" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>多列布局</strong>：支持创建两列或三列的布局，以更好地组织内容。</li>
+<li><strong>列宽调整</strong>：用户可以自定义每列的宽度，以适应不同的内容需求。</li>
+<li><strong>跨列支持</strong>：允许某些元素（如标题或图片）跨越多列显示。</li>
+<li><strong>响应式设计</strong>：列布局会根据窗口大小自动调整，以保持最佳的可读性。</li>
+</ul>
+<h4 id="使用方法：-6"><a href="#使用方法：-6" class="headerlink" title="使用方法："></a>使用方法：</h4><p>根据语法直接贴入到文本中，然后进行文章编辑。<a class="link"   target="_blank" rel="noopener" href="https://github.com/ckRobinson/multi-column-markdown/blob/master/documentation/FullExamples.md#multi-column-reflow" >多列使用示例<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><video src="https://storage.chinapmcc.com/2025/09/MultiColumn.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+<h3 id="8-makemd"><a href="#8-makemd" class="headerlink" title="8. makemd"></a>8. makemd</h3><blockquote>
+<p>版本：1.2.2<br>Github仓库地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/Make-md/makemd" >https://github.com/Make-md/makemd<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><br>简介：make.md 自带您所需的一切功能，无需额外代码或第三方依赖，即可在 Obsidian 内轻松实现笔记的组织、标记与个性化。其设计秉承简洁易用的理念，并能通过数据库、公式和双向关联功能无缝扩展至任何复杂应用场景。<br>下载插件：<a class="link"   target="_blank" rel="noopener" href="https://storage.chinapmcc.com/2025/09/obsidian-makemd-1.2.2.rar" >obsidian-makemd-1.2.2.rar<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>，解压至<code>plugins</code>文件夹下，如：<code>.\.obsidian\plugins\</code><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/09/file-20250829164602914.png"
+                      alt="makemd"
+                ></p>
+</blockquote>
+<h4 id="功能点：-7"><a href="#功能点：-7" class="headerlink" title="功能点："></a>功能点：</h4><ul>
+<li><strong>清除杂乱，保持专注</strong>：整理您的笔记，以便快速关注您正在处理的内容或特定类别。</li>
+<li><strong>使用列表、表格、日历和板快速组织</strong>：使用笔记中可自定义的列表视图以任何您想要的方式可视化您的信息，使用自定义过滤器、排序和分组对工作流程的不同部分使用不同的视图。</li>
+<li><strong>具有双向关系、公式和汇总的数据库</strong>：使用简单的表格或强大的数据库来连接笔记中的数据，并以不同的方式将其可视化，以更深入地了解您的知识。</li>
+<li><strong>完全可个性化的工作空间</strong>：表达您的创造力并将您的工作区自定义为仪表板、跟踪器等，所有这些都无需任何代码。</li>
+</ul>
+<h4 id="使用方法：-7"><a href="#使用方法：-7" class="headerlink" title="使用方法："></a>使用方法：</h4><p><video src="https://storage.chinapmcc.com/2025/09/makemd.mp4" position= "absolute" width="100%" height="100%" controls="controls"></video></p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Obsidian插件精选：全网最用心试用图文详解-编辑增强系列</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2025-09-14 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-09-14 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2025/09/14/生产力/Obsidian插件精选：全网最用心试用图文详解-编辑增强系列/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/Obsidian/">#Obsidian</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F/">#扩展程序</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/10/11/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E8%BE%85%E5%8A%A9%E4%BC%98%E5%8C%96%E7%B3%BB%E5%88%97/" title="Obsidian插件精选：全网最用心试用图文详解-辅助优化系列" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/10/Obsidian-plugins-bannerPic4.png" alt="Obsidian插件精选：全网最用心试用图文详解-辅助优化系列" class="!max-w-none">
+  <span class="title">Obsidian插件精选：全网最用心试用图文详解-辅助优化系列</span>
+</a><a class="recommended-article-item" href="/2025/09/20/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%B3%BB%E5%88%97/" title="Obsidian插件精选：全网最用心试用图文详解-文件管理系列" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/09/Obsidian-plugins-bannerPic3.png" alt="Obsidian插件精选：全网最用心试用图文详解-文件管理系列" class="!max-w-none">
+  <span class="title">Obsidian插件精选：全网最用心试用图文详解-文件管理系列</span>
+</a><a class="recommended-article-item" href="/2025/09/01/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E5%9B%BE%E7%89%87%E5%A2%9E%E5%BC%BA%E7%B3%BB%E5%88%97/" title="Obsidian插件精选：全网最用心试用图文详解-图片增强系列" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/Obsidian-plugins-bannerPic.png" alt="Obsidian插件精选：全网最用心试用图文详解-图片增强系列" class="!max-w-none">
+  <span class="title">Obsidian插件精选：全网最用心试用图文详解-图片增强系列</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/10/11/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E8%BE%85%E5%8A%A9%E4%BC%98%E5%8C%96%E7%B3%BB%E5%88%97/" title="Obsidian插件精选：全网最用心试用图文详解-辅助优化系列" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/10/Obsidian-plugins-bannerPic4.png" alt="Obsidian插件精选：全网最用心试用图文详解-辅助优化系列" class="!max-w-none">
+  <span class="title">Obsidian插件精选：全网最用心试用图文详解-辅助优化系列</span>
+</a><a class="recommended-article-item" href="/2025/09/20/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%B3%BB%E5%88%97/" title="Obsidian插件精选：全网最用心试用图文详解-文件管理系列" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/09/Obsidian-plugins-bannerPic3.png" alt="Obsidian插件精选：全网最用心试用图文详解-文件管理系列" class="!max-w-none">
+  <span class="title">Obsidian插件精选：全网最用心试用图文详解-文件管理系列</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/09/20/%E7%94%9F%E4%BA%A7%E5%8A%9B/Obsidian%E6%8F%92%E4%BB%B6%E7%B2%BE%E9%80%89%EF%BC%9A%E5%85%A8%E7%BD%91%E6%9C%80%E7%94%A8%E5%BF%83%E8%AF%95%E7%94%A8%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%B3%BB%E5%88%97/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">Obsidian插件精选：全网最用心试用图文详解-文件管理系列</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/09/06/%E7%94%9F%E4%BA%A7%E5%8A%9B/%E6%9C%80%E6%96%B0%E7%89%88Axure10%E6%88%9611%E6%BF%80%E6%B4%BB%E7%A0%B4%E8%A7%A3%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">最新版Axure10/11激活破解图文教程</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">Obsidian插件精选：全网最用心试用图文详解-编辑增强系列</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Editing-Toolbar"><span class="nav-text">1. Editing Toolbar</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Excalidraw"><span class="nav-text">2. Excalidraw</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-1"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-1"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Diagrams%EF%BC%88Draw-io%EF%BC%89"><span class="nav-text">3. Diagrams（Draw.io）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-2"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-2"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Kanban"><span class="nav-text">4. Kanban</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-3"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-3"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-LaTeX-Suite"><span class="nav-text">5. LaTeX Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-4"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-4"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Enhanced-Editing"><span class="nav-text">6. Enhanced Editing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-5"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-5"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Multi-Column-Markdown"><span class="nav-text">7. Multi Column Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-6"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-6"><span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-makemd"><span class="nav-text">8. makemd</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%82%B9%EF%BC%9A-7"><span class="nav-text">功能点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-7"><span class="nav-text">使用方法：</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

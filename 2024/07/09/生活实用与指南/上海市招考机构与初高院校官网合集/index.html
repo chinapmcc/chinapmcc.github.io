@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2024/07/09/生活实用与指南/上海市招考机构与初高院校官网合集/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上海市招考机构与初高院校官网合集">
+<meta property="og:url" content="https://chinapmcc.com/2024/07/09/%E7%94%9F%E6%B4%BB%E5%AE%9E%E7%94%A8%E4%B8%8E%E6%8C%87%E5%8D%97/%E4%B8%8A%E6%B5%B7%E5%B8%82%E6%8B%9B%E8%80%83%E6%9C%BA%E6%9E%84%E4%B8%8E%E5%88%9D%E9%AB%98%E9%99%A2%E6%A0%A1%E5%AE%98%E7%BD%91%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2024-07-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-08T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="初高院校">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            上海市招考机构与初高院校官网合集 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">上海市招考机构与初高院校官网合集</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-07-09</span>
+        <span class="mobile">2024-07-09</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-07-09</span>
+            <span class="mobile">2024-07-09</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%9B%A3%EF%B8%8F%E7%94%9F%E6%B4%BB%E5%AE%9E%E7%94%A8%E4%B8%8E%E6%8C%87%E5%8D%97/">🛣️生活实用与指南</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%88%9D%E9%AB%98%E9%99%A2%E6%A0%A1/">初高院校</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>5.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>26 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h3 id="上海市各区招考机构"><a href="#上海市各区招考机构" class="headerlink" title="上海市各区招考机构"></a>上海市各区招考机构</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>上海市各区招考机构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>黄浦区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shhuangpu.gov.cn/yqyw/010001/010001003/department.html" >http://www.shhuangpu.gov.cn/yqyw/010001/010001003/department.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>徐汇区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.xuhui.gov.cn/jiaoyuju/" >http://www.xuhui.gov.cn/jiaoyuju/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>长宁区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shcn.gov.cn/cnjy/" >https://www.shcn.gov.cn/cnjy/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>静安区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jingan.gov.cn/sy/004009/004009010/ssEducation.html" >https://www.jingan.gov.cn/sy/004009/004009010/ssEducation.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>虹口区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shhk.gov.cn/hkjy/" >https://www.shhk.gov.cn/hkjy/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>普陀区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shpt.gov.cn/jyj/" >https://www.shpt.gov.cn/jyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>杨浦区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl/" >https://www.shyp.gov.cn/shypq/yqyw-wb-jyjzl/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>闵行区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shmh.gov.cn/shmh/jyj/" >http://www.shmh.gov.cn/shmh/jyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>宝山区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shbsq.gov.cn/shbs/jyj/" >https://www.shbsq.gov.cn/shbs/jyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>嘉定区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jiading.gov.cn/jiaoyu" >http://www.jiading.gov.cn/jiaoyu<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>浦东新区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.pudong.gov.cn/jyj/" >https://www.pudong.gov.cn/jyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>金山区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jinshan.gov.cn/bmwj-qjyj/" >https://www.jinshan.gov.cn/bmwj-qjyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>松江区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.songjiang.gov.cn/ztzl/005001/index.html" >https://www.songjiang.gov.cn/ztzl/005001/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>青浦区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shqp.gov.cn/edu/" >https://www.shqp.gov.cn/edu/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>奉贤区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.fengxian.gov.cn/jyj/" >https://www.fengxian.gov.cn/jyj/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>崇明区</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shcm.gov.cn/bmpd/019002/index.html" >https://shcm.gov.cn/bmpd/019002/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+</tbody></table>
+<h3 id="上海市普通高校介绍"><a href="#上海市普通高校介绍" class="headerlink" title="上海市普通高校介绍"></a>上海市普通高校介绍</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>上海市普通高校介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>复旦大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.fudan.edu.cn/" >http://www.fudan.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>上海交通大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sjtu.edu.cn/" >http://www.sjtu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>同济大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.tongji.edu.cn/" >http://www.tongji.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>华东师范大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.ecnu.edu.cn/" >http://www.ecnu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>华东理工大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.ecust.edu.cn/" >http://www.ecust.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>东华大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.dhu.edu.cn/" >http://www.dhu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>上海财经大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sufe.edu.cn/" >http://www.sufe.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>上海外国语大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shisu.edu.cn/" >http://www.shisu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>上海海事大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shmtu.edu.cn/" >http://www.shmtu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>上海理工大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.usst.edu.cn/" >http://www.usst.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>上海公安学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shpc.edu.cn/gaxy/" >https://www.shpc.edu.cn/gaxy/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>上海杉达学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sandau.edu.cn/" >https://www.sandau.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>华东政法大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.ecupl.edu.cn/" >https://www.ecupl.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>上海对外经贸大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.suibe.edu.cn/" >https://www.suibe.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>上海立信会计金融学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.lixin.edu.cn/" >https://www.lixin.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>上海海洋大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shou.edu.cn/" >https://www.shou.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>上海电力大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shiep.edu.cn/" >https://www.shiep.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>上海音乐学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shcmusic.edu.cn/" >https://www.shcmusic.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>上海大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shu.edu.cn/" >https://www.shu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>上海交通大学医学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shsmu.edu.cn/" >https://www.shsmu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>上海中医药大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shutcm.edu.cn/" >https://www.shutcm.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>上海应用技术大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sit.edu.cn/" >https://www.sit.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>上海师范大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shnu.edu.cn/" >https://www.shnu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>上海工程技术大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sues.edu.cn/" >https://www.sues.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>上海商学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sbs.edu.cn/" >https://www.sbs.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>香港城市大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.cityu.edu.hk/" >https://www.cityu.edu.hk/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>上海体育学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sus.edu.cn/" >https://www.sus.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>海军军医大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://ao.smmu.edu.cn/" >http://ao.smmu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>上海电机学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sdju.edu.cn/" >https://www.sdju.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>30</td>
+<td>上海政法学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shupl.edu.cn/" >https://www.shupl.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>31</td>
+<td>上海第二工业大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sspu.edu.cn/" >https://www.sspu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>32</td>
+<td>上海外国语大学贤达经济人文学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.xdsisu.edu.cn/" >https://www.xdsisu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>33</td>
+<td>上海兴伟学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.xingwei.edu.cn/" >https://www.xingwei.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>34</td>
+<td>上海建桥学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.gench.edu.cn/" >https://www.gench.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>35</td>
+<td>上海健康医学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sumhs.edu.cn/" >https://www.sumhs.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>36</td>
+<td>上海海关学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shcc.edu.cn/" >https://www.shcc.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>37</td>
+<td>上海师范大学天华学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sthu.cn/" >https://www.sthu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>38</td>
+<td>上海视觉艺术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.siva.edu.cn/" >https://www.siva.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>39</td>
+<td>上海纽约大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shanghai.nyu.edu/cn/" >https://shanghai.nyu.edu/cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>40</td>
+<td>上海科技大学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shanghaitech.edu.cn/" >https://www.shanghaitech.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>41</td>
+<td>上海旅游高等专科学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sitsh.edu.cn/" >https://www.sitsh.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>42</td>
+<td>上海出版印刷高等专科学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sppc.edu.cn/" >https://www.sppc.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>43</td>
+<td>上海济光职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shjgu.edu.cn/" >https://www.shjgu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>44</td>
+<td>上海工商外国语职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sicfl.edu.cn/" >https://www.sicfl.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>45</td>
+<td>上海东海职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.esu.edu.cn/" >https://www.esu.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>46</td>
+<td>上海工商职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sicp.edu.cn/" >https://www.sicp.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>47</td>
+<td>上海科学技术职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.scst.edu.cn/" >https://www.scst.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>48</td>
+<td>上海海事职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sma.edu.cn/" >http://www.sma.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>49</td>
+<td>上海交通职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.scp.edu.cn/" >https://www.scp.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>50</td>
+<td>上海电子信息职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.stiei.edu.cn/" >https://www.stiei.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>51</td>
+<td>上海城建职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.succ.edu.cn/" >https://www.succ.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>52</td>
+<td>上海行健职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shxj.edu.cn/" >http://www.shxj.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>53</td>
+<td>上海工艺美术职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sada.edu.cn/" >https://www.sada.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>54</td>
+<td>上海邦德职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shbangde.com/" >https://www.shbangde.com/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>55</td>
+<td>上海农林职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shafc.edu.cn/" >https://www.shafc.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>56</td>
+<td>上海中侨职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shzq.edu.cn/" >http://www.shzq.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>57</td>
+<td>上海震旦职业学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.aurora-college.cn/" >https://www.aurora-college.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>58</td>
+<td>上海立达学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.lidapoly.edu.cn/" >https://www.lidapoly.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>59</td>
+<td>上海思博职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shsipo.com/" >http://www.shsipo.com/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>60</td>
+<td>上海民远职业技术学院</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shmy.edu.cn/" >http://www.shmy.edu.cn/<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+</tbody></table>
+<h3 id="上海市普通高中介绍"><a href="#上海市普通高中介绍" class="headerlink" title="上海市普通高中介绍"></a>上海市普通高中介绍</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>上海市普通高中介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>上海交通大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fz.sjtu.edu.cn/" >https://fz.sjtu.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>复旦大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.fdfz.cn/" >https://www.fdfz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>华东师范大学第二附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsefz.cn/" >http://www.hsefz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>上海师范大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.ssdfz.pudong-edu.sh.cn/" >https://www.ssdfz.pudong-edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>上海市实验学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.ses.sh.edu.cn/web/syxy/5190001.htm" >http://www.ses.sh.edu.cn/web/syxy/5190001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>上海科技大学附属学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fsxx.shanghaitech.edu.cn/" >https://fsxx.shanghaitech.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>上海市格致中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gezhi.hpe.cn/" >https://gezhi.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>上海市大同中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://dt.hpe.cn/" >https://dt.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>上海市向明中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xiangming.hpe.cn/" >https://xiangming.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>上海外国语大学附属大境中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://dj.hpe.cn/" >https://dj.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>上海市光明中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gm.hpe.cn/" >https://gm.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>上海市敬业中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jy.hpe.cn/" >https://jy.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>上海市卢湾高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://lwgj.hpe.cn/" >https://lwgj.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>上海市格致中学（奉贤校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gezhi.hpe.cn/demo/fx.htm" >https://gezhi.hpe.cn/demo/fx.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>上海市向明中学（浦江校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xiangming.hpe.cn/" >https://xiangming.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>上海市第八中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shiba.hpe.cn/" >https://shiba.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>上海市五爱高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://wuai.hpe.cn/" >https://wuai.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>上海市第十中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://d10.hpe.cn/" >https://d10.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>上海理工大学附属储能中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://chun.hpe.cn/" >https://chun.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>上海市金陵中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jl.hpe.cn/" >https://jl.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>上海市市南中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shinan.hpe.cn/" >https://shinan.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>上海音乐学院附属黄浦比乐中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://bile.hpe.cn/" >https://bile.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>上海市同济黄浦设计创意中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://tc.hpe.cn/" >https://tc.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>上海市第二中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shiers.cn/" >https://www.shiers.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>上海市南洋模范中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://nmzx.xhedu.sh.cn/cms" >https://nmzx.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>上海市位育中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.weiyu.sh.cn/cms/index.html" >https://www.weiyu.sh.cn/cms/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>上海市南洋中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.nygz.xhedu.sh.cn/nanyangCustom/index.html" >https://www.nygz.xhedu.sh.cn/nanyangCustom/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>复旦大学附属中学徐汇分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.fdfz.cn/" >https://www.fdfz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>上海市第二中学（梅陇校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shiers.cn/" >https://www.shiers.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>30</td>
+<td>上海市徐汇中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xhzx.xhedu.sh.cn/site/site1/index.html" >https://xhzx.xhedu.sh.cn/site/site1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>31</td>
+<td>上海市中国中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://zgzx.xhedu.sh.cn/po/1/index.html" >http://zgzx.xhedu.sh.cn/po/1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>32</td>
+<td>上海市第五十四中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://wszx.xhedu.sh.cn/cms" >https://wszx.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>33</td>
+<td>上海市第四中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sh4z.xhedu.sh.cn/cms" >https://sh4z.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>34</td>
+<td>上海市西南位育中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xnwy.xhedu.sh.cn/cms" >https://xnwy.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>35</td>
+<td>上海市零陵中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://llzx.xhedu.sh.cn/cms" >https://llzx.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>36</td>
+<td>华东理工大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://ldfz.xhedu.sh.cn/cms" >https://ldfz.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>37</td>
+<td>上海市西南模范中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xnmf.xhedu.sh.cn/cms" >https://xnmf.xhedu.sh.cn/cms<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>38</td>
+<td>上海市紫竹园中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://zzzx.xhedu.sh.cn:1053/site/e2ac4a84-7399-4e46-af37-867968c6a2d5/index.html" >http://zzzx.xhedu.sh.cn:1053/site/e2ac4a84-7399-4e46-af37-867968c6a2d5/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>39</td>
+<td>上海市徐汇区董恒甫高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://dhf.xhedu.sh.cn/site/7912fd4e-2f1a-427d-a846-6200241b5833/index.html" >http://dhf.xhedu.sh.cn/site/7912fd4e-2f1a-427d-a846-6200241b5833/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>40</td>
+<td>上海市世外中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.wflms.cn/site/site1/index.html?_=1591675901145" >http://www.wflms.cn/site/site1/index.html?_&#x3D;1591675901145<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>41</td>
+<td>上海市第三女子中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.ssnz.sh.cn/site/1/index.html" >https://www.ssnz.sh.cn/site/1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>42</td>
+<td>上海市延安中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shyahs.chneic.sh.cn/WebSite.Net" >https://shyahs.chneic.sh.cn/WebSite.Net<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>43</td>
+<td>上海市复旦中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fdhs.chneic.sh.cn/FDPM/index.jsp" >https://fdhs.chneic.sh.cn/FDPM/index.jsp<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>44</td>
+<td>华东政法大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hzfz.chneic.sh.cn/HZFZPM/index.jsp" >https://hzfz.chneic.sh.cn/HZFZPM/index.jsp<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>45</td>
+<td>华东师范大学附属天山学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://tszx.chneic.sh.cn/" >https://tszx.chneic.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>46</td>
+<td>上海市仙霞高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://xxgz.hongyucloud.com/" >http://xxgz.hongyucloud.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>47</td>
+<td>上海市西郊学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xjxx.chneic.sh.cn/" >https://xjxx.chneic.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>48</td>
+<td>上海市民办新虹桥中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xhqzx.chneic.sh.cn/" >https://xhqzx.chneic.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>49</td>
+<td>上海市市西中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shixi.edu.sh.cn/" >http://www.shixi.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>50</td>
+<td>上海市育才中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.yucai.edu.sh.cn/" >http://www.yucai.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>51</td>
+<td>上海市新中高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.xzschool.edu.sh.cn/" >http://www.xzschool.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>52</td>
+<td>上海市市北中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shibei.edu.sh.cn/" >http://www.shibei.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>53</td>
+<td>上海市回民中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hmschool.edu.sh.cn/" >http://www.hmschool.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>54</td>
+<td>上海市华东模范中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.huamo.edu.sh.cn/" >http://www.huamo.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>55</td>
+<td>上海戏剧学院附属高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sxfz.edu.sh.cn/" >http://www.sxfz.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>56</td>
+<td>上海市民立中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.minli.edu.sh.cn/" >http://www.minli.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>57</td>
+<td>上海市第一中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.yizhong.edu.sh.cn/" >http://www.yizhong.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>58</td>
+<td>上海市风华中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.fh.edu.sh.cn/" >http://www.fh.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>59</td>
+<td>上海市第六十中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.no60school.edu.sh.cn/" >http://www.no60school.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>60</td>
+<td>上海市彭浦中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shppzx.edu.sh.cn/" >http://www.shppzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>61</td>
+<td>上海市久隆模范中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jlmfzx.edu.sh.cn/" >http://www.jlmfzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>62</td>
+<td>上海市闸北第八中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.zhb8zh.edu.sh.cn/" >http://www.zhb8zh.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>63</td>
+<td>同济大学附属七一中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.71school.edu.sh.cn/" >http://www.71school.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>64</td>
+<td>上海田家炳中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.tjb.edu.sh.cn/" >http://www.tjb.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>65</td>
+<td>上海市向东中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.xdschool.edu.sh.cn/" >http://www.xdschool.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>66</td>
+<td>上海大学市北附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sdsbfz.edu.sh.cn/" >http://www.sdsbfz.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>67</td>
+<td>上海市民办扬波中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.yangbo.edu.sh.cn/" >http://www.yangbo.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>68</td>
+<td>上海市民办新和中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.xhschool.edu.sh.cn/" >http://www.xhschool.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>69</td>
+<td>上海市民办风范中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.fhschool.edu.sh.cn/" >http://www.fhschool.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>70</td>
+<td>上海市晋元高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hsjy.pte.sh.cn/" >https://hsjy.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>71</td>
+<td>上海市曹杨第二中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://web-hscyez.pte.sh.cn/" >https://web-hscyez.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>72</td>
+<td>上海市宜川中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hsyc.pte.sh.cn/" >https://hsyc.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>73</td>
+<td>华东师范大学第二附属中学（普陀校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsefz.cn/" >http://www.hsefz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>74</td>
+<td>上海市曹杨中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hscy.pte.sh.cn/" >https://hscy.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>75</td>
+<td>同济大学第二附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hstjef.pte.sh.cn/" >https://hstjef.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>76</td>
+<td>上海市甘泉外国语中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gqms.pte.sh.cn/" >https://gqms.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>77</td>
+<td>上海音乐学院附属安师实验中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hsdx.pte.sh.cn/" >https://hsdx.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>78</td>
+<td>上海市长征中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://czzx.pte.sh.cn/" >https://czzx.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>79</td>
+<td>上海市桃浦中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hstp.pte.sh.cn/" >https://hstp.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>80</td>
+<td>上海华东师范大学附属进华中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://minbanjinhuazx.pte.sh.cn/x310000/6408/index.aspx" >https://minbanjinhuazx.pte.sh.cn/x310000/6408/index.aspx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>81</td>
+<td>上海安生学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sh-thomas.pte.sh.cn/" >https://sh-thomas.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>82</td>
+<td>上海培佳双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://peijia.pte.sh.cn/" >https://peijia.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>83</td>
+<td>上海市复兴高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.fuxing.sh.cn/SDFZB/revival" >https://www.fuxing.sh.cn/SDFZB/revival<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>84</td>
+<td>华东师范大学第一附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sdfz.sh.cn/SDFZ" >https://www.sdfz.sh.cn/SDFZ<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>85</td>
+<td>上海财经大学附属北郊高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.beijiaoedu.com/Default.aspx" >http://www.beijiaoedu.com/Default.aspx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>86</td>
+<td>上海市继光高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.schools.sh.cn/web/jgzx/4530001.htm" >http://www.schools.sh.cn/web/jgzx/4530001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>87</td>
+<td>上海外国语大学附属外国语学校东校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sefls.cn/" >https://www.sefls.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>88</td>
+<td>上海市杨浦高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.ypgz.edu.sh.cn/" >http://www.ypgz.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>89</td>
+<td>上海市控江中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shkjzx.edu.sh.cn/" >http://www.shkjzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>90</td>
+<td>同济大学第一附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://tjyfz.tongji.edu.cn/main.htm" >https://tjyfz.tongji.edu.cn/main.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>91</td>
+<td>上海理工大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://fwpt.yp.edu.sh.cn/shlgdxfszx" >http://fwpt.yp.edu.sh.cn/shlgdxfszx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>92</td>
+<td>上海市市东实验学校（上海市市东中学）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sdzx.edu.sh.cn/" >http://www.sdzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>93</td>
+<td>上海财经大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.scfz.edu.sh.cn/site/template/site1/index.html" >http://www.scfz.edu.sh.cn/site/template/site1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>94</td>
+<td>上海市同济中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.tjzx.edu.sh.cn/" >http://www.tjzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>95</td>
+<td>上海市中原中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://fwpt.yp.edu.sh.cn/zyzx" >http://fwpt.yp.edu.sh.cn/zyzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>96</td>
+<td>上海市复旦实验中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://ypfdsy.edu.sh.cn/" >http://ypfdsy.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>97</td>
+<td>上海理工大学附属杨浦少云中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.syun.edu.sh.cn/" >http://www.syun.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>98</td>
+<td>上海市民星中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.mxzx.edu.sh.cn/" >http://www.mxzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>99</td>
+<td>上海市体育学院附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.tyfz.edu.sh.cn/" >http://www.tyfz.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>100</td>
+<td>上海市民办上实剑桥外国语中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://fwpt.yp.edu.sh.cn/ssjqwgyzx/index.htm" >http://fwpt.yp.edu.sh.cn/ssjqwgyzx/index.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>101</td>
+<td>上海市七宝中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qbzx.icampus.cn/" >https://qbzx.icampus.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>102</td>
+<td>上海市闵行中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://mhzx.mhedu.sh.cn/" >https://mhzx.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>103</td>
+<td>华东师范大学第二附属中学（紫竹校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hsefzcz.com/SeniorSchool/home/index" >https://www.hsefzcz.com/SeniorSchool/home/index<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>104</td>
+<td>上海师范大学附属中学闵行分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sdfz.mhedu.sh.cn/api/po/sites/a59f8895-297e-49ce-b07c-68955251229a/index.html" >https://sdfz.mhedu.sh.cn/api/po/sites/a59f8895-297e-49ce-b07c-68955251229a/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>105</td>
+<td>上海交通大学附属中学闵行分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jdfzmh.sjtu.edu.cn/index/Index!Index.htm" >https://www.jdfzmh.sjtu.edu.cn/index/Index!Index.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>106</td>
+<td>上海市闵行第三中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://mh3z.mhedu.sh.cn/web/mh3z/4940001.htm" >https://mh3z.mhedu.sh.cn/web/mh3z/4940001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>107</td>
+<td>上海市莘庄中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xzzx.mhedu.sh.cn/" >https://xzzx.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>108</td>
+<td>上海外国语大学闵行外国语中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.smfms.cn/2018" >https://www.smfms.cn/2018<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>109</td>
+<td>华东理工大学附属闵行科技高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hlkg.mhedu.sh.cn/" >https://hlkg.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>110</td>
+<td>北京外国语大学附属上海闵行田园高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://tygz.mhedu.sh.cn/" >https://tygz.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>111</td>
+<td>上海市文来中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://wlhs.mhedu.sh.cn/" >https://wlhs.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>112</td>
+<td>上海市第二体育运动学校（上海市体育中学）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.s2ss.cn/" >https://www.s2ss.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>113</td>
+<td>上海中医药大学附属浦江高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shpjgz.mhedu.sh.cn/" >https://shpjgz.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>114</td>
+<td>上海市金汇高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jhgz.mhedu.sh.cn/" >https://jhgz.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>115</td>
+<td>上海市古美高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gmgz.mhedu.sh.cn/" >https://gmgz.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>116</td>
+<td>上海市民办文绮中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://wqzx.mhedu.sh.cn/" >https://wqzx.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>117</td>
+<td>上海市闵行区教育学院附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://mjyfz.mhedu.sh.cn/" >https://mjyfz.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>118</td>
+<td>上海闵行区协和双语教科学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jiaoke.suis.com.cn/" >https://jiaoke.suis.com.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>119</td>
+<td>上海市民办燎原双语高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.liaoyuanedu.org/" >http://www.liaoyuanedu.org<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>120</td>
+<td>上海闵行区诺达双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.nacisminhang.cn/" >https://www.nacisminhang.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>121</td>
+<td>上海七宝德怀特高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.qibaodwight.org/" >https://www.qibaodwight.org<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>122</td>
+<td>上海星河湾双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.ssbs.sh.cn/" >https://www.ssbs.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>123</td>
+<td>上海协和双语高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gubei.suis.com.cn/" >https://gubei.suis.com.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>124</td>
+<td>上海市七宝中学附属鑫都实验中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qbxd.mhedu.sh.cn/" >https://qbxd.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>125</td>
+<td>上海闵行区民办德闳学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shanghai.dehong.cn/zh" >https://shanghai.dehong.cn/zh<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>126</td>
+<td>上海市闵行区实验高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://mhsg.mhedu.sh.cn/" >https://mhsg.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>127</td>
+<td>上海市闵行中学东校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://mhzx.mhedu.sh.cn/" >https://mhzx.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>128</td>
+<td>上海市七宝中学浦江分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qbzx.icampus.cn/" >https://qbzx.icampus.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>129</td>
+<td>上海市闵行区教育学院附属友爱实验中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://yazx.mhedu.sh.cn/" >https://yazx.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>130</td>
+<td>上海市行知中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/xzhs" >https://school.bsedu.org.cn/xzhs<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>131</td>
+<td>上海大学附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sdfz.shu.edu.cn/" >https://sdfz.shu.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>132</td>
+<td>上海市吴淞中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/shwusong" >https://school.bsedu.org.cn/shwusong<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>133</td>
+<td>华东师范大学第二附属中学（宝山校区）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsefz.cn/" >http://www.hsefz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>134</td>
+<td>上海师范大学附属中学宝山分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/ssdfzbf" >https://school.bsedu.org.cn/ssdfzbf<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>135</td>
+<td>上海师范大学附属宝山罗店中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/ldzx" >https://school.bsedu.org.cn/ldzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>136</td>
+<td>上海市宝山中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/bszx" >https://school.bsedu.org.cn/bszx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>137</td>
+<td>上海市通河中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/thzx" >https://school.bsedu.org.cn/thzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>138</td>
+<td>上海市顾村中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/shgczx" >https://school.bsedu.org.cn/shgczx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>139</td>
+<td>上海市行知实验中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shsxzsyzx.com/" >http://www.shsxzsyzx.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>140</td>
+<td>上海宝山区世外学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://bs.shwfl.edu.cn/" >https://bs.shwfl.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>141</td>
+<td>上海存志高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.bsedu.org.cn/shczgz" >https://school.bsedu.org.cn/shczgz<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>142</td>
+<td>上海市嘉定区第一中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jdyz.jdjy.sh.cn/" >https://jdyz.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>143</td>
+<td>上海交通大学附属中学嘉定分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jdfx.jdjy.sh.cn/" >https://jdfx.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>144</td>
+<td>上海市嘉定区第二中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jez.jdjy.sh.cn/" >https://jez.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>145</td>
+<td>上海师范大学附属嘉定高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://ssjg.jdjy.sh.cn/" >https://ssjg.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>146</td>
+<td>上海市嘉定区安亭高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://atgz.jdjy.sh.cn/" >https://atgz.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>147</td>
+<td>上海市嘉定区嘉一实验高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jiading.gov.cn/jiaoyu/bmfw/xxcx/gz/content_801813" >http://www.jiading.gov.cn/jiaoyu/bmfw/xxcx/gz/content_801813<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>148</td>
+<td>上海大学附属嘉定高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sdnz.jdjy.sh.cn/" >https://sdnz.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>149</td>
+<td>上海市嘉定区封浜高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fbgjzx.jdjy.sh.cn/" >https://fbgjzx.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>150</td>
+<td>上海市嘉定区中光高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://zgzx.jdjy.sh.cn/" >https://zgzx.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>151</td>
+<td>上海市民办远东学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fareastschool.jdjy.sh.cn/" >https://fareastschool.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>152</td>
+<td>上海华旭双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://m.arete.cn/" >https://m.arete.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>153</td>
+<td>上海嘉定区民办华盛怀少学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hsxx.jdjy.sh.cn/" >https://hsxx.jdjy.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>154</td>
+<td>上海市建平中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jianping.com.cn/web/index.html" >http://www.jianping.com.cn/web/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>155</td>
+<td>上海市进才中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jincai.sh.cn/infoweb/index/jincai" >http://www.jincai.sh.cn/infoweb/index/jincai<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>156</td>
+<td>上海南汇中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shnhzx.pdedu.sh.cn/web/nhzx/4240001.htm" >https://shnhzx.pdedu.sh.cn/web/nhzx/4240001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>157</td>
+<td>上海市洋泾中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsyj.pudong-edu.sh.cn/index/index.aspx" >http://www.hsyj.pudong-edu.sh.cn/index/index.aspx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>158</td>
+<td>上海市川沙中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hschsh.pudong-edu.sh.cn/" >http://www.hschsh.pudong-edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>159</td>
+<td>上海中学东校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://eshs.pdedu.sh.cn/" >https://eshs.pdedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>160</td>
+<td>上海市浦东复旦附中分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://pdfdfz.pdedu.sh.cn/" >http://pdfdfz.pdedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>161</td>
+<td>上海外国语大学附属浦东外国语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.msshw.pudong-edu.sh.cn/" >https://www.msshw.pudong-edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>162</td>
+<td>华东师范大学附属东昌中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hsdch.pudong-edu.sh.cn/web/index.html" >https://www.hsdch.pudong-edu.sh.cn/web/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>163</td>
+<td>上海市香山中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsxsh.pudong-edu.sh.cn/infoweb/index/pdxszx" >http://www.hsxsh.pudong-edu.sh.cn/infoweb/index/pdxszx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>164</td>
+<td>上海市上南中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsshn.pudong-edu.sh.cn/infoweb" >http://www.hsshn.pudong-edu.sh.cn/infoweb<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>165</td>
+<td>上海市高桥中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsgq.pudong-edu.sh.cn/api/po/sites/1-site/index.html" >http://www.hsgq.pudong-edu.sh.cn/api/po/sites/1-site/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>166</td>
+<td>上海市三林中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://slzx.pdedu.sh.cn/?fid-6-id-3836-page-1.htm" >http://slzx.pdedu.sh.cn/?fid-6-id-3836-page-1.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>167</td>
+<td>上海市杨思高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsys.pudong-edu.sh.cn/infoweb" >http://www.hsys.pudong-edu.sh.cn/infoweb<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>168</td>
+<td>上海市新场中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://xczx.pdedu.sh.cn/" >http://xczx.pdedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>169</td>
+<td>上海市浦东中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hspd.pudong-edu.sh.cn/site/site1/index.html" >https://www.hspd.pudong-edu.sh.cn/site/site1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>170</td>
+<td>上海交通大学附属中学浦东实验高中</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsjzsy.pudong-edu.sh.cn/homepage/default.aspx" >http://www.hsjzsy.pudong-edu.sh.cn/homepage/default.aspx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>171</td>
+<td>上海市南汇第一中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shnhzx.pdedu.sh.cn/web/nhzx/4240001.htm" >https://shnhzx.pdedu.sh.cn/web/nhzx/4240001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>172</td>
+<td>上海市沪新中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.schools.sh.cn/web/HXZX/38001.htm" >http://www.schools.sh.cn/web/HXZX/38001.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>173</td>
+<td>民办上海工商外国语职业学院附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://fz.sicfl.edu.cn/" >https://fz.sicfl.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>174</td>
+<td>上海市民办金苹果学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jinpingguo.com.cn/" >http://www.jinpingguo.com.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>175</td>
+<td>上海浦东新区民办东鼎外国语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.2ndfls.com/" >https://www.2ndfls.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>176</td>
+<td>上海市民办尚德实验学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shangdejy.com/" >https://www.shangdejy.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>177</td>
+<td>上海市民办平和学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shphschool.com/" >https://www.shphschool.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>178</td>
+<td>上海浦东新区民办惠立学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shanghai.huilieducation.cn/community/huili-voices" >https://shanghai.huilieducation.cn/community/huili-voices<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>179</td>
+<td>上海民办华曜浦东实验学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hesy.cn/" >https://www.hesy.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>180</td>
+<td>上海市金山中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/jszx" >https://www.jsedu.sh.cn/jszx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>181</td>
+<td>华东师范大学第三附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/hdsdsfz" >https://www.jsedu.sh.cn/hdsdsfz<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>182</td>
+<td>华东师范大学附属枫泾中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/fjzx" >https://www.jsedu.sh.cn/fjzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>183</td>
+<td>华上海市张堰中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/zyzx" >https://www.jsedu.sh.cn/zyzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>184</td>
+<td>上海师范大学第二附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://jjc.shnu.edu.cn/33/c7/c17675a472007/page.htm" >http://jjc.shnu.edu.cn/33/c7/c17675a472007/page.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>185</td>
+<td>上海体育学院附属金山亭林中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/tlzx" >https://www.jsedu.sh.cn/tlzx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>186</td>
+<td>上海市民办交大南洋中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shjdny.cn/" >http://www.shjdny.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>187</td>
+<td>上海金山区世外学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://js.shwfl.edu.cn/" >https://js.shwfl.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>188</td>
+<td>上海金山区枫叶学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://shanghai.mapleleaf.cn/" >http://shanghai.mapleleaf.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>189</td>
+<td>上海市民办永昌中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jsedu.sh.cn/yczx" >https://www.jsedu.sh.cn/yczx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>190</td>
+<td>上海市松江二中</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sjez.com/" >https://www.sjez.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>191</td>
+<td>上海市松江一中</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://school.sjyz.sjedu.cn/yz" >https://school.sjyz.sjedu.cn/yz<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>192</td>
+<td>上海外国语大学附属外国语学校松江云间中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://swyjzx.sjedu.cn/" >https://swyjzx.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>193</td>
+<td>华东师范大学第二附属中学松江分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.hsefz.cn/songjiang" >http://www.hsefz.cn/songjiang<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>194</td>
+<td>上海师范大学附属外国语中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://ssdwyfz.sjedu.cn/" >https://ssdwyfz.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>195</td>
+<td>华东师范大学松江实验高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://hsgz.sjedu.cn/" >https://hsgz.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>196</td>
+<td>上海市松江区立达中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://ldzx.sjedu.cn/" >https://ldzx.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>197</td>
+<td>上海市松江区第四中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sjsz.sjedu.cn/" >https://sjsz.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>198</td>
+<td>上海市西外外国语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.xw.sjedu.cn/" >https://www.xw.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>199</td>
+<td>上海民办包玉刚实验高中</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.ykpaoschool.cn/" >https://www.ykpaoschool.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>200</td>
+<td>上海赫贤学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hdschools.org/zh_cn/shanghai" >https://www.hdschools.org/zh_cn&#x2F;shanghai<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>201</td>
+<td>上海市松江九峰实验学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://jfzx.sjedu.cn/" >https://jfzx.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>202</td>
+<td>上海市青浦高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.qpshs.sh.cn/site/73ee013c-6b37-41a3-b0e1-71a0871ff706/index.html" >https://www.qpshs.sh.cn/site/73ee013c-6b37-41a3-b0e1-71a0871ff706/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>203</td>
+<td>上海市朱家角中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.zhuzhong.cn/infoweb" >http://www.zhuzhong.cn/infoweb<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>204</td>
+<td>复旦大学附属中学青浦分校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.qingpufdfz.cn/" >https://www.qingpufdfz.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>205</td>
+<td>上海市青浦区第一中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qpyz.qpedu.cn/" >https://qpyz.qpedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>206</td>
+<td>上海市青浦区第二中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qpez.qpedu.cn/" >https://qpez.qpedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>207</td>
+<td>上海市青浦区东湖中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://dhzx.qpedu.cn/" >https://dhzx.qpedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>208</td>
+<td>上海宋庆龄学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://scls.org.cn/" >https://scls.org.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>209</td>
+<td>上海青浦区协和双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qingpu.suis.com.cn/" >https://qingpu.suis.com.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>210</td>
+<td>上海市奉贤中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.fxzx.shfxjy.cn/" >http://www.fxzx.shfxjy.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>211</td>
+<td>上海市奉贤区致远高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.zygz.shfxjy.cn/" >http://www.zygz.shfxjy.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>212</td>
+<td>上海市奉贤区奉城高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.fczx.shfxjy.cn/" >http://www.fczx.shfxjy.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>213</td>
+<td>上海师范大学第四附属中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://sfz.shnu.edu.cn/" >http://sfz.shnu.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>214</td>
+<td>上海市奉贤区景秀高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jxgz.shfxjy.cn/" >http://www.jxgz.shfxjy.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>215</td>
+<td>上海奉贤区博华双语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.padingdun.shfxjy.cn/guestbook/form.jsp?gbs_id=11&amp;lxwm" >http://www.padingdun.shfxjy.cn/guestbook/form.jsp?gbs_id&#x3D;11&amp;lxwm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>216</td>
+<td>上海美达菲双语高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://sh.macduffie.cn/" >http://sh.macduffie.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+</tbody></table>
+<h3 id="上海市中专职校介绍"><a href="#上海市中专职校介绍" class="headerlink" title="上海市中专职校介绍"></a>上海市中专职校介绍</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>上海市中专职校介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>上海商业会计学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.scasqhwz.edu.cn/" >https://www.scasqhwz.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>上海市商贸旅游学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://smly.hpe.cn/" >https://smly.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>上海市工商外国语学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.sgsw.edu.cn/" >https://www.sgsw.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>上海市工业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shgyjs.cn/" >https://www.shgyjs.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>上海市材料工程学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shclgc.net/" >https://www.shclgc.net<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>上海市信息管理学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xxgl.xhedu.sh.cn/site/bcc4116e-42a1-4db1-a639-c43267a27516/index.html" >https://xxgl.xhedu.sh.cn/site/bcc4116e-42a1-4db1-a639-c43267a27516/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>上海信息技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shitac.net/" >https://www.shitac.net<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>上海市经济管理学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://sems.edu.sh.cn/" >http://sems.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>上海市商业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shangxiao.cn/" >https://www.shangxiao.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>上海市贸易学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shsmyxx.com/webDisplay/ESite/EnterFlash.html" >https://www.shsmyxx.com/webDisplay/ESite/EnterFlash.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>上海健康医学院附属卫生学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://sumhshs.sumhs.edu.cn/" >https://sumhshs.sumhs.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>上海科技管理学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shkg.net/" >https://www.shkg.net<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>上海市建筑工程学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shjgxx.edu.cn/" >https://www.shjgxx.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>上海市西南工程学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xngc.mhedu.sh.cn/" >https://xngc.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>上海市现代流通学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.smcs.cn/" >http://www.smcs.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>上海市大众工业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shdzgy.com/" >https://www.shdzgy.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>上海市行政管理学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.saszms.edu.cn/" >http://www.saszms.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>上海市工艺美术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.scac-cn.com/" >http://www.scac-cn.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>上海港湾学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shmtu.net/site/site1/index.html" >https://www.shmtu.net/site/site1/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>上海市第二轻工业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.eqxx.edu.cn/" >https://www.eqxx.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>上海市医药学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.spsedu.cn/" >https://www.spsedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>上海市环境学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.encollege.cn/" >https://www.encollege.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>上海市航空服务学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://shhkfw.edu.sh.cn/" >https://shhkfw.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>上海食品科技学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://spkjxx.jsedu.sh.cn/web/index.do" >https://spkjxx.jsedu.sh.cn/web/index.do<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>上海市城市科技学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://cskj.sjedu.cn/" >https://cskj.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>上海工商信息学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://gsxx.qpedu.cn/" >http://gsxx.qpedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>上海电机学院附属科技学校（上海市临港科技学校）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shlgkj.pudong-edu.sh.cn/web/index.html#/home" >http://www.shlgkj.pudong-edu.sh.cn/web/index.html#/home<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>上海市奉贤中等专业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.fxzz.sh.cn/" >https://www.fxzz.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>江南造船集团职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.jx1951.com/tqcms/cms/cms_show!cmsShowInfo.action" >http://www.jx1951.com/tqcms/cms/cms_show!cmsShowInfo.action<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>30</td>
+<td>上海市高级技工学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.simc.cn/" >https://www.simc.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>31</td>
+<td>上海新闻出版职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.jpzx.net/" >https://www.jpzx.net<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>32</td>
+<td>沪东中华造船集团高级技工学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.hdzhjx.net/tqcms/page/mainhtml/shouye/shouye.html?t=1687741241525" >https://www.hdzhjx.net/tqcms/page/mainhtml/shouye/shouye.html?t=1687741241525<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>33</td>
+<td>中华职业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://zhonghua.hpe.cn/" >https://zhonghua.hpe.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>34</td>
+<td>上海市现代职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://xdzx.chneic.sh.cn/xywz/index.html" >https://xdzx.chneic.sh.cn/xywz/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>35</td>
+<td>上海市逸夫职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.yfzx.edu.sh.cn/" >http://www.yfzx.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>36</td>
+<td>上海市曹杨职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://web-cyzx.pte.sh.cn/" >https://web-cyzx.pte.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>37</td>
+<td>上海市市北职业高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.sbzg.edu.sh.cn/" >http://www.sbzg.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>38</td>
+<td>上海市杨浦职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.ypzhixiao.edu.sh.cn/" >http://www.ypzhixiao.edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>39</td>
+<td>上海市现代音乐职业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.svscm.net/Home/Index" >https://www.svscm.net/Home/Index<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>40</td>
+<td>上海市宝山职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.shbszyxx.com/shbszyxx" >http://www.shbszyxx.com/shbszyxx<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>41</td>
+<td>上海鸿文国际职业高级中学</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.etek.cc/hongwen" >http://www.etek.cc/hongwen<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>42</td>
+<td>上海市浦东外事服务学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://www.vsdh.pudong-edu.sh.cn/" >http://www.vsdh.pudong-edu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>43</td>
+<td>上海第二工业大学附属浦东振华外经职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://http/vszhh.fanya.chaoxing.com/portal" >http://http://vszhh.fanya.chaoxing.com/portal<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>44</td>
+<td>上海市群星职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://http/qxzx.fanya.chaoxing.com/portal" >http://http://qxzx.fanya.chaoxing.com/portal<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>45</td>
+<td>上海海事大学附属职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shmtu.edu.cn/imagenews/pu-dong-xin-qu-jiao-yu-ju-yu-shang-hai-hai-shi-da-xue-he-zuo-gong-jian-shang-hai-hai-shi" >https://www.shmtu.edu.cn/imagenews/pu-dong-xin-qu-jiao-yu-ju-yu-shang-hai-hai-shi-da-xue-he-zuo-gong-jian-shang-hai-hai-shi<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>46</td>
+<td>上海市新陆职业技术学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.xlzx.pudong-edu.sh.cn/site/1d037a8e-8abd-4e48-b7b5-f55618dbde81/index.html" >https://www.xlzx.pudong-edu.sh.cn/site/1d037a8e-8abd-4e48-b7b5-f55618dbde81/index.html<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>47</td>
+<td>上海市青浦区职业学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://qpzx.qpedu.cn/" >https://qpzx.qpedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>48</td>
+<td>上海市工程技术管理学校</td>
+<td><a class="link"   target="_blank" rel="noopener" href="http://sfdot.ouchn.edu.cn/ChongMingXian/html/2017/04/17/3b8385ca-31e1-4581-92c1-d8ee68daf029.htm" >http://sfdot.ouchn.edu.cn/ChongMingXian/html/2017/04/17/3b8385ca-31e1-4581-92c1-d8ee68daf029.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>49</td>
+<td>上海电子信息职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.stiei.edu.cn/" >https://www.stiei.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>50</td>
+<td>上海震旦职业学院有限公司（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.aurora-vs.cn/" >https://www.aurora-vs.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>51</td>
+<td>上海南湖职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shnhvtc.edu.cn/zz.htm" >https://www.shnhvtc.edu.cn/zz.htm<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>52</td>
+<td>上海交通职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.scp.edu.cn/jiaotong/page/index.asp" >https://www.scp.edu.cn/jiaotong/page/index.asp<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>53</td>
+<td>上海农林职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shafc.edu.cn/" >https://www.shafc.edu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>54</td>
+<td>上海建设管理职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://www.shjgzy.cn/webnews/home/index" >https://www.shjgzy.cn/webnews/home/index<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>55</td>
+<td>上海科创职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://kczy.sjedu.cn/" >https://kczy.sjedu.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+<tr>
+<td>56</td>
+<td>上海闵行职业技术学院（中职部）</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://vtc.mhedu.sh.cn/" >https://vtc.mhedu.sh.cn<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></td>
+</tr>
+</tbody></table>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 上海市招考机构与初高院校官网合集</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2024-07-09 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-07-09 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2024/07/09/生活实用与指南/上海市招考机构与初高院校官网合集/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E5%88%9D%E9%AB%98%E9%99%A2%E6%A0%A1/">#初高院校</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/12/26/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%91%8A%E5%88%AB%E8%AE%A4%E8%AF%81%EF%BC%81%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B11%E5%88%86%E9%92%9F%E6%B3%A8%E5%86%8CChatGPT5.2%E6%95%99%E5%B8%88%E7%89%88%E4%B8%94%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96%E4%BD%BF%E7%94%A8/" title="告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/12/2025-12-26_22-19-42.png" alt="告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用" class="!max-w-none">
+  <span class="title">告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用</span>
+</a><a class="recommended-article-item" href="/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/" title="项目管理金典宝库：PMP考证一站式攻略" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/06/PMBOK14.png" alt="项目管理金典宝库：PMP考证一站式攻略" class="!max-w-none">
+  <span class="title">项目管理金典宝库：PMP考证一站式攻略</span>
+</a><a class="recommended-article-item" href="/2025/09/26/%E7%94%9F%E6%B4%BB%E5%AE%9E%E7%94%A8%E4%B8%8E%E6%8C%87%E5%8D%97/%E5%85%A8%E5%9B%BD%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B7%AF%E5%86%B5%C2%B7%E4%BA%91%E7%9B%91%E6%8E%A7%E5%AE%9E%E6%97%B6%E6%9F%A5%E7%9C%8B/" title="全国高速公路路况·云监控实时查看" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/09/gsgllk.jpg" alt="全国高速公路路况·云监控实时查看" class="!max-w-none">
+  <span class="title">全国高速公路路况·云监控实时查看</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/12/26/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%91%8A%E5%88%AB%E8%AE%A4%E8%AF%81%EF%BC%81%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B11%E5%88%86%E9%92%9F%E6%B3%A8%E5%86%8CChatGPT5.2%E6%95%99%E5%B8%88%E7%89%88%E4%B8%94%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96%E4%BD%BF%E7%94%A8/" title="告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/12/2025-12-26_22-19-42.png" alt="告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用" class="!max-w-none">
+  <span class="title">告别认证！临时邮箱1分钟注册ChatGPT5.2教师版且免费白嫖使用</span>
+</a><a class="recommended-article-item" href="/2025/06/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.2%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E4%B8%8E%E8%AE%A4%E8%AF%81/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%91%E5%85%B8%E5%AE%9D%E5%BA%93%EF%BC%9APMP%E8%80%83%E8%AF%81%E4%B8%80%E7%AB%99%E5%BC%8F%E6%94%BB%E7%95%A5/" title="项目管理金典宝库：PMP考证一站式攻略" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/06/PMBOK14.png" alt="项目管理金典宝库：PMP考证一站式攻略" class="!max-w-none">
+  <span class="title">项目管理金典宝库：PMP考证一站式攻略</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2024/07/12/%E5%AE%9E%E7%94%A8%E5%A2%9E%E5%BC%BA/%E6%9C%80%E7%AE%80%E5%8D%95%E7%A0%B4%E8%A7%A3Windows%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%9A%84%E6%96%B9%E6%B3%95/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">最简单破解Windows登录密码的方法</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2024/07/04/%E7%94%9F%E4%BA%A7%E5%8A%9B/%E8%A7%A3%E5%86%B3%E8%BF%90%E8%A1%8CWindows%E8%BD%AF%E4%BB%B6%E4%B9%B1%E7%A0%81%E7%9A%84%E6%96%B9%E6%B3%95/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">告别乱码！Windows软件乱码解决指南</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">上海市招考机构与初高院校官网合集</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%90%84%E5%8C%BA%E6%8B%9B%E8%80%83%E6%9C%BA%E6%9E%84"><span class="nav-text">上海市各区招考机构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E5%B8%82%E6%99%AE%E9%80%9A%E9%AB%98%E6%A0%A1%E4%BB%8B%E7%BB%8D"><span class="nav-text">上海市普通高校介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E5%B8%82%E6%99%AE%E9%80%9A%E9%AB%98%E4%B8%AD%E4%BB%8B%E7%BB%8D"><span class="nav-text">上海市普通高中介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E5%B8%82%E4%B8%AD%E4%B8%93%E8%81%8C%E6%A0%A1%E4%BB%8B%E7%BB%8D"><span class="nav-text">上海市中专职校介绍</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

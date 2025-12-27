@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2025/04/08/ai人工智能/常见的100个ai人工智能术语解释/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的100个AI人工智能术语解释">
+<meta property="og:url" content="https://chinapmcc.com/2025/04/08/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%9A%84100%E4%B8%AAAI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-04-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-07T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="术语解释">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            常见的100个AI人工智能术语解释 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">常见的100个AI人工智能术语解释</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-04-08</span>
+        <span class="mobile">2025-04-08</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-04-08</span>
+            <span class="mobile">2025-04-08</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A4%96AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">🤖AI人工智能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A4%96AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%F0%9F%8E%93AI%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">🎓AI入门学习</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A4%96AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%F0%9F%8E%93AI%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/AI%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">AI基础知识</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A/">术语解释</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/AI/">AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>7.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>26 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h2 id="1-Adversarial-Machine-Learning"><a href="#1-Adversarial-Machine-Learning" class="headerlink" title="1. Adversarial Machine Learning"></a>1. Adversarial Machine Learning</h2><p><strong>对抗性机器学习</strong></p>
+<p>对抗性机器学习是一种机器学习类型，对手试图通过提供示例(称为负面示例)来误导学习系统，这些示例精心制作，以便被目标学习系统错误分类。</p>
+<h2 id="2-Al-Analytics"><a href="#2-Al-Analytics" class="headerlink" title="2. Al Analytics"></a>2. Al Analytics</h2><p><strong>人工智能分析</strong></p>
+<p>人工智能分析是一种使用机器学习来处理大量数据并识别模式、趋势和关系的分析它不需要人工输入，企业可以利用结果做出数据驱动的决策，并保持竞争力。</p>
+<h2 id="3-Al-Assistant"><a href="#3-Al-Assistant" class="headerlink" title="3. Al Assistant"></a>3. Al Assistant</h2><p><strong>人工智能助手</strong></p>
+<p>人工智能助手，通常是聊天机器人或虚拟助手，使用人工智能来理解和响应人类的请求。它可以安排会议、回答问题和自动执行重复性任务，以节省时间和提高效率，</p>
+<h2 id="4-Al-Bias"><a href="#4-Al-Bias" class="headerlink" title="4. Al Bias"></a>4. Al Bias</h2><p><strong>人工智能偏见</strong></p>
+<p>人工智能偏见是指机器学习系统可能会因为有偏见的训练数据而产生偏见，这导致它们产生的输出延续并强化了对特定社群的刻板印象。</p>
+<h2 id="5-Al-Enhanced-Cybersecurity"><a href="#5-Al-Enhanced-Cybersecurity" class="headerlink" title="5. Al-Enhanced Cybersecurity"></a>5. Al-Enhanced Cybersecurity</h2><p><strong>增高的网络安全</strong></p>
+<p>人工智能增强网络安全是利用人工智能保护计算机系统和网络免受网络威胁。人工智能算法可以快速分析大量数据，以检测潜在攻击的模式。在电子邮件安全方面，人工智能增强的网络安全可以通过分析传入电子邮件的内容和行为来识别网络钓鱼企图，帮助防止用户成为骗局的受害者。</p>
+<h2 id="6-Al-safety"><a href="#6-Al-safety" class="headerlink" title="6. Al safety"></a>6. Al safety</h2><p><strong>人工智能安全</strong></p>
+<p>人工智能安全是一个多学科领域，专注于评估人工智能的长期影响。它解决了人们对超级人工智能突然发展可能对人类构成威胁的担忧。目标是制定指导方针和保障措施，以确保人工智能的负责任和安全发展。</p>
+<h2 id="7-Algrithm"><a href="#7-Algrithm" class="headerlink" title="7. Algrithm"></a>7. Algrithm</h2><p><strong>算法</strong></p>
+<p>算法是表示变量之间关系的公式，是程序员用于计算和计算机编程的一组指令。这些指示通常以必须遵循的步骤列表的形式出现，以达到预期的结果。在机器学习中模型使用算法根据它分析的数据做出预测。社交媒体网络的算法会利用用户在平台上的先前行为，向他们展示预测他们最有可能喜欢的内容。</p>
+<h2 id="8-Anthropomorphize"><a href="#8-Anthropomorphize" class="headerlink" title="8. Anthropomorphize"></a>8. Anthropomorphize</h2><p><strong>拟人化</strong></p>
+<p>拟人化是指人类根据人工智能系统复制人类能力的方式来赋子它们某些品质。这是人们认为人工智能有感知能力的原因之一但专家和科学家表示，任何对人类品质的假设都是因为模型按照程序设定的那样去做。</p>
+<h2 id="9-Artificial-GeneralIntelligence-AGl"><a href="#9-Artificial-GeneralIntelligence-AGl" class="headerlink" title="9. Artificial GeneralIntelligence(AGl)"></a>9. Artificial GeneralIntelligence(AGl)</h2><p><strong>通用人工智能</strong></p>
+<p>AGI 是人工智能系统执行人类可以执行的所有过程的能力。换句话说，AGI是指人工智能系统可以执行人类可以执行的任何认知任务，包括感知、语音识别、规划、语言之间的翻译以及对时间、空间和原因等抽象概念的推理。</p>
+<h2 id="10-Artificial-Intelligence"><a href="#10-Artificial-Intelligence" class="headerlink" title="10. Artificial Intelligence"></a>10. Artificial Intelligence</h2><p><strong>(AI)人工智能</strong></p>
+<p>人工智能是计算机科学的一个领域，是一种使用机器学习和算法来模拟人类智能的系统。</p>
+<h2 id="11-Artificial-Neural-Network"><a href="#11-Artificial-Neural-Network" class="headerlink" title="11. Artificial Neural Network"></a>11. Artificial Neural Network</h2><p><strong>人工神经网络</strong></p>
+<p>人工神经网络是一种以人脑为灵感的机器学习算法。它们的用途包括计算机视觉、语音识别、自然语言处理和音频分类。人工神经网络的组成包括许多简单的处理元素，这些处理元素通过链接连接在一起，可以类似于生物神经网络中的轴突。</p>
+<h2 id="12-Artificial-Superintelligence"><a href="#12-Artificial-Superintelligence" class="headerlink" title="12. Artificial Superintelligence"></a>12. Artificial Superintelligence</h2><p><strong>(ASI)人工超级智能</strong></p>
+<p>ASI是人工智能的第三个也是最先进的阶段，系统可以解决复杂的问题并做出超出人类智能能力的决策。这是一个争论的热门话题，因为它的潜力和风险纯粹是推测性的。也被称为超级人工智能，强人工智能和超级智能。</p>
+<h2 id="13-Association-Rule-Learning"><a href="#13-Association-Rule-Learning" class="headerlink" title="13. Association Rule Learning"></a>13. Association Rule Learning</h2><p><strong>关联规则学习</strong></p>
+<p>关联规则学习是一种无监督机器学习技术，旨在发现大型数据集中变量之间的有趣关系。在市场营销中，这种学习技巧可以发现隐藏的模式，为您的业务策略和客户细分提供见解。</p>
+<h2 id="14-Automated-MachineLearning-AutoML"><a href="#14-Automated-MachineLearning-AutoML" class="headerlink" title="14. Automated MachineLearning(AutoML)"></a>14. Automated MachineLearning(AutoML)</h2><p><strong>自动化机器学习</strong></p>
+<p>自动化机器学习涉及使机器学习应用更容易的工具和过程。AutoML 可以自动执行选择最佳机器学习模型并调整其设置以获得最佳性能等任务。例如，在预测股票价格时，AutoML 可以自动选择最合适的模型，并根据历史数据对其参数进行微调，从而简化金融分析师的过程。</p>
+<h2 id="15-Augmented-Intelligence"><a href="#15-Augmented-Intelligence" class="headerlink" title="15. Augmented Intelligence"></a>15. Augmented Intelligence</h2><p><strong>增强智能</strong></p>
+<p>增强智能是利用人工智能来增强人类的智能并为决策提供信息，而不是人工智能独立执行任务和处理数据来取代人类。</p>
+<h2 id="16-Auto-complete"><a href="#16-Auto-complete" class="headerlink" title="16. Auto-complete"></a>16. Auto-complete</h2><p><strong>自动补全</strong></p>
+<p>自动补全分析输入、文本或语音，并根据从分析历史数据、个人语言模式和上下文中学习到的模式，建议可能的单词或短语</p>
+<h2 id="17-Auto-Classification"><a href="#17-Auto-Classification" class="headerlink" title="17. Auto Classification"></a>17. Auto Classification</h2><p><strong>自动分类</strong></p>
+<p>自动分类是基于唯一的类别对数据进行分类和标记，使组织、管理和检索信息变得更加容易。</p>
+<h2 id="18-Automatic-speechRecognition"><a href="#18-Automatic-speechRecognition" class="headerlink" title="18. Automatic speechRecognition"></a>18. Automatic speechRecognition</h2><p><strong>自动语音识别</strong></p>
+<p>自动语音识别也被称为语音识别，是一种使应用程序能够识别口语并将其转换为书面格式的功能。</p>
+<h2 id="19-Automated-Content-Creation"><a href="#19-Automated-Content-Creation" class="headerlink" title="19. Automated Content Creation"></a>19. Automated Content Creation</h2><p><strong>自动化内容创建</strong></p>
+<p>使用人工智能驱动的自然语言生成(NLG)算法为营销目的生成书面内容。这些算法可以像人类一样流畅地创建文本，从而提高效率。</p>
+<h2 id="20-Behavioral-Analytics"><a href="#20-Behavioral-Analytics" class="headerlink" title="20. Behavioral Analytics"></a>20. Behavioral Analytics</h2><p><strong>行为分析</strong></p>
+<p>对客户行为数据的分析，如浏览模式、购买历史和交互。人工智能工具以更高的准确性和预测能力增强了对客户行为的理解。</p>
+<h2 id="21-Bayesian-Network"><a href="#21-Bayesian-Network" class="headerlink" title="21. Bayesian Network"></a>21. Bayesian Network</h2><p><strong>贝叶斯网络</strong></p>
+<p>贝叶斯网络是一种概率模型，用于估计事件发生的概率。人工智能可以帮助创建贝叶斯网络，因为它可以以非常快的速度评估数据。</p>
+<h2 id="22-Black-Box-AI"><a href="#22-Black-Box-AI" class="headerlink" title="22. Black Box AI"></a>22. Black Box AI</h2><p><strong>黑盒人工智能</strong></p>
+<p>黑盒人工智能是一种不显示其如何操作和处理用户输入的人工智能系统。用户提供黑盒 Al输入后，它将产生一个输出。但是用户不能查看其代码并分析其逻辑以产生这样的结果。</p>
+<h2 id="23-Brute-Force-search"><a href="#23-Brute-Force-search" class="headerlink" title="23. Brute Force search"></a>23. Brute Force search</h2><p><strong>暴力搜索</strong></p>
+<p>暴力搜索，又称穷举搜索或并行搜索，是一种解决问题的策略，其中算法试图通过考虑每个可能的候选解决方案来找到解决方案。</p>
+<h2 id="24-Chatbot"><a href="#24-Chatbot" class="headerlink" title="24. Chatbot"></a>24. Chatbot</h2><p><strong>聊天机器人</strong></p>
+<p>聊天机器人通过回答常见问题或将人们路由到正确的资源以解决他们的需求来模拟人类在线对话。</p>
+<h2 id="25-Cluster"><a href="#25-Cluster" class="headerlink" title="25. Cluster"></a>25. Cluster</h2><p><strong>聚类</strong></p>
+<p>Cluster指的是具有共同特征的一群人或事物，又指一种人工智能技术。人工智能对数据进行梳理，以发现人类可能不容易看到的模式和联系。聚类可用于识别目标细分或受众，通过共性创造营销机会。例如:零售商可以使用聚类来根据购物偏好对使用其网站的客户进行分组。</p>
+<h2 id="26-Cognitive-computing"><a href="#26-Cognitive-computing" class="headerlink" title="26. Cognitive computing"></a>26. Cognitive computing</h2><p><strong>认知计算</strong></p>
+<p>认知计算是人工智能的一个分支，研究试图模仿人类思维和推理方式的系统，以便他们能够理解数据，自然地说话，并从遭遇中学习。其目标是制造出能够学习和决定做什么的智能机器，其方式类似于人类的行为方式。</p>
+<h2 id="27-Cognitive-science"><a href="#27-Cognitive-science" class="headerlink" title="27. Cognitive science"></a>27. Cognitive science</h2><p><strong>认知科学</strong></p>
+<p>认知科学研究心灵及其过程。人工智能是认知科学的一种应用，它将思维系统(如神经网络)应用于机器模型。</p>
+<h2 id="28-Composite-Al"><a href="#28-Composite-Al" class="headerlink" title="28. Composite Al"></a>28. Composite Al</h2><p><strong>复合人工智能</strong></p>
+<p>复合人工智能结合了不同的人工智能技术和技巧，并使它们协同工作来解决问题和处理复杂的任务。</p>
+<h2 id="29-Computer-Vision"><a href="#29-Computer-Vision" class="headerlink" title="29. Computer Vision"></a>29. Computer Vision</h2><p><strong>计算机视觉</strong></p>
+<p>计算机视觉是分析、解释和理解视觉信息(即图像和视频)的深度学习模型。反向图像搜索(Reverseimage search)是计算机视觉的一个例子。</p>
+<h2 id="30-Conversational-Al"><a href="#30-Conversational-Al" class="headerlink" title="30. Conversational Al"></a>30. Conversational Al</h2><p><strong>会话式人工智能</strong></p>
+<p>会话式人工智能是一种模仿人类会话风格的技术，可以进行逻辑和准确的对话。它使用自然语言处理(NLP)和自然语言生成(NLG)来收集上下文并以相关的方式响应它通常用于聊天机器人和语音助手，改善客户互动和服务。</p>
+<h2 id="31-Corpus"><a href="#31-Corpus" class="headerlink" title="31. Corpus"></a>31. Corpus</h2><p><strong>语料库</strong></p>
+<p>语料库是作为信息、示例或实例存储库的大量文档集合，在人工智能中用于训练模型的文本主体(文档集合)。语料库包含文本，它并不一定局限于数据。</p>
+<h2 id="32-Customer-Sentiment-Analysis"><a href="#32-Customer-Sentiment-Analysis" class="headerlink" title="32. Customer Sentiment Analysis"></a>32. Customer Sentiment <strong>Analysis</strong></h2><p><strong>客户情绪分析</strong></p>
+<p>涉及使用人工智能，特别是 NLP，来分析客户反馈井确定话语背后的情感基调。它为公众舆论和客户满意度提供了有价值的见解，塑造了沟通和产品策略。</p>
+<h2 id="33-Data-Mining"><a href="#33-Data-Mining" class="headerlink" title="33. Data Mining"></a>33. Data Mining</h2><p><strong>数据挖掘</strong></p>
+<p>数据挖掘是发现模式、关系和趋势，从而从大型数据集中获得见解。它通过机器学习算法加速，可以以更快的速度完成这个过程。推荐算法是数据挖掘，通过分析大量的用户数据来给出推荐。</p>
+<h2 id="34-Dataset"><a href="#34-Dataset" class="headerlink" title="34. Dataset"></a>34. Dataset</h2><p><strong>数据集</strong></p>
+<p>数据集是结构化的信息集合，就像包含有组织和相关数据点的数字文件。可以把它想象成一组排列良好的事实或数字，每一条信息都被标记或标记，以便于计算机或用户更容易理解和有效处理这些数据。</p>
+<h2 id="35-Deep-Learning"><a href="#35-Deep-Learning" class="headerlink" title="35. Deep Learning"></a>35. Deep Learning</h2><p><strong>深度学习</strong></p>
+<p>深度学习是一类受大脑结构和功能启发的机器学习算法，创造人工神经网络，模仿真实的神经元如何相互交流。这些算法能够从经验中学习，并已应用于计算机视觉自然语言处理和语音识别等领域。</p>
+<h2 id="36-Deep-Neural-Network"><a href="#36-Deep-Neural-Network" class="headerlink" title="36. Deep Neural Network"></a>36. Deep Neural Network</h2><p><strong>深度神经网络</strong></p>
+<p>深度神经网络是解决复杂问题的最佳模型之一。深度神经网络不仅局限于计算机视觉应用，还可以用于 NLP、时间序列预测音频分类和预测。</p>
+<h2 id="37-Edge-Computing-in-Al"><a href="#37-Edge-Computing-in-Al" class="headerlink" title="37. Edge Computing in Al"></a>37. Edge Computing in Al</h2><p><strong>人工智能中的边缘计算</strong></p>
+<p>人工智能中的边缘计算意味着在本地设备上进行人工智能计算，而不是依赖远程云服务。边缘计算不是将数据发送到很远的地方进行处理，而是使人工智能更接近数据产生的地方。例如，使用边缘计算的智能恒湿器可以在家中分析温度数据，无需连接到中央服务器即可进行快速调整。这加快了响应时间，提高了从智能家居到工业自动化等各种应用的效率。</p>
+<h2 id="38-Emotional"><a href="#38-Emotional" class="headerlink" title="38. Emotional"></a>38. Emotional</h2><p><strong>Al情惑</strong></p>
+<p>AI情感 AI 由识别和解释人类情感的系统组成。</p>
+<h2 id="39-Entity-Annotation"><a href="#39-Entity-Annotation" class="headerlink" title="39. Entity Annotation"></a>39. Entity Annotation</h2><p><strong>实体注释</strong></p>
+<p>实体注释是用特定信息标记非结构化句子的过程，使机器能够理解和解释内容。这涉及到标记文档中的人员、组织和位置等实体。例如，在一篇新闻文章中，实体注释可以识别个人、公司和地点的名称，为后续的机器分析提供结构化的理解。</p>
+<h2 id="40-Entity-Extraction"><a href="#40-Entity-Extraction" class="headerlink" title="40. Entity Extraction"></a>40. Entity Extraction</h2><p><strong>实体提取</strong></p>
+<p>实体提取是一个更广泛的术语，包含了用于机器理解的数据结构。这可以通过人工标注或使用机器学习模型来实现。目标是识别和组织数据中的实体，使机器更容易获得有意义的见解。在客户反馈数据集中实体提取可能涉及对提及的产品、情感和客户名称进行分类。</p>
+<h2 id="41-Ensemble-Learning"><a href="#41-Ensemble-Learning" class="headerlink" title="41. Ensemble Learning"></a>41. Ensemble Learning</h2><p><strong>整体学习</strong></p>
+<p>集成学习是指计算机组队并使用多个模型来更好地完成任务。这就像一群拥有不同优势的朋友一起做一个项目。例如，在预测天气时，一个模型可能擅长温度，另一个擅长湿度，将它们结合起来就能给出更准确的预测。</p>
+<h2 id="42-Exascale-Computing"><a href="#42-Exascale-Computing" class="headerlink" title="42. Exascale Computing"></a>42. Exascale Computing</h2><p><strong>百亿亿次计算机</strong></p>
+<p>百亿亿次计算机指的是能够每秒处理惊人的百亿亿次数据的超级计算机。这种巨大的计算能力允许处理复杂的任务和大型数据集，使其在各个领域都很有价值。在气候研究中，百亿亿次计算机可以模拟和分析复杂的气候模型，帮助科学家更全面地了解气候变化的影响。</p>
+<h2 id="43-Explainable-Al"><a href="#43-Explainable-Al" class="headerlink" title="43. Explainable Al"></a>43. Explainable Al</h2><p><strong>可解释的人工智能</strong></p>
+<p>可解释的人工智能(XAI)可以帮助人类理解它是如何工作的，以及为什么它会做出决定或预测。</p>
+<h2 id="44-Facial-Recognition"><a href="#44-Facial-Recognition" class="headerlink" title="44. Facial Recognition"></a>44. Facial Recognition</h2><p><strong>面部识别</strong></p>
+<p>面部识别是一种生物识别技术，它利用一个人的面部特征的独特配置来准确识别他们。</p>
+<h2 id="45-Feature-Engineering"><a href="#45-Feature-Engineering" class="headerlink" title="45. Feature Engineering"></a>45. Feature Engineering</h2><p><strong>特征工程</strong></p>
+<p>特征工程是从原始数据中选择特定的特征，以便系统在训练时知道要学习什么。</p>
+<h2 id="46-Feature-Extraction"><a href="#46-Feature-Extraction" class="headerlink" title="46. Feature Extraction"></a>46. Feature Extraction</h2><p><strong>特征提取</strong></p>
+<p>特征提取是指机器将输入分解为特定的特征，并使用这些特征对其进行分类和理解在图像识别中，图像的特定元素可以定义为特征，并且该特征用于预测整个图像是什么的可能性。</p>
+<h2 id="47-Forward-Chaining"><a href="#47-Forward-Chaining" class="headerlink" title="47. Forward Chaining"></a>47. Forward Chaining</h2><p><strong>正向链接</strong></p>
+<p>正向链接是一种机器通过解决问题和分析各种假设来推断潜在解决方案的方法。它包括推理和决策的连续过程。</p>
+<h2 id="48-Generative-Al"><a href="#48-Generative-Al" class="headerlink" title="48. Generative Al"></a>48. Generative Al</h2><p><strong>生成式人工智</strong></p>
+<p>能利用机器学习算法生成新颖内容的人工智能技术，包括图像、文本或声音。通过利用深度学习网络的力量，人工智能系统可以创建高质量和逼真的输出。</p>
+<h2 id="49-Generative-AdversarialNetwork-GAN"><a href="#49-Generative-AdversarialNetwork-GAN" class="headerlink" title="49. Generative AdversarialNetwork(GAN)"></a>49. Generative AdversarialNetwork(GAN)</h2><p><strong>生成对抗网络</strong></p>
+<p>GAN 是一种机器学习技术，由两个相互竞争的神经网络(生成器和鉴别器)组成。生成器根据输入创建输出，而鉴别器识别输出是否真实。</p>
+<h2 id="50-GPT"><a href="#50-GPT" class="headerlink" title="50. GPT"></a>50. GPT</h2><p><strong>生成预训练转换器</strong></p>
+<p>生成预训练转换器(GPT)是一种大语言模型，它经过大量数据的训练，可以理解自然语言输入来回答问题，进行类似人类的对话，并生成内容。GPT于2018年由OpenAl 首次推出，GPT-4 是 GPT 的最新和最先进的迭代。</p>
+<h2 id="51-Hallucination"><a href="#51-Hallucination" class="headerlink" title="51. Hallucination"></a>51. Hallucination</h2><p><strong>幻觉</strong></p>
+<p>人工智能幻觉是指生成式人工智能分析提示并生成错误的虚假信息。</p>
+<h2 id="52-Heuristic-Methods"><a href="#52-Heuristic-Methods" class="headerlink" title="52. Heuristic Methods"></a>52. Heuristic Methods</h2><p><strong>启发式方法</strong></p>
+<p>启发式方法就像使用快速和聪明的技巧来快速解决问题，即使它不是完美的解决方案。这就像是走了一条捷径来快速完成任务。例如，使用 GPS 并不总能找到绝对最短的路线，但能根据交通情况帮助你更快地到达目的地。</p>
+<h2 id="53-Human-in-the-loop-Al"><a href="#53-Human-in-the-loop-Al" class="headerlink" title="53. Human-in-the-loop Al"></a>53. Human-in-the-loop Al</h2><p><strong>人工循环人工智能</strong></p>
+<p>人工循环 AI将机器智能与人类专业知识相结合，以提高人工智能系统的可靠性和性能。这就像有一个人类合作者和人工智能算法一起工作。例如，在语言翻译中，人工循环 Al 涉及人工翻译人员与机器翻译工具合作，以改进和提高翻译的准确性，确保最终用户获得更好的结果。</p>
+<h2 id="54-Hyperparameter"><a href="#54-Hyperparameter" class="headerlink" title="54. Hyperparameter"></a>54. Hyperparameter</h2><p><strong>超参数</strong></p>
+<p>超参数，虽然有时与参数互换使用，但有细微的区别。它们是在模型外部手动设置的值，影响机器学习模型的学习方式。例如，在神经网络中，超参数可能包括学习率或隐藏层的数量，影响模型的训练和性能。</p>
+<h2 id="55-lmage-Recognition"><a href="#55-lmage-Recognition" class="headerlink" title="55. lmage Recognition"></a>55. lmage Recognition</h2><p><strong>图像识别</strong></p>
+<p>图像识别是一种允许计算机查看照片、物体或场景并识别它们所看到的内容的技术。最简单的图像识别例子是谷歌搜索如果你搜索一张狗的照片，谷歌会显示其他狗的照片。</p>
+<h2 id="56-Knowledge-Base"><a href="#56-Knowledge-Base" class="headerlink" title="56. Knowledge Base"></a>56. Knowledge Base</h2><p><strong>知识库</strong></p>
+<p>知识库就像一个充满信息的数字图书馆可以帮助计算机做出明智的选择。它是计算机存储事实和规则的地方。在客户支持中，它就像一个有用的指南和常见问题的答案的集合。</p>
+<h2 id="57-Knowledge-Graphs"><a href="#57-Knowledge-Graphs" class="headerlink" title="57. Knowledge Graphs"></a>57. Knowledge Graphs</h2><p><strong>知识图谱</strong></p>
+<p>人工智能支持的语义搜索工具，用于映射实体之间的关系。在市场营销中，它们被用来理解客户关系和优化目标，提高覆盖面和相关性。</p>
+<h2 id="58-Large-LanguageModel-LLM"><a href="#58-Large-LanguageModel-LLM" class="headerlink" title="58. Large LanguageModel(LLM)"></a>58. Large LanguageModel(LLM)</h2><p><strong>大语言模型</strong></p>
+<p>大语言模型是人工智能在大量文本数据上训练出来的。它可以理解、生成和预测新的内容。典型的大语言模型如 GPT。</p>
+<h2 id="59-Linguistic-Annotation"><a href="#59-Linguistic-Annotation" class="headerlink" title="59. Linguistic Annotation"></a>59. Linguistic Annotation</h2><p><strong>语言注释</strong></p>
+<p>语言注释包括用主题信息标记句子数据集并为分析或评估准备数据。这个过程通常用于情感分析和自然语言处理等任务。对于情感分析，语言注释可能涉及将句子标记为积极、消极或中性，以训练机器学习模型来识别情感。</p>
+<h2 id="60-Machine-Learning"><a href="#60-Machine-Learning" class="headerlink" title="60. Machine Learning"></a>60. Machine Learning</h2><p><strong>机器学习</strong></p>
+<p>机器学习是一种人工智能技术，机器使用数据和算法来做出决策和预测并完成任务。</p>
+<h2 id="61-Model"><a href="#61-Model" class="headerlink" title="61. Model"></a>61. Model</h2><p><strong>模型</strong></p>
+<p>在机器学习中，模型是描述某些数据的函数。</p>
+<h2 id="62-Narrow-Al"><a href="#62-Narrow-Al" class="headerlink" title="62. Narrow Al"></a>62. Narrow Al</h2><p><strong>狭义 AI</strong></p>
+<p>狭义 AI是一种设计用于执行特定任务或一组任务的系统，但不能适应其他任何任务，今天大多数系统都是狭义的人工智能。也被称为弱人工智能或狭义智能。</p>
+<h2 id="63-Natural-Language-Generation-NLG"><a href="#63-Natural-Language-Generation-NLG" class="headerlink" title="63. Natural Language Generation(NLG)"></a>63. Natural Language Generation(NLG)</h2><p><strong>自然语言生成</strong></p>
+<p>自然语言生成是指模型处理语言并使用其理解准确地完成任务，无论是回答问题还是为文章创建大纲。</p>
+<h2 id="64-Natural-Language-Query-NLQ"><a href="#64-Natural-Language-Query-NLQ" class="headerlink" title="64. Natural Language Query(NLQ)"></a>64. Natural Language Query(NLQ)</h2><p><strong>自然语言查询</strong></p>
+<p>自然语言查询是一种书面输入，它看起来就像大声说出来一样，这意味着没有特殊字符或语法。</p>
+<h2 id="65-Natural-Language-Processing-NLP"><a href="#65-Natural-Language-Processing-NLP" class="headerlink" title="65. Natural Language Processing(NLP)"></a>65. Natural Language Processing(NLP)</h2><p><strong>自然语言处理</strong></p>
+<p>自然语言处理是人工智能和语言学领域的分支学科。此领域探讨如何处理及运用自然语言。自然语言处理由认知、理解、生成等部分组成。自然语言认知和理解是让电脑把输入的语言变成有意思的符号和关系，然后根据目的再处理。自然语言生成系统则是把计算机数据转化为自然语言。</p>
+<h2 id="66-Neural-Networks"><a href="#66-Neural-Networks" class="headerlink" title="66. Neural Networks"></a>66. Neural Networks</h2><p><strong>神经网络</strong></p>
+<p>神经网络是机器学习算法的一个分支，其灵感来自于大脑中的神经元如何连接形成一个网络。它们的用途包括计算机视觉、语音识别、自然语言处理等。</p>
+<h2 id="67-Neuromorphic-Computing"><a href="#67-Neuromorphic-Computing" class="headerlink" title="67. Neuromorphic Computing"></a>67. Neuromorphic Computing</h2><p><strong>神经形态计算</strong></p>
+<p>神经形态计算是指受人脑结构和功能的启发设计计算机。这些系统旨在以一种模仿大脑自然能力的方式处理信息。在机器人领域，神经形态计算可能使机器更有效地学习和适应新任务，就像人类通过经验不断提高技能一样。</p>
+<h2 id="68-Object-Detection"><a href="#68-Object-Detection" class="headerlink" title="68. Object Detection"></a>68. Object Detection</h2><p><strong>目标检测</strong></p>
+<p>这是一项识别图像中的物体的任务。例如它可以用于分析照片和视频，将它们分类到预定义的类别中。目标检测的目的是在单个图像或包含多个图像的场景中自动识别感兴趣的物体(如人脸)，然后在图像中定位这些物体。</p>
+<h2 id="69-Object-Recognition"><a href="#69-Object-Recognition" class="headerlink" title="69. Object Recognition"></a>69. Object Recognition</h2><p><strong>目标识别</strong></p>
+<p>简单地说，它就是对图像、视频或其他媒体中的物体进行检测和分类。例如，如果你把手机的摄像头对准一朵花，然后点击“拍照”，设备就会识别出这是一朵花，并将其分类。</p>
+<h2 id="70-Overfitting"><a href="#70-Overfitting" class="headerlink" title="70. Overfitting"></a>70. Overfitting</h2><p><strong>过度拟合</strong></p>
+<p>过拟合是模型失效的常见原因，当模型过于复杂时，通常由于模型参数的过度调整而发生过拟合。它可以分为欠拟合(数据模型无法准确地捕捉输入和输出变量之间的关系)和过度拟合(过于紧密或精确地匹配特定数据集，以致于无法良好地拟合其他数据或预测未来的观察结果)。</p>
+<h2 id="71-Pattern-Recognition"><a href="#71-Pattern-Recognition" class="headerlink" title="71. Pattern Recognition"></a>71. Pattern Recognition</h2><p><strong>模式识别</strong></p>
+<p>模式识别是一种机器识别数据模式的能力，基于它在训练期间开发的算法。</p>
+<h2 id="72-Predictive-Analytics"><a href="#72-Predictive-Analytics" class="headerlink" title="72. Predictive Analytics"></a>72. Predictive Analytics</h2><p><strong>预测分析</strong></p>
+<p>预测分析是一种在机器学习和数据挖掘中用于预测结果的技术。企业用它来预测客户行为、特定产品的可能性等等。预测分析是一种展望未来的方式。它可以用于广泛的用途，包括商业和经济预测，市场营销和销售分析邓。</p>
+<h2 id="73-Prompt"><a href="#73-Prompt" class="headerlink" title="73. Prompt"></a>73. Prompt</h2><p><strong>提示符</strong></p>
+<p>提示符是给模型的自然语言输入。提示可以是问题、待完成的任务，也可以是用户希望 AI 创建的内容类型的描述。一个简单的定义是提示模型做某事的指令</p>
+<h2 id="74-Prompt-Engineering"><a href="#74-Prompt-Engineering" class="headerlink" title="74. Prompt Engineering"></a>74. Prompt Engineering</h2><p><strong>提示工程</strong></p>
+<p>提示工程是找出正确的单词和短语，帮助生成系统与输入的确切意图保持一致。例如，找出最合适的词汇，让人工智能准确地写出用户想要的东西。</p>
+<h2 id="75-Reinforcement-Learning"><a href="#75-Reinforcement-Learning" class="headerlink" title="75. Reinforcement Learning"></a>75. Reinforcement Learning</h2><p><strong>强化学习</strong></p>
+<p>强化学习是一种基于反馈的机器学习训练方法。人工智能代理通过接收到的反馈来学习如何在环境中表现:它对每个期望的行为都得到积极的反馈，对每个不希望的行为都得到惩罚。换句话说，这是一种让计算机学会做人类或其他计算机认为有价值的事情的方法，从而赢得某种“点数”或“经验”。</p>
+<h2 id="76-Reinforcement-Learningfrom-Human-Feedback-RLHF"><a href="#76-Reinforcement-Learningfrom-Human-Feedback-RLHF" class="headerlink" title="76. Reinforcement Learningfrom Human Feedback(RLHF)"></a>76. Reinforcement Learningfrom Human Feedback(RLHF)</h2><p><strong>基于人类反馈的强化学习</strong></p>
+<p>基于人类反馈的强化学习(RLHF)是一种利用人类直接反馈来训练人工智能模型的策略。人工智能模型不是获得奖励或惩罚，而是从人类那里获得反馈。</p>
+<h2 id="77-Responsible-Al"><a href="#77-Responsible-Al" class="headerlink" title="77. Responsible Al"></a>77. Responsible Al</h2><p><strong>负责任的人工智能</strong></p>
+<p>负责任的人工智能包括确保人工智能系统在开发和使用过程中符合道德、公平和透明。这是关于防止偏见和确保问责制。例如，在贷款审批中，负责任的人工智能确保算法不会基于种族或性别等因素进行歧视，从而让所有申请人获得平等机会。</p>
+<h2 id="78-Robotic-ProcessAutomation-RPA"><a href="#78-Robotic-ProcessAutomation-RPA" class="headerlink" title="78. Robotic ProcessAutomation(RPA)"></a>78. Robotic ProcessAutomation(RPA)</h2><p><strong>机器人流程自动化</strong></p>
+<p>RPA 使用软件或“机器人”来自动化完成日常任务。在营销中，RPA 可以用于数据输入、报告生成和电子邮件自动化等任务，从而提高操作效率和准确性。</p>
+<h2 id="79-Rule-Based-systems"><a href="#79-Rule-Based-systems" class="headerlink" title="79. Rule-Based systems"></a>79. Rule-Based systems</h2><p><strong>基于规则的系统</strong></p>
+<p>基于规则的系统是计算机助手，它遵循一套明确的指令或规则来做出决定。这就像为计算机创建一个循序渐进的指南。典型例子如电子邮件过滤器，它根据特定的规则(如某些词汇或发件人信息)来判断电子邮件是否是垃圾邮件。</p>
+<h2 id="80-Search-Query"><a href="#80-Search-Query" class="headerlink" title="80. Search Query"></a>80. Search Query</h2><p><strong>搜索查询</strong></p>
+<p>搜索查询是一个字符串，用它可以识别数据库或其他信息检索系统中的记录，产生一个与搜索查询相关的文档列表。</p>
+<h2 id="81-Selective-Filtering"><a href="#81-Selective-Filtering" class="headerlink" title="81. Selective Filtering"></a>81. Selective Filtering</h2><p><strong>有选择性的过滤</strong></p>
+<p>选择性过滤是人工智能系统的一种技术，用于更准确地确定所需的输出。这类系统中最简单的系统对任何输入都会产生相同的结果，这是无益的。通过训练，系统可以更准确地预测结果。在应用程序中，用户可以使用这种技术通过让计算机学习和记忆来识别特定的物体或语音模式。</p>
+<h2 id="82-Self-aware-Al"><a href="#82-Self-aware-Al" class="headerlink" title="82. Self-aware Al"></a>82. Self-aware Al</h2><p><strong>自我意识人工智能</strong></p>
+<p>自我意识人工智能是人工智能心智理论的进一步发展，机器可以理解人类的情感，拥有自己的情感、需求和信仰。有感知的人工智能是有自我意识的人工智能，目前还只是一个理论概念。</p>
+<h2 id="83-Semantic-Analysis"><a href="#83-Semantic-Analysis" class="headerlink" title="83. Semantic Analysis"></a>83. Semantic Analysis</h2><p><strong>语义分析</strong></p>
+<p>作为自然语言处理的一种更复杂的形式这一概念侧重于将单词串在一起的过程以及通过文化背景理解语言的方式。</p>
+<h2 id="84-sentient-Al"><a href="#84-sentient-Al" class="headerlink" title="84. sentient Al"></a>84. sentient Al</h2><p><strong>有感知力的 AI</strong></p>
+<p>有感知力的 A1 与人类有着相同的感受和经验。这种人工智能具有情商，可以感知世界，并将感知转化为情感。</p>
+<h2 id="85-Sentiment-Analysis"><a href="#85-Sentiment-Analysis" class="headerlink" title="85. Sentiment Analysis"></a>85. Sentiment Analysis</h2><p><strong>情感分析</strong></p>
+<p>情感分析是从文本中识别情感信号和队列来预测语句整体情绪的过程。</p>
+<h2 id="86-Singularity"><a href="#86-Singularity" class="headerlink" title="86. Singularity"></a>86. Singularity</h2><p><strong>奇点</strong></p>
+<p>奇点是人工智能的假想未来，在那里系统会经历不受控制的增长，并采取可能对人类生活产生重大影响的行动。与超级智能(Superintelligence)和有感知力的人工智能(Sentient A1.)密切相关。</p>
+<h2 id="87-Speech-Recognition"><a href="#87-Speech-Recognition" class="headerlink" title="87. Speech Recognition"></a>87. Speech Recognition</h2><p><strong>语音识别</strong></p>
+<p>一种将口语转换为书面文本的人工智能技术。在营销方面，它被用于语音搜索优化和理解设备上的语音命令，进入不断增长的语音助手市场(比如苹果的 Siri)。</p>
+<h2 id="88-Supervised-Learning"><a href="#88-Supervised-Learning" class="headerlink" title="88. Supervised Learning"></a>88. Supervised Learning</h2><p><strong>监督式学习</strong></p>
+<p>这种形式的机器学习不能独立运行，而是需要人工输入。数据被输入到机器中，监督学习，或从例子中学习，是一种机器学习方法，通过向计算机展示正确答案的例子来“教”计算机该做什么。在监督式学习中，程序员将标记数据提供给计算机。这与无监督学习相反，在无监督学习中，计算机得到的数据没有标签。</p>
+<h2 id="89-Swarm-Intelligence"><a href="#89-Swarm-Intelligence" class="headerlink" title="89. Swarm Intelligence"></a>89. Swarm Intelligence</h2><p><strong>群体智慧</strong></p>
+<p>群体智能是一种解决问题的智能，它的灵感来自于成群的昆虫如何为了共同的目标一起工作。可以把它想象成一组机器人合作完成一项任务，模仿蜜蜂在蜂巢里的合作方式。群体中的每个个体都有贡献，从而导致高效而智能的集体行为。</p>
+<h2 id="90-Synthetic-Data"><a href="#90-Synthetic-Data" class="headerlink" title="90. Synthetic Data"></a>90. Synthetic Data</h2><p><strong>合成数据</strong></p>
+<p>合成数据是由计算机生成的用来替代真实数据的数据，为了保护敏感数据、减少偏见或增强人工智能模型</p>
+<h2 id="91-Theory-of-Mind-Al"><a href="#91-Theory-of-Mind-Al" class="headerlink" title="91. Theory of Mind Al"></a>91. Theory of Mind Al</h2><p><strong>心智理论人工智能</strong></p>
+<p>心智理论人工智能是一种先进的技术，可以理解人类的心理状态，并利用这些知识进行真正的互动。例如，一个了解不满客户情绪的系统可以利用这些知识做出相应的反应。</p>
+<h2 id="92-Training-Data"><a href="#92-Training-Data" class="headerlink" title="92. Training Data"></a>92. Training Data</h2><p><strong>训练数据</strong></p>
+<p>训练数据是机器用来学习完成未来任务的数据。</p>
+<h2 id="93-Transfer-Learning"><a href="#93-Transfer-Learning" class="headerlink" title="93. Transfer Learning"></a>93. Transfer Learning</h2><p><strong>迁移学习</strong></p>
+<p>迁移学习是一种机器学习技术，其中使用预训练的模型作为新任务的起点。</p>
+<h2 id="94-Transformer"><a href="#94-Transformer" class="headerlink" title="94. Transformer"></a>94. Transformer</h2><p><strong>转换器</strong></p>
+<p>转换器是一种用于自然语言处理的深度学习模型类型。它可以处理句子中单词的上下文，并根据整个对话中的数据序列产生输出。</p>
+<h2 id="95-Unsupervised-Learning"><a href="#95-Unsupervised-Learning" class="headerlink" title="95. Unsupervised Learning"></a>95. Unsupervised Learning</h2><p><strong>无监督学习</strong></p>
+<p>这种类型的学习几乎不需要人的参与，它允许机器从它发现的模式中自行得出结论。</p>
+<h2 id="96-Validation"><a href="#96-Validation" class="headerlink" title="96. Validation"></a>96. Validation</h2><p><strong>验证</strong></p>
+<p>在人工智能方面，验证是检查人工智能模型在训练过程中或之后的表现。人工智能模型在训练中没有见过的数据子集上进行测试，以验证它是否在学习。</p>
+<h2 id="97-Visual-Recognition"><a href="#97-Visual-Recognition" class="headerlink" title="97. Visual Recognition"></a>97. Visual Recognition</h2><p><strong>视觉识别</strong></p>
+<p>视觉识别是一种计算机功能，它使机器能够识别和区分物体。此外，识别图像的能力是机器学习中的基本技能之一，因为它允许计算机确定图像的内容，甚至将其像素映射到相应的物理尺寸。</p>
+<h2 id="98-Voice-Search-Optimization-VSO"><a href="#98-Voice-Search-Optimization-VSO" class="headerlink" title="98. Voice Search Optimization(VSO)"></a>98. Voice Search Optimization(VSO)</h2><p><strong>语音搜索</strong></p>
+<p>优化对语音搜索的内容、关键字和短语进行优化，确保内容可访问且与语音搜索相关。</p>
+<h2 id="99-Web-scraping"><a href="#99-Web-scraping" class="headerlink" title="99. Web scraping"></a>99. Web scraping</h2><p><strong>网络抓取</strong></p>
+<p>一种人工智能辅助技术，用于快速从网站中提取大量数据。在营销中，它用于竞争对手分析、市场研究和搜索引擎优化策略，增强市场理解和竞争定位。</p>
+<h2 id="100-Zero-shot"><a href="#100-Zero-shot" class="headerlink" title="100. Zero-shot"></a>100. Zero-shot</h2><p><strong>零样本学习</strong></p>
+<p>零样本学习是一种机器学习方法，它训练人工智能模型识别和分类他们以前没有见过的物体。</p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 常见的100个AI人工智能术语解释</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2025-04-08 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-04-08 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2025/04/08/AI人工智能/常见的100个AI人工智能术语解释/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A/">#术语解释</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/AI/">#AI</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2024/11/08/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E7%94%A8%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%8CAI%E5%8D%B3%E5%8F%AF%E9%94%81%E5%AE%9A%E4%BD%A0%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/" title="用一张图片，AI即可锁定你的地理位置" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/f3ef5f525e53c778f48cd37a58867c58_MD5.jpg" alt="用一张图片，AI即可锁定你的地理位置" class="!max-w-none">
+  <span class="title">用一张图片，AI即可锁定你的地理位置</span>
+</a><a class="recommended-article-item" href="/2025/03/13/4.%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4.3%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%B8%93%E9%A2%98%E6%B4%9E%E5%AF%9F/%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%9A%E9%BB%91%E8%AF%9D%E8%AF%8D%E5%85%B8/" title="互联网行业黑话词典" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="互联网行业黑话词典" class="!max-w-none">
+  <span class="title">互联网行业黑话词典</span>
+</a><a class="recommended-article-item" href="/2025/10/28/3.%E9%AA%8C%E8%AF%81%E4%B8%8E%E5%A2%9E%E9%95%BF/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%EF%BC%9A%E8%AE%A9%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E4%B8%BA%E7%94%A8%E6%88%B7%E5%8F%91%E5%A3%B0/" title="数据驱动：让产品数据为用户发声" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/10/file-20251028085455028.png" alt="数据驱动：让产品数据为用户发声" class="!max-w-none">
+  <span class="title">数据驱动：让产品数据为用户发声</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2024/11/08/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E7%94%A8%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%8CAI%E5%8D%B3%E5%8F%AF%E9%94%81%E5%AE%9A%E4%BD%A0%E7%9A%84%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/" title="用一张图片，AI即可锁定你的地理位置" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/f3ef5f525e53c778f48cd37a58867c58_MD5.jpg" alt="用一张图片，AI即可锁定你的地理位置" class="!max-w-none">
+  <span class="title">用一张图片，AI即可锁定你的地理位置</span>
+</a><a class="recommended-article-item" href="/2025/03/13/4.%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4.3%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%B8%93%E9%A2%98%E6%B4%9E%E5%AF%9F/%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%9A%E9%BB%91%E8%AF%9D%E8%AF%8D%E5%85%B8/" title="互联网行业黑话词典" rel="bookmark">
+  <img src="/images/blogSpaces-light.jpg" alt="互联网行业黑话词典" class="!max-w-none">
+  <span class="title">互联网行业黑话词典</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/04/16/6.%E5%85%A8%E7%90%83%E6%8E%A2%E7%B4%A2%E6%96%B0%E8%A7%86%E7%95%8C/6.1%E5%85%A8%E7%90%83%E5%AE%9E%E5%86%B5%E4%B8%8E%E8%B5%84%E8%AE%AF/%E5%9C%A8%E7%BA%BF%E4%BA%91%E5%90%AC%EF%BC%9A%E5%85%A8%E7%90%83%E4%B8%8A%E4%B8%87%E4%B8%AA%E7%94%B5%E5%8F%B0%E9%9A%8F%E6%84%8F%E5%90%AC/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">在线云听：全球上万个电台随意听</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/04/01/6.%E5%85%A8%E7%90%83%E6%8E%A2%E7%B4%A2%E6%96%B0%E8%A7%86%E7%95%8C/6.1%E5%85%A8%E7%90%83%E5%AE%9E%E5%86%B5%E4%B8%8E%E8%B5%84%E8%AE%AF/%E5%9C%A8%E7%BA%BF%E4%BA%91%E6%B8%B8%EF%BC%9A%E5%85%A8%E7%90%83%E5%AE%9E%E5%86%B5%E6%91%84%E5%83%8F%E5%A4%B4%E9%9A%8F%E4%BE%BF%E7%9C%8B%EF%BC%8C%E4%B8%96%E7%95%8C%E8%A7%A6%E6%89%8B%E5%8F%AF%E5%8F%8A/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">在线云游：全球实况摄像头随便看，世界触手可及</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">常见的100个AI人工智能术语解释</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Adversarial-Machine-Learning"><span class="nav-text">1. Adversarial Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Al-Analytics"><span class="nav-text">2. Al Analytics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Al-Assistant"><span class="nav-text">3. Al Assistant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Al-Bias"><span class="nav-text">4. Al Bias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Al-Enhanced-Cybersecurity"><span class="nav-text">5. Al-Enhanced Cybersecurity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Al-safety"><span class="nav-text">6. Al safety</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Algrithm"><span class="nav-text">7. Algrithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Anthropomorphize"><span class="nav-text">8. Anthropomorphize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Artificial-GeneralIntelligence-AGl"><span class="nav-text">9. Artificial GeneralIntelligence(AGl)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Artificial-Intelligence"><span class="nav-text">10. Artificial Intelligence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Artificial-Neural-Network"><span class="nav-text">11. Artificial Neural Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Artificial-Superintelligence"><span class="nav-text">12. Artificial Superintelligence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Association-Rule-Learning"><span class="nav-text">13. Association Rule Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-Automated-MachineLearning-AutoML"><span class="nav-text">14. Automated MachineLearning(AutoML)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-Augmented-Intelligence"><span class="nav-text">15. Augmented Intelligence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-Auto-complete"><span class="nav-text">16. Auto-complete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-Auto-Classification"><span class="nav-text">17. Auto Classification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-Automatic-speechRecognition"><span class="nav-text">18. Automatic speechRecognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Automated-Content-Creation"><span class="nav-text">19. Automated Content Creation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Behavioral-Analytics"><span class="nav-text">20. Behavioral Analytics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-Bayesian-Network"><span class="nav-text">21. Bayesian Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-Black-Box-AI"><span class="nav-text">22. Black Box AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-Brute-Force-search"><span class="nav-text">23. Brute Force search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-Chatbot"><span class="nav-text">24. Chatbot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-Cluster"><span class="nav-text">25. Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-Cognitive-computing"><span class="nav-text">26. Cognitive computing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-Cognitive-science"><span class="nav-text">27. Cognitive science</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-Composite-Al"><span class="nav-text">28. Composite Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29-Computer-Vision"><span class="nav-text">29. Computer Vision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30-Conversational-Al"><span class="nav-text">30. Conversational Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31-Corpus"><span class="nav-text">31. Corpus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-Customer-Sentiment-Analysis"><span class="nav-text">32. Customer Sentiment Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-Data-Mining"><span class="nav-text">33. Data Mining</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-Dataset"><span class="nav-text">34. Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-Deep-Learning"><span class="nav-text">35. Deep Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-Deep-Neural-Network"><span class="nav-text">36. Deep Neural Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37-Edge-Computing-in-Al"><span class="nav-text">37. Edge Computing in Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#38-Emotional"><span class="nav-text">38. Emotional</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39-Entity-Annotation"><span class="nav-text">39. Entity Annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#40-Entity-Extraction"><span class="nav-text">40. Entity Extraction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#41-Ensemble-Learning"><span class="nav-text">41. Ensemble Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-Exascale-Computing"><span class="nav-text">42. Exascale Computing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-Explainable-Al"><span class="nav-text">43. Explainable Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#44-Facial-Recognition"><span class="nav-text">44. Facial Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-Feature-Engineering"><span class="nav-text">45. Feature Engineering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-Feature-Extraction"><span class="nav-text">46. Feature Extraction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#47-Forward-Chaining"><span class="nav-text">47. Forward Chaining</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#48-Generative-Al"><span class="nav-text">48. Generative Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#49-Generative-AdversarialNetwork-GAN"><span class="nav-text">49. Generative AdversarialNetwork(GAN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#50-GPT"><span class="nav-text">50. GPT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#51-Hallucination"><span class="nav-text">51. Hallucination</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#52-Heuristic-Methods"><span class="nav-text">52. Heuristic Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#53-Human-in-the-loop-Al"><span class="nav-text">53. Human-in-the-loop Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#54-Hyperparameter"><span class="nav-text">54. Hyperparameter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-lmage-Recognition"><span class="nav-text">55. lmage Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#56-Knowledge-Base"><span class="nav-text">56. Knowledge Base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#57-Knowledge-Graphs"><span class="nav-text">57. Knowledge Graphs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#58-Large-LanguageModel-LLM"><span class="nav-text">58. Large LanguageModel(LLM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#59-Linguistic-Annotation"><span class="nav-text">59. Linguistic Annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#60-Machine-Learning"><span class="nav-text">60. Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#61-Model"><span class="nav-text">61. Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-Narrow-Al"><span class="nav-text">62. Narrow Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#63-Natural-Language-Generation-NLG"><span class="nav-text">63. Natural Language Generation(NLG)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-Natural-Language-Query-NLQ"><span class="nav-text">64. Natural Language Query(NLQ)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#65-Natural-Language-Processing-NLP"><span class="nav-text">65. Natural Language Processing(NLP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#66-Neural-Networks"><span class="nav-text">66. Neural Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#67-Neuromorphic-Computing"><span class="nav-text">67. Neuromorphic Computing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#68-Object-Detection"><span class="nav-text">68. Object Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#69-Object-Recognition"><span class="nav-text">69. Object Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#70-Overfitting"><span class="nav-text">70. Overfitting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#71-Pattern-Recognition"><span class="nav-text">71. Pattern Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-Predictive-Analytics"><span class="nav-text">72. Predictive Analytics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#73-Prompt"><span class="nav-text">73. Prompt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#74-Prompt-Engineering"><span class="nav-text">74. Prompt Engineering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#75-Reinforcement-Learning"><span class="nav-text">75. Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#76-Reinforcement-Learningfrom-Human-Feedback-RLHF"><span class="nav-text">76. Reinforcement Learningfrom Human Feedback(RLHF)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#77-Responsible-Al"><span class="nav-text">77. Responsible Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#78-Robotic-ProcessAutomation-RPA"><span class="nav-text">78. Robotic ProcessAutomation(RPA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#79-Rule-Based-systems"><span class="nav-text">79. Rule-Based systems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#80-Search-Query"><span class="nav-text">80. Search Query</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#81-Selective-Filtering"><span class="nav-text">81. Selective Filtering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#82-Self-aware-Al"><span class="nav-text">82. Self-aware Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#83-Semantic-Analysis"><span class="nav-text">83. Semantic Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#84-sentient-Al"><span class="nav-text">84. sentient Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#85-Sentiment-Analysis"><span class="nav-text">85. Sentiment Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#86-Singularity"><span class="nav-text">86. Singularity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#87-Speech-Recognition"><span class="nav-text">87. Speech Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#88-Supervised-Learning"><span class="nav-text">88. Supervised Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#89-Swarm-Intelligence"><span class="nav-text">89. Swarm Intelligence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#90-Synthetic-Data"><span class="nav-text">90. Synthetic Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#91-Theory-of-Mind-Al"><span class="nav-text">91. Theory of Mind Al</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#92-Training-Data"><span class="nav-text">92. Training Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#93-Transfer-Learning"><span class="nav-text">93. Transfer Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#94-Transformer"><span class="nav-text">94. Transformer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#95-Unsupervised-Learning"><span class="nav-text">95. Unsupervised Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#96-Validation"><span class="nav-text">96. Validation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#97-Visual-Recognition"><span class="nav-text">97. Visual Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#98-Voice-Search-Optimization-VSO"><span class="nav-text">98. Voice Search Optimization(VSO)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#99-Web-scraping"><span class="nav-text">99. Web scraping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#100-Zero-shot"><span class="nav-text">100. Zero-shot</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

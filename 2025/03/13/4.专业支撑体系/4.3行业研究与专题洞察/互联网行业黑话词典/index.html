@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2025/03/13/4.专业支撑体系/4.3行业研究与专题洞察/互联网行业黑话词典/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="互联网行业黑话词典">
+<meta property="og:url" content="https://chinapmcc.com/2025/03/13/4.%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4.3%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%B8%93%E9%A2%98%E6%B4%9E%E5%AF%9F/%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%9A%E9%BB%91%E8%AF%9D%E8%AF%8D%E5%85%B8/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-03-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-12T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="黑话">
+<meta property="article:tag" content="互联网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            互联网行业黑话词典 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">互联网行业黑话词典</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-03-13</span>
+        <span class="mobile">2025-03-13</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-03-13</span>
+            <span class="mobile">2025-03-13</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">04⚙️专业支撑体系</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/4-3%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6%E4%B8%8E%E4%B8%93%E9%A2%98%E6%B4%9E%E5%AF%9F/">4.3行业研究与专题洞察</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E9%BB%91%E8%AF%9D/">黑话</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/">互联网</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>37.5k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>128 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="1-老板的潜台词"><a href="#1-老板的潜台词" class="headerlink" title="1. 老板的潜台词"></a>1. <strong>老板的潜台词</strong></h1><blockquote>
+<p>得专注用户体验</p>
+</blockquote>
+<p><strong>老板意图：界面做的好看漂亮</strong></p>
+<blockquote>
+<p>产品不够大气</p>
+</blockquote>
+<p><strong>老板意图：我也不知道哪不好，反正就是不好</strong></p>
+<blockquote>
+<p>你来一下我办公室</p>
+</blockquote>
+<p><strong>老板意图：老子又想到了绝妙的 idea</strong></p>
+<blockquote>
+<p>要精致的感觉</p>
+</blockquote>
+<p><strong>老板意图：抄苹果</strong></p>
+<blockquote>
+<p>产品气质不够成熟</p>
+</blockquote>
+<p><strong>老板意图：界面通通做成黑的</strong></p>
+<blockquote>
+<p>要追求流行设计趋势</p>
+</blockquote>
+<p><strong>老板意图：抄微信、抖音、支付宝</strong></p>
+<blockquote>
+<p>当务之急是抢占市场</p>
+</blockquote>
+<p><strong>老板意图：快狂发补贴</strong></p>
+<blockquote>
+<p>今年来点新花样</p>
+</blockquote>
+<p><strong>老板意图：低预算，多套方案，关键还要快</strong></p>
+<blockquote>
+<p>让用户产生自发传播</p>
+</blockquote>
+<p><strong>老板意图：想办法快让他们转发朋友圈</strong></p>
+<blockquote>
+<p>节假日要到啦，跟品牌方进行“资源置换”合作</p>
+</blockquote>
+<p><strong>老板意图：能不花钱就别花钱，花别人的钱办自己的事（没预算，没成本，空手套白狼）</strong></p>
+<blockquote>
+<p>要利用用户的固有习惯</p>
+</blockquote>
+<p><strong>老板意图：看同行，抄同行</strong></p>
+<blockquote>
+<p>商业模式要形成闭环</p>
+</blockquote>
+<p><strong>老板意图：赶紧给我想办法卖出去</strong></p>
+<blockquote>
+<p>我们是弹性工作制</p>
+</blockquote>
+<p><strong>老板意图：加班不给钱</strong></p>
+<blockquote>
+<p>我们是扁平化管理</p>
+</blockquote>
+<p><strong>老板意图：公司没几个人</strong></p>
+<blockquote>
+<p>我们会给你很多期权</p>
+</blockquote>
+<p><strong>老板意图：不会给你很多工资</strong></p>
+<blockquote>
+<p>为了健康发展我们要启动下轮融资</p>
+</blockquote>
+<p><strong>老板意图：公司快没钱了</strong></p>
+<blockquote>
+<p>我们辞退了一些跟不上公司发展的同事</p>
+</blockquote>
+<p><strong>老板意图：公司快没钱了</strong></p>
+<blockquote>
+<p>打补贴战其实不符合我们公司的理念</p>
+</blockquote>
+<p><strong>老板意图：公司快没钱了</strong></p>
+<h1 id="2-互联网运营黑话"><a href="#2-互联网运营黑话" class="headerlink" title="2. 互联网运营黑话"></a>2. <strong>互联网运营黑话</strong></h1><p><strong>💭裂变</strong></p>
+<p><strong>💯人话：分享给好友</strong></p>
+<p><strong>💭建私域流量池</strong></p>
+<p><strong>💯人话：多加好友</strong></p>
+<p><strong>💭发现用户痛点</strong></p>
+<p><strong>💯人话：找到用户要解决的问题</strong></p>
+<p><strong>💭社群运营</strong></p>
+<p><strong>💯人话：在微信群里发广告</strong></p>
+<p><strong>💭促进群里活跃</strong></p>
+<p><strong>💯人话：在群里发消息做活动</strong></p>
+<p><strong>💭促活老用户</strong></p>
+<p><strong>💯人话：在群里发老用户优惠活动</strong></p>
+<p><strong>💭建立良好的微信内容生态</strong></p>
+<p><strong>💯人话：做好微信公众号的内容</strong></p>
+<p><strong>💭跨部门协调</strong></p>
+<p><strong>💯人话：跟其他单位搞好关系</strong></p>
+<p><strong>💭新店开业造势</strong></p>
+<p><strong>💯人话：花点钱找人客串拍拍照，拍拍视频，强制分享朋友圈</strong></p>
+<p><strong>私域流量：</strong> 朋友圈，不用付费，可以任意时间、频次，直接触达到的用户　</p>
+<p><strong>公域流量：</strong> 微博、小红书、抖音等外部平台　</p>
+<p><strong>用户心智：</strong> 说到网购，就是淘宝，说到音频，就是喜马拉雅！　</p>
+<p><strong>组合拳：</strong> 视频图片一起发　</p>
+<p>资源置换东西随便拿，但是别提钱　</p>
+<p>矩阵做一些同频同类事件，复制改个名再做一个　</p>
+<p>切换赛道这件事干不下去了，换一件事干　</p>
+<p><strong>快速优化迭代：</strong> 事情边做边改　</p>
+<p><strong>复盘：</strong> 这个活动或项目结束后开个会，分析优缺点　</p>
+<p><strong>转化：</strong> 用户看完了视频点了关注　</p>
+<p><strong>弯道超车：</strong> 跳槽更高的企业，学习更多的知识，最终实现自我升级　</p>
+<p><strong>战略性亏损：</strong> 打折促销　</p>
+<p><strong>联合创始人：</strong> 老员工　</p>
+<p><strong>头部流量：</strong> 行业头牌　</p>
+<p><strong>腰部流量：</strong> 处于行业中游企业　</p>
+<p><strong>踝部流量：</strong> 行业里没有人知道的，惯用资源置换　</p>
+<p><strong>用户不感知：</strong> 毫无水花，感觉不到　</p>
+<p><strong>延迟满足感：</strong> 项目不赚钱　</p>
+<p><strong>打磨：</strong> 自我修改，疯狂的修改　</p>
+<p><strong>聚焦：</strong> 只够干一件事，多了没有　</p>
+<p><strong>发力：</strong> 要开始烧钱了　</p>
+<p><strong>多元赋能：</strong> 以多种方式多维度的对指定人员或产品进行协助提升　</p>
+<p><strong>抓手：</strong> 切入点，主要手段，以研发赋能为抓手，以需求为导向，以公司收入增长为落脚点。　</p>
+<p><strong>多维矩阵闭环：</strong> 广撒网多搞几个平台，总有人上当来做内容，然后就可以趟着数钱了。　</p>
+<p><strong>底层逻辑：</strong> 回归事物最本质的存在因果关系　</p>
+<p><strong>非标到标，标到非标：</strong> 非标准化到标准化，再从标准化到人性化　</p>
+<p><strong>生态化反：</strong> 各个生态业务被糅合到一起，产生化学反应，生成巨大能量　</p>
+<p><strong>技术中台：</strong> 强调资源整合、能力沉淀的平台体系，当技术前台实现业务功能时，为他们提供底层的技术、数据等资源和能力的支持，起到承上启下的作用　</p>
+<p>**行业壁垒：**跨行业经营者丢掉擅长的业务而去开拓不擅长业务所会遇到的陌生的困难。　</p>
+<p>**用户的全路径管理：**从用户入局开始，到用户出局中间所有用户行走的线路。　</p>
+<p><strong>用户裂变</strong>：A 推荐了 B，B 推荐了 C。　</p>
+<p><strong>黑盒技术：</strong> 用户提出需求，输入进黑盒，然后黑盒从另一端拿到结果，就是黑盒技术。　</p>
+<p><strong>垂直社交：</strong> 深层次的特殊群体社交。　</p>
+<p><strong>闭环：</strong> 流程两端环节之间实现的对接和循环。　</p>
+<p><strong>数据挖掘：</strong> 从大量的数据中通过算法搜索隐藏于其中信息的过程，总结出对业务有用的结论。　</p>
+<p><strong>数据看板：</strong> 数据可视化载体，把需求的图表美观的放在一个屏幕展示出来。　</p>
+<p><strong>数据孤岛：</strong> 数据分散在不同的地方，不集中。　</p>
+<p><strong>思想拉齐：</strong> 统一认知，统一目标　</p>
+<p><strong>数据仓：</strong> 比数据库还大的放海量数据存放的地方　</p>
+<p><strong>用户触点：</strong> 能够被用户通过感官接收到的，直接或间接地、传递出目标信息，感官可以是来自五官感受，视觉、触觉、嗅觉等或其多重结合　</p>
+<p><strong>第一性原理：</strong> 最根本的基础逻辑，同底层逻辑　</p>
+<p><strong>躬身入局：</strong> 亲自参与进入　</p>
+<p><strong>顶层设计：</strong> 用上帝视角设计　</p>
+<p><strong>顶层思考：</strong> 用领导去看待这件事情的想法来进行思考　</p>
+<p><strong>陌拜：</strong> 硬着头皮给陌生人推销　</p>
+<p><strong>共建：</strong> 双方都没钱又想白嫖对方的流量　</p>
+<p><strong>颗粒度要细：</strong> 还得再开八百个会　</p>
+<p><strong>打法：</strong> 劝人付钱　</p>
+<p><strong>组合拳：</strong> 用各种方式劝人付钱　</p>
+<p><strong>打磨：</strong> 疯狂修改　</p>
+<p><strong>内容电商：</strong> 软广植入　</p>
+<p><strong>跟进：</strong> 催你干活　</p>
+<p><strong>结果导向：</strong> 只看 KPI　</p>
+<p><strong>护城河：</strong> 原意指古代城池防守时，围绕整座城墙挖掘的护城河。在方案写作中，主要是与定位内容相关，只品牌或者产品的差异化、高门槛的竞争优势。　</p>
+<p><strong>背书：</strong> 品牌为了打造消费信任状，找到各种证据证明所言非虚，即是背书。一般背书包括多种形式：权威人士、权威媒体，权威机构、明星名人、科学测试、热销认证、现身说法，品牌承诺等。　</p>
+<p><strong>痛点：</strong> 市场不能充分满足的，而客户迫切需要满足的需求。　</p>
+<p><strong>痒点：</strong> 用户对美好生活的追求，对虚拟自我的满足。　</p>
+<p><strong>爽点：</strong> 用户即刻的满足感。</p>
+<h1 id="3-互联网运营词语"><a href="#3-互联网运营词语" class="headerlink" title="3. 互联网运营词语"></a>3. 互联网运营词语</h1><h3 id="3-1-二字词"><a href="#3-1-二字词" class="headerlink" title="3.1 二字词"></a>3.1 二<strong>字词</strong></h3><p>落地、沉淀、给到、响应、同步、对齐、对标、迭代、优化、跟进、升级、交付、聚焦、倒逼、复盘、梳理、输出、提炼、包装、上升、方案、摸索、踩坑、填坑、报备、串联、协同、联动、透传、打通、打平、抹平、发力、兼容、量化、细分、重塑、蓄能、引爆、挖掘、背书、背锅、支持、支撑、协调、支援、加持、加速、共建、共创、融合、拉通、拉升、洞察、渗透、咬合、穿梭、辐射、扩展、开拓、兜底、降级、容错、容灾、解耦、耦合、复用、封装、抽象、聚合、集成、拆解、抓包、观察、监控、上报、捕获、分发、分层、迁移、回溯、回归、回流、回跳、赋能、通晒、吃透、死磕、树立、跨界、共情、演绎、画饼、打造、反哺、输血、造血、造势、造市、造事、下沉、拉新、转化、留存、促活、付费、营收、盈利、获客、邀请、助力、激励、激活、推广、投放、导流、覆盖、曝光、裂变、增长、优秀、感恩、比心、笔芯、下跪、致敬、订阅、认证、推送、唤醒、流失、召回、授权、接入、铸造、构筑、构建、搭建、布局、组局、摸鱼、划水、众筹、收割、共享、重组、收口、转型、围绕、出击、证言、确认、明确、评估、评审、务实、夯实、预判、预言、变迁、返佣、深入、打磨、攻坚、击穿、破冰、破题、解题、破圈、破局、定量、定性、制约、约束、触及、触达、触发、操盘、思考、反思、精简、深耕、突围、补位、抽离、履约、进化、进军、起飞、all in、皮实、本分、重磅、垂直、真香、自洽、精准、持续、灵活、稳定、可控、活跃。　</p>
+<p>抓手、漏斗、中台、平台、闭环、风口、打法、玩法、矩阵、纽带、刺激、规模、场景、渠道、入口、维度、格局、形态、生态、体系、认知、体感、感知、心智、调性、战役、合力、心力、赛道、基石、基因、因子、模型、通道、链路、水位、水准、姿态、卡点、卡位、头部、腰部、踝部、痛点、爽点、痒点、全域、公域、私域、本我、自我、超我、蓝海、红海、纵向、横向、上限、下限、上游、下游、阈值、场域、架构、系统、标配、长尾、态势、锚点、标杆、壁垒、变量、期权、边界、品牌、阵地、高地、洼地、高空、革命、变革、内卷、外包、福报、脑暴、脑洞、圈层、层级、段位、环节、困局、话术、文案、议程、公关、PR 稿、配称、力场、魔方、触点、势能、流量、资源、排期、延期、弹窗、浮层、引导、蒙层、幕帘、遮罩、埋点、坑位、楼层、按钮、推送、红包、峰值、漏洞、风险、瓶颈、策略、价值、成本、复利、人性、利器、深度、玩家、小白、韭菜、羊毛、福利、套路、情怀、标准、规范、报备、社群、产业、载体、服务、粘性、属性、地域、终端、版本、口碑、指标、年框、试点、母体、空白、银弹。　</p>
+<h3 id="3-2-三字词"><a href="#3-2-三字词" class="headerlink" title="3.2 三字词"></a>3.2 <strong>三字词</strong></h3><p>对一下&#x2F;碰一下&#x2F;过一下、抢品类&#x2F;卡认知&#x2F;占场景、观行业&#x2F;明竞争&#x2F;洞自身、开场子&#x2F;提调子、冷启动、秀肌肉、借东风、断舍离、薅羊毛、砍一刀、走出去、讲故事、扁平化、差异化、平台化、结构化、精细化、短平快、常态化、强依赖、不可控、有风险、感知度、颗粒度、方法论、组合拳、引爆点、护城河、影响力、资源位、优先级、制高点、可用性、易用性、稳定性、便捷性、耦合性、一致性、系统性、端到端、点对点、点线面、上半场、下半场、主战场、人货场、基本面、基本盘、操盘手、进化论、解释权、最优解、执行力、驱动力、鄙视链、生态链、生态圈、生态位、全场景、全渠道、全方位、全媒体、流量池、天花板、传话筒、转化率、活跃度、颗粒感、登云梯、冲击力、视觉锤、孵化器、新零售、新物种、新品牌、新篇章、新局势、新赛道、新势能、新国货、新国潮、新动力、同理心、气氛组、竞争力、存在感、认同感、参与感、归属感、使命感、价值观、忠诚度、预热期、高峰期、高潮期、上升期、瓶颈期、大数据、云计算、区块链、比特币、虚拟币、天使轮、自媒体、新媒体、价格门、超预期、小前台、大中台、凝聚力、向心力。　</p>
+<h3 id="3-3-四字词"><a href="#3-3-四字词" class="headerlink" title="3.3 四字词"></a>3.3 <strong>四字词</strong></h3><p>支棱起来、快速响应、小步快跑、价值转化、强化认知、资源置换、资源倾斜、资源配置、完善逻辑、去中心化、渠道下沉、用户下沉、降维打击、体验度量、高频触达、快速迭代、持续迭代、持续集成、持续交付、持续观察、躬身入局、顺势而为、打破结界、升维定位、有机结合、起承转合、存量维持、增量博弈、心智角逐、抽离透传、拨冗参会、反复确认、综合评估、刻意练习、打破制约、绝境求生、品牌露出、拥抱变化、重新定义、借势营销、内容创业、归因分析、逻辑推理、建立范式、总结沉淀、解决问题、占领心智、高举高打、高开低走、高台跳水、深入产业、拉齐水位、全情投入、如何收口、全面封锁、协同作战、剑走偏锋、弹射起飞、结果导向、业务导向、资源紧张、人力不足、体感不好、风险可控、逻辑自洽、品效合一、全球领先、人无我有&#x2F;人有我优&#x2F;人优我变、势如破竹、势不可挡、石破天惊、生命周期、复用打法、商业模式、平台战略、集团战略、战略引擎、关键路径、决策路径、天使投资、盈利模式、底层逻辑、顶层设计、饥饿营销、行业壁垒、下沉市场、消费认知、人工智能、赛博朋克、智慧城市、解决方案、知识付费、私域流量、交付价值、时间价值、共享经济、通证经济、中央厨房、先发优势、真实场景、临门一脚、真香定律、正态分布、幂律分布、二八定律、长尾理论、叠加效应、马太效应、沉没成本、边际成本、机会成本、偏好植入、蚂蚁市场、场景占位、产业集群、产业服务、标杆市场、心动情境、利基市场、第二曲线、增长飞轮、垂直领域、可持续性、可替代性、认知优势、新增长点、颠覆态势、最高规制、三位一体、资深玩家、不破不立、精神 SPA、用户心智、用户粘性、用户体验、用户认知、用户画像、用户调研、重度用户、沉默用户、活跃用户、用户黏性、千人千面、千人一面、信息茧房、流量红利、流量为王、价格歧视、意识形态、心理账户、情绪 G 点、品牌势能、服务产业、关键时期、沟通协作、战略合力、品牌航母、品类战舰、行军路线、产品尖兵、拳头产品、超级符号、挽留弹窗、时间窗口、定性定量、战略支点、声音印记、社交货币、付费社群、神交已久、财务自由。　</p>
+<h3 id="3-4-五字词"><a href="#3-4-五字词" class="headerlink" title="3.4 五字词"></a>3.4 <strong>五字词</strong></h3><p>大数据分析、大数据杀熟、延迟满足感、地毯式轰炸、饱和式攻击、四两拨千斤、开辟新路径、建立新习惯、用户无感知、叫好又叫座、优先级很高、拉新成本高、打开率极高、留存率奇高、活跃度新高、颠覆式创新、连续创业者、投入产出比、互联网思维、互联网红利、国民总时间、最后一公里、海豚湾模式、最大公约数、现象级事件、沉浸式体验、用户忠诚度、自媒体矩阵、病毒式营销、风口上的猪、战略性投资、战略性亏损、系统性风险、不跟风要造风、多维矩阵闭环、打开销售通路。　</p>
+<h3 id="3-5-六字词"><a href="#3-5-六字词" class="headerlink" title="3.5 六字词"></a>3.5 <strong>六字词</strong></h3><p>天时地利人和、品牌记忆系统、心智切割利器。　</p>
+<h1 id="4-产品经理黑话"><a href="#4-产品经理黑话" class="headerlink" title="4. 产品经理黑话"></a>4. <strong>产品经理黑话</strong></h1><p>产品设计应该大道至简 &#x3D; 复杂的我也不会　</p>
+<p>用户都应该用完即走 &#x3D; 回不回来我不管　</p>
+<p>这是常规的典型的做法 &#x3D; 我抄的微信&#x2F;淘宝&#x2F;滴滴…　</p>
+<p>需求要抓住人性 &#x3D; 多放美女照片　</p>
+<p>得考虑用户的使用场景 &#x3D; 加个夜间模式　</p>
+<p>商业模式要形成闭环 &#x3D; 放东西线上卖　</p>
+<p>要搭建完善的用户运营体系 &#x3D; 做个积分商城　</p>
+<p>要有社交元素促进活跃度 &#x3D; 塞一个 IM　</p>
+<p>没有用户是因为没有做好运营 &#x3D; 不是我的锅　</p>
+<p>体验不好是因为技术实现问题 &#x3D; 不是我的锅　</p>
+<p>界面难看是因为设计水平不行 &#x3D; 反正都不是我的锅 　</p>
+<p>这个我回去再确认一下 &#x3D; 别说了，老子没想到　</p>
+<p>这个逻辑比较复杂，一时说不清 &#x3D; 这么大个坑，回去赶快填　</p>
+<p>在吗？&#x3D; 要改需求了　</p>
+<p>哥哥最近累吗要不要喝奶茶 &#x3D; 要改需求了　</p>
+<p>那个…有句话…不知… &#x3D; 要改需求了　</p>
+<p>下次肯定不改了 &#x3D; 这次先改了再说　</p>
+<p>你的建议很好我们已经想到了 &#x3D; 我擦说得真有道理赶紧提需求　</p>
+<p>你的建议我们会考虑的 &#x3D; 这建议好像有点蠢　</p>
+<p>你的建议很有启发性 &#x3D; 哈哈哈什么杰宝玩意儿　</p>
+<p>灰度发布&#x3D;发布体验版　</p>
+<p>A&#x2F;B Test&#x3D;为同一个目标制定两个方案　</p>
+<p>PGC&#x3D;专业人写的　</p>
+<p>OGC&#x3D;职业的写的　</p>
+<p>UGC&#x3D;用户写的内容　</p>
+<p>用户画像&#x3D;大部分用户喜欢啥关心啥爱看啥　</p>
+<p>用户痛点&#x3D;咋让用户上瘾　</p>
+<p>MVP&#x3D;最小可行性产品　</p>
+<p>DAU&#x3D;日活跃度　</p>
+<p>WAU&#x3D;周活跃度　</p>
+<p>MAU&#x3D;月活跃度　</p>
+<p>UV&#x3D;唯一访问量　</p>
+<p>PV&#x3D;页面浏览量　</p>
+<h1 id="5-程序员黑话"><a href="#5-程序员黑话" class="headerlink" title="5. 程序员黑话"></a>5. <strong>程序员黑话</strong></h1><p>你这个需求不清晰 &#x3D; 我不想做　</p>
+<p>目前技术实现不了 &#x3D; 我不想做　</p>
+<p>现在服务器性能跟不上 &#x3D; 我不想做 　</p>
+<p>去找老板&#x2F;项目经理排期吧 &#x3D; 我不想做　</p>
+<p>你怎么老改需求啊 &#x3D; X 了个 X　</p>
+<p>你怎么设计的这么复杂啊 &#x3D; X 了个 X　</p>
+<p>你怎么就给这么短时间啊 &#x3D; X 了个 X　</p>
+<p>在吗？ &#x3D; 要延期了　</p>
+<p>弟弟最近累吗要不要喝奶茶 &#x3D; 要延期了　</p>
+<p>那个…有句话…不知… &#x3D; 要延期了　</p>
+<p>下次肯定不延期了 &#x3D; 这次先应付了再说　</p>
+<p>你退后点说话 &#x3D; 口水别喷到我宝贝键盘上　</p>
+<p>你别把胸压到桌子上 &#x3D; 我宝贝键盘会受不了的　</p>
+<p>你告诉我输什么我自己来 &#x3D; 你别用脏手碰我的宝贝键盘　</p>
+<p>你怎么还用 Word 啊？ &#x3D; Markdown 才是最好的写作工具　</p>
+<p>你怎么还在用 ThinkPad 啊？ &#x3D; Mac 才是最好的电脑　</p>
+<p>你怎么还在自学 Python 啊？ &#x3D; PHP 才是最好的语言　</p>
+<p>bug&#x3D;程序运行有不正确的地方　</p>
+<p>API&#x3D;应用程序接口　</p>
+<p>GC&#x3D;垃圾回收　</p>
+<p>blank screen&#x3D;黑屏　</p>
+<p>system halt&#x3D;死机　</p>
+<p>XP&#x3D;敏捷开发　</p>
+<p>ARP 欺骗&#x3D;ARP 毒化　</p>
+<p>IDE&#x3D;集成开发环境　</p>
+<p>OSS&#x3D;即开源软件　</p>
+<p>DBMS&#x3D;数据库管理系统　</p>
+<h1 id="6-运营人黑话"><a href="#6-运营人黑话" class="headerlink" title="6. 运营人黑话"></a>6. <strong>运营人黑话</strong></h1><p>得培养用户的使用习惯 &#x3D; 做个签到体系　</p>
+<p>好产品要用完即走 &#x3D; 用户使用时长短不是我的锅　</p>
+<p>要学会洞察人性 &#x3D; 多放几张美女图　</p>
+<p>没有用户是因为产品不行啊 &#x3D; 不是我的锅　</p>
+<p>我今晚有事 &#x3D; 老子我就是不想加班　</p>
+<p>文案我已经快改好了&#x3D; 卧槽我还是憋不出来　</p>
+<p>小哥哥是喜欢一点点还是喜茶呀 &#x3D; 又要改需求了　</p>
+<p>设计图还缺一点感觉 &#x3D; 设计什么辣鸡玩意啊　</p>
+<p>最近经常按十下班 &#x3D; 老板怎么还不加工资呀　</p>
+<p>新用户获客成本都很高 &#x3D; 老板你这点预算我很难帮你做事啊　</p>
+<p>这是很常见的活动啊 &#x3D; 我抄袭大厂的　</p>
+<p>最后一次修改需求了 &#x3D; 只好暂时先忽悠一波了　</p>
+<p>这个需 4 求很简单 &#x3D; 怎么实现我不管　</p>
+<p>随便弄弄 &#x3D; 别瞎 bb 了，就这么简单的一个需求，不就几分钟的事情…　</p>
+<p>要想办法提升用户活跃度 &#x3D; 多发红包多发补贴　</p>
+<p>商业化运营&#x3D;能挣钱的都做　</p>
+<p>社群营销&#x3D;微信群卖课　</p>
+<p>发力&#x3D;投钱　</p>
+<p>打法&#x3D;花钱的方法　</p>
+<p>闭环&#x3D;做 PPT 时画个圈儿　</p>
+<p>联动&#x3D;多人参与　</p>
+<p>群控&#x3D;一台电脑控制上百部手机　</p>
+<p>私域流量&#x3D;朋友圈　</p>
+<p>Vlog&#x3D;有人对着镜头说话　</p>
+<p>MCN&#x3D;网红经纪公司　</p>
+<p>洗稿&#x3D;抄袭　</p>
+<p>互推&#x3D;资源互换粉丝共享　</p>
+<p>硬广&#x3D;只有广告　</p>
+<p>软文&#x3D;有点广告　</p>
+<p>跳出率&#x3D;没看完　</p>
+<p>网感&#x3D;上网时间长短　</p>
+<p>内容迭代&#x3D;根据时间再改一版　</p>
+<p>孵化&#x3D;自己搞　</p>
+<p>追热点&#x3D;蹭流量，博眼球　</p>
+<p>全网发布&#x3D;各个平台，都发一遍　</p>
+<p>分发&#x3D;一个一个发　</p>
+<p>矩阵&#x3D;搞一堆号　</p>
+<p>赋能&#x3D;帮忙助力　</p>
+<p>圈层传播&#x3D;全网发布　</p>
+<h1 id="7-互联网人知名大厂别称黑话"><a href="#7-互联网人知名大厂别称黑话" class="headerlink" title="7. 互联网人知名大厂别称黑话"></a>7. <strong>互联网人知名大厂别称黑话</strong></h1><p><strong>熊厂、狼厂、蓝厂</strong>&#x3D;百度。百度的 Logo 是一个蓝色的熊爪子，所以蓝厂和熊厂的名字是这样来的，但是相比来说，百度更多的时候被叫做狼厂，起源于百度 CEO 李彦宏给百度员工的一封公开信：《鼓励狼性淘汰小资》，引起广泛的讨论，之后百度有员工就开始称百度为「狼厂」。　</p>
+<p><strong>猫厂、东厂、西厂、福报厂</strong>&#x3D;阿里巴巴。阿里巴巴是因为旗下天猫的 Logo 而演变来的，所以叫做猫厂。除此之外在浙江杭州有东西两处办公地点，被内部员工称为东厂和西厂。　</p>
+<p><strong>鹅厂</strong>&#x3D;腾讯。腾讯名字的原由就比较简单了，因为腾讯的 Logo 是一只企鹅，企鹅也是鹅。　</p>
+<p><strong>渣浪</strong>&#x3D;新浪。新浪人称渣浪人人都知道，当然这么渣的名字就不是自称得来的了，而是 A 站和 B 站网友对新浪视频的称号，起因是 up 主使用外链投稿曾多次被新浪审核但又无故删除，使得 UP 主们抓狂，从此就有了“战渣浪”的定义。　</p>
+<p><strong>猪厂</strong>&#x3D;网易。这个名字内部人基本不用，也是属于外面人叫得比较多一点，起源是网易 CEO 丁磊在之前养过一段时间的猪，所以就这样被传开了。　</p>
+<p><strong>狐厂</strong>&#x3D;搜狐。搜狐的吉祥物是一只红色大尾巴的小狐狸，所以被叫做狐厂，不过对搜狐的人使用花名的时间并不多。　</p>
+<p><strong>狗厂</strong>&#x3D;京东。为了和天猫打一场硬架，2013 年 3 月 30 日，京东高调地更换域名、logo 及 VI 系统，随之，一只名为“Joy”的金属小狗也空降互联网，于是在电商领域，阿里巴巴和京东的交战也可以被称为“猫狗大战”。　</p>
+<p><strong>绿厂、数字公司</strong>&#x3D;奇虎 360。由来：绿厂名字的带来是 360 的 Logo 颜色，不过 OPPO 也是绿色的 Logo 所以也被叫做绿厂，但是 360 更加出名的花名是数字公司，因为 360 嘛。　</p>
+<p><strong>杂粮、粗粮、粮厂</strong>&#x3D;小米。由来：杂粮名字的由来是 360 周鸿祎 2012 年和雷军在微博上打口水战而来，而后又被传播为粗粮和粮厂。　</p>
+<p><strong>宇宙厂</strong>&#x3D;字节跳动。“宇宙厂”的由来，一说是前 CEO 张一鸣在 2020 年的一封内部信中，鼓励员工要有“火星视角”。还有另一说是字节跳动的“超级 APP 工厂”属性，资讯、短视频什么都做，还偏偏都能成，于是被送外号“宇宙厂”。　</p>
+<p><strong>开水团</strong>&#x3D;美团，开水”二字，意味着纯净，也代表着无味。获得这个称号完全是因为它的薪资福利体系不够有竞争力。但是也因为他们艰苦朴素、勤俭节约的风格像水一样，所以有了这个戏称。　</p>
+<p>**老铁厂&#x3D;**快手，源于老铁 666 经典话语。　</p>
+<p>**桔厂&#x3D;**滴滴，因公司为小桔科技得名。　</p>
+<p><strong>红薯厂&#x3D;小红书</strong>，因谐音而得名。　</p>
+<p><strong>搜厂&#x3D;搜狐</strong>，因 logo 是一只狐狸而得名。　</p>
+<p><strong>海豚厂&#x3D;携程</strong>，因 logo 是一只海豚而得名。　</p>
+<p><strong>菊花厂&#x3D;华为</strong>，沸腾厂，菊花因 logo 像菊花得名，沸腾因新闻经常出现“沸腾”二字而得名。　</p>
+<p><strong>猴厂&#x3D;小米</strong>，因为小米饥饿营销被大家戏称为耍猴而得名。　</p>
+<p><strong>绿厂&#x3D;OPPO</strong>，本分厂，因 logo 是绿色被称为绿厂，因价值观第一条是要求员工守本分而叫本分厂。　</p>
+<p><strong>蓝厂&#x3D;VIVO</strong>，因 logo 是蓝色而得名。　</p>
+<p>**豆厂&#x3D;**取豆瓣公司的名字中豆字　</p>
+<p><strong>发电厂&#x3D;B 站</strong>，B 站的一个梗，用爱发电，为爱买单。　</p>
+<p><strong>体面厂&#x3D;海康威视</strong>，大佬说，公司不能让你赚很多钱，但是可以给你一份体面的工作。　</p>
+<h1 id="8-互联网招聘黑话"><a href="#8-互联网招聘黑话" class="headerlink" title="8. 互联网招聘黑话"></a>8. <strong>互联网招聘黑话</strong></h1><p>能承受较大的工作压力——加班　</p>
+<p>抗压能力强——加班+替别人扛雷　</p>
+<p>工作有激情——自觉加班还要特美　</p>
+<p>有强烈责任心——没做完不准走　</p>
+<p>弹性工作制——加班不给加班费　</p>
+<p>弹性工作制，但不保证准时下班——做完了才准走　</p>
+<p>包三餐——早晚都得加班　</p>
+<p>双休——工作日加班　</p>
+<p>薪资+社保+带薪休假+职位晋升——是个正经公司都有，没什么拿得出手的福利　</p>
+<p>适应较快的工作节奏——加班把三天的工作两天做完　</p>
+<p>公司提供水果——貌似也就这一个福利　</p>
+<p>有强烈的上进心——干完工作就加班去干其他工作　</p>
+<p>喜欢有挑战性的工作——加班、前人留的坑不少　</p>
+<p>不提倡加班——你懂的（该加还得加，加班是因为你工作效率低，不是安排工作多）　</p>
+<p>不强制加班——你懂的 （不做完额外安排的工作你走一个试试！) 　</p>
+<p>上不封顶——下不保底　</p>
+<p>偶尔会忙——以后忙了你别抱怨，提醒过了　</p>
+<p>团队氛围很好——大家经常一起加班，一起吃加班餐，聊聊工作，多 happy　</p>
+<p>上升空间大——工资低，3000 元涨个 50%不也就 4500 吗？　</p>
+<p>领导安排的其它任务——我叫你干啥你就得干啥　</p>
+<p>妹子多——这个屌丝虽然脑子不太好使但便宜，看看这个理由能不能骗一蛤　</p>
+<p>有期权——没多余的现金发工资给你　</p>
+<p>有股权——工资微妙地低于你应得的数，反正我不信你能干满拿走　</p>
+<p>年底双薪——13 薪　</p>
+<p>13 薪起——别想了，就是 13 薪　</p>
+<p>年底有奖金——年薪大于 12 薪小于 13 薪　</p>
+<p>我们 6 点准时下班 -——入职才知道最严重的早晨 6 点下班，回家吃早饭睡觉。　</p>
+<p>扁平化管理 -——领导和你坐一屋，盯着你干活　</p>
+<p>核心团队来自 BAT ——嗯，你不是 BAT 的，所以你不是核心　</p>
+<p>“我把你的简历整理一下”——对方说这个的话基本可以判断他是卖人头外派的了，把你的简历给他的甲方。　</p>
+<p>弹性工作时间——只弹下班（下班时间不固定），不弹上班　</p>
+<p>能独立完成任务 ——前端后端或产品测试推广运营全都你一个人干　</p>
+<p>领导好——看你顺眼就好，不顺眼就 XX ；你有生之年不可能有晋升的空间　</p>
+<p>XXX 比钱重要——钱达不到你的要求　</p>
+<p>公司会给你培训，但是工作之后你要交培训费——麻痹就是培训班　</p>
+<p>BAT 薪资——略微高于本地市场价　</p>
+<p>帮员工避税——按最低工资给你交社保公积金（五险一金）　</p>
+<p>我们是创业公司——有不少坑要填，另请做好加班拼命的准备　</p>
+<p>老板 &#x2F;负责人不在，稍后会联系你的——面试不合格，不要抱期望了　</p>
+<p>期权激励拿到手软——希望能弥补你看到基本工资后的脚软　</p>
+<p>专注移动互联网，拥有几亿活跃用户——就注册了个微信公众号　</p>
+<p>有活力的技术团队——团队平均工作经验&lt;1 年　</p>
+<p>创始团队全部来自 BAT——在淘宝干过客服、自己玩过微信公众号、还在百度实过习　</p>
+<p>千亿市场的探索者——目前尚没看清具体市场在哪　</p>
+<p>扁平化管理，高度自由——全公司人数，一只手就数的过来。　</p>
+<p>典型欧美创业工作环境——办公室现处于毛坯房状态　</p>
+<p>新技术+新方向+新团队——嗯，目前这三样都没有　</p>
+<p>直进核心团队——公司尚未设置非核心团队岗　</p>
+<p>全方位成长机会——你有很大机会成为外卖超人　</p>
+<p>有机会晋升技术合伙人 ——现在就缺一个程序员来码代码了！　</p>
+<p>提供各种福利——每样细说咱就伤感情了　</p>
+<p>福利完善，待遇从优——严格按照法定节假日上班和……上班。　</p>
+<p>有完善的员工期权激励措施——所以对工资要求别太高。　</p>
+<p>提供住宿、班车及两餐——每周提供数小时时间与家人团聚　</p>
+<p>底薪+岗位绩效+职称奖+管理绩效+提成+五险 ——和在一块您看看够不 56、够付这个月房租？　</p>
+<p>加入我们，给你足够大的发展空间！——目前公司规模&lt;10 人　</p>
+<p>女性员工占一半以上——创业公司的员工性别结构为：男生、女汉子以及别人的女友。　</p>
+<p>深受资本追捧，行业方向被投资人看好——又有几个同行拿到融资了，而他们还在追着投资人跑　</p>
+<p>大牛云集——我司属牛的同事比较多　</p>
+<p>与互联网大咖面对面，有巨大成长空间——加了个混充有某某大佬的微信群，常年潜水从不说话，好友更不加。　</p>
+<p>公司计划短期内上市——您也知道计划一般赶不上变化　</p>
+<p>徘徊在牛 A 和牛 C 之间一群人！——永不止步，从来没在牛 B 上停驻过　</p>
+<h1 id="9-互联网黑话名词解释"><a href="#9-互联网黑话名词解释" class="headerlink" title="9. 互联网黑话名词解释"></a>9. <strong>互联网黑话名词解释</strong></h1><p><strong>痛点：</strong> 痛点往往是当下的困境、消费者不满意的地方、品牌可以对此加以弥补的地方——简单来说，在品牌营销中痛点就是品牌当前急需解决的问题，可以用在各种媒介运营困境、问题等分析中。比如对快手来说当前的痛点即“土味”标签。小标题举例：大数据辅助：精准打击消费者痛点。　</p>
+<p><strong>场景：</strong> 场景的概念运用非常广泛，一般特制传播、话语、行为发生的具体平台、媒介、空间。当下场景有几个典型用法，如媒介场景、消费场景、文化场景等。同时场景强调精准和个性，是针对用户特点予以设定的。举个例子，在谈到直播带货优势的时候，我们可以说消费场景泛化，随时与碎片化消费成为可能。　</p>
+<p><strong>渠道：</strong> 渠道就是媒体，像是微博、微信、抖音快手都是渠道，目前渠道这个词几乎被滥用了，大家如果看到渠道的话，就直接带入「平台即可」，比如媒介融合实际上就是在做渠道融合、渠道革新。　</p>
+<p>**生态：生态到处都能看见，但一定要解释的话其实也没个专业的词能解释新传领域的生态，如果一定要说的话，生态就是传媒环境，是宏观的市场状态：后真相是传播生态、媒介融合是传播生态、媒介化社会也是传播生态。任何你想用背景这个词的时候，都可以把背景换成生态，就高级很多。　</p>
+<p>**头部：尾部：以网红为例，头部就是李佳琦薇娅，腰部就是个大圈层中的博主，尾部就是还在孵化中的或者是经纪公司签约的网红。如果以媒体为例，头部就是中央主流，腰部就是地方广电，尾部就是县级融媒体。这三个层次可以构建答题框架，比如分析网红经济的困境，可以分别分析头部、腰部和尾部存在的困境。　</p>
+<p>**画像：简单来说就是目标消费者，或者说是目标消费者的特点集合。如果要写用户或者是目标消费者，在后面加个「画像」就会高级很多。不信你感受下，「目标消费者：标签式的信息传播&#x2F;用户画像：标签摹画消费者特征」　</p>
+<p>**声量：声量是支持度，比如李佳琦直播间有多少人，就表示李佳琦有多少身量，现在有种说法叫声量转化为销量，也是直播带货目前亟待突破的瓶颈。　</p>
+<p>**蓝海：蓝海代表当今还不存在的产业，这就是未知的市场空间。但蓝海不代表没有竞争，而是企业需要不断的挖掘市场潜力，通过创新等手段来激活市场，比如当下的人工智能市场。举个例子：创新方向：聚焦蓝海市场，深挖技术潜能。　</p>
+<p>**红海：红海指的是现有的竞争白热化的血腥、残酷的市场。因为招招见红，所以叫“红海”，所有短视频就是红海市场，对于红海市场而言，需要进行行业规整，产业化发展。　</p>
+<p>**赋能：赋予能力，和赋权差不多的意思。所有能用赋权的都能用赋能，什么技术赋能啊，渠道赋能下传播内容多样表达等，还有比如文化赋能、价值观赋能、内容赋能之类。比如品牌社会化：品牌形象与社会价值双重赋能。　</p>
+<p>**圈层：简单来说就是阶级或者说是社会圈子，粉丝圈也是圈层，上流社会也是圈层。圈层最常和圈层传播、圈层互动这几个词结合在一起用。圈层传播是圈子内部的信息交流，可以是社群，也可以是群体。而圈层互动则是突破圈层的互动形式。　</p>
+<p>**出圈：现在都强调垂直，垂直一般都是在特定的小众圈层内进行传播，而出圈的意思就是这个内容做的太好了，突破了原本的传播圈层，比如 b 站出圈的《后浪》，比如回形针出圈的《关于新冠肺炎的一切》以及何同学，都是突破了原有的传播和粉丝圈层，实现了跨圈层全网传播。　</p>
+<p>**洞察：就观察呗，观察的高级说方法。小标题举例：大数据实现消费者深度洞察。　</p>
+<p>**MCN：这个词如果看各种解释的话就很神奇，什么多媒体频道啦，什么持续变现啦之类的，但其实简单来说就是网红公司。所以提到网红经济、李佳琦、直播带货，完全可以说他们背后都是 mcn，而 mcn 也是整个网红&#x2F;粉丝产业链的上游，负责商业运作的那个机构。　</p>
+<p>**矩阵：一家公司下面有好多个平台或者好多个媒体就叫矩阵。人民日报的人民号 1000+，头条系、腾讯系产品都叫矩阵。矩阵即使当下保证平台互相协助的方式，也是未来互联网平台发展的趋势。小标题举例：矩阵化传播：内核一体化与内容多样化。　</p>
+<p>**产业链：以网红产业为例，网红本人、经纪公司、广告商、品牌商、平台方这些合并在一起就构成了网红产业链。所以当下粉丝、网红、ip 都在强调产业链，产业链的构建意味着商业模式的成熟。直播带货相关的小标题举例：产业链打造：重塑货、场、人关系。　</p>
+<p>**社群：这个词用的太多啦，几乎所有的用户策略、平台策略里面不提社群就很土了，社群其实就是把用户聚集在一起，让他们自己交流自己生产内容，自产自销。所以小红书其实就是社群，什么社群营销啦、社群经济啦、社群生产啦都与之相关。小标题举例：消费者策略：社交+电商+社群增加粘性。　</p>
+<p>**信息流：微博的信息、朋友圈的信息、公众号的信息，这些都是信息流。信息流主要用在广告里，当然现在信息流也是重要的营销场景，可以有效降低用户的广告抵触或者广告躲避。　</p>
+<p>**闭环：闭环有很多高级的说法，但咱们简单点哈，闭环就是围绕消费者，把消费者牢牢的圈在平台上，从内容消费到真实消费到支付再到反馈构成一个闭环，在任何一个环节消费者都不会离开平台。小标题举例：盈利策略：商业闭环打造产业化变现。　</p>
+<p>**风口：风口浪尖，所有人都在冲，最赚快钱的领域就是风口，比如前几段的短视频，比如现在的直播带货。这个词是个很好的形容词，强调互联网目前的主要领域和趋势。　</p>
+<p>**垂直：垂直等同于当下的精准，这个词真的万能搭配，简单点作为特点比如垂直化；复杂点比如垂直传播、垂直营销、垂直消费；再复杂点就和各种词巴拉巴拉相结合，比如垂直化的平台极大的激活了用户的创造性，实现用户的个体赋能。　</p>
+<p><strong>碎片</strong>：碎片化是这两年特别喜欢考的一个词，往往和垂直化放在一起。碎片简单来来说就是无处不在无时不在，比如你此刻阅读我们推送的时间就是你的碎片化时间，你可以躺在床上看，吃饭的时候看，厕所的时候看——碎片和时间的组合最常用，除此之外还有碎片化阅读、碎片化传播等，抖音就是典型的挖掘碎片化时间，进行的碎片化传播。　</p>
+<p>**扁平：扁平是和立体对应的，比如以前媒体内部的编辑室机制是层层把关层层筛选，那现在的媒介融合的流水线就属于扁平生产，彼此之间平等互助。举个小标题的例子，比如讲到中央厨房优势的时候可以写「扁平化传播提升内容生产效率」　</p>
+<p>**迭代：我继文科生装逼词汇后又写了这篇互联网装逼词，这就是我的迭代，而你们学会这个后也成长了，不在写很土的内容了，这是你们的迭代。目前迭代的说法主要是信息迭代、新闻迭代、媒介迭代甚至包括流言和谣言，都始终在迭代传播。举个例子：后真相的实际困境：信息迭代快于事实核查。　</p>
+<p>上半场与下半场：上半场是快速发展、乱、各种风口巴拉巴拉，下半场就是开始规整了一些、发展速度变慢，开始进行挑战转型。比如现在是直播带货的上半场，是云教育的上半场，但是现在是互联网下半场、短视频下半场、媒介融合下半场。　</p>
+<p>**云 xx：云教育、云健身、云喝酒。云依托于当下的云传播，正在成为媒介化社会中特别重要的词，是一切即可互联网的典型。所以大家看到云这个词的时候，就记住是线上就好。　</p>
+<p>**粘性：秃头所的粘性，就是让你们离不开我，这就是粘性。创造用户粘性是目前所有品牌和平台都在努力的，抖音的沉浸算法、网易云的社区和乐评，都是在打造用户粘性，这个词可以用于所有平台策略、媒体策略和媒体改革中。　</p>
+<p>**变现：口语化翻译就是把内容、信息、知识变成钱。比如此刻我辛辛苦苦写推送，辛辛苦苦卖课恰饭，就是为了把我的大脑变现。目前变现可以说是最低级的互联网盈利话术，在变现上面还有更高级的比如商业变现、资本转化之类的。　</p>
+<p>**供给侧：供给侧是内容、产品以及服务的提供者。互联网平台、媒体、政府这些都属于供给侧，所以日常所说的供给侧改革，实际上就是平台的媒介融合、政府的改革，更复杂的一点的供给侧结构性改革，人话就是供给侧从组织架构到内容全面改革。小标题举例：供给侧自我革新：以技术实现全面融合。　</p>
+<p>**需求端：供给侧的另一面，是消费者和用户端口，也是消费者的说法。如果你觉得用户消费者你都用腻了，你就可以用需求侧表示。在产品或者媒介运营里，假如要用到 5w 框架，就可以用供给和需求来代替传播者和消费者。　</p>
+<p>**支撑层：支撑层是 pest 因素，包括了政策支持、资本支持、技术支持和社会文化支持等，比如当下要建立深度媒介融合，支撑层就同时具备了国家政策、社会资本以及技术要素，因此分析四级融合可能性时可以写：支撑层：顶层设计辐射全域融合。　</p>
+<p>**普惠：平等的对待每一个人，同时惠及每一个人。这是快手提出来的策略，意思是每个人在快手都可以获得平等的流量、平等的传播。小标题举例：社会价值：信息普惠与传播公共职能凸显。　</p>
+<p>**景观：形成了什么样的社会趋势和社会状态，比如粉丝文化是一种社会文化景观、后真相是社会舆论景观、拜金主义是社会消费景观。　</p>
+<p>**新常态：过渡阶段态势称之为新常态，新常态具备从混乱到稳定、从无规则到有规制等特征，因此互联网下半场其实也是一种新常态，而当下短视频的调整与转型也可以称之为新常态。大家写任何一种互联网现状的未来发展趋势是，都可以用新常态这个词。　</p>
+<p>**IP 化：ip 是知识版权，而 ip 化其实就是知识产权概念进一步扩大。比如当下李佳琦的名字甚至形象就是一个 ip，是一个知识产权，李佳琦和完美日记，和花西子的联名，就是 ip 化下产业链的衍生。因此无论是网红，还是品牌，都要在未来呈现 ip 化发展的趋势。　</p>
+<p>**Z 世代：当下互联网的主力人群，所有流行社会文化如饭圈文化、消费文化、亚文化、女权主义的创造者和拥护者，其实就是你和我。因此几乎所有的互联网平台、抖音啊快手啊，第一目标消费者都应当是 z 世代。　</p>
+<p>**小镇青年：小镇青年指出身在三四线及以下的县城、乡镇，在老家生活工作、或前往大城市及省会周边城市打拼的青年，小镇青年社会基数大、消费能力在逐步上升，正在成为社会重要的消费力量。目标消费者画像就可以写 z 世代或者小镇青年。　</p>
+<p>**代际：代际就是以前说的代沟，假设大家是 00 后的话，我们可能就会存在一点代际隔阂了。小标题举例：老年的消逝：代际隔阂的逐步弥合。　</p>
+<p>**新消费：专业解释的话，“新消费”是指由数字技术等新技术、线上线下融合等新商业模式以及基于社交网络和新媒介的新消费关系所驱动之新消费行为。所以如果大家想在论述行业热点的题目里面提升自己答题逼格的话，可以用新消费代替平台型经济、甚至直播带货也是新消费。比如宏观分析当下社会现状的题，就可以写：新消费趋势：技术驱动消费变革。　</p>
+<p>**私域流量：相比于百度、谷歌这种大规模占有内容数据体系的平台和公共流量池来说，个体与个体间的社交关系则成为重要的相对私人的情况，例如传统的电话簿营销、新兴的朋友圈宣传等方式。可以说，私域就是相比于公领而言的个人访客。　</p>
+<p>**出海：就是国际传播，跨文化传播。抖音去国外发展就是出海，李子柒传播也叫出海，国际传播需要借船出海，船就是类似 fb 这样的全球社交软件，出海就是全球传播。可以用在所有国际传播题里，小标题举例：社交出海：品牌传播的未来趋势。　</p>
+<p>**降维打击：两层意思，要不就是我很高级你很土，我从高级层面对你降维打击，要不就是我无限变土，土到你不认识我，也算是降维打击。总而言之自己和对家要处于不同的层面上。举个例子：我们在说到下沉市场的时候，往往会提到品牌对下沉市场的策略是降维策略，属于降维打击。　</p>
+<p>**下沉市场：三四线城市，小镇青年所在的市场。中国下沉市场特别广阔，快手、直播带货、拼多多当下都在针对下沉市场进行营销和传播，用法特别多，比如说直播带货的价值或者是快手兴起原因的时候，都可以说聚焦下沉市场，深度挖掘用户价值之类的。　</p>
+<p>**平台背书：背书意思是权威保证，平台背书一般就是大平台大资本作为背后的支撑，既可以是资本支撑、也可以是服务支撑，也可以是声誉保证。比如腾讯发起了一个公益活动，腾讯作为最牛逼的互联网平台进行背书，会提高活动的可信度。比如我写这篇推送，背后是花花和秃头所的学识背书，提升推送的学术价值。在写到一些品牌发展策略的时候，小标题举例：资本平台背书：商业+服务+技术助力品牌形象。　</p>
+<p>**社会品牌：社会品牌是目前所有互联网品牌和消费品牌的发展方向，即兼具经济效益和社会效益，比如维秘突然强调女性价值，比如杜蕾斯去年歌颂伟大的爱情、比如快手的《看见》，这些都是平台积极打造社会品牌的体现。小标题举例：文化价值引导：打造普惠性社会品牌。　</p>
+<p>**个人主义：个人主义是互联网时代强调个人价值的体现，就像快手的《看见》一样，要看见我们身边每个发光的普通人，这就是互联网平台对当下个体的赋权。举个例子分析快手或者 b 站的宣传视频为何会走红时可以写：个人主义传播：打造集体记忆式的文化景观。　</p>
+<p>**社交货币（资本）：简单来说就是谈资。之前名媛群是谈资，七夕的呱呱是谈资，现在的打工人是谈资，抖音热门段子、流行音乐都是社交货币。小标题可以这么写：迷因式传播打造社交货币。　</p>
+<p>倒逼：听起来很有逼格，实际上就是促进、推动、反向推动整个事件、项目的进程发展，或者是对用户购买欲等方面的刺激。例如舆论热点的大量积累倒逼相应权力机构对具体事件的解决。</p>
+<h1 id="10-互联网岗位的口头禅"><a href="#10-互联网岗位的口头禅" class="headerlink" title="10. 互联网岗位的口头禅"></a>10. <strong>互联网岗位的口头禅</strong></h1><p>产品岗：没排上期、下个版本。　</p>
+<p>设计岗：别戳屏幕。　</p>
+<p>研发岗：实现不了。　</p>
+<p>测试岗：醒醒，有 bug　</p>
+<p>数据岗：你们要这个干啥　</p>
+<p>运维岗：磁盘满了、网络抖动。　</p>
+<p>程序员终极大法：删库跑路。　</p>
+<p>法务岗：这个有风险。　</p>
+<p>公关岗：建议别做。　</p>
+<p>品牌岗：预算多少？　</p>
+<p>财务岗：还没到你。　</p>
+<p>采购岗：按流程走。　</p>
+<p>策划岗：客户不接受。　</p>
+<p>行政岗：我去问问那谁。　</p>
+<p>客服岗：刚遇到一傻 X。　</p>
+<p>市场运营岗：辛苦辛苦、好的收到、求求你啦、谢谢爸爸、感恩的心、给大佬们下跪。　</p>
+<h1 id="11-互联网人的焦虑词汇"><a href="#11-互联网人的焦虑词汇" class="headerlink" title="11. 互联网人的焦虑词汇"></a>11. <strong>互联网人的焦虑词汇</strong></h1><p>搞副业、搞钱、做微商、斜杠青年、知识付费、流量密码、认知升级、收智商税、底层逻辑、割韭菜、交学费、这碗鸡汤我干了、睡后收入、如何实现财务自由　</p>
+<h1 id="12-新媒体黑话"><a href="#12-新媒体黑话" class="headerlink" title="12. 新媒体黑话"></a>12. <strong>新媒体黑话</strong></h1><p><strong>自媒体：</strong> 开公众号。　</p>
+<p><strong>内容创业：</strong> 写公众号拍短视频搞直播。　</p>
+<p><strong>进军移动互联网：</strong> 注册订阅号。　</p>
+<p><strong>全媒体：</strong> 开了公众号和微博，也当了 UP 主，但就是没人看。　</p>
+<p><strong>致敬：</strong> 抄袭。　</p>
+<p><strong>自由职业：</strong> 无业游民。　</p>
+<p><strong>数字游民：</strong> 在家玩电脑。　</p>
+<p><strong>交学费：</strong> 赔钱。　</p>
+<p><strong>跨界：</strong> 不务正业。　</p>
+<p><strong>促进圈层传播：</strong> 找人发朋友圈　</p>
+<p><strong>通过 KOC 矩阵传播实现真实人格分享：</strong> 大号太贵了，有没有小号　</p>
+<p><strong>品效合一：</strong> 别刷量忽悠老板了，有本事带货看销量　</p>
+<p><strong>All in 视频号：</strong> 抖音快手 B 站你都玩不起来，视频号是你最后的救命稻草了　</p>
+<p><strong>内容迭代：</strong> 快做视频啊　</p>
+<p><strong>全平台分发：</strong> 每个网站都传一份　</p>
+<p><strong>全网阅读量 1 亿：</strong> 微信 1000，剩下全在微博和头条号　</p>
+<p><strong>自我迭代：</strong> 一度快做死了，侥幸又活了过来　</p>
+<p><strong>种草心智：</strong> 我们卖不了货　</p>
+<p><strong>我们是一个 B 端影响力大号：</strong> 阅读量不会太高　</p>
+<p><strong>传统产业转型线上新零售：</strong> 线下卖不动了去网上试试　</p>
+<p><strong>矩阵式打法：</strong> 做一堆号总有一个行吧　</p>
+<p><strong>拓展商业化边界：</strong> 找更多赚钱的方法　</p>
+<p><strong>孵化自有 KOL：</strong> 外面的网红不好签　</p>
+<p><strong>赋能 KOL 成长：</strong> 自家的网红孵不出　</p>
+<p><strong>商业化运营：</strong> 做广告、卖货、卖课，每个都试一遍　</p>
+<p><strong>私域流量搭建：</strong> 多搞几个微信加好友　</p>
+<p><strong>社群裂变：</strong> 多拉一些微信群　</p>
+<p><strong>社群经济：</strong> 拉一堆群天天发广告　</p>
+<p><strong>拉新成本高：</strong> 实在刷不动粉了，买粉太贵　</p>
+<p><strong>公众号内容升级：</strong> 爸爸们，涨价了　</p>
+<p><strong>流量共享机制：</strong> 博主们互相加入对方的群　</p>
+<p><strong>热点到了第三天：</strong> 没人关注了　</p>
+<p><strong>微信再推新版本：</strong> 冲！教张小龙做产品的时候到了　</p>
+<p><strong>这个稿子缺乏共情：</strong> 说不出具体问题但反正不太行　</p>
+<p><strong>行业人脉升级：</strong> 加入了大佬的微信群　</p>
+<p><strong>战略打法：</strong> 没有什么道理但大家都这么说　</p>
+<p><strong>直播营销具备超强实时互动性并即时促成转化：</strong> 直播可以边看边买　</p>
+<p><strong>认知占领，概念先行：</strong> 这个词我也不知道啥意思但反正我先提出来　</p>
+<p><strong>这次项目预算有限，要考虑优化资源配置实现性价比最大化：</strong> 没钱　</p>
+<p><strong>从 0 到 1 学会视频号：</strong> 自己做内容没赚到钱，所以去忽悠那些想赚钱的　</p>
+<p><strong>与用户建立更深层次的交互，实现对用户的深度触达：</strong> 充分获得用户的时间和钱</p>
+<h1 id="13-互联网企业团建黑话"><a href="#13-互联网企业团建黑话" class="headerlink" title="13. 互联网企业团建黑话"></a>13. <strong>互联网企业团建黑话</strong></h1><p>时间：一般选在周末等非工作时间。　</p>
+<p>地点：市内或就近不超过两百公里的邻近城市，甚至乡村农家乐乃至山里。　</p>
+<p>内容：顶着大太阳玩大学生军训破冰那套。　</p>
+<p>住宿：当天来回，或住一天快捷酒店（帐篷也是有可能的）。　</p>
+<p>伙食：普遍为自己采购材料的烧烤，吃完还得拉一天肚子。　</p>
+<p>性质：虽然是做公司的事，但没有产生实际工作量，所以依然算放假。　</p>
+<p>请假：不允许。　</p>
+<p>员工 A 感受：团建还要在外地远程加班，还不如直接回公司。　</p>
+<p>员工 B 感受：公司的加班制度本来就是大小周，那团建就导致了持续单休。实在没时间。　</p>
+<p>员工 C 感受：花这么多冤枉钱，还不如直接加薪。别整这些花里胡哨的。　</p>
+<p>老板期待效果：公司内部大团结，生产力极大的提高，用人成本极大的降低，免费 996 向义务 007 过渡。　</p>
+<p>实际效果：加速了员工的离职计划，激活部分没有离职计划的员工开启离职计划。　</p>
+<p>老板结论：下次继续。　</p>
+<p>员工结论：实在受不了。　</p>
+<h1 id="14-互联网日常沟通话术"><a href="#14-互联网日常沟通话术" class="headerlink" title="14. 互联网日常沟通话术"></a>14. <strong>互联网日常沟通话术</strong></h1><p>好哒：草。　</p>
+<p>好的：我整个人都不好了。　</p>
+<p>收到：沙雕半夜发通知。　</p>
+<p>欢迎：又新来一个 sb。　</p>
+<p>谢谢：md，下次赶紧自己发给我，别让我亲自来要。　</p>
+<p>在吗：又来活了。　</p>
+<p>在：有话赶紧说。　</p>
+<p>稍等哈：现在没空理你。　</p>
+<p>哈哈：不知道该回复什么。　</p>
+<p>哈哈哈哈哈：你这话我没法接。　</p>
+<p>我和 xx 沟通一下：就知道和你沟通没用。　</p>
+<p>加油你可以的：我觉得你不行。　</p>
+<p>咱们拉个群吧：和你沟通真费劲。　</p>
+<p>棒棒哒：这点小事搞这么久？　</p>
+<p>我今天比较忙：我就是不想理你。　</p>
+<p>优秀：你做完我就不用做了，太好了。　</p>
+<p>过分优秀：随便夸一下你，别当真。　</p>
+<p>好的：现在不想和你说话。　</p>
+<p>收到：现在没空看。　</p>
+<p>争取今天搞定：加班！　</p>
+<p>在做了：进度 0％。　</p>
+<p>快搞完了：进度 1%。　</p>
+<p>在路上了：还没出发。　</p>
+<p>对一下：开会。　</p>
+<p>碰一下：开会。　</p>
+<p>过一下：开会。　</p>
+<p>分享：开会&#x2F;脑暴。　</p>
+<p>给到：给了，用不了不怪我。　</p>
+<p>咬合：撕逼。　</p>
+<p>同步：把资料发给一起干活的。　</p>
+<p>跟进（push）：催着同事出活儿。　</p>
+<p>反向 push：先一步催促那些催你的同事。　</p>
+<p>整合：东拼西凑。　</p>
+<p>输出：交一份文档。　</p>
+<p>给到：给了，如果出事，那可不怪我。　</p>
+<p>交付：都交接给你，我不用管了。　</p>
+<p>方法论：过往经验总结的套路。　</p>
+<p>接地气：别太洋气。　</p>
+<p>水位：标准。　</p>
+<p>通晒：公布给大家看。　</p>
+<p>有案例可以参考吗：有现成的可以抄吗？　</p>
+<p>我建议不改：你行你上啊。　</p>
+<p>不要再改了：你到底行不行啊？　</p>
+<p>你是专业的：终于把锅甩出去了。　</p>
+<p>领导很重视：打死都得做出来。　</p>
+<p>你可以提意见：你说的对，但是我不会听。　</p>
+<p>我没啥意见：你开心就好。　</p>
+<p>这个选题可以先放一放：八成要凉，别想做了。　</p>
+<p>这个我回去再确认一下：别说了，我没想到。　</p>
+<p>我再看看：是我的问题，但我不想承认。　</p>
+<p>这个是已知问题：我早就知道这个问题，但就是不想改。　</p>
+<p>这个是历史遗留问题：不是我的锅，我接手之前就有这个问题。　</p>
+<p>我有个疑问：你说的是什么辣鸡玩意？　</p>
+<p>最近挺忙的：休想甩锅给我。　</p>
+<p>我有个想法：虽然我说的不一定是对的，但是你别 bb，照这样做就好了。　</p>
+<p>预算不多：对不起其实根本就没预算。　</p>
+<p>你先做吧：虽然我不知道要做什么，但是你做出来之后我就知道自己不想要了。　</p>
+<p>差点感觉：怎么看都觉得缺了点东西，具体什么我也说不出，反正你改就是了。　</p>
+<p>就这样吧：虽然我很不满意，但是你改了这么多次，内心过意不去。　</p>
+<p>辛苦了：看着是关切的话，一方面是假装的问候，另一方面是想让你继续更辛苦地听我使唤。　</p>
+<p>财务不在：我有拖延症，根本就没走到财务那个流程　</p>
+<h1 id="15-互联网甲方黑话"><a href="#15-互联网甲方黑话" class="headerlink" title="15. 互联网甲方黑话"></a>15. <strong>互联网甲方黑话</strong></h1><p>你懂我的意思吧？&#x3D; 我刚才说啥啦？我在哪，我是谁？哦～我是你爸爸，那你肯定懂了。　</p>
+<p>你们是专业的嘛！ &#x3D; 我不知道自己在说什么，但你要赚钱嘛，你肯定知道。　</p>
+<p>尽快吧 &#x3D; 下午给资料，明天就能出 10 个方案，30 页 PPT 吧。　</p>
+<p>我觉得这个创意不够爆啊 &#x3D; Em…说什么好呢，挑不出什么毛病，但是 boss 还没点头啊。　</p>
+<p>好像差点意思 &#x3D; Em…说什么好呢，虽然我也不知道差在哪儿，要么……重做一个试试吧？　</p>
+<p>我想的不一定对，你们看行不行得通？&#x3D; 一群垃圾，给的什么 JB 方案，还是按照老子说得做吧。　</p>
+<p>那就这样吧 &#x3D; 这做的什么玩意儿啊，但时间来不及了，而且看在你改了 10 次的份儿上，就大度的接受吧。　</p>
+<p>我们有很多流程要走，我帮你问问财务 &#x3D; 不想付钱。　</p>
+<p>这个月财务关账了下个月才能走系统 &#x3D; 不想付钱。　</p>
+<p>老板出国参加女儿的毕业典礼了&#x2F;财务上个礼拜开始休产假啦 &#x3D; 不想付钱　</p>
+<p>联系不到 &#x3D; 我想不到借口了，不想付钱，就酱。　</p>
+<p>你懂我的意思吧？&#x3D; 我也不懂我什么意思，靠你了　</p>
+<p>你们是专业的 &#x3D; 不要问我，靠你了　</p>
+<p>我觉得这个东西不够爆 &#x3D; 领导在场，怎么也要找点话说　</p>
+<p>先按这个方向走 &#x3D; 我也不知道领导怎么想，反正到时候不是我改　</p>
+<p>你觉得这样行吗 &#x3D; 按这个做　</p>
+<p>我说的不一定对，just 给你个思路 &#x3D; 按这个做　</p>
+<p>我有一个想法 &#x3D; 按这个做　</p>
+<p>strategy thinking 呢？&#x3D; PPT 丑　</p>
+<p>后续不好看，我们压力很大的 &#x3D; TM 赶紧刷数据吧　</p>
+<p>方案我跟 boss 沟通一下＝之前都是热身运动　</p>
+<p>你們的方案很好，只是…＝ 方案好没用，价格好才是关键　</p>
+<p>项目先缓一缓 &#x3D; 这事黄了　</p>
+<p>Soft launch &#x3D; 没预算　</p>
+<p>你们有没有网红资源？&#x3D; 你们有没有<strong>免费的</strong>网红资源？　</p>
+<p>你们的想法很好 &#x3D; 报价不好　</p>
+<p>领导比较保守 &#x3D; 西红柿炒鸡蛋　</p>
+<p>科技感 &#x3D; 蓝色　</p>
+<p>不够丰满 &#x3D; 多加动图　</p>
+<p>你们要有追求 &#x3D; 改到我满意　</p>
+<p>不复杂，做几页 PPT 就行了&#x3D; 随便糊弄下，重点是要快　</p>
+<p>你们的方案我们已经看过了&#x3D; 你们的方案，我刚刚才打开瞄了一眼　</p>
+<h1 id="16-互联网创业公司黑话"><a href="#16-互联网创业公司黑话" class="headerlink" title="16. 互联网创业公司黑话"></a>16. <strong>互联网创业公司黑话</strong></h1><p>智慧城市：路口装摄像头。　</p>
+<p>人工智能：自动回复。　</p>
+<p>大数据分析：收集用户隐私。　</p>
+<p>社区团购：网上买菜，第二天去楼下小卖部自提。　</p>
+<p>闭环：逻辑自洽，骗不了自己，但骗得了投资人。　</p>
+<p>变革：再次折腾。　</p>
+<p>转型：快不行了。　</p>
+<p>上半场：还没开始呢。　</p>
+<p>下半场：也快不行了。　</p>
+<p>共享经济：分时租赁。　</p>
+<p>连续创业者：多次创业失败。　</p>
+<p>联合创始人：老员工。　</p>
+<p>颠覆式创新：捣乱。　</p>
+<p>新三板：在国内上市。　</p>
+<p>传统企业转型：被忽悠。　</p>
+<p>发力：开始烧钱。　</p>
+<p>赋能：扶你一把。　</p>
+<p>众筹：水滴筹。　</p>
+<p>情怀：装逼。　</p>
+<p>孵化器：办公室是租的。　</p>
+<p>路演：到处展示 PPT 里画的饼。　</p>
+<p>O2O 闭环：卖煎饼扫码付款。或者开个淘宝店，在农民房楼下还有个小卖部。　</p>
+<p>风险投资：借钱不还。　</p>
+<p>风口：最容易骗到的投资。　</p>
+<p>垂直领域：业务很小众。　</p>
+<p>盈利模式：其实赚不到钱但听上去可以赚钱的方法。　</p>
+<p>新物种：以前的模式没成功，换个新名字再搞一遍。　</p>
+<p>知识付费：缓解焦虑。　</p>
+<p>不吃你这一套：我知道，你也不吃我这一套。　</p>
+<p>从 0 到 1：比喻从无到有、较困难的发展初期。　</p>
+<p>外包：由第三方公司派驻进大厂的员工。虽然工位及工作事宜与正式员工一致，但不能享有正式员工同等待遇，不能登录公司内网。工作量因各厂风格不同而有着较大差异。但优势是不用承担任何考核。　</p>
+<p>活水：各大公司推行的内部人才流动机制，力求使员工在公司内部获得更合适的岗位，员工提升工作积极性的同时，公司也保证了人才的稳定。　</p>
+<p>回流：指离职员工通过面试，重新回到前任公司就业。公司会设置回流时间，一般几个月内不录取前员工。　</p>
+<p>我们工作环境很纯粹，是扁平化管理 &#x3D; 我们公司没几个人，领导跟你坐一起，想偷懒那是不可能的。　</p>
+<p>我们欢迎有梦想的人加入 &#x3D; 金钱太肮脏，我们也没有，钱不够不来？真是……你看我长得像不像个钱？　</p>
+<p>你有机会晋升技术合伙人哦 &#x3D; 我们现在啥都没，但是快上车，就缺一个程序员了！　</p>
+<p>我们是有活力的团队 &#x3D; 团队成员都刚毕业，工作经验什么的，不存在的。　</p>
+<p>你可以直进入核心团队 &#x3D; 公司就这几个人，啥是非核心岗位？　</p>
+<p>可以全面接触公司业务，能够学到很多东西 &#x3D; 来了你得啥都干，修电脑、搬快递、换纯净水的技能可以突飞猛进。　</p>
+<p>我们会帮员工合理避税 &#x3D; 按最低工资给你交五险一金，反正你暂时也取不出来，我们少交点，你多拿点，是不是很人性化？　</p>
+<p>们是创业公司 &#x3D; 听说过有人想一夜暴富去澳门，结果坐着一夜，就输得只剩一条秋裤吗？我们和那个不一样，我们这儿还得干活呢。　</p>
+<p>这次合作，我们想要资源置换 &#x3D; 我们没有预算　</p>
+<p>公司现在发展迅猛，打补贴战已经不符合我们现阶段的理念了，一些跟不上公司发展的同事也需要被淘汰 &#x3D; 公司没钱了。　</p>
+<h1 id="17-互联网绩效黑话"><a href="#17-互联网绩效黑话" class="headerlink" title="17. 互联网绩效黑话"></a>17. <strong>互联网绩效黑话</strong></h1><p>有很大的潜力&#x3D;现在能力不行　</p>
+<p>上升空间很大&#x3D;现在还在底层很　</p>
+<p>认可你的能力&#x3D;并不准备给你升职加薪　</p>
+<p>你肯定不满足于只做 XXX&#x3D;准备给你派更多的活，设置更高 KPI 且不加薪　</p>
+<p>希望你能承担更多地责任&#x3D;加量不加价　</p>
+<p>未来能够独当一面&#x3D;可以一个人当好多人用　</p>
+<p>相信你能够做得更好&#x3D;做不好就可以滚蛋了　</p>
+<h1 id="18-互联网裁员黑话"><a href="#18-互联网裁员黑话" class="headerlink" title="18. 互联网裁员黑话"></a>18. <strong>互联网裁员黑话</strong></h1><p>正常人员调整&#x3D;确实裁员了　</p>
+<p>组织架构优化&#x3D;确实裁员了　</p>
+<p>毕业了&#x3D;已经通知裁员　</p>
+<p>从未停止引进人才&#x3D;确实裁员了，但会上架一些职位到招聘网站装样子　</p>
+<p>N+1:员工被优化后，通常会得到的赔偿标准。“N”是劳动者在用人单位的工作年限，每满一年补偿 1 个月工资，不满半年算半个月，半年以上算 1 个月。当下，很多人在被优化时，把争取“N+1”作为和公司的最后一场较量。　</p>
+<p>润：润&#x2F;run，指跑路。　</p>
+<p>去肥增痩：指大型互联网公司将冗余员工及部门裁撤，增加人效及工作效率的管理方式。　</p>
+<h1 id="19-互联网岗位黑话"><a href="#19-互联网岗位黑话" class="headerlink" title="19. 互联网岗位黑话"></a>19. <strong>互联网岗位黑话</strong></h1><p>主 R：R 为“Responsible”的缩写。“主 R”即主要负责人。　</p>
+<p>总包：大厂员工形容一年内所有收入的总称，包括大小周加班费、饭补、下午茶餐标、通讯补助、加班打车费、未上市股票、不一定拿到的年终奖等。　</p>
+<p>大头兵：指目前还没有任何管理权限的执行层面员工，他们是各个领域的螺丝钉，同时也是较容易被代替的员工。　</p>
+<p>早 C 晚 A：早上 CEO，晚上 Agency；或者早上 Coffee，晚上 Alcohol。Anyway，都是在说勤劳的打工人。　</p>
+<p>PM-Product Manager ，产品经理　</p>
+<p>RD- Research &amp; Develop 研发工程师，一般指后端工程师　</p>
+<p>FE-Front End 前端工程师　</p>
+<p>QA-Quality Assurance 品质保证，通常叫做测试工程师　</p>
+<p>DBA-Database Administrator 数据库　</p>
+<p>TS – Technology Support 技术支持　</p>
+<p>OP – Operation 运维工程师　</p>
+<p>UE（UX） – User Experience 用户体验设计师，也会做交互设计师　</p>
+<p>UI – User Interface 用户界面设计师（可不要管你的 UI 同事叫美工哦，否则你可能以后要自己设计了）　</p>
+<p>UER – User Experience Research 用户研究　</p>
+<p>HR-Human Resource ，人力资源　</p>
+<p>HRBP-Human Resource Business Partner，人力资源业务合作伙伴，负责某一个或多个业务或事业部的 HR，实际中，很多公司对 HR 和 HRBP 没有分的很清楚，HRBP 的作用也没有显现出来　</p>
+<p>CEO-Chief Executive Officer，首席执行官　</p>
+<p>CTO-chief technology officer，首席技术官　</p>
+<p>COO-Chief Operating Officer，首席运营官　</p>
+<p>CFO-Chief Financial Officer，首席财务官　</p>
+<p>CPO-Chief Product Officer，首席产品官，（除此外还有 process-流程，public-公关等等，但好像比较少见）　</p>
+<p>CGO-Chief Gonverment Officer，首席政府关系官　</p>
+<p>CHO-Chief Human Resource Officer，首席人力资源官　</p>
+<p>CMO-Chief Marketing Officer，首席营销官　</p>
+<p>CIO-首席信息官　</p>
+<p>HRD-人力资源总监　</p>
+<p>OD-运营总监　</p>
+<p>MD-市场总监　</p>
+<p>OM-运作经理　</p>
+<p>PM-生产经理　</p>
+<p>PG-产品经理　</p>
+<p>GM-总经理　</p>
+<p>VP-副总裁　</p>
+<p>FVP-第一副总裁　</p>
+<p>AVP-副总裁助理　</p>
+<p>GM-总经理　</p>
+<p>VP-副总裁　</p>
+<p>PM-产品经理、项目经理　</p>
+<p>DB-数据库　</p>
+<p>IT-技术支持　</p>
+<p>OP-技术运维　</p>
+<p>UI-用户设计　</p>
+<p>UE-用户体验　</p>
+<p>FE-技术研发（前端）　</p>
+<p>DEV-开发　</p>
+<p>RD-程序员　</p>
+<p>QA-测试　</p>
+<p>BD-商务拓展　</p>
+<p>MD-市场总监　</p>
+<p>OD-运营总监　</p>
+<p>KA-大客户部门 　</p>
+<p>Master of Business Administration-企业管理硕士　</p>
+<p>Marketing and Sales-市场与销售部分-　</p>
+<p>Vice-President of Sales-销售副总裁　</p>
+<p>Senior Customer Manager-高级客户经理　</p>
+<p>Sales Manager-销售经理　</p>
+<p>Regional Sales Manager-地区销售经理　</p>
+<p>Sales Assistant-销售助理　</p>
+<p>Wholesale Buyer-批发采购员　</p>
+<p>Tele-Interviewer-电话调查员　</p>
+<p>Marketing Consultant-市场顾问　</p>
+<p>Marketing and Sales Director-市场与销售总监　</p>
+<p>Market Research Analyst-市场调查分析员　</p>
+<p>Director of Subsidiary Rights-分公司权利总监　</p>
+<p>Sales Representative-销售代表　</p>
+<p>Assistant Customer Executive-客户管理助理　</p>
+<p>Marketing Intern-市场实习　</p>
+<p>Insurance Agent-保险代理人　</p>
+<p>Customer Manager-客户经理　</p>
+<p>Vice-President of Marketing-市场副总裁　</p>
+<p>Regional Customer Manager-地区客户经理　</p>
+<p>Sales Administrator-销售主管　</p>
+<p>Telemarketing Director-电话销售总监　</p>
+<p>Advertising Manager-广告经理　</p>
+<p>Marketing Assistant-市场助理　</p>
+<p>Product Developer-产品开发　</p>
+<p>Marketing Manager-市场经理　</p>
+<p>Manager of Network Administration-网络管理经理　</p>
+<p>MIS Manager -电脑部经理　</p>
+<p>Project Manager-项目经理　</p>
+<p>Technical Engineer-技术工程师　</p>
+<p>Developmental Engineer-开发工程师　</p>
+<p>Systems Programmer-系统程序员　</p>
+<p>Operations Analyst-操作分析　</p>
+<p>Product Support Manager-产品支持经理　</p>
+<p>Computer Operations Supervisor-电脑操作主管　</p>
+<p>Systems Engineer-系统工程师　</p>
+<p>Hardware Engineer-硬件工程师　</p>
+<p>Applications Programmer-应用软件程序员　</p>
+<p>Information Analyst-信息分析　</p>
+<p>LAN Systems Analyst-系统分析　</p>
+<p>Statistician-统计员　</p>
+<p>Human Resources-人力资源部分　</p>
+<p>Director of Human Resources-人力资源总监　</p>
+<p>Assistant Personnel Officer-人事助理　</p>
+<p>Compensation Manager-薪酬经理　</p>
+<p>Director of Operations-运营总监　</p>
+<p>Branch Manager-部门经理　</p>
+<h1 id="20-互联网商业模式黑话"><a href="#20-互联网商业模式黑话" class="headerlink" title="20. 互联网商业模式黑话"></a>20. <strong>互联网商业模式黑话</strong></h1><p><strong>B2B（经济组织对经济组织） ：</strong> 是指企业对企业之间的营销关系，它将企业内部网，通过 B2B 网站与客户紧密结合起来，通过网络的快速反应，为客户提供更好的服务，从而促进企业的业务发展。 　</p>
+<p><strong>B2C（经济组织对消费者） ：</strong> B2C 即企业通过互联网为消费者提供一个新型的购物环境—— 网上商店，消费者通过网络在网上购物、网上支付等消费行为。 　</p>
+<p><strong>B2B2C（企业对企业对消费者） ：</strong> 是一种电子商务类型的网络购物商业模式，B 是 BUSINESS 的简称，C 是 CUSTOMER 的简称，第一个 B 指的是商品或服务的供应商，第二个 B 指的是从事电子商务的企业，C 则是表示消费者。 　</p>
+<p><strong>C2C（消费者对消费者） ：</strong> 就是个人与个人之间的电子商务。比如一个消费者有一台电脑，通过网络进行交易，把它出售给另外一个消费者，此种交易类型就称为 C2C 电子商务。 　</p>
+<p><strong>C2B（消费者集合竞价团购） ：</strong> 先有消费者需求产生而后有企业生产，即先有消费者提出需求，后有生产企业按需求组织生产。 　</p>
+<p><strong>F2C ：</strong> 指的是 Factory to customer，即从厂商直接到消费者个人的电子商务模式 O2O（网上与网下相结合）是指将线下的商务机会与互联网结合，让互联网成为线下交易的前台。 　</p>
+<p><strong>P2P（点对点、渠道对渠道） ：</strong> 是英文 peer-to peer 的缩写，意即个人对个人。又称点对点网络借款，是一种将小额资金聚集起来借贷给 有资金需求人群的一种民间小额借贷模式。 P2P 还有一种更广泛的概念，泛指互联网金融，借助互联网、移动互联网技术的网络信贷平 台及相关理财行为、金融服务。 　</p>
+<p><strong>众筹 ：</strong> 是指用团购+预购的形式，向网友募集项目资金的模式。众筹利用互联网和 SNS 传播的特性，让小企业、艺术家或个人对公众展示他们的创意，争取大家的关注和支持，进而获得所需要的资金援助。 　</p>
+<p><strong>众包 ：</strong> 众包指的是一个公司或机构把过去由员工执行的工作任务，以自由自愿的形式外包给非特定的（而且通常是大型的）大众网络的做法。众包的任务通常是由个人来承担，但如果涉及到需要多人协作完成的任务，也有可能以依靠开源的个体生产的形式出现。 　</p>
+<p><strong>孵化器 ：</strong> 一般指企业孵化器，在中国也称高新技术创业服务中心，它通过为新创办的科技型中小企业提供物理空间和基础设施，提供一系列的服务支持，进而降低创业者的创业风 险和创业成本，提高创业成功率，促进科技成果转化，培养成功的企业和企业家。 　</p>
+<p><strong>SaaS（软件服务） ：</strong> 是 Software-as-aService（软件即服务）的简称。它是一种通过 Internet 提供软件的模式，厂商将应用软件 统一部署在自己的服务器上，客户可以根据自己实际需求，通过互联网向厂商定购所需的 应用软件服务，按定购的服务多少和时间长短向厂商支付费用，并通过互联网获得厂商提 供的服务。　</p>
+<p><strong>PaaS（平台服务）：</strong> 平台即服务，提供给消费者的服务是把客户采用提供的开发语言和工具（例如 Java，python， 。Net 等）开发的或收购的应用程序部署到供应商的云计算基础设施上去。客户不需要管理或控制底层的云基础设施，包括网络、服务器、操作系统、存储等，但客户能控制部署的应用程序，也可能控制运行应用程序的托管环境配置；　</p>
+<p><strong>IaaS（基础架构施服务）：</strong> （基础设施即服务）提供给消费者的服务是对所有计算基础设施的利用，包括处理 CPU、内存、存储、网络和其它基本的计算资源，用户能够部署和运行任意软件，包括操作系统和应用程序。消费者不管理或控制任何云计算基础设施，但能控制操作系统的选择、存储空间、部署的应用，也有可能获得有限制的网络组件（例如路由器、，防火墙，、负载均衡器等）的控制。 　</p>
+<p><strong>DTC（Direct To Customer）：</strong> DTC 营销是指直接面对消费者的营销模式，它包括任何以终端消费者为目标而进行的传播活动，它与传统媒体如电视广告等的传播方式相比，优势主要体现在更接近消费者，更关注消费行为的研究，更重视消费者生活形态的把握。 　</p>
+<p><strong>CRM ：</strong> 现代信息技术、经营思想的结合体，它以信息技术为手段，通过对以“客户为中心” 的业务流程的重要组合和设计，形成一个自动化的解决方案，以提高客户的忠诚度，最终实现业务操作效益的提高和利润的增长。 　</p>
+<p><strong>SoLoMo（社交+本地化+移动） ：</strong> 这个词形容三种概念混合的产物，即：Social（社交的）、Local（本地的）、Mobile（移动的），连起来就是 SoLoMo（索罗门），社交本地移动，即社交加本地化加移动，它代表着未来互联网发展的趋势。 　</p>
+<p><strong>LBS：</strong> 基于位置的服务，它是通过电信移动运营商的无线电通讯网络（如 GSM 网、CDMA 网）或外部定位方式（如 GPS）获取移动终端用户的位置信息（地理坐标，或大地坐标），在地理信息系统（外语缩写：GIS、外语全称：Geographic Information System）平台的支持下，为用户提供相应服务的一种增值业务。 　</p>
+<p><strong>SNS ：</strong> Social Networking Services，即社会性网络服务，是指个人之间的关系网络，这种基于社会网络关 系系统思想的网站就是社会性网络网站（SNS 网站）。现在许多 WEB2.0 网站都属于 SNS 网站， 如网络聊天（IM）、交友、视频分享、博客、播客、网络社区、音乐共享等。社会性网络 的理论基础源于六度理论（六度分隔理论，Six Degrees of Separation）和 150 法则（Rule Of 150）。另外不仅现在一些大公司网站开始了一些 SNS 应用，一些垂直领域的行业站点也开 始了 SNS 的尝试。目前国外较出名的是 facebook、myspac，国内流行的 SNS 有海内、校内、 开心、51 等。 　</p>
+<p><strong>OTT ：</strong> “Over The Top”的缩写，是指通过互联网向用户提供各种应用服务。这种应用和目前运营商所提供的 通信业务不同，它仅利用运营商的网络，而服务由运营商之外的第三方提供。目前，典型的 OTT 业务有互联网电视业务，苹果应用商店等。 　</p>
+<p><strong>OTA ：</strong> 旅游电子商务行业的专业词语。代表为号码百事通、旅游百事通、驴妈妈旅游网、携程网、出游客旅游网、乐途旅游网、欣欣旅游网、芒果网、艺龙网、同程网、搜旅网、途牛旅游网和易游天下、快乐 e 行旅行网等。OTA 的出现将原来传统的旅行社销售模式放到网络平台上，更广泛的传递了线路信息，互动式的交流更方便了客人的咨询和订购。 　</p>
+<p><strong>电子商务：</strong> 以信息网络技术为手段，以商品交换为中心的商务活动。在因特网开放的网络 环境下，基于浏览器&#x2F;服务器应用方式，买卖双方不谋面地进行各种商贸活动，实现消费者的网上购物、商户之间的网上交易和在线电子支付以及各种商务活动、交易活动、金融活 动和相关的综合服务活动的一种新型的商业运营模式。电子商务分为：ABC、B2B、B2C、C2 C、B2M、M2C、B2A（即 B2G）、C2A（即 C2G）、O2O 等。 　</p>
+<p><strong>海淘 ：</strong> 通过互联网检索海外商品信息，并通过电子订购单发出购物请求，然后填上私人信用卡号码，由海外购物网站通过国际快递发货，或是由转运公司代收货物再转寄回国。海淘，一般付款方式是款到发货（在线信用卡付款、PayPal 账户付款）。 　</p>
+<p><strong>微商 ：</strong> 基于微信生态的社会化分销模式，是企业或者个人基于社会化媒体开店的新型电商 ，从模式上来说主要分为两种：基于微信公众号的微商成为 B2C 微商，基于朋友圈开店的成 为 C2C 微商。微商和淘宝一样，有天猫平台（B2C 微商）也有淘宝集市（C2C 微商）。所不同的是 微商基于微信“连接一切”的能力，实现商品的社交分享、熟人推荐与朋友圈展示。从微商来流程来说，微商主要由基础完善的交易平台微盟旺铺、营销插件、分销体系以及个人端分享推广微客四个流程部分组成。 　</p>
+<p><strong>微店 ：</strong> 全球第一个云销售电子商务，是零成本开设的巨型商城，是计算机云技术和传统电子商务相结合的创新模式。微店并不是利用手机开网店，这个“微”是指无须资金、无须成本、无须处理货源，无须处理物流和客服，就可以赚取推广佣金。微店的模式之所以受到追捧，是因为它颠覆了传统网商既要找货源，又要做推广的高门槛要求，很好地解决了货源与推广的分工问题。这是互联网分工进一步细化的体现。 　</p>
+<p><strong>UGC：</strong> 互联网术语，全称为 User Generated Content，也就是用户生成内容的意思。UGC 的概念最早起源于互联网领域，即用户将自己 原创的内容通过互联网平台进行展示或者提供给其他用户。UGC 是伴随着以提倡个性化为主 要特点的 Web2.0 概念兴起的。　</p>
+<p><strong>PGC：</strong> 全称：Professional Generated Content），互联网术语。指专业生产内容（视频网站）、专家生产内容（微博）。用来泛 指内容个性化、视角多元化、传播民主化、社会关系虚拟化。　</p>
+<p><strong>OEM：</strong> 也称为定点生产，俗称代工（生产），基本含义为品牌生产者不直接生产产品，而是 利用自己掌握的关键的核心技术负责设计和开发新产品，控制销售渠道，具体的加工任务 通过合同订购的方式委托同类产品的其他厂家生产。之后将所订产品低价买断，并直接贴上自己的品牌商标。 　</p>
+<p><strong>ODM ：</strong> 某“原始设计制造商”设计出某产品后，在某些情况下可能会被另外一些企业看中， 要求配上后者的品牌名称来进行生产，或者稍微修改一下设计来生产。这样可以使其他厂商减少自己研制的时间。承接设计制造业务的制造商被称为 ODM 厂商，其生产出来的产品就是 ODM 产品。 　</p>
+<p><strong>鼠标+水泥（Clicks and Mortar） ：</strong> 又称为“砖块+鼠标”（Bricks and Clicks），是指传统商业模式（主要运用直接的面对面的方式与顾客发生联系）与互联网商业模式（主要通过网站、电子邮件、FTP 以及其他互联网技术手段与顾客发生联系）的联姻。它是一种将先进的互联网技术与传统优势资源相结合，利用先进的信息技术提高传统 业务的效率和竞争力，实现真正的商业利润的电子商务运作模式。鼠标+水泥是一个传统企 业电子化和互联网公司实体化的趋同过程，是电子商务发展的趋同方向。 　</p>
+<p><strong>“互联网+” ：</strong> 互联网+”是创新 2.0 下的互联网发展新形态、新业态，即充分发挥互联网在 生产要素配置中的优化和集成作用，将互联网的创新成果深度融合于经济社会各领域之中，提高实体经济的创新力和生产力，形成更广泛的以互联网为基础设施和实现工具的经济发展新形态。“互联网+”，是知识社会创新 2.0 推动下的互联网形态演进。新一代信息技术发展催生了创新 2.0，而创新 2.0 又反过来作用与新一代信息技术形态的形成与发展，重塑了物联网、云计算、社会计算、大数据等新一代信息技术的新形态，并进一步推动知识社会以用户创新、开放创新、大众创新、协同创新为特点的创新 2.0，改变了我们的生产、 工作、生活方式，也引领了创新驱动发展的“新常态”。 　</p>
+<p><strong>物联网 ：</strong> 把所有物品通过信息传感设备与互联网连接起来，进行信息交换，即“物物相息”，以实现智能化识别和管理。 　</p>
+<p><strong>新零售：</strong> 英文是 New Retailing，即企业以互联网为依托，通过运用大数据、人工智能等先进技术手段，对商品的生产、流通与销售过程进行升级改造，进而重塑业态结构与生态圈，并对线上服务、线下体验以及现代物流进行深度融合的零售新模式，由阿里巴巴创始人马云提出。</p>
+<h1 id="21-互联网网络广告术语"><a href="#21-互联网网络广告术语" class="headerlink" title="21. 互联网网络广告术语"></a>21. <strong>互联网网络广告术语</strong></h1><p><strong>Ad Network ：</strong> Ad Network 即“广告网络”。在广告业内，这是一个较为广泛的概念。是一种介于想出售广告 流量资源的网站与想在网站上刊登广告的广告主之间的平台。 　</p>
+<p><strong>Ad Server 广告管理系统 ：</strong> 指为媒体提供的一套综合性广告发布系统，可以帮助媒体管理、优化其广告流量，简化广告管理及投放流程，提供全面的广告投放报告，制定高效的投放解决方案，提升广告价值。Display AD 展示广告网站广告的主要形式，通常在文本的基础上再加上图像型信息，其形式如企业标识、相关产品图片，企业所在位置的简易电子地图或其他相关信息。 　</p>
+<p><strong>品牌广告 ：</strong> 以树立产品品牌形象，提高品牌的市场占有率为直接目的，突出传播品牌在消费者心目中确定的位置的一种方法。 　</p>
+<p><strong>效果广告 ：</strong> 基于效果为基础的广告系统中，广告主只需要为可衡量的结果付费。　</p>
+<p><strong>Banner 横幅广告 ：</strong> 一种常见的网络广告形式，常表现为 GIF、JPG 等格式建立的图像文件，定位在网页中，大多用来表现广告内容，同时还可实用 Java 等语言使其产生交互性，用 Shockwave 等插件工具增强表现力。 　</p>
+<p><strong>Buttons 按钮 ：</strong> 网站上一小块形似按钮的可点击区域，往往采用动画形式，并连接到广告主的网站。 　</p>
+<p><strong>Pop-up Ad 弹出式广告 ：</strong> 在用户浏览网页或打开新网页时弹出的短暂的广告。在已经显示内容的页面上出现的具有独立广告内容的窗口，一般是网页内容下载完成弹出式广告也随之出现，因而对浏览网页内容产生直接影响。 　</p>
+<p><strong>Skyscraper 擎天柱广告 ：</strong> 一种又高又窄的网络广告格式，通常位于网页左右两侧的狭窄空间。 　</p>
+<p><strong>Rich Media （富媒体） ：</strong> 这种应用采取了所有适合的最先进技术，以最好的传达广告主的信息， 甚至与用户进行互动，如视频、flash 广告等。 　</p>
+<p><strong>Keyword 关键字广告 ：</strong> 用户输入到搜索引擎中用于搜索匹配和相关结果的单词或词语。 　</p>
+<p><strong>竞价排名 ：</strong> 一种按效果付费的网络推广方式。基本特点是按点击付费，推广信息出现在搜索结果中（一般是靠前的位置），如果没有被用户点击，则不收取推广费。竞价就是拍卖 ，关键词出价是影响排名的一个重要因素。 　</p>
+<p><strong>AdWords ：</strong> Google 的关键词竞价广告。 　</p>
+<p><strong>Adsens ：</strong> Google AdSense 是一种获取收入的快速简便的方法，适合于各种规模的网站发布商。它可以在网站的内容 网页上展示相关性较高的 Google 广告，并且这些广告不会过分夸张醒目。 　</p>
+<p><strong>百度凤巢 ：</strong> 百度的关键词竞价广告。 　</p>
+<p><strong>淘宝直通车 ：</strong> 淘宝的关键词竞价广告。 　</p>
+<p><strong>钻石展位 ：</strong> 是淘宝网图片类广告位竞价投放平台，是为淘宝卖家提供的一种营销工具。钻石展位依靠图片创意吸引买家点击，获取巨大流量。 　</p>
+<p><strong>积分墙广告 ：</strong> 在一个应用内展示各种积分任务（下载安装推荐的优质应用、注册、填表等 ），以供用户完成任务获得积分的页面。是除“广告条”、“插屏广告”外，第三方移动广告平台提供给应用开发者的另一新型移动广告盈利模式。 　</p>
+<p><strong>Ad Exchange 广告交易平台 ：</strong> Ad Exchange 是针对每次广告展示，以受众为单位进行实时竞价的互联网流量交换市场。能帮助广告联盟、代理机构和第三方技术提供商通过实时竞价的方式购买众多互联网站点的广告资源。 　</p>
+<p><strong>DSP（Demand-Side Platform） ：</strong> 需求方平台 DSP 需求方平台是一个综合性管理平台，在这个平台上，广告主可以通过同一个界面管理多 个数字广告和数据交换的账户。利用 DSP，广告主可以在广告交易平台（Ad Exchange）对在线广告进行实时竞价（RTB Real-Time Bidding），高效管理广告定价，利用 DSP 也可以根据目标受众数据分析进行理性定价，就 像付费搜索的操作原理一样，在用户优化的基础上使用 DSP 设置如 CPC 和 CPA 这些关键性能指 标，从而达到理性定价的目　</p>
+<p>标。 　</p>
+<p><strong>DMP （Data-Management Platform） ：</strong> 数据管理平台 DMP 数据管理平台，是把分散的第一、第三方数据进行整合纳入统一的技术平台，并对这些数据进行标准化和细分，让用户可以把这些细分结果推向现有的互动营销环境里。 　</p>
+<p><strong>RTB（Real-Time Bidding）：</strong> 实时竞价 RTB 实时竞价，是一种利用第三方技术在数以百万计的网站上针对每一个用户展示行为进行 评估以及出价的竞价技术。与大量购买投放频次不同，实时竞价规避了无效的受众到达， 只针对有意义的用户进行购买。它的核心是 DSP 平台（需求方平台）。 RTB 对于媒体来说，可以带来更多的广告销量、实现销售过程自动化及减低各项费用的支出 。而对于广告商和代理公司来说，最直接的好处就是提高了效果与投资回报率。 　</p>
+<p><strong>Media Plan 媒介计划 ：</strong> 包含了传播目标，同时描述如何通过广告途径来实现这些目标的概述。它由媒介策划人员提供。媒介计划一般包括市场营销、广告投放以及媒介目标，相关的媒介策略通常在其基础上制定。 　</p>
+<p><strong>Campaign 广告活动 ：</strong> 广告活动指在某一特定市场上为实现某一重大目标所集中进行的大规模的广告活动，是广告决战思想的一种体现，是企业之间进行市场竞争的策略之一。 　</p>
+<p><strong>Landing Page 登陆页面：</strong> 当用户点击了广告之后所访问的广告主网页。通常登陆页面会要求用户注册以便获得服务或购买产品，也称为点进 URL 或目标 URL。 　</p>
+<p><strong>Positioning 定位 ：</strong> 投放广告的位置，可以指定广告出现的位置。 　</p>
+<p><strong>Targeted 针对性广告 ：</strong> 通过分析人口特征、网络行为、消费习惯等制定的面向特定受众市场的广告 　</p>
+<p><strong>信息流广告：</strong> 是在社交媒体用户好友动态、或者资讯媒体和视听媒体内容流中的广告。在 2006 年由 Facebook 首先推出。这种穿插在内容流中的广告，对用户来说体验相对较好，对广告主来说可以利用用户的标签进行精准投放，因此特别是在移动互联网时代到来后迎来了爆炸式的增长，几乎所有的互联网媒体都推出了信息流广告平台。　</p>
+<p><strong>植入式广告 ：</strong> 在电影或电视剧或者其它场景插入相关的广告。如变形金刚，非诚勿扰等。eCPM（effective cost per mille）指的就是每一千次展示可以获得的广告收入，展示的单位可以是网页，广告单元， 甚至是单个广告（在 AdSense “高级报告”的“数据展示依据”下拉框中可以选择）。默认情况下，eCPM 指的都是千次网页展示（Pageview）收入。eCPM 只是用来反映网站盈利能力的参数，不代表收入。 　</p>
+<p><strong>CPD （Cost Per Day）：</strong> 每日成本，是按天收费的一种模式，是广告合作的一种常见方式。 　</p>
+<p><strong>CPM（Cost Per Mille 或者 Cost Per Thousand； Cost Per Impressions) ：</strong> 　</p>
+<p>千人成本，指由某一媒介或媒介广告排期表所送达 1000 人所需的成本。其原始英文为 Cost Per Mille，简称 CPM。其计算公式为：千人成本&#x3D;（广告费用&#x2F;到达人数）×1000。目前，CPM 已经作为”按广告每千次被展现收费”的广告模式，成为网络广告的基本术语。 　</p>
+<p><strong>CPC( Cost Per Click; Cost Per Thousand Click-Through ）：</strong> 点击成本，以每点击一次计费。在这种模式下广告主仅为用户点击广告的行为付费，而不再为广告的显示次数付费。 　</p>
+<p><strong>OCPC（Optimized Cost Per Click）：</strong> 从字面理解就是按转化出价，按转化出价首先需要根据自己推广目标设定广告的转化目标再根据可接受的转化价格进行出价。相比 cpc 来说采用更科学的转化率预估机制，所以更智能，广告转化效果更好，百度 OCPC 是通过对转化词的监控，可以帮助广告主控制转化成本，从而进一步提升转化效果。OCPC 是通过对转化词的监控，利用溢价方式来增加转化词展现量和点击量，能在更大范围内甄选优质流量转化，也可以帮助广告主控制转化成本，从而进一步提升转化效果。　</p>
+<p><strong>Ocpm：</strong> 是指即优化千次展现出价，即广告被展示 1000 次时收取一次费用，其本质还是按照 cpm 收费，而 Ocpm 是指可以在广告主摸清用户的消费习惯及爱好后，为用户设置的广告展示费用，举个例子，为了让广告主展示给精准的用户，将广告展现给最容易产生转化的用户，对展示费用提高价格，提高转化率。　</p>
+<p><strong>CPA （Cost Per Action）：</strong> 行动成本，每次行动的费用。即根据每个访问者对网络广告所采取的行动收费的定价模式，对于用户行为的定义，包括形成一次交易、获得一个注册用户、或者对网络广告的一次点击等。 　</p>
+<p><strong>CPE（Cost Per Engagement）：</strong> 每参与成本，旨在评估用户与品牌之间参与程度的价值。多应用于社交媒体，例如链接点击、喜欢、转发和“@回复”等等。另外 CPE 也指用户浏览过广告后，在一定时间内（如一周）与品牌进行的互动。 　</p>
+<p><strong>CPS（Cost Per Sales &#x3D;CPP Cost Per Purchase） ：</strong> 每购买成本，以实际销售产品数量来换算广告投放金额。广告主为规避风险，只有在用户点击广告并进行在线交易后，才支付广告费用。</p>
+<h1 id="22-互联网营销推广术语"><a href="#22-互联网营销推广术语" class="headerlink" title="22. 互联网营销推广术语"></a>22. <strong>互联网营销推广术语</strong></h1><p><strong>网络营销 ：</strong> 以现代营销理论为基础，借助网络、通信和数字媒体技术实现营销目标的商务活动。企业网络营销包含企业网络推广和电子商务两大要素，网络推广就是利用互联网进行宣传推广活动，电子商务指的是利用简单、快捷、低成本的电子通讯方式，买卖双方无需谋面地进行各种商贸活动。 　</p>
+<p><strong>网络推广 ：</strong> 通过互联网把产品或服务推广出去，使产品或服务增加曝光率，尽可能让更多的人知道。常见网络推广渠道有分类信息、问答、博客、论坛、视频网站等。 　</p>
+<p><strong>SEM ：</strong> 是“Search Engine Marketing”的缩写，意为“搜索引擎营销”。包含关键字广告和 SEO 两大主要手段。 　</p>
+<p><strong>SEO ：</strong> 搜索引擎优化。搜索引擎优化（Search Engine Optimization，简称“SEO”），泛指为了提升网站在搜索引擎中的表现而采取的各种符合 必要的规则的手段和由此开展的各种工作。 　</p>
+<p><strong>EDM ：</strong> 内部邮件群发，第三方平台，数据库整合营销等方式，数据库营销。　</p>
+<p><strong>社会化媒体营销 ：</strong> 基于微博、微信、QQ、sns、bbs、博客等社交媒体来进行推销并创造业务机会和销售的行为。其最大的优势在于能够帮助企业推销，从而增加流量并建立新的业务合作关系。 　</p>
+<p><strong>口碑营销 ：</strong> 企业在调查市场需求的情况下，为消费者提供需要的产品和服务，同时制定一定的口碑推广计划，让消费者自动传播公司产品和服务的良好评价，从而让人们通过口碑 了解产品、树立品牌、加强市场认知度，最终达到企业销售产品和提供服务的目的。 　</p>
+<p><strong>病毒式营销 ：</strong> 是指通过用户的社会人际网络，使信息像病毒一样传播和扩散，利用快速复制 的方式传向数以千计、数以百万计的受众。也就是说，通过提供有价值的产品或服务，“ 让大家告诉大家”，通过别人为你宣传，实现“营销杠杆”的作用。 　</p>
+<p><strong>SMO ：</strong> （社交媒体优化）通过社会化媒体、在线组织及社区网站获得公共传播的一整套方法。SMO 的方法包括添加 RSS 订阅、顶上去、博客写作及非合作形式的第三方社区功能（如：Flickr 图片幻灯片、YouTube 的视频分享）。 　</p>
+<p><strong>ASO （App Store Optimization）</strong>：就是提升你 APP 在各类 APP 电子市场排行榜和搜索结果排名的过程。类似移动 APP 的 SEO 优化。　</p>
+<p><strong>饥饿营销 ：</strong> 商品提供者有意调低产量，以期达到调控供求关系、制造供不应求“假象”、 维持商品较高售价和利润率，也达到维护品牌形象、提高产品附加值的目的。“饥饿营销 ”是把双刃剑，苹果公司的“可控泄漏”战略为其赢得了全球市场，而小米手机却也因过 分的“饥饿”让用户失去了耐心。 　</p>
+<p><strong>Interactive Marketing ：</strong> 互动营销通过互动营销能够向潜在客户进行推销并记住他们的行为和话语，从而使潜在客户知道广告主已了解其之前提供的信息。　</p>
+<p><strong>KOC：</strong> Key Opinion Consumer，即关键意见消费者，对应 KOL（Key Opinion Leader，关键意见领袖） 。一般指能影响自己的朋友、粉丝，产生消费行为的消费者。相比于 KOL，KOC 的粉丝更少，影响力更小，优势是更垂直、更便宜。　</p>
+<p><strong>KOL：</strong> Key Opinion Leader，关键意见领袖简称 KOL，是营销学上的概念，通常被定义为：拥有更多、更准确的产品信息，且为相关群体所接受或信任，并对该群体的购买行为有较大影响力的人。　</p>
+<p><strong>MCN（Multi-Channel Network）：</strong> 即多频道网络 ，一种多频道网络的产品形态，是一种新的网红经济运作模式。这种模式将不同类型和内容的 PGC（专业生产内容）联合起来，在资本的有力支持下，保障内容的持续输出，从而最终实现商业的稳定变现。　</p>
+<p><strong>大 v：</strong> 关键意见领袖通常指拥有更多、更准确的产品信息，且为相关群体所接受或信任，并对该群体的购买行为有较大影响力的人。　</p>
+<h1 id="23-互联网常见数据指标术语"><a href="#23-互联网常见数据指标术语" class="headerlink" title="23. 互联网常见数据指标术语"></a>23. <strong>互联网常见数据指标术语</strong></h1><p>启动用户：启动过应用程序的用户（以独立设备为标准进行去重）　</p>
+<p>新用户：所选时段的启动用户中，历史上第一次启动应用程序的用户　</p>
+<p>老用户：当日启动用户中，以前也启动过应用程序的用户　</p>
+<p>每次使用时长：平均每一次使用应用程序（session）的时间　</p>
+<p>每人使用时长：平均每个用户使用应用程序的时间　</p>
+<p>流失用户：过去 60 天（含当日）没有启动过应用程序的用户（已去重）　</p>
+<p>流失率：流失用户&#x2F;累计用户　</p>
+<p>累计启动用户：累计启动过应用程序的用户数量（以独立设备为标准进行去重）　</p>
+<p>留存用户：留存用户是指某个时间段的新增用户，经过一段时期，仍使用程序的用户。该指标可以用来掌握用户的粘性及忠诚度。　</p>
+<p>留存率：用户在某段时间内开始使用应用，经过一段时间后，仍然继续使用应用的被认作是留存；这部分用户占当时新增用户的比例即是留存率，　</p>
+<p>日留存：某日的新增用户中，在第 2 天之后，每日启动过程序的用户数　</p>
+<p>周留存：某周的新增用户中，在第 2 周之后，每周启动过程序的用户数　</p>
+<p>月留存：某月的新增用户中，在第 2 月之后，每月启动过程序的用户数　</p>
+<p>活跃留存数：某个时间段的活跃用户中，在第二天之后，每日启动过程序的用户。　</p>
+<p>访问页面：被用户访问的页面（如 searchindex）　</p>
+<p>访问页面备注名称：访问页面备注名称（如搜索页）　</p>
+<p>访问次数：用户访问当前页面的总次数　</p>
+<p>访问次数占比：当前页面访问次数&#x2F;全部页面访问次数　</p>
+<p>平均停留时间：用户访问当前页面的平均停留时长（如在搜索页的停留时间）　</p>
+<p>页面跳出率：用户从当前页面离开应用程序的比例　</p>
+<p>访问深度：用户一次启动内，访问页面的总数，如果用户一次启动内多次访问同一个页面，该页面会被累计　</p>
+<p>使用频率：所选时间段内的产品启动次数　</p>
+<p>使用时长：用户每一次使用应用程序（session）的时间　</p>
+<p>使用间隔：所选时间段内，同一用户相邻两次启动的时间间隔　</p>
+<p>留存率：用户会在多长时间内使用产品。如：次日留存率、周留存率等。　</p>
+<p>流失率：一段时间内流失的用户，占这段时间内活跃用户数的比例。　</p>
+<p><strong>PV（page view）：</strong> 即页面浏览量，用户每 1 次对网站中的每个网页访问均被记录 1 次。用户对同一页面的多次访问，访问量累计。在一定统计周期内用户每次刷新网页一次也被计算一次。　</p>
+<p>一般来说 PV 与来访者数量成正比，但是 PV 并不直接决定页面的真实来访者数量，例如，同一个来访者通过不断的刷新页面，也可以制造出非常高的 PV。　</p>
+<p><strong>UV（unique visitor）：</strong> 即独立访客，访问网站的一台电脑客户端为一个访客。　</p>
+<p>PR（pagerank）：即网页的级别，一个 PR 值为 1 的网站表明这个网站不太具有流行度，而 PR 值为 7 到 10 则表明这个网站非常受欢迎（或者说极其重要）。　</p>
+<p>跳出率：指用户到达你的网站上并在你的网站上仅浏览了一个页面就离开的访问次数与所有访问次数的百分比。这里的访问次数其实就是指 PV。是评价一个网站性能的重要指标，跳出率高，说明网站用户体验做得不好，用户进去就跳出去了，网站没有满足用户的期望与需求或是人群定位不精准，反之如果跳出率较低，说明网站用户体验做得不错。　</p>
+<p>转化率：指在一个统计周期内，完成转化行为的次数占推广信息总点击次数的比率。转化率&#x3D;（转化次数&#x2F;点击量）×100%。重复购买率：指消费者对该品牌产品或者服务的重复购买次数。重复购买率越多，则反应出消费者对品牌的忠诚度就越高，反之则越低。　</p>
+<p>AU（Active Users）活跃用户：用户登陆产品记为一次登录　</p>
+<p><strong>DAU（Daily Active Users）日活跃用户：</strong> 每日登陆过的用户数　</p>
+<p>WAU（Weekly Active Users）周活跃用户：七天内登陆过的用户数　</p>
+<p><strong>MAU（Monthly Active Users）月活跃用户：</strong> 30 天内登陆过的用户数　</p>
+<p>AT( Daily Avg. Online Time）日均使用时长：活跃用户平均每日在线时长　</p>
+<p>PCU（Peak Concurrent Users）最高同时在线用户人数：统计周期内，同一时点（通常精确至分）的最高在线人数　</p>
+<p>ACU（Average Concurrent Users）平均同时在线用户人数：统计周期内，每个时点（通常精确到分）的平均在线人数　</p>
+<p>ARPU（ARPU-AverageRevenuePerUser）即每用户平均收入。用于衡量电信运营商和互联网公司业务收入的指标。ARPU 注重的是一个时间段内运营商从每个用户所得到的收入。很明显，高端的用户越多，ARPU 越高。在这个时间段，从运营商的运营情况来看，ARPU 值高未必说明利润高，因为利润还需要考虑成本，如果每用户的成本也很高，那么即使 ARPU 值很高，利润也未必高。　</p>
+<p>GMV 指标通常称为网站成交金额，属于电商平台企业成交类指标，主要指拍下订单的总金额，包含付款和未付款两部分。　</p>
+<p>DAU（Daily Active User）日活跃用户数量。常用于反映网站、互联网应用或网络游戏的运营情况。　</p>
+<p>MAU（monthly active users）月活跃用户人数。　</p>
+<p>PCU（Peak concurrent users ）最高同时在线玩家人数。　</p>
+<p>DNU 日新增用户　</p>
+<p>WAU 是周活跃用户数量　</p>
+<p>ACU （Average concurrent users）平均同时在线玩家人数。　</p>
+<p>UV 是 unique visitor 的简写，是指通过互联网访问、浏览这个网页的自然人。　</p>
+<p>DAU 与日 UV 的区别：　</p>
+<p>UV：没有时间范围限制，就是访问用户数（去重），所以一般会加上每日 UV，现在一般都指 PC 站的访问用户数；　</p>
+<p>DAU：加了时间限制，就是指每日访问用户数（去重），现在一般都会指的是 APP 的日活用户数。　</p>
+<p>DNU&#x2F;DA：叫这个指标为活跃度指数，当然大家喜欢叫做新增用户占比　</p>
+<p>ULR（Users Leave Rate）用户流失率：统计当日登录过产品的用户，但在随后 N 日内未登录的用户数&#x2F;统计日 DAU　</p>
+<p>日流失率：统计当日登陆过产品的用户，次日未登陆的用户数&#x2F;统计日 DAU　</p>
+<p>周流失率：统计当周登陆过产品，之后下一周未登陆的用户数&#x2F;WAU　</p>
+<p>月流失率：统计当月登陆过产品，下一月未登陆的用户数&#x2F;MAU　</p>
+<p>日留存率：统计当日登录过产品的用户，在之后 N 日内至少登录一次的用户数&#x2F;统计日 DAU　</p>
+<p>周留存率：统计当周登录过产品的用户，且下一周至少登录一次的用户数&#x2F;WAU　</p>
+<p>月留存率：统计当月登录过产品的用户，且下一月至少登录一次的用户数&#x2F;MAU　</p>
+<p>次日留存率：统计当日登录过产品的用户，次日依旧登录的用户数&#x2F;统计日 DAU　</p>
+<p>回归率：曾经流失，重新登录产品的用户数占流失用户的比例　</p>
+<p>回归用户：曾经流失，重新登录产品的用户数　</p>
+<p>流失用户池：过去一段时间内流失的用户数　</p>
+<p><strong>ROI（Return On Investment）：</strong> 即投入产出比。目前很多广告主要求每笔广告投入都能够获得一定量的转化目标，在广告主的成本控制中就会出现一个指标，即每获得一个有效转化所花费的成本，该指标就是衡量效果广告的投入产出比。　</p>
+<p><strong>LTV（Life Time Value）生命周期价值：</strong> 从用户从最第一次登录到最后一次登录的整个生命周期过程中，所贡献的全部经济收益价值总和。而由于用户的生命周期通常难以统计，所以在实践中，更多采用“LTV_N”来统计新用户在首次登录后的 N 天内，所贡献的价值总和。此指标更为灵活实用。　</p>
+<p><strong>PUR（Paying User Rate）用户付费率：</strong> 计算公式为：APA&#x2F;AU，通常以特定统计周期内的活跃用户为统计前提。指统计周期内的活跃付费用户（APA）数除以该周期内的总活跃用户（AU）数。　</p>
+<p><strong>OMTM（one metric that matters）：</strong> 北极星指标，唯一重要指标；之所以叫北极星指标，是因为这个指标一旦确定，就会像夜晚高悬于天空的北极星一样，指引整个公司和产品的前进方向。 　</p>
+<h1 id="24-互联网商品相关术语"><a href="#24-互联网商品相关术语" class="headerlink" title="24. 互联网商品相关术语"></a>24. <strong>互联网商品相关术语</strong></h1><p><strong>QC：</strong> 即质量控制，为达到质量要求所采取的作业技术和活动称为质量控制。这就是说，质量控制是为了通过监视质量形成过程，消除质量环上所有阶段引起不合格或不满意效果的因素。以达到质量要求，获取经济效益，而采用的各种质量作业技术和活动。　</p>
+<p><strong>SKU：</strong> 即库存保有单位、库存进出计量的单位，可以是以件、盒、托盘等为单位。SKU 是物理上不可分割的最小存货单元。在使用时要根据不同业态，不同管理模式来处理。在服装、鞋类商品中使用非常普遍。一款商品多色，则是有多个 SKU，比如一件衣服，有红色、白色、蓝色，则 SKU 编码也不相同，如相同则会出现混淆，发错货。例如：iPhone X 64G 银色 就是一个 SKU；白色鞋子 40 码 也是一个 SKU。　</p>
+<p><strong>二类电商：</strong> 通俗的话来讲，就是在淘宝、京东、拼多多、唯品会等专业电商平台之外做的线上电商。　</p>
+<p><strong>标品：</strong> 具有统一市场标准的产品，价格透明，比如手机、电脑、家电等都属于标品。很多商品规格都是参考国家统一标准生产制造的。　</p>
+<p><strong>非标品：</strong> 没有明确规格和型号的产品，比如女装、女鞋等。因为产品款式、创意、服务、质量不一样，价格差距大。</p>
+<h1 id="25-互联网新潮相关术语"><a href="#25-互联网新潮相关术语" class="headerlink" title="25. 互联网新潮相关术语"></a>25. <strong>互联网新潮相关术语</strong></h1><p><strong>DeepSeek</strong>：DeepSeek的突破性进展主要体现在其开源模型DeepSeek—R1的发布。这一模型不仅在技术上取得了显著成就，更在全球范围内引起了广泛关注。DeepSeek—R1颠覆了国际社会对AI研发“高投入、长周期”的固有认知，打破了美国对AI话语权的垄断，被誉为中国对全球AI发展格局的重塑。</p>
+<p><strong>ChatGPT：</strong> ChatGPT，美国“开放人工智能研究中心”研发的聊天机器人程序 ，于 2022 年 11 月 30 日发布 。ChatGPT 是人工智能技术驱动的自然语言处理工具，它能够通过学习和理解人类的语言来进行对话，还能根据聊天的上下文进行互动，真正像人类一样来聊天交流，甚至能完成撰写邮件、视频脚本、文案、翻译、代码等任务。　</p>
+<p><strong>元宇宙：</strong> 是人类运用数字技术构建的，由现实世界映射或超越现实世界，可与现实世界交互的虚拟世界，具备新型社会体系的数字生活空间。　</p>
+<p><strong>数字藏品：</strong> 数字藏品是指使用区块链技术，对应特定的作品、艺术品生成的唯一数字凭证，在保护其数字版权的基础上，实现真实可信的数字化发行、购买、收藏和使用。　</p>
+<p><strong>云计算：</strong> 是分布式计算的一种，指的是通过网络“云”将巨大的数据计算处理程序分解成无数个小程序，然后，通过多部服务器组成的系统进行处理和分析这些小程序得到结果并返回给用户。云计算早期，简单地说，就是简单的分布式计算，解决任务分发，并进行计算结果的合并。因而，云计算又称为网格计算。通过这项技术，可以在很短的时间内（几秒钟）完成对数以万计的数据的处理，从而达到强大的网络服务。　</p>
+<p><strong>凡尔赛</strong>：指通过一些反向的表述来透露自己的优越生活的人。简单来说，就是低调的炫耀。明明很开心很想炫耀自己，却要装作一副闷闷不乐的样子。比如我上个月工资实在太少了，少到只有五位数。　</p>
+<p><strong>打工人</strong>：指对所有从事体力劳动或者技术劳动的人的统称，无论是农民工，还是白领，又或者是中层领导、创业者，都可以自称“打工人”。“打工人”有着一系列显著的特征，比如对现实都有着清醒的认知，就连为什么打工，他们都有充足的理由。　</p>
+<p><strong>集美</strong>：指好姐妹，来源于抖音主播迷人的郭老师。她的口头禅就是姐妹们。由于她发音比较奇特，听起来就像是集美们，引众多网友模仿，进而火了起来。　</p>
+<p><strong>U1S1</strong>:指有一说一，实话实说。U1S1 是字母与数字的谐音缩写，大多数是用来网友在网站下面评论等，加上 U1S1，似乎自己的观点更有说服力。　</p>
+<p><strong>工具人</strong>：指被对方当工具使唤，对他人任劳任怨付出却得不到平等的对待。工具人分为职场和情场两种。在职场中，有的人喜欢叫别人帮忙带奶茶带各种东西，复印跑腿只能答应，“收到”、“好的”、“没问题”成了职场工具人的口头禅；而情场工具人，是偶尔充当女神的司机或情感顾问，有的连做备胎的机会也被剥夺。　</p>
+<p><strong>立刻有</strong>：拼音是“li ke you”，连起来就是“like you”，即“喜欢你”的意思。出自电影《唐人街探案 2》，其中秦风问 kiko 什么时候来北京玩儿，而 kiko 马上回答说立刻有。　</p>
+<p><strong>尾款人</strong>：指参加网购预售活动之后，还需要支付尾款的消费者。他们往往耐不住定金的诱惑，又抵不住尾款的冲击。不管是年中的 618 活动，还是年年必有的双十一活动，尾款人更多的在盲目消费、无脑跟风，最终换来苦不堪言。还有狼性尾款人，统统拿下；锦鲤尾款人，靠着非凡的运气获得别人做梦都想要的清空购物车福利。更有健忘尾款人，因为长时间的预付忘自己几个月前的订购。　</p>
+<p><strong>柠檬精</strong>：这句话的潜在意思是，跟柠檬的味道一样，就是我酸了。现在生活越来越多元化，大家在网络上表达自己心情的时候，也会更加的真实。比如在羡慕别人的事业成功、爱情美满或者是绝世容颜时，大家都会甩出这样一句流行语来表达自己的羡慕之情。　</p>
+<p><strong>小丑竟是我自己</strong>：原是逗人开心，现指尽力讨好别人或者真心对别人到头却是一场空。　</p>
+<p><strong>后浪</strong>：首先出现在 2020 年五四青年节短视频《后浪》中。我们年轻的 90 后、00 后总是被看做温室的花朵，大人觉得不着调、很叛逆，又没规矩，找工作总会碰壁，总是被看扁。可面对新冠疫情，奋不顾身的是年轻一代；面对各地紧急情况支援，吃苦耐劳不畏牺牲的也是年轻一代。　</p>
+<p><strong>耗子尾汁</strong>：说的应是好自为之，告诉别人看着办。这词儿源于浑元形象意太极掌门人马保国在网络上发布的一段视频，上面说两个年轻人不讲武德，和自己较量时态度有问题，最后劝他们好自为之。因为口音问题，马保国把好自为之说成了耗子尾汁。　</p>
+<p><strong>干饭人</strong>：指吃饭时非常积极的人。干饭人用语：“干啥啥不行，吃饭第一名”，“干饭人干饭魂，干饭人吃饭得用盆”。　</p>
+<p><strong>爷青回</strong>：是“爷的青春又回来了”的缩写，用来表达人在变化后的环境中面对曾经熟悉的人和事物时，油然而生的一种喜悦之情。　</p>
+<p><strong>云监工</strong>：原指抗击新冠肺炎疫情期间，数千万网友在线观看武汉火神山、雷神山医院建设现场 24 小时直播，主动充当“云监工”。现泛指通过网络远程监督某件事的进展。　</p>
+<p><strong>车厘子自由</strong>：这词儿来源于一篇叫《26 岁，月薪一万，却吃不起车厘子》的文章。其中提到了年轻人的几个阶段，比如辣条自由、奶茶自由、外卖自由、车厘子自由和口红自由等多个阶段，通过自黑的手段来表述年轻人的囊中羞涩，由此车厘子自由这个词语也在网络盛行开来，成为很多年轻人自嘲的搞笑梗。　</p>
+<p><strong>时间管理大师</strong>：主要用于贬义形容，吐槽的是一些欺骗别人感情和时间的渣男渣女。　</p>
+<p><strong>实锤</strong>：字面意思是很真很足的锤击。现指由于某些强有力证据的作用，对某些事物的定性已经不能改变。比如指有图有视频证据，整件事都已经有了结论。　</p>
+<p><strong>精神小伙</strong>：原指收拾的十分利落，看起来充满活力的小伙子。现在几乎特指看起来很社会的土味小伙子，具体表现有：整条胳膊的纹身，颜色不限的锅盖头，紧身的裤子，锃光瓦亮的豆豆鞋，动感十足的社会摇等等。　</p>
+<p><strong>EMO：</strong> “Emo”是英文 Emotional 的缩写，大体含义类似于 2020 年网络流行语“丧”。不过与“丧”相比，emo 的含义更加宽广，比如颓废、抑郁、不乐观等负面情绪，统统可以用 emo 代替！　</p>
+<p><strong>野性消费：</strong> 2021 年 7 月，河南遭受特大洪灾，鸿星尔克捐赠 5000 万元物资低调赈灾。网友们得知后大受感动，纷纷涌入直播间无底线下单，变相支持爱心企业。整个过程中，主播不断劝告大家要理性消费，却被网友们一遍遍以“我要野性消费”回怼。而野性消费这个词，也因其积极向上的态度，一跃成为 2021 年最热网红词。</p>
+<h1 id="26-互联网直播相关术语"><a href="#26-互联网直播相关术语" class="headerlink" title="26. 互联网直播相关术语"></a>26. <strong>互联网直播相关术语</strong></h1><p><strong>卡直播广场：</strong> 本来是指用各种奇淫技巧（弹乒乓球、滚弹珠），吸引大量看热闹的人留在直播间，以此欺骗抖音算法，让其误以为这个直播间很优质，继续推送更多的人过来。　</p>
+<p>后来也泛指，用各种正当（送东西抽奖）或非正当手段（奇淫技巧），吸引大家停留在直播间的行为。　</p>
+<p><strong>三频共振：</strong> 短视频爆了—直播间爆了—东西卖爆了，三者之间，互相影响。　</p>
+<p><strong>四频共振：</strong> 短视频、广告投放、直播间、商品四个元素互相影响。　</p>
+<p><strong>七天螺旋起号：</strong> 一种刀法，连爆：不断发短视频；瞬爆：给一个视频，同时投 N 个广告。　</p>
+<p><strong>起号&#x2F;冷启动：</strong> 从 0 到 1，启动一个直播间，并使其能稳定卖出去东西的过程。　</p>
+<p><strong>直播推荐&#x2F;自然流量：</strong> 直播间出现在推荐页+直播广场中。　</p>
+<p><strong>用户定向&#x2F;巨量云图&#x2F;人群包：</strong> 投放广告时，选定的筛选条件，一般包括年龄、性别、地域、兴趣等多种条件。抖音官方提供了定向平台，即巨量云图。选定的定向条件，即人群包。　</p>
+<p><strong>莱卡定向：</strong> 投放定向中，选择行为+兴趣定向。　</p>
+<p><strong>ATV：</strong> 直播间平均在线人数。　</p>
+<p><strong>CTR：</strong> 点击率。没加前缀，通常指直播间的点击率；也可以指小黄车点击率。　</p>
+<p><strong>PCU：</strong> 直播间在线人数最多的数值。　</p>
+<p><strong>直播间 GPM：</strong> 平均每一千个观众下单的总金额，常用来衡量直播间卖货能力。　</p>
+<p><strong>商品 GPM：</strong> 单个商品，平均每 1000 个观众下单的总金额，常用来衡量该商品是否为爆款。　</p>
+<p><strong>憋单&#x2F;放单：</strong> 让一堆人在你的直播间等着买东西或是抢福利，叫憋单。　</p>
+<p><strong>选品&#x2F;组品&#x2F;排品&#x2F;过品（过款）：</strong> 一个早点铺，选择卖豆浆、油条、包子，不卖面条、烧饼，叫选品；　</p>
+<p>豆浆 2 元，油条 1 元，豆浆+油条一起买 2.5 元，叫组品；先卖豆浆油条，卖完了才卖包子，叫排品；　</p>
+<p>有人买了豆浆，问一句要不要买油条，可以优惠 5 毛钱，叫过品。　</p>
+<p><strong>话术：</strong> 主播&#x2F;助播说的所有话，都可称为话术。按功能，具体可分为：停留话术、互动话术、产品话术、逼单话术等。　</p>
+<p><strong>直播切片：</strong> 直播的同时，不断地拍摄并发布直播现场的短视频。　</p>
+<p><strong>精选联盟：</strong> 你有商品，想找人代卖，卖出去了才给佣金，链接你的商品和达人的地方，即精选联盟。　</p>
+<p><strong>DSR：</strong> 卖家服务评级系统（Detail Seller Rating），也叫店铺体验分，与抖音小店挂钩，主要考核商品、服务和物流情况。　</p>
+<p><strong>挂铁&#x2F;大头娃娃：</strong> 在直播间，挂了虚假的机器人叫挂铁；系统推送来的假人，往往都是大大的宝妈头像，统称大头娃娃。　</p>
+<p><strong>DP：</strong> Douyin Partern，通常指提供代播服务的机构　</p>
+<p><strong>坑位费：</strong> 达人为企业卖货时，上架直播间商品的固定链接费用，坑位费的变量包括商品品类和商品直播顺序。　</p>
+<p><strong>服务费：</strong> 机构为商家提供各类直播服务时收取的费用，一般模式为基础服务费+直播间销售额的一定比例。　</p>
+<p><strong>纯佣模式：</strong> 主播不向商家收取坑位费，只收佣金。　</p>
+<p><strong>佣金：</strong> 主播按照直播间产品销量，向商家收取一定比例的佣金，可以理解为销售提成。　</p>
+<p><strong>POI：</strong> Ponit of Interest，即兴趣点。抖音短视频中可定位到具体地址（例如线下店铺），为店铺进行宣传曝光。　</p>
+<p><strong>小风车：</strong> 即直播卡片，图标为一个彩色风车状，可用于收集客户信息、APP 下载、预约团购等用途。　</p>
+<p><strong>小雪花：</strong> 抖音第三方小程序，类似基于微信的第三方小程序，功能可自行开发。走抖音开放平台接口。　</p>
+<p><strong>小黄车：</strong> 抖音直播间三大转化组件之一。抖音直播间的购物功能，走商品橱窗体系。　</p>
+<p><strong>BGM：</strong> Background music，背景音乐。　</p>
+<p><strong>跳失率：</strong> 即流失率，以直播间为例，刷到直播间之后没有点击进去看直播，即为曝光—点击的跳失率。　</p>
+<p><strong>拉时长：</strong> 直播拉时长是指通过延长直播时间，吸引更多流量进入直播间产生消费。拉时长需要前提条件，在线人数要相对保持均衡稳定、主播状态良好以及有足够的引流款产品。否则免费流量的直播间，绝大多数的在线人数都会随着时间的拉长出现人数越播越少。　</p>
+<p>这个时候一定不要去拉时长，因为平台会对每场直播计算出一个平均数据，数据越差，下一场的流量就会有所下降。　</p>
+<p><strong>控评：</strong> 指控制直播间评论区画风。一般主播或运营会提前设置屏蔽一些负面关键词，引导直播间的良性互动氛围。　</p>
+<p><strong>直播“黑五类”：</strong> 药品、医疗器械、丰胸、减肥、增高这几种产品统称为黑五类产品，是被抖音平台严禁售卖的。　</p>
+<p><strong>直播报白：</strong> 也就是抖音直播白名单申请。报白之后，账号产品视频和直播不会被抖音定为营销推广而限流，还会得到流量扶持，也更加安全而稳定。目前抖音报白分为几种情况：　</p>
+<p>直播类目是定向邀约（定向准入）的，报白之后才能开通该类目的直播。目前开通抖音小点需要报白的类目有生鲜、字画、茶叶、陶瓷、珠宝、皮草、二手奢侈品、本地生活服务、刀具、酒水、内衣、饰品、文玩、古董等商品。　</p>
+<p>不能进行千川投放、Dou+投放的类目，必须报白投放户。例如燕窝等营养滋补品。　</p>
+<p>直播间报白。在进行特殊的或大型的直播活动时，如果需要特殊的、超出平台规定的福利或措施的，例如增加福袋个数、增加控评词等，这些就可以申请直播活动报白。　</p>
+<p><strong>Feed 流：</strong> 是抖音退出的直播间付费推广工具。投放 feed 流之后，平台可以在“推荐”页中将推广的直播间呈现给用户。分为两种形式：短视频引流直播间和 feed 流直投直播间。　</p>
+<ul>
+<li><p>短视频引流直播间是指商家投放广告视频素材，让用户在信息流中刷到，通过短视频内容吸引用户点击进入直播间。　</p>
+</li>
+<li><p>Feed 流直投直播间则是直播间的实时内容将通过 Feed 信息流直接展示，用户可在信息流页面刷到，并直接点击屏幕进入直播间。</p>
+</li>
+</ul>
+<p>　</p>
+<p><strong>绿幕直播：</strong> 也叫做抠像直播或者是虚拟背景直播。不同于传统的直播间布置，在绿幕直播间中，主播身后的背景板仅是一块绿幕。通过抠像技术、虚拟背景以及 OBS 推流，在直播间营造出千变万化的直播背景画面。不但摆脱了直播场地的局限，让直播间的场景多元化；而且提升了用户的观感及体验感。　</p>
+<p><strong>产业带直播：</strong> 通过借助线上直播销售渠道，帮助商户拓展销售渠道，同时缓解地方过剩产能等问题，带动当地经济发展，是地方政府推动企业数字化转型的重要手段。　</p>
+<p><strong>档口直播：</strong> 在线下有实体店的商家在店铺通过直播带货平台销售产品。　</p>
+<p><strong>村播：</strong> 地方村民、村官出镜，在农田、工厂等原产地附近场景开展直播。　</p>
+<p><strong>走播：</strong> 电商主播没有固定的直播间，在品牌店或大型批发市场档口里直播带货。　</p>
+<p><strong>达播&#x2F;店播：</strong> 达播指直播账号为达人账号，通过达人账号进行的直播。达播的直播品类一般相对固定，但是品牌不固定。店播：使用品牌&#x2F;商家认证的蓝 V 账号进行的直播，因此直播商品的品牌固定。店播可以根据是否为品牌&#x2F;商家自己直播而区分为“自播”和“代播”。　</p>
+<p><strong>公域直播：</strong> 主播依托于第三方平台，基于公域流量的直播，如淘宝直播、抖音直播等。　</p>
+<p><strong>私域直播：</strong> 基于私域流量的直播，如小程序直播、腾讯直播、视频号直播等。　</p>
+<p><strong>流量承载力：</strong> 直播间转化流量的能力，即直播间能在保证一定转化率的情况下，承受多少人流量。　</p>
+<p><strong>完播率：</strong> 衡量一个视频质量的重要指标之一，是视频被播放完的次数占所有播放量的比例。完播率越高，则系统认定这个视频质量就越好，系统推荐的流量就越多。　</p>
+<p><strong>抖音店群：</strong> 顾名思义，就是批量开设、运营抖音店铺，利用抖音商品的搜索排名及其他推荐机制进行产品售卖模式。　</p>
+<p><strong>ECPM：</strong> 每把你的内容推送到 1000 份手机上，抖音可以赚到的钱。通常用这个数值，来预估你的广告是优秀，进而推算你的广告费可以多久烧完。　</p>
+<p><strong>通投：</strong> 采用系统智能定向，即不人为设定任何定向。　</p>
+<p><strong>血条：</strong> 指主播 PK 过程中双方的红蓝进度条。谁的礼物少那么谁的血条就少，引导用户刷礼物。　</p>
+<p><strong>白牌：</strong> 品牌的相对概念，指一些小厂商生产的、没有牌子的产品。　</p>
+<p><strong>拼场直播：</strong> 主播在单场直播里，带货多个品牌的产品。　</p>
+<p><strong>推流：</strong> 推流指的是把采集阶段封包好的内容传输到服务器的过程，可以优化直播间的功能。</p>
+<h1 id="27-互联网私域相关术语"><a href="#27-互联网私域相关术语" class="headerlink" title="27. 互联网私域相关术语"></a>27. <strong>互联网私域相关术语</strong></h1><p><strong>私域流量：</strong> 私域流量是指企业可以<strong>自由利用，无须付费，又能随时触达</strong>，被沉淀在自有 app、公众号、个人微信、微信群等相对私密渠道的用户集群。　</p>
+<p><strong>公域流量：</strong> 公域流量是和私域流量相对的一个概念。简而言之就是一个公共区域的流量，是大家共享的平台，比如微博、抖音、小红书等平台。　</p>
+<p><strong>商域流量：</strong> 商域流量是平台从公域流量划出来，<strong>以付费为主要分配标准的流量</strong>。本质上，商域流量还是公域流量，只是分配流量的标准变成了以付费为主。例如抖音信息流广告等。　</p>
+<p><strong>超级用户：</strong> 超级用户首先一定是企业产品的重度用户，对产品的需求频率很高；其次，他们在未来一段时间内，有明确意愿持续消费企业的产品和服务，目前主要体现在愿意花钱成为企业的付费会员上。<strong>在这个定义中有两个关键点，一是重度用户；二是有明确的持续消费意愿。</strong>　</p>
+<p><strong>LTV（life time value）：</strong> 可以理解为用户的生命周期价值，简单来说就是：** 用户从开始接触私域到离开离开的整个过程。**可以分为：引入期、成长期、稳定期、衰退期、流失期。　</p>
+<p><strong>增量市场&#x2F;存量市场：</strong> 增长市场它是指潜在的、还没被竞争对手教育和抢占的市场，也可以说是空白市场。而存量市场，是已经被看见、被教育、被开发的市场，它的出现经历了一段“从有到优”的过程。　</p>
+<p><strong>用户画像：</strong> 用户画像简单理解就是<strong>用户信息标签化，例如通过用户年龄、性别、消费习惯、地域等信息</strong>，把用户抽象成标签化的模型，以便进行更有针对性地进行推广或用户管理。　</p>
+<p><strong>用户分层：</strong> 用户分层是建立用户标签体系、用户分层体系和分层转化策略，实现精细化运营用户的目的，更是一种对用户进行标签划分的方法。　</p>
+<p><strong>触点营销：用户接触到我们的每一个点</strong>，这些点就叫触点。触点营销，就是通过包装这些每一个点，让用户有产生关注、有感到我们的价值等等，最终促使用户进行购买和转化。　</p>
+<p><strong>用户行为路径：</strong> 用户行为路径分析是一种监测用户流向，从而统计产品使用深度的分析方法。用户访问页面、小程序等都会形成行为路径。　</p>
+<p><strong>拉新：</strong> 拉新是指拉来新用户，最直接的指标是新增用户数。在私域中常被指于社群拉新、门店拉新等渠道新增用户。　</p>
+<p><strong>促活&#x2F;唤醒：</strong> 简单理解就是通过某些方式达到活跃用户的目的，通常在社群中里会进行用户促活，让用户重新关注品牌。　</p>
+<p><strong>千人千面：</strong> 常用于广告或内容营销，通过个性化标签以及内容推荐系统实现不同的人看到不同的内容，从而实现精准营销。　</p>
+<p><strong>SOP（Standard Operating Procedure）：即标准作业程序</strong>，就是将某一事件的标准操作步骤和要求以统一的格式描述出来，用来指导和规范日常的工作。例如社群 sop 就是建立社群运营工作的标准化，每一个步骤细节、每一个动作的时间节点、负责人等等，都需要提前准备。　</p>
+<p><strong>私域裂变：</strong> 私域裂变以私域用户为基础刺激分享，获取用户社交关系链中的用户，可以充分利用用户的拉新价值，并且获客成本较低，有利于实现快速的用户增长。例如社群中进行红包裂变玩法。　</p>
+<p><strong>复购率：</strong> 复购率是是根据消费者对某一产品或服务的重复购买次数计算出来的比率。<strong>复购率能够反映出消费者对该产品或服务的忠诚度</strong>，比率越高则忠诚度越高，反之则越低。　</p>
+<p><strong>转化率：</strong> 转化率指在一个统计周期内，完成转化行为的人数占私域总人数的比率。<strong>计算公式为：转化率&#x3D;（转化人数&#x2F;总人数）×100%。</strong>　</p>
+<p><strong>私域沙漏模型：</strong> 沙漏模式是一个完整的良性的闭环。**从用户的吸引、用户转化、用户留存、用户复购再到分享裂变，是一个完整的客户关系管理的过程。**只有这样，企业才能有沉淀客户，让客户产生复购，最终形成品牌。　</p>
+<p><strong>用户留存率：</strong> 这个指标是用来衡量一段时间后用户留下来的比例。常用户私域社群的留存率计算，一般会跟踪次日留存、三日留存、七日留存以及 30 天留存。　</p>
+<p><strong>AARRR 模型：</strong> AARRR 模型是私域流量运营中最为常见的模型之一。<strong>从获客、激活、留存、变现、传播 5 个流程帮助商家从公域中挖掘新流量</strong>，建立自己的“私域流量池”。　</p>
+<p><strong>RFM 模型：</strong> RFM 是衡量用户价值常用的工具，R（Recency）表示客户最近一次交易与当前时间的间隔，F（Frequency）表示客户的交易频率，M （Monetary）表示客户的交易金额。以这三个指标为基础，<strong>可将用户分为八大客户类型，根据不同的客户类型采取相应的措施，促进企业决策。</strong>　</p>
+<p><strong>帕累托分层模型：</strong> 帕累托分层模型又叫 28 定律模型，**即 20%的用户为企业创造 80%的价值，运营者需要花费 80%的精力去服务 20%的优质用户。**常用于用户分层，所以需要企业优先找到这 20%的客户，并服务好他们。　</p>
+<p><strong>埋点：</strong> 是数据分析中的一种常用的数据采集方法，有全埋点、代码埋点、可视化埋点几种方式，代码埋点又分前端埋点，后端埋点。　</p>
+<p><strong>A&#x2F;B 测试：</strong> A&#x2F;B 测试常用于裂变海报的测试。在同一时间维度，为了测试某因素对结果的影响，以此因素为变量，其他因素为定量进行测试，以找到结果最佳的变量刻度。　</p>
+<p><strong>免费会员：</strong> 用户获取会员身份，并不需要额外花钱。<strong>这种会员模式门槛低，覆盖广，经常被设计成“成长型会员”模式</strong>，我们最常见的就是“积分制”。根据你累积的消费行为，来区分不同的会员等级和权益。　</p>
+<p><strong>付费会员：</strong> 用户需要花钱获取会员身份，而且是限时的。**这种会员模式门槛较高，主要针对一部分粘性高、要求高、复购高，且有一定消费力的用户。**这又可以细分为付费购买消费资格（比如 Costco、山姆会员店等），以及付费购买权益（比如京东 PLUS、天猫 88VIP 等）。　</p>
+<p><strong>储值会员：“储值会员”本质是一种消费金预存行为</strong>，钱还是顾客的，只是提前存在商家这边，我承诺以后会用来消费。预存的目的，是为了返现、折扣等价格优惠，而非为了某种权益或服务额外支付溢价。　</p>
+<p><strong>种子用户：这类用户通常是产品的重度使用者</strong>，而且乐于反馈和分享给他周边的人使用。例如品牌通过社群与种子用户进行沟通交流，挖掘需求，他们可以更好地进行传播。　</p>
+<p><strong>GMV（Gross Merchandise Volume）：</strong> 即商品交易总额，是成交总额（一定时间段内）的意思。例如社群当月的 GMV 是 10 万元。　</p>
+<p><strong>ROI（Return on Investment）：</strong> 意思是投资回报率，<strong>计算公式：投资回报率（ROI）&#x3D;利润&#x2F;投资总额×100%。</strong>　</p>
+<p><strong>DAU（Daily Active User）：</strong> 日活跃用户数量，常用于反映网站、互联网应用或网络游戏的运营情况，网站通常用日 UV 来衡量，DAU 常用于 APP，常见的还有 WAU 周活跃和 MAU 月活跃。　</p>
+<p><strong>ARPU（average revenue per user）：</strong> 指每个用户的平均收入，是运营商用来测定其取自每个最终用户收入的一个指标。做数据分析的时候，ARPU 一般指客单价，但并不反映最终的利润率。　</p>
+<p><strong>API（Application Programming Interface）：</strong> 应用程序接口，用来提供应用程序与开发人员基于某软件或硬件得以访问的一组例程，而又无需访问源码，或理解内部工作机制的细节。　</p>
+<p><strong>CRM（Customer Relationship Management）：</strong> 客户关系管理，通常也代表客户关系管理系统，企业用来管理与客户之间的关系。　</p>
+<p><strong>SCRM（Social Customer Relationship Management）：</strong> 即社会化的客户关系管理，或是基于社交媒体的客户关系管理。　</p>
+<p><strong>ERP （Enterprise Resource Planning） ：</strong> 企业资源计划 ，是指建立在信息技术基础上，集信息技术与先进管理思想于一身，以系统化的管理思想，为企业员工及决策层提供决策手段的管理平台。　</p>
+<p><strong>SMO（Social Media Optimization）：</strong> 社会化媒体优化，通过社会化媒体，在线组织和社交网站获得公共传播的一整套方案。　</p>
+<p><strong>KPI（Key Performance Indicator）：关键绩效指标法，是企业绩效考核的方法之一</strong>，其特点是考核指标围绕关键成果领域进行选取。　</p>
+<p><strong>OKR（Objectives andKey Results）：即目标与关键成果法，是一套明确和跟踪目标及其完成情况的管理工具和方法</strong>，通过 O（Objectives 目标）来进行拆分出 KR（Key Results 关键结果），下一级的 O 是上一级的 KR，最终保证大家目标方向的统一。　</p>
+<p><strong>MOT（Moment of Truths）：</strong> MOT 是一个关键指标，是对客户导向的具体衡量，因为对客户而言，他只会记住那些关键时刻，<strong>用来帮助企业落实以用户为中心的理念。</strong>　</p>
+<p><strong>Unio n ID：</strong> 个 人 微 信 上 有 ID， 企 业 微 信 上 有 UnionID， 意 思 是 “ 统 一 ” 。假 设 有 一 个 用 户 在 小 程 序 上 注 册 了 账 号 ， 同 时 又 关 注 了 公 众 号 ，那 就 会 有 一 个 统 一 的 账 号 ， 这 个 账 号 就 是 UnionID。 企 业 微 信提供了 UnionID，使 企 业 可 以 将 用 户 在 私 域 全 域 中 对 客 户 进 行 统一的画像和标签。　</p>
+<h1 id="28-互联网短视频相关术语"><a href="#28-互联网短视频相关术语" class="headerlink" title="28. 互联网短视频相关术语"></a>28. <strong>互联网短视频相关术语</strong></h1><p><strong>景别：</strong> 镜头距离人物的位置远景，常见的 5 个景别分为：** 远景、全景、中景、近景、特写。**　</p>
+<p><strong>运镜：</strong> 常见镜头的拍摄方式包括<strong>推、拉、摇、移、跟</strong>等多种形式。　</p>
+<p><strong>时长：</strong> 指视频的时间长度。基本单位是秒。一般常见的是，时、分、秒、帧。其中帧是指视频的基础单位，可理解为一张静态图片就是一帧。　</p>
+<p><strong>角度：</strong> 与被拍摄主题的角度关系，如<strong>平拍、俯拍、斜拍等</strong>。　</p>
+<p><strong>构图：</strong> 画面中主题与陪体、背景等元素的占比。常用的构图法则如<strong>黄金分割构图法、对角线构图法、中心对称构图法等。</strong>　</p>
+<p><strong>封装格式：</strong> 存储视频的格式，通常 MP4 和 MOV 是各大视频平台支持度最好的视频格式。　</p>
+<p><strong>关键帧：</strong> 关键帧就是素材中某一个指定的时间节点，在这个时间节点上我们给素材添加上动画特效，在播放这一素材时只有时间节点走到这个关键帧才能触发这一特效。　</p>
+<p><strong>蒙太奇：</strong> 蒙太奇（Montage）是“剪接“的意思，把不同镜头拼接在一起时，是短视频拍摄中常用的创作手法，可以很好地展现场景的主次关系、人物关系、剧情发展等。　</p>
+<p><strong>剪辑率：</strong> 一个段落镜头的切换速度，切换的越快，剪辑率越高；切换的越慢，剪辑率越低。　</p>
+<p><strong>转场：</strong> 指不同内容的两个镜头之间衔接，一般分有无技巧转场与技巧转场。　</p>
+<p><strong>定格：</strong> 指将电影胶片的某一格、电视画面的某一帧，通过技术手段，增加若干格、帧相同的胶片或画面，以达到影像处于静止状态的目的。　</p>
+<p><strong>闪回：</strong> 突然以很短暂的画面插入某一场景，用以表现人物此时此刻的心理活动以及感情起伏，手法极其简洁明快。一般为过去出现的场景或已经发生的事情。　</p>
+<p><strong>光位：</strong> 日光或人造光的照射方向，如<strong>顺光、逆光、顶光、侧光、脚光等</strong>。　</p>
+<p><strong>镜头技法：</strong> 在拍摄中被广泛采取的拍摄或组接方法，如<strong>两级镜头、跳切镜头、正反打镜头。</strong>　</p>
+<p><strong>账号标签：</strong> 平台通过账号发布的内容，经过算法根据视频内容筛选归类，给账号一个标签，推送给对此内容感兴趣的用户。账号标签明确，视频发布后很快会被目标用户看到。标签不明确，算法则无法得知推荐某种类型用户，不被推荐。　</p>
+<p><strong>截流：</strong> 字面上的解释其实很好理解，就是“截取别人的流量”。比如，短视频评论区截流，如果评论的文案功底好的话，很容易引起创作者和同评论区的用户共鸣或评论内容成为热门评论，你的主页面就会被关注，即可在同类型的抖音大号评论区进行流量截取。</p>
+<h1 id="29-互联网大厂毕业生组织名称"><a href="#29-互联网大厂毕业生组织名称" class="headerlink" title="29. 互联网大厂毕业生组织名称"></a>29. <strong>互联网大厂毕业生组织名称</strong></h1><p>在特殊的历史阶段，很多优秀的人喜欢扎堆，像上世纪 80 年代商界出现了“万通六君子”，互联网时代百度的“百老汇”、腾讯的“南极圈”、阿里的“前橙会”、盛大的“盛斗士”。一般员工离职后自发建立群，说明大部分是比较认可前一个雇主的，至少很感谢那样的集团体系，离职的原因很多，因为某些事或某些人或职业发展瓶颈，互联网企业离职后抱团的比较多。　</p>
+<p>百度离职员工组织：百老汇　</p>
+<p>腾讯离职员工组织：南极圈、单飞的企鹅　</p>
+<p>阿里离职员工组织：曾经的阿里人、前橙会、阿里校友会　</p>
+<p>华为离职员工组织：华友会　</p>
+<p>新浪离职员工组织：毕浪　</p>
+<p>网易离职员工组织：离易、妖鹿山　</p>
+<p>京东离职员工组织：东成西就　</p>
+<p>盛大离职员工组织：盛斗士，据说在盛大工作过 1-2 年叫盛斗士；3-5 年叫必盛客；6-9 年叫斗战盛佛，10 年以上叫齐天大盛。　</p>
+<p>巨人离职员工组织：消失的巨人　</p>
+<p>金山离职员工组织：旧金山　</p>
+<p>小米离职员工组织：小米粒　</p>
+<p>高德离职员工组织：高老庄　</p>
+<p>大疆离职员工组织：行者无疆，疆湖再会　</p>
+<p>南方报业传媒离职员工组织 ：南友圈，南友众创圈　</p>
+<p>奇虎 360 离职员工组织 ：飞虎队　</p>
+<p>携程离职员工组织：海豚湾　</p>
+<p>顺丰离职员工组织：丰云会　</p>
+<p>比亚迪离职员工组织：迪创会　</p>
+<p>三星离职员工组织 ：来自星星的你　</p>
+<p>金蝶离职员工组织：蝶代　</p>
+<p>去哪儿网的离职员工组织：8 骆客　</p>
+<p>喜马拉雅 fm 离职组织：脱马斯　</p>
+<p>搜狐离职员工组织：朋狐湾　</p>
+<h1 id="30-互联网大厂大佬调侃外号"><a href="#30-互联网大厂大佬调侃外号" class="headerlink" title="30. 互联网大厂大佬调侃外号"></a>30. <strong>互联网大厂大佬调侃外号</strong></h1><p>马云：悔创阿里杰克马，福报马。“悔创阿里杰克马”这个梗源自于马云老师在中央电视台“开讲了”节目中说过的一句话，那时身价万亿的马老师在节目中痛彻心扉的说，这一生最大的失误就是创立阿里巴巴，最快乐的时间，是当老师每月领 90 元工资的时候。　</p>
+<p>马化腾：普通家庭马化腾。同为网络巨头的“深圳马”，腾讯的创始人马化腾，以前是互联网大人物中比较低调的一个，很少像马云老师一样频繁出现，到处发表演讲，但在面对节目采访时，马化腾表示：“我们家也就是普通家庭，不过是房子大一点”，由此留下了“普通家庭马化腾”的江湖传奇。　</p>
+<p><strong>雷军：</strong> <strong>Are you ok 雷布斯，“雷布斯”、“猴王”、“雷 OK”</strong>。程序员出身，小米手机的创始人雷军也是话题比较多的一个人，不过，真正让雷军火遍全网的，还是那首神曲《are you ok》。雷军在印度的产品发表会上进行了演讲，以非标准的英语发音受到关注，被编辑成鬼畜神曲，还被小米手机用于手机音乐。　</p>
+<p>刘强东：不知妻美刘强东。奶茶妹妹章泽天手拿奶茶的照片，火遍网络，其美貌是众所周知的，只有枕边的人刘强东不知道。 在接受记者采访时，刘强东面不改色地说：“我完全不知道她是否美丽。 因为我是脸盲。”　</p>
+<p><strong>贾跃亭：</strong> <strong>下周回国贾跃亭</strong>。已经和妻子离婚了，不过，曾经的乐视一把手，互联网大佬贾跃亭，什么时候回国，一直都是悬念。　</p>
+<p><strong>余承东：</strong> <strong>“余大嘴”、“余实诚”</strong>。余承东这个就比较厉害了，可以说是神反转啊。从 2012 年开始接受华为消费者业务之后，带领华为手机取得了非常优秀的成绩。余承东曾经说过不止一次豪言壮语，像“未来手机仅剩两三家、华为就是其中之一；三年内超越三星、两年内超越苹果”等口号，因此被网友们挂上了“余大嘴”这个称号。“余实诚”这个称号完全就是凭自身实力获得的。当初余承东所说的豪言壮语，如今正在一个接一个的实现，华为手机目前也已经坐稳全球第三的位置。可以说华为在他的带领下是非常成功的。　</p>
+<p><strong>常程：</strong> <strong>“掌柜”、“万磁王”</strong>。常程，相信各位也是非常熟悉。他是 ZUK 手机的创始人，目前已经成为小米集团副总裁了。他应该是最接地气的手机大佬了，每天与网友们进行互动，人送外号“掌柜”。之前联想手机能有持久的热度，离不开他的努力。“万磁王”这个称号不是白来的。2018 年联想手机确认新目标之后，一直以小米为主要竞争对手，每次发布新品都要“碰瓷”一下小米手机，甚至拿一千元的联想 Z5 和售价接近上万的 IPhone X 相比较。久而久之，网友们将“万磁王”这个称号赐给了他。而常程也没有辜负众望。　</p>
+<p><strong>刘作虎：</strong> <strong>“张老板”</strong>。相比较前几位大佬的绰号，一加手机创始人刘作虎的绰号就显得特别文雅和亲切了。“张老板”这个称号纯属是一位网友“翻车”造成的。一加 5 发布后，一位网友在刘作虎微博评论的时候语无伦次地说了一句“张老板”。如今，刘作虎也一直以这个称号自居。　</p>
+<p><strong>罗永浩：</strong> <strong>“罗玉龙”、“公孙浩”</strong>。罗永浩是一位充满笑点的手机圈的大佬。他是锤子手机的创始人，凭自身实力让锤子科技目前处于接近倒闭的状态，但不妨碍人们喜欢他。“罗玉龙”这个称号，是喜欢他的人所起的，他的发布会从不缺少乐趣。“人家开发布会讲手机，罗永浩则是讲相声”。“公孙浩”这个称号就是贬义的了。起因就是锤子 T1 上市的时候，老罗与网友打赌，“如果价格低于 2500 元，我是你孙子”。结果，不到两个月，价格来到了 2000 元，因此被网友们称为“公共孙子罗永浩”。不仅如此，罗永浩也是经常吹牛，“收购苹果”就是从他口中说出的。　</p>
+<p><strong>卢伟冰：</strong> 目前卢伟冰拥有“<strong>卢十瓦、卢嗡嗡、卢马达、卢怼怼</strong>”等多个绰号，甚至本人都拿十瓦开玩笑。不得不说，网友们都是一些人才，想混手机圈，真是太难了。自卢伟冰加入小米集团之后，它就长期霸占手机圈的热搜，因为一直怼友商，遭到各路网友的调侃。　</p>
+<p><strong>许家印：</strong> 外号<strong>许皮带</strong>，许家印这个外号的来源于一张照片，有一年全国两会期间，全国政协委员在人民大会堂前的广场为了逃避记者的采访，腰缠爱马仕的他销魂一跑，爆红一时，至今值得回味一百遍。　</p>
+<p><strong>丁磊：</strong> 外号<strong>丁三石</strong>，丁三石的外号来源于丁磊名字的拆解，磊为三个石组成又名丁三石。据了解，因为丁磊是网易游戏中禁言的用词，所以，就被很多玩家分化成丁三石，出现在网易的各大游戏中，成为了玩游戏的戏弄。　</p>
+<p><strong>王健林：</strong> <strong>一无所有王健林</strong>。王健林作为中国前首富，应该是中国最有钱的男人之一了吧，前段时间给人订小目标，张嘴就是一个亿，可公司年会的时候，王首富偏偏选择“一无所有”这首歌，歌词和现状形成鲜明对比，因此，网友送外号为“一无所有王健林”。</p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 互联网行业黑话词典</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2025-03-13 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-03-13 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2025/03/13/4.专业支撑体系/4.3行业研究与专题洞察/互联网行业黑话词典/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E9%BB%91%E8%AF%9D/">#黑话</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/">#互联网</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/10/28/3.%E9%AA%8C%E8%AF%81%E4%B8%8E%E5%A2%9E%E9%95%BF/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%EF%BC%9A%E8%AE%A9%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E4%B8%BA%E7%94%A8%E6%88%B7%E5%8F%91%E5%A3%B0/" title="数据驱动：让产品数据为用户发声" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/10/file-20251028085455028.png" alt="数据驱动：让产品数据为用户发声" class="!max-w-none">
+  <span class="title">数据驱动：让产品数据为用户发声</span>
+</a><a class="recommended-article-item" href="/2025/08/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.1%E9%AB%98%E9%98%B6%E6%80%9D%E7%BB%B4%E4%B8%8E%E5%AE%9E%E6%88%98%E5%A4%8D%E7%9B%98/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BB%85%E5%81%9A%E5%8A%9F%E8%83%BD%E8%A7%84%E5%88%92%EF%BC%9F%E8%A2%AB%E6%B7%98%E6%B1%B0%E6%98%AF%E8%BF%9F%E6%97%A9%E7%9A%84%E4%BA%8B/" title="产品经理仅做功能规划？被淘汰是迟早的事" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/file-20250820190300123.jpg" alt="产品经理仅做功能规划？被淘汰是迟早的事" class="!max-w-none">
+  <span class="title">产品经理仅做功能规划？被淘汰是迟早的事</span>
+</a><a class="recommended-article-item" href="/2025/12/23/1.%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/1.2%E5%B8%82%E5%9C%BA%E5%88%86%E6%9E%90%E4%B8%8E%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1/%E5%88%AB%E5%86%8D%E8%AF%B4%E2%80%9C%E8%B5%9A%E4%B8%8D%E8%B5%9A%E9%92%B1%E2%80%9D%EF%BC%9A%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E7%9A%84%E5%95%86%E4%B8%9A%E5%8D%87%E7%BB%B4%E6%80%9D%E8%80%83/" title="别再说“赚不赚钱”：产品经理的商业升维思考" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/12/MoneyMind.png" alt="别再说“赚不赚钱”：产品经理的商业升维思考" class="!max-w-none">
+  <span class="title">别再说“赚不赚钱”：产品经理的商业升维思考</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/10/28/3.%E9%AA%8C%E8%AF%81%E4%B8%8E%E5%A2%9E%E9%95%BF/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%EF%BC%9A%E8%AE%A9%E4%BA%A7%E5%93%81%E6%95%B0%E6%8D%AE%E4%B8%BA%E7%94%A8%E6%88%B7%E5%8F%91%E5%A3%B0/" title="数据驱动：让产品数据为用户发声" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/10/file-20251028085455028.png" alt="数据驱动：让产品数据为用户发声" class="!max-w-none">
+  <span class="title">数据驱动：让产品数据为用户发声</span>
+</a><a class="recommended-article-item" href="/2025/08/23/5.%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%88%90%E9%95%BF/5.1%E9%AB%98%E9%98%B6%E6%80%9D%E7%BB%B4%E4%B8%8E%E5%AE%9E%E6%88%98%E5%A4%8D%E7%9B%98/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BB%85%E5%81%9A%E5%8A%9F%E8%83%BD%E8%A7%84%E5%88%92%EF%BC%9F%E8%A2%AB%E6%B7%98%E6%B1%B0%E6%98%AF%E8%BF%9F%E6%97%A9%E7%9A%84%E4%BA%8B/" title="产品经理仅做功能规划？被淘汰是迟早的事" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/08/file-20250820190300123.jpg" alt="产品经理仅做功能规划？被淘汰是迟早的事" class="!max-w-none">
+  <span class="title">产品经理仅做功能规划？被淘汰是迟早的事</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/03/17/%E7%94%9F%E4%BA%A7%E5%8A%9B/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%20Axure%20Cloud%20%E5%B9%B6%E6%94%AF%E6%8C%81%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E5%8F%91%E5%B8%83%E7%AE%A1%E7%90%86/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">本地部署安装 Axure Cloud 并支持团队协作发布管理</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/03/07/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/DeepSeek%E5%AE%9E%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%B0%86DeepSeek%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8A%9B%E8%BD%BB%E6%9D%BE%E6%8E%A5%E5%85%A5%E5%90%84%E7%B1%BB%E8%BD%AF%E4%BB%B6/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">DeepSeek实用集成：将DeepSeek大模型能力轻松接入各类软件</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">互联网行业黑话词典</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%80%81%E6%9D%BF%E7%9A%84%E6%BD%9C%E5%8F%B0%E8%AF%8D"><span class="nav-text">1. 老板的潜台词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BA%92%E8%81%94%E7%BD%91%E8%BF%90%E8%90%A5%E9%BB%91%E8%AF%9D"><span class="nav-text">2. 互联网运营黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%BA%92%E8%81%94%E7%BD%91%E8%BF%90%E8%90%A5%E8%AF%8D%E8%AF%AD"><span class="nav-text">3. 互联网运营词语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BA%8C%E5%AD%97%E8%AF%8D"><span class="nav-text">3.1 二字词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%B8%89%E5%AD%97%E8%AF%8D"><span class="nav-text">3.2 三字词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%9B%9B%E5%AD%97%E8%AF%8D"><span class="nav-text">3.3 四字词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E4%BA%94%E5%AD%97%E8%AF%8D"><span class="nav-text">3.4 五字词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%85%AD%E5%AD%97%E8%AF%8D"><span class="nav-text">3.5 六字词</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E9%BB%91%E8%AF%9D"><span class="nav-text">4. 产品经理黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%A8%8B%E5%BA%8F%E5%91%98%E9%BB%91%E8%AF%9D"><span class="nav-text">5. 程序员黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E8%BF%90%E8%90%A5%E4%BA%BA%E9%BB%91%E8%AF%9D"><span class="nav-text">6. 运营人黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E4%BA%92%E8%81%94%E7%BD%91%E4%BA%BA%E7%9F%A5%E5%90%8D%E5%A4%A7%E5%8E%82%E5%88%AB%E7%A7%B0%E9%BB%91%E8%AF%9D"><span class="nav-text">7. 互联网人知名大厂别称黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E4%BA%92%E8%81%94%E7%BD%91%E6%8B%9B%E8%81%98%E9%BB%91%E8%AF%9D"><span class="nav-text">8. 互联网招聘黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E4%BA%92%E8%81%94%E7%BD%91%E9%BB%91%E8%AF%9D%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-text">9. 互联网黑话名词解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E4%BA%92%E8%81%94%E7%BD%91%E5%B2%97%E4%BD%8D%E7%9A%84%E5%8F%A3%E5%A4%B4%E7%A6%85"><span class="nav-text">10. 互联网岗位的口头禅</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E4%BA%92%E8%81%94%E7%BD%91%E4%BA%BA%E7%9A%84%E7%84%A6%E8%99%91%E8%AF%8D%E6%B1%87"><span class="nav-text">11. 互联网人的焦虑词汇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E6%96%B0%E5%AA%92%E4%BD%93%E9%BB%91%E8%AF%9D"><span class="nav-text">12. 新媒体黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-%E4%BA%92%E8%81%94%E7%BD%91%E4%BC%81%E4%B8%9A%E5%9B%A2%E5%BB%BA%E9%BB%91%E8%AF%9D"><span class="nav-text">13. 互联网企业团建黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-%E4%BA%92%E8%81%94%E7%BD%91%E6%97%A5%E5%B8%B8%E6%B2%9F%E9%80%9A%E8%AF%9D%E6%9C%AF"><span class="nav-text">14. 互联网日常沟通话术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-%E4%BA%92%E8%81%94%E7%BD%91%E7%94%B2%E6%96%B9%E9%BB%91%E8%AF%9D"><span class="nav-text">15. 互联网甲方黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-%E4%BA%92%E8%81%94%E7%BD%91%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E9%BB%91%E8%AF%9D"><span class="nav-text">16. 互联网创业公司黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%A9%E6%95%88%E9%BB%91%E8%AF%9D"><span class="nav-text">17. 互联网绩效黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-%E4%BA%92%E8%81%94%E7%BD%91%E8%A3%81%E5%91%98%E9%BB%91%E8%AF%9D"><span class="nav-text">18. 互联网裁员黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-%E4%BA%92%E8%81%94%E7%BD%91%E5%B2%97%E4%BD%8D%E9%BB%91%E8%AF%9D"><span class="nav-text">19. 互联网岗位黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-%E4%BA%92%E8%81%94%E7%BD%91%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F%E9%BB%91%E8%AF%9D"><span class="nav-text">20. 互联网商业模式黑话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-%E4%BA%92%E8%81%94%E7%BD%91%E7%BD%91%E7%BB%9C%E5%B9%BF%E5%91%8A%E6%9C%AF%E8%AF%AD"><span class="nav-text">21. 互联网网络广告术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-%E4%BA%92%E8%81%94%E7%BD%91%E8%90%A5%E9%94%80%E6%8E%A8%E5%B9%BF%E6%9C%AF%E8%AF%AD"><span class="nav-text">22. 互联网营销推广术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#23-%E4%BA%92%E8%81%94%E7%BD%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E6%8C%87%E6%A0%87%E6%9C%AF%E8%AF%AD"><span class="nav-text">23. 互联网常见数据指标术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-%E4%BA%92%E8%81%94%E7%BD%91%E5%95%86%E5%93%81%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">24. 互联网商品相关术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#25-%E4%BA%92%E8%81%94%E7%BD%91%E6%96%B0%E6%BD%AE%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">25. 互联网新潮相关术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26-%E4%BA%92%E8%81%94%E7%BD%91%E7%9B%B4%E6%92%AD%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">26. 互联网直播相关术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#27-%E4%BA%92%E8%81%94%E7%BD%91%E7%A7%81%E5%9F%9F%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">27. 互联网私域相关术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-%E4%BA%92%E8%81%94%E7%BD%91%E7%9F%AD%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">28. 互联网短视频相关术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#29-%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E6%AF%95%E4%B8%9A%E7%94%9F%E7%BB%84%E7%BB%87%E5%90%8D%E7%A7%B0"><span class="nav-text">29. 互联网大厂毕业生组织名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#30-%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E5%A4%A7%E4%BD%AC%E8%B0%83%E4%BE%83%E5%A4%96%E5%8F%B7"><span class="nav-text">30. 互联网大厂大佬调侃外号</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>

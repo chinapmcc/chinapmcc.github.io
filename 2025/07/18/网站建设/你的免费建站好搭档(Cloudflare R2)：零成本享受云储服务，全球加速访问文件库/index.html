@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="产品经理实战指南、运营方法论、敏捷开发流程、用户体验设计案例、产品开发协作、程序员职业成长、用户体验设计、敏捷开发、资源分享、应用案例、必备软件、AI工具应用">
+    
+    <meta name="author" content="xuliyaoPro">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+            <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://chinapmcc.com/2025/07/18/网站建设/你的免费建站好搭档(cloudflare r2)：零成本享受云储服务，全球加速访问文件库/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库">
+<meta property="og:url" content="https://chinapmcc.com/2025/07/18/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E4%BD%A0%E7%9A%84%E5%85%8D%E8%B4%B9%E5%BB%BA%E7%AB%99%E5%A5%BD%E6%90%AD%E6%A1%A3(Cloudflare%20R2)%EF%BC%9A%E9%9B%B6%E6%88%90%E6%9C%AC%E4%BA%AB%E5%8F%97%E4%BA%91%E5%82%A8%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%85%A8%E7%90%83%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE%E6%96%87%E4%BB%B6%E5%BA%93/index.html">
+<meta property="og:site_name" content="ChinaPMCC">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chinapmcc.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-07-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-17T16:00:00.000Z">
+<meta property="article:author" content="Liyao.Xu">
+<meta property="article:tag" content="Free">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="图床">
+<meta property="article:tag" content="CloudflareR2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chinapmcc.com/images/redefine-og.webp">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4TWZK8Y1NV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4TWZK8Y1NV');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/chinapmcc-logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chinapmcc-logo.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/chinapmcc-logo.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库 | 产品社区营(ChinaPMCC)™️
+        
+    </title>
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/css/build/tailwind.css">
+    
+
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/GeistMono/geist-mono.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fonts/Geist/geist.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"chinapmcc.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["过期程序员"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":true,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/blogSpaces-light.jpg","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":true,"id":"G-4TWZK8Y1NV"}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/blogSpaces-light.jpg","dark":"/images/blogSpaces-dark.jpg"},"title":"欢迎您的到来~Welcome","subtitle":{"text":["产品人秉持创造用户价值使命，于学习中成长蜕变。","产品经理从入门到独挡一面，分享每个产品背后的故事与思维逻辑，让我们不停地学习！不停地进化！","有您的参与才会变得更美好！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":"chinapmcc@gmail.com","fa-brands fa-telegram":"https://t.me/chinapmcc"},"qrs":{"weixin":"/images/wechat-chinapmcc.png","fa-brands fa-qq":"/images/qq-815069460.png"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":true,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"archives":{"icon":"fa-regular fa-archive","submenus":{"Archives":"/archives","Categories":"/categories","Tags":"/tags"}},"学产品":{"icon":"fa-solid fa-list-alt","submenus":{"🧭定义与规划":"/categories/01🧭定义与规划/","🎨设计与开发":"/categories/02🎨设计与开发/","⚙️专业支撑体系":"/categories/04⚙️专业支撑体系/","💡行业方案与应用案例":"/categories/💡行业方案与应用案例/"}},"工具集锦":{"icon":"fa-solid fa-toolbox","submenus":{"🌍NavSite | 一站在手，资源全有":"https://nav.chinapmcc.com/","⚡short link":"https://surl.chinapmcc.com/","👍好站好软件":"/toolbox/TopApp","🎨一站式设计资源":"/developer/Development/thestocks.html","🌟精选AI LLM应用集":"/developer/Development/awesome-llm-apps.html","💻独立开发者项目":"/developer/Development/chinese-independent-developer.html","💻独立开发者项目-程序板块":"/developer/Development/Programmer.html","💻独立开发者项目-游戏板块":"/developer/Development/Game.html","💻高速公路云监控":"https://surl.chinapmcc.com/china-highway"}},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"欢迎关注评论(Ctrl+D)","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"YYYY-MM-DD","excerpt_length":200,"categories":{"enable":true,"limit":5},"tags":{"enable":true,"limit":5}},"footerStart":"2025/5/12 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                产品社区营(ChinaPMCC)™️
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories">
+                                                    分类
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-list-alt fa-fw"></i>
+                                    学产品
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">
+                                                    🧭定义与规划
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">
+                                                    🎨设计与开发
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">
+                                                    ⚙️专业支撑体系
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+                                                    💡行业方案与应用案例
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-solid fa-toolbox fa-fw"></i>
+                                    工具集锦
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">
+                                                    🌍NAVSITE | 一站在手，资源全有
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">
+                                                    ⚡SHORT LINK
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/toolbox/TopApp">
+                                                    👍好站好软件
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/thestocks.html">
+                                                    🎨一站式设计资源
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/awesome-llm-apps.html">
+                                                    🌟精选AI LLM应用集
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/chinese-independent-developer.html">
+                                                    💻独立开发者项目
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Programmer.html">
+                                                    💻独立开发者项目-程序板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/developer/Development/Game.html">
+                                                    💻独立开发者项目-游戏板块
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">
+                                                    💻高速公路云监控
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-archives">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories">分类</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags">标签</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-学产品"
+                        >
+                            <span>
+                                学产品
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-学产品">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/01%F0%9F%A7%AD%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%84%E5%88%92/">🧭定义与规划</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/02%F0%9F%8E%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91/">🎨设计与开发</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/04%E2%9A%99%EF%B8%8F%E4%B8%93%E4%B8%9A%E6%94%AF%E6%92%91%E4%BD%93%E7%B3%BB/">⚙️专业支撑体系</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/categories/%F0%9F%92%A1%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">💡行业方案与应用案例</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-工具集锦"
+                        >
+                            <span>
+                                工具集锦
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-工具集锦">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://nav.chinapmcc.com/">🌍NAVSITE | 一站在手，资源全有</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/">⚡SHORT LINK</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/toolbox/TopApp">👍好站好软件</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/thestocks.html">🎨一站式设计资源</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/awesome-llm-apps.html">🌟精选AI LLM应用集</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/chinese-independent-developer.html">💻独立开发者项目</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Programmer.html">💻独立开发者项目-程序板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/developer/Development/Game.html">💻独立开发者项目-游戏板块</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://surl.chinapmcc.com/china-highway">💻高速公路云监控</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">116</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">36</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">105</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://storage.chinapmcc.com/2025/06/ClodflarR2Storage.png" alt="你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/chinapmcc-logo.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">xuliyaoPro</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">过期程序员</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-07-18</span>
+        <span class="mobile">2025-07-18</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-07-18</span>
+            <span class="mobile">2025-07-18</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/">🧰工具技能</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">💻开发工具</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/%F0%9F%A7%B0%E5%B7%A5%E5%85%B7%E6%8A%80%E8%83%BD/%F0%9F%92%BB%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/%F0%9F%8F%97%EF%B8%8F%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">🏗️网站建设</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Free/">Free</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Cloudflare/">Cloudflare</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%9B%BE%E5%BA%8A/">图床</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/CloudflareR2/">CloudflareR2</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.8k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>在当前互联网时代，图片&#x2F;文件等存储与分享已成为日常需求。无论是写博客、发帖子还是整理笔记，<strong>稳定高效的图床服务</strong>都是不可或缺的工具。Cloudflare R2 作为新兴对象存储服务，以其<strong>零出口流量费</strong>和<strong>10GB免费存储空间</strong>的优势，成为个人图床的绝佳选择。</p>
+<blockquote>
+<p>免流量费+全球加速，10分钟完成专业级图床配置<br>本文将手把手教你如何利用 Cloudflare R2 和 PicList 搭建完全免费的图床服务，从此告别图片存储烦恼！</p>
+</blockquote>
+<h2 id="一、为什么选择-Cloudflare-R2-做图床？"><a href="#一、为什么选择-Cloudflare-R2-做图床？" class="headerlink" title="一、为什么选择 Cloudflare R2 做图床？"></a>一、为什么选择 Cloudflare R2 做图床？</h2><p>Cloudflare R2 是 Cloudflare 推出的对象存储服务，与传统云存储相比具有独特优势：</p>
+<ul>
+<li>✅ <strong>零出口流量费用</strong>：图片被访问时<strong>不收取任何流量费</strong></li>
+<li>🌍 <strong>全球加速网络</strong>：利用 Cloudflare 全球275个节点实现快速访问</li>
+<li>🆓 <strong>免费额度充足</strong>：每月免费提供：<ul>
+<li>10GB 存储空间（约可存5万张2MB图片）</li>
+<li>100万次上传操作（A类操作）</li>
+<li>1000万次图片读取（B类操作）</li>
+</ul>
+</li>
+<li>💰 <strong>超低超额费用</strong>：即使超出免费额度，每1000万次读取仅需$0.36<br>实测网络速度：</li>
+<li>白天：<strong>最高可达50MB&#x2F;s</strong></li>
+<li>晚上：<strong>约4-5MB&#x2F;s</strong>（不同地区有差异）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616151644427.png"
+                     
+                ></p>
+<h2 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h2><p>在开始搭建前，需要准备好以下资源：</p>
+<ol>
+<li><strong>Cloudflare 账号</strong>：访问 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/" >Cloudflare官网<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 注册免费账号</li>
+<li><strong>支付方式</strong>：信用卡或 PayPal（仅用于验证，免费额度内不会被扣费）</li>
+<li><strong>域名一个(可选)</strong>：可以是免费域名，或任意已购买的域名（无需备案），将域名托管到Cloudflare<blockquote>
+<p>💡 提示：域名不需要备案，只需接入Cloudflare DNS解析即可使用</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="三、创建与配置-R2-存储桶"><a href="#三、创建与配置-R2-存储桶" class="headerlink" title="三、创建与配置 R2 存储桶"></a>三、创建与配置 R2 存储桶</h2><h3 id="步骤1：创建存储桶"><a href="#步骤1：创建存储桶" class="headerlink" title="步骤1：创建存储桶"></a>步骤1：创建存储桶</h3><ol>
+<li>登录 Cloudflare 控制台</li>
+<li>左侧菜单选择 <strong>R2 对象存储</strong>，需要添加付款方式VISA卡或Paypal</li>
+<li>点击 <strong>创建存储桶</strong></li>
+<li>填写存储桶名称（例如 <code>imghosting</code>）</li>
+<li>地区选择 <strong>亚太地区（APAC）</strong></li>
+<li>默认存储类选择 <strong>标准</strong></li>
+<li>点击 <strong>创建存储桶</strong></li>
+<li>开启公开访问：点击 <strong>设置</strong>，<strong>公共开发URL</strong>栏 点击 启用，确认对话框中输入”allow”，点击允许</li>
+<li>这样创建完成了！直接在页面的<strong>对象</strong>TAB上传和删除文件等操作。<br>打开文件的URL能访问的话，就不需要配置域名，直接使用即可；但为了哪天被墙，建议用自定义域名绑定，看上去也更简洁美观点。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616152310530.png"
+                     
+                ></th>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616153344603.png"
+                     
+                ></th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616155107984.png"
+                     
+                ></th>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616155530003.png"
+                     
+                ></th>
+</tr>
+</thead>
+</table>
+<h3 id="步骤2：绑定自定义域名"><a href="#步骤2：绑定自定义域名" class="headerlink" title="步骤2：绑定自定义域名"></a>步骤2：绑定自定义域名</h3><p>如没有域名请看教程：<br>公共开发URL地址测试下来全国是都可以使用的，不像网络上说的会被墙；但Cloudflare上写着有速率限制建议我们使用自定义域名，那么就听建议吧：</p>
+<ol>
+<li>进入刚创建的存储桶</li>
+<li>点击 <strong>设置</strong> 标签页</li>
+<li>找到 <strong>自定义域</strong> 二级菜单</li>
+<li>点击 <strong>添加</strong> ，输入自定义域名（例如<code>chinapmcc.com</code>），点击<strong>继续</strong></li>
+<li>点击 <strong>连接域</strong></li>
+<li>等待初始化，<strong>状态&#x3D;活动 即成功</strong><blockquote>
+<p>💡 提示：Cloudflare 会自动添加所需的DNS记录，等待几分钟即可生效。</p>
+</blockquote>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616162414973.png"
+                     
+                ></th>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616163834837.png"
+                     
+                ></th>
+</tr>
+</thead>
+</table>
+<p>点击对象 上传的图片，可以看到自定义域名地址，贴入浏览器中即可访问</p>
+<p><code>https://pub-06e4576fcdb04c07b6b688839c8c000a.r2.dev/虚拟电厂搭建全流程解读2025.06.png</code></p>
+<p><code>https://storage.chinapmcc.com/虚拟电厂搭建全流程解读2025.06.png</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616165755306.png"
+                     
+                ></p>
+<p>至此图床就搭建完成了，但要批量上传文件，还是比较麻烦，或做些高级配置，请继续往下阅读；</p>
+<h3 id="步骤3：创建S3-客户端API访问密钥"><a href="#步骤3：创建S3-客户端API访问密钥" class="headerlink" title="步骤3：创建S3 客户端API访问密钥"></a>步骤3：创建S3 客户端API访问密钥</h3><ol>
+<li><p>左侧菜单选择 <strong>R2 对象存储</strong>，点击<strong>概述</strong></p>
+</li>
+<li><p>点击 <strong>管理API令牌</strong></p>
+</li>
+<li><p>点击 <strong>创建 Account API令牌</strong></p>
+</li>
+<li><p>配置参数：</p>
+</li>
+</ol>
+<ul>
+<li>令牌名称：<code>PicListToken</code> </li>
+<li>权限：<strong>对象读和写: 允许读取、写入和列出特定存储桶中的对象。</strong></li>
+<li>指定存储桶：<strong>应用于此帐户中的所有存储桶(包括新创建的存储桶)</strong></li>
+<li>TTL：<strong>永久</strong></li>
+</ul>
+<ol start="5">
+<li><p>点击底部按钮 <strong>创建 Account API令牌</strong></p>
+</li>
+<li><p>在记事本中保存&lt;访问密钥 ID&gt;&lt;机密访问密钥&gt;值，点击完成后无法再次查看</p>
+<p><strong>令牌值：</strong></p>
+<p>​    iUpTxxx_TQKoCY</p>
+<p><strong>访问密钥 ID：</strong></p>
+<p>​    0757a2xxxb275f</p>
+<p><strong>机密访问密钥：</strong></p>
+<p>​    57eaa2xxx952c</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616170741864.png"
+                     
+                ></th>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616171416112.png"
+                     
+                ></th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616171947637.png"
+                     
+                ></th>
+<th><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616172145980.png"
+                     
+                ></th>
+</tr>
+</thead>
+</table>
+<h2 id="四、配置-PicList-上传图片"><a href="#四、配置-PicList-上传图片" class="headerlink" title="四、配置 PicList 上传图片"></a>四、配置 PicList 上传图片</h2><p>PicList是一款高效的云存储和图床平台管理工具，基于PicGo深度二次开发，提供完整的图床功能和全面的云存储管理能力</p>
+<h3 id="PicList下载安装与基础配置"><a href="#PicList下载安装与基础配置" class="headerlink" title="PicList下载安装与基础配置"></a>PicList下载安装与基础配置</h3><ol>
+<li>下载安装 <a class="link"   target="_blank" rel="noopener" href="https://piclist.cn/" >PicList<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li>打开 PicList，进入 <strong>图床设置</strong></li>
+<li>选择 <strong>Amazon S3</strong>（因 R2 兼容 S3 API）</li>
+<li>填写配置信息：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Piclist 字段名</th>
+<th>Cloudflare R2 对应值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>图床配置名</td>
+<td>填写自定义名称</td>
+</tr>
+<tr>
+<td>设定AccessKeyId</td>
+<td>访问密钥 ID (Access Key ID)</td>
+</tr>
+<tr>
+<td>设定SecretAccessKey</td>
+<td>机密访问密钥 (Secret Access Key)</td>
+</tr>
+<tr>
+<td>设定Bucket</td>
+<td>创建存储桶时填写的名称 <code>imghosting</code></td>
+</tr>
+<tr>
+<td>设定上传路径</td>
+<td><code>PicList/&#123;year&#125;/&#123;month&#125;/&#123;fullName&#125;</code><br>上传到PicList文件夹下&#x2F;子文件夹为年&#x2F;月&#x2F;文件名<br><br><code>&#123;year&#125;/&#123;month&#125;/&#123;md5&#125;.&#123;extName&#125;</code><br>上传到文件夹为年&#x2F;月&#x2F;md5文件名.扩展名</td>
+</tr>
+<tr>
+<td>设定Region</td>
+<td><code>auto</code>（自动）<br><code>apac</code>（亚太地区）</td>
+</tr>
+<tr>
+<td>自定义节点</td>
+<td>复制节点URL：R2 对象存储→概述→API→将 R2 与 API 配合使用→复制URL<br><code>https://xxx.r2.cloudflarestorage.com</code></td>
+</tr>
+<tr>
+<td>自定义域名</td>
+<td>填写自定义域名(建议使用二级域名区分img.Domain.com)<br><code>https://chinapmcc.com</code></td>
+</tr>
+</tbody></table>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616174847983.png"
+                      style="zoom:85%;" 
+                >
+
+<h3 id="PicList使用"><a href="#PicList使用" class="headerlink" title="PicList使用"></a>PicList使用</h3><p>重复上传相同文件，会覆盖之前的文件，做好文件唯一命名或用md5命名</p>
+<p>图片处理：加水印、压缩图片、转换格式、尺寸调整、是否旋转等</p>
+<table>
+<thead>
+<tr>
+<th>拖动文件上传<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616181446384.png"
+                      style="zoom:55%;" 
+                ><br>Cloudflare端的文件<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616182635677.png"
+                      style="zoom:35%;" 
+                ></th>
+<th>正常显示的文件URL<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616182501201.png"
+                      style="zoom:65%;" 
+                ></th>
+</tr>
+</thead>
+</table>
+<h2 id="五、高级优化配置"><a href="#五、高级优化配置" class="headerlink" title="五、高级优化配置"></a>五、高级优化配置</h2><h3 id="1-设置缓存规则（减少B类操作）"><a href="#1-设置缓存规则（减少B类操作）" class="headerlink" title="1. 设置缓存规则（减少B类操作）"></a>1. 设置缓存规则（减少B类操作）</h3><ol>
+<li>在 Cloudflare 控制台选择你的域名</li>
+<li>进入 <strong>规则 → 页面规则 → 创建页面规则</strong></li>
+<li>配置：<ul>
+<li>URL：<code>https://www.yourdomain.com/*</code></li>
+<li>边缘缓存TTL：<strong>1个月</strong>（长期不更新的图片）</li>
+<li>浏览器缓存TTL：<strong>1天</strong></li>
+<li>缓存级别：<strong>缓存所有内容</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616213620359.png"
+                     
+                ></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-设置速率限制（防止恶意请求）"><a href="#2-设置速率限制（防止恶意请求）" class="headerlink" title="2. 设置速率限制（防止恶意请求）"></a>2. 设置速率限制（防止恶意请求）</h3><ol>
+<li>进入 <strong>安全性 → WAF → 速率限制规则</strong></li>
+<li>点击 <strong>创建规则</strong></li>
+<li>配置：<ul>
+<li>规则名称：<code>image-rate-limit</code></li>
+<li>字段：<code>URL路径</code></li>
+<li>运算符：<code>包含</code></li>
+<li>值：<code>/</code></li>
+<li>当速率超过：<code>100</code> 请求 &#x2F; <code>10</code> 秒</li>
+<li>然后采取措施：<strong>阻止</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616214356912.png"
+                     
+                ></li>
+</ul>
+</li>
+</ol>
+<h3 id="3-防盗链设置（防止蹭图）"><a href="#3-防盗链设置（防止蹭图）" class="headerlink" title="3. 防盗链设置（防止蹭图）"></a>3. 防盗链设置（防止蹭图）</h3><ol>
+<li>进入 <strong>安全性 → WAF → 自定义规则</strong></li>
+<li>点击 <strong>创建规则</strong></li>
+<li>配置：<ul>
+<li>规则名称：<code>hotlink-protection</code></li>
+<li>字段：主机名 等于 <code>img.yourdomain.com</code></li>
+<li>添加条件：引用方 不等于 <code>www.yourblog.com</code></li>
+<li>然后采取措施：<strong>阻止</strong><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://storage.chinapmcc.com/2025/06/file-20250616215341626.png"
+                     
+                ></li>
+</ul>
+</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><blockquote>
+<p>通过本教程，你已经成功搭建了一个<strong>完全免费、全球加速、安全可靠</strong>的个人图床服务，当然你<strong>可以存放任何文件</strong>如:gif\mp4\excel\word等等。Cloudflare R2 的免费额度足以满足绝大多数个人用户的需求，即使超出限额，其费用也远低于传统云服务商。<br>✨ 现在就开始你的图床之旅吧！释放本地存储空间，享受全球极速访问体验。</p>
+</blockquote>
+<p><strong>扩展阅读</strong>：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/r2/" >Cloudflare R2 官方文档<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://piclist.cn/app.html" >PicList 快速开始<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.google.com/speed/webp" >WebP 图片优化指南<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库</li>
+        <li><strong>作者:</strong> xuliyaoPro</li>
+        <li><strong>创建于
+                :</strong> 2025-07-18 00:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-07-18 00:00:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://chinapmcc.com/2025/07/18/网站建设/你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/Free/">#Free</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E5%8D%9A%E5%AE%A2/">#博客</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/Cloudflare/">#Cloudflare</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E5%9B%BE%E5%BA%8A/">#图床</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/CloudflareR2/">#CloudflareR2</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+  <div class="recommended-article px-2 sm:px-6 md:px-8">
+   <div class="recommended-desktop">
+    <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+    </div>
+    <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/05/25/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E4%B8%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%8F%90%E6%8F%90%E9%80%9F%EF%BC%9A%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D%EF%BC%8C%E7%95%85%E4%BA%AB%E5%85%A8%E7%90%83%E9%AB%98%E9%80%9F%E8%AE%BF%E9%97%AE/" title="为你的博客网站提提速：绑定个性域名，畅享全球高速访问" rel="bookmark">
+  <img src="https://img.chinapmcc.dpdns.org/A.7.5/%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D%E5%88%B0%E5%8A%A0%E9%80%9F%E7%94%A8%E6%88%B7%E5%85%A8%E7%90%83%E8%AE%BF%E9%97%AE.png" alt="为你的博客网站提提速：绑定个性域名，畅享全球高速访问" class="!max-w-none">
+  <span class="title">为你的博客网站提提速：绑定个性域名，畅享全球高速访问</span>
+</a><a class="recommended-article-item" href="/2025/05/26/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB%EF%BC%9A%E9%85%8D%E5%9B%BE%E4%B8%8D%E6%B1%82%E4%BA%BA%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96/" title="图床存储分享：配图不求人，免费图床搭建与提速优化" rel="bookmark">
+  <img src="https://img.chinapmcc.dpdns.org/A.7.5/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB.png" alt="图床存储分享：配图不求人，免费图床搭建与提速优化" class="!max-w-none">
+  <span class="title">图床存储分享：配图不求人，免费图床搭建与提速优化</span>
+</a><a class="recommended-article-item" href="/2025/11/21/%E8%A1%8C%E4%B8%9A%E6%96%B9%E6%A1%88%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/%E9%9B%B6%E6%88%90%E6%9C%AC%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84%E7%9F%AD%E9%93%BE%E6%8E%A5%E6%9C%8D%E5%8A%A1/" title="零成本部署一个自定义域名的短链接服务" rel="bookmark">
+  <img src="https://storage.chinapmcc.com/2025/11/Sink-Banner.png" alt="零成本部署一个自定义域名的短链接服务" class="!max-w-none">
+  <span class="title">零成本部署一个自定义域名的短链接服务</span>
+</a></div>
+   </div>
+   <div class="recommended-mobile">
+   <div class="recommended-article-header text-xl md:text-3xl font-bold mt-10">
+     <i aria-hidden="true"></i><span>推荐阅读</span>
+   </div>
+   <div class="recommended-article-group"><a class="recommended-article-item" href="/2025/05/25/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E4%B8%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%8F%90%E6%8F%90%E9%80%9F%EF%BC%9A%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D%EF%BC%8C%E7%95%85%E4%BA%AB%E5%85%A8%E7%90%83%E9%AB%98%E9%80%9F%E8%AE%BF%E9%97%AE/" title="为你的博客网站提提速：绑定个性域名，畅享全球高速访问" rel="bookmark">
+  <img src="https://img.chinapmcc.dpdns.org/A.7.5/%E7%BB%91%E5%AE%9A%E4%B8%AA%E6%80%A7%E5%9F%9F%E5%90%8D%E5%88%B0%E5%8A%A0%E9%80%9F%E7%94%A8%E6%88%B7%E5%85%A8%E7%90%83%E8%AE%BF%E9%97%AE.png" alt="为你的博客网站提提速：绑定个性域名，畅享全球高速访问" class="!max-w-none">
+  <span class="title">为你的博客网站提提速：绑定个性域名，畅享全球高速访问</span>
+</a><a class="recommended-article-item" href="/2025/05/26/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB%EF%BC%9A%E9%85%8D%E5%9B%BE%E4%B8%8D%E6%B1%82%E4%BA%BA%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%8F%90%E9%80%9F%E4%BC%98%E5%8C%96/" title="图床存储分享：配图不求人，免费图床搭建与提速优化" rel="bookmark">
+  <img src="https://img.chinapmcc.dpdns.org/A.7.5/%E5%9B%BE%E5%BA%8A%E5%AD%98%E5%82%A8%E5%88%86%E4%BA%AB.png" alt="图床存储分享：配图不求人，免费图床搭建与提速优化" class="!max-w-none">
+  <span class="title">图床存储分享：配图不求人，免费图床搭建与提速优化</span>
+</a></div>
+   </div>
+  </div>
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/07/24/%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/%E8%A7%A3%E5%86%B3Chrome%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">解决Chrome扩展程序无法安装问题</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/07/11/%E7%94%9F%E4%BA%A7%E5%8A%9B/%E8%BF%90%E8%90%A5%C2%B7%E5%8D%9A%E4%B8%BB%E7%A6%8F%E5%88%A9%EF%BC%9A%E6%95%99%E4%BD%A0%E4%B8%80%E9%94%AE%E8%A7%A3%E5%86%B3%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%A0%BC%E5%BC%8F%E6%8E%92%E7%89%88%E7%AD%89%E9%97%AE%E9%A2%98/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">运营·博主福利：教你一键解决微信公众号格式排版等问题</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://comment.chinapmcc.dpdns.org',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">你的免费建站好搭档(Cloudflare R2)：零成本享受云储服务，全球加速访问文件库</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Cloudflare-R2-%E5%81%9A%E5%9B%BE%E5%BA%8A%EF%BC%9F"><span class="nav-text">一、为什么选择 Cloudflare R2 做图床？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">二、准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE-R2-%E5%AD%98%E5%82%A8%E6%A1%B6"><span class="nav-text">三、创建与配置 R2 存储桶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%AD%98%E5%82%A8%E6%A1%B6"><span class="nav-text">步骤1：创建存储桶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="nav-text">步骤2：绑定自定义域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E5%88%9B%E5%BB%BAS3-%E5%AE%A2%E6%88%B7%E7%AB%AFAPI%E8%AE%BF%E9%97%AE%E5%AF%86%E9%92%A5"><span class="nav-text">步骤3：创建S3 客户端API访问密钥</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE-PicList-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-text">四、配置 PicList 上传图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PicList%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-text">PicList下载安装与基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PicList%E4%BD%BF%E7%94%A8"><span class="nav-text">PicList使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-text">五、高级优化配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AE%BE%E7%BD%AE%E7%BC%93%E5%AD%98%E8%A7%84%E5%88%99%EF%BC%88%E5%87%8F%E5%B0%91B%E7%B1%BB%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-text">1. 设置缓存规则（减少B类操作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%AE%BE%E7%BD%AE%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%EF%BC%88%E9%98%B2%E6%AD%A2%E6%81%B6%E6%84%8F%E8%AF%B7%E6%B1%82%EF%BC%89"><span class="nav-text">2. 设置速率限制（防止恶意请求）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%98%B2%E7%9B%97%E9%93%BE%E8%AE%BE%E7%BD%AE%EF%BC%88%E9%98%B2%E6%AD%A2%E8%B9%AD%E5%9B%BE%EF%BC%89"><span class="nav-text">3. 防盗链设置（防止蹭图）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">对对对~你说的对！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">xuliyaoPro</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 105 篇文章
+                    </span>
+                    
+                        <span>
+                            共 186.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Swup.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupSlideTheme.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScriptsPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupProgressPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupScrollPlugin.min.js" ></script><script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/SwupPreloadPlugin.min.js" ></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/imageViewer.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/utils.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/main.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/navbarShrink.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/scrollTopBottom.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/lightDarkSwitch.js" ></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/categoryList.js" ></script>
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/localSearch.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/codeBlock.js" ></script>
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/lazyload.js" ></script>
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/runtime.js" ></script>
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/odometer.min.js" ></script>
+    <link rel="stylesheet" href="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/Typed.min.js" ></script>
+  <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/typed.js" ></script>
+
+
+
+    
+        <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/mermaid.min.js" ></script>
+    
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/mermaid.js" ></script>
+
+
+
+
+
+    <script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/anime.min.js" ></script>
+
+
+
+
+    <script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/tools/tocToggle.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/toc.js" data-swup-reload-script></script><script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/plugins/tabs.js" data-swup-reload-script></script>
+
+
+<script  src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/libs/moment-with-locales.min.js" data-swup-reload-script></script>
+<script type="module" src="https://registry.npmmirror.com/hexo-theme-redefine/2.8.5/files/source/js/build/layouts/essays.js" data-swup-reload-script></script>
+
+
+
+
+	
+</body>
+
+</html>
