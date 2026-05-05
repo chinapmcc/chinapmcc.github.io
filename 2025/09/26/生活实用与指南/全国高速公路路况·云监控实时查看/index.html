@@ -798,12 +798,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.9k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.4k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>11 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>13 分钟</span>
         </span>
     
     
@@ -827,13 +827,14 @@
 <p><strong>高速原则：不要龟速占用第一车道，不要占用应急车道，不要长时间簇拥并排行驶</strong></p>
 <p>全国高速公路摄像头实时监控，查看方式不太一样，有的须微信打开，有的用第三方浏览器打开链接地址，清晰度与流畅度各不相同。最后提醒出行安全第一。</p>
 <div align="right">
-    <strong>2026年1月21日更新</strong>
+    <strong>2026年5月4日更新</strong>
     <ul style="list-style-position: inside; padding-left: 0; margin: 0;">
-        <strong>۰新增数据、更新：7省</strong><br>
-        <strong>۰新增微信二维码生成、复制链接</strong><br>
-        <strong>۰优化了兼容性</strong><br>
+        <strong>۰新增微信小程序链接5省</strong><br>
+        <strong>۰修复2省网页无法浏览问题</strong><br>
+        <strong>۰优化了兼容性可在微信、网页端同时打开</strong><br>
     </ul>
 </div>
+
 
 <p>后续新增&#x2F;更新可访问网站（建议收藏Ctrl+D）：<a class="link"   target="_blank" rel="noopener" href="http://www.chinapmcc.com/" >www.chinaPMCC.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
 <ul>
@@ -1252,6 +1253,116 @@ function copyToClipboard4() {
 <h2 id="20-广西壮族自治区（桂）"><a href="#20-广西壮族自治区（桂）" class="headerlink" title="20. 广西壮族自治区（桂）"></a>20. 广西壮族自治区（桂）</h2><h3 id="广西高速路况预览"><a href="#广西高速路况预览" class="headerlink" title="广西高速路况预览"></a>广西高速路况预览</h3><iframe src="http://221.7.196.191:9002/gxgscx-public/#/home/homePage" style="width:100%; aspect-ratio:4/3; border:0;"></iframe>
 
 <h2 id="21-海南省（琼）"><a href="#21-海南省（琼）" class="headerlink" title="21. 海南省（琼）"></a>21. 海南省（琼）</h2><h3 id="海南高速路况预览"><a href="#海南高速路况预览" class="headerlink" title="海南高速路况预览"></a>海南高速路况预览</h3><iframe src="http://hnglj.tianyait.net:8189/lkxx/index.jhtml" style="width:100%; aspect-ratio:4/3; border:0;"></iframe>
+
+
+<h2 id="DeepSeek-1"><a href="#DeepSeek-1" class="headerlink" title="DeepSeek 1"></a>DeepSeek 1</h2><div style="text-align:center; padding:20px; background:#f0f8ff; border-radius:10px; border:2px solid #07c160;">
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg"
+                      style="width:60px; height:60px; margin-bottom:15px;"
+                >
+
+  <h3 style="color:#333; margin-bottom:10px;">请在微信·小程序中打开"湖南高速警察便民服务平台"</h3>
+
+  <p style="color:#666; margin-bottom:20px;">
+    该功能需要在微信客户端中才能正常使用
+  </p>
+  <p style="color:#ff6b6b; margin-bottom:20px;">
+    ⚠️ 请复制微信小程序口令，在微信里粘贴即可打开
+  </p>
+
+  <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+      <button id="copyBtn" 
+              style="padding:12px 24px; background:#07c160; color:white; border:none; border-radius:6px; cursor:pointer; font-size:16px;">
+        复制链接到微信打开
+      </button>
+      <p id="copyStatus5" style="font-size:14px; color:#666; margin-top:8px;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+function copyToClipboard5() {
+  const text = '#小程序://湖南高速警察便民服务平台/dGhPz9Bc8Knk75g';
+  
+  // 方法1: 尝试使用微信专用API (推荐)
+  if (window.WeixinJSBridge) {
+    window.WeixinJSBridge.invoke('getBrandWCPayRequest', {
+      // 注意：这里是调用复制功能，不是支付
+      // 微信没有直接提供copy API，但可以通过创建input元素实现
+    });
+  }
+  
+  // 通用降级方案：创建临时输入框（在微信中可行）
+  const tempInput = document.createElement('input');
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  tempInput.setSelectionRange(0, 99999);
+  
+  try {
+    const success = document.execCommand('copy');
+    if (success) {
+      document.getElementById('copyStatus5').innerHTML = '✅ 链接已复制！请到微信中粘贴打开';
+      document.getElementById('copyStatus5').style.color = '#07c160';
+    } else {
+      throw new Error('execCommand failed');
+    }
+  } catch (err) {
+    // 最后的降级方案：提示用户手动复制
+    document.getElementById('copyStatus5').innerHTML = '⚠️ 复制失败，请长按上方口令手动复制';
+    document.getElementById('copyStatus5').style.color = '#ff6b6b';
+    // 显示口令文本供用户手动长按复制
+    const existingHint = document.getElementById('manualCopyText');
+    if (!existingHint) {
+      const manualDiv = document.createElement('div');
+      manualDiv.id = 'manualCopyText';
+      manualDiv.style.marginTop = '10px';
+      manualDiv.style.padding = '10px';
+      manualDiv.style.background = '#f9f9f9';
+      manualDiv.style.borderRadius = '4px';
+      manualDiv.style.fontSize = '14px';
+      manualDiv.style.wordBreak = 'break-all';
+      manualDiv.style.color = '#333';
+      manualDiv.innerHTML = `📋 小程序口令：<span style="user-select:all; font-family:monospace;">${text}</span>`;
+      document.querySelector('#copyBtn').parentNode.parentNode.appendChild(manualDiv);
+    }
+  }
+  
+  document.body.removeChild(tempInput);
+}
+
+// 绑定到页面元素
+document.getElementById('copyBtn').addEventListener('click', copyToClipboard5);
+</script>
+
+
+<h2 id="DeepSeek-2"><a href="#DeepSeek-2" class="headerlink" title="DeepSeek 2"></a>DeepSeek 2</h2><div style="text-align:center; padding:20px; background:#f0f8ff; border-radius:10px; border:2px solid #07c160;">
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg"
+                      style="width:60px; height:60px; margin-bottom:15px;"
+                >
+  
+  <h3 style="color:#333; margin-bottom:10px;">湖南高速警察便民服务平台</h3>
+  
+  <p style="color:#666; margin-bottom:20px;">
+    点击下方按钮，直接跳转小程序
+  </p>
+  
+<p>  <button onclick="openMiniProgram()" 
+          style="padding:12px 24px; background:#07c160; color:white; border:none; border-radius:6px; cursor:pointer; font-size:16px;"><br>    打开小程序<br>  </button></p>
+</div>
+
+<script>
+function openMiniProgram() {
+  // 微信环境下直接跳转
+  window.location.href = '#小程序://湖南高速警察便民服务平台/dGhPz9Bc8Knk75g';
+}
+</script>
 
 
 
@@ -1789,7 +1900,7 @@ function copyToClipboard9() {
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">全国高速公路路况·云监控实时查看</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1%E6%93%8D%E4%BD%9C%E6%9F%A5%E7%9C%8B%E8%AF%B4%E6%98%8E"><span class="nav-text">手机微信操作查看说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8A%E6%B5%B7%E5%B8%82%EF%BC%88%E6%B2%AA%EF%BC%89"><span class="nav-text">1. 上海市（沪）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">上海高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B5%99%E6%B1%9F%E7%9C%81%EF%BC%88%E6%B5%99%EF%BC%89"><span class="nav-text">2. 浙江省（浙）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;浙里畅行&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%99%E6%B1%9F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">浙江高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B1%9F%E8%8B%8F%E7%9C%81%EF%BC%88%E8%8B%8F%EF%BC%89"><span class="nav-text">3. 江苏省（苏）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;江苏路网&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%9F%E8%8B%8F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">江苏高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B2%B3%E5%8D%97%E7%9C%81%EF%BC%88%E8%B1%AB%EF%BC%89"><span class="nav-text">4. 河南省（豫）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%B3%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">河南高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%89%E5%BE%BD%E7%9C%81%EF%BC%88%E7%9A%96%EF%BC%89"><span class="nav-text">5. 安徽省（皖）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%BE%BD%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">安徽高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%9B%9B%E5%B7%9D%E7%9C%81%EF%BC%88%E5%B7%9D%EF%BC%89"><span class="nav-text">6. 四川省（川）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%B7%9D%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">四川高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%99%95%E8%A5%BF%E7%9C%81%EF%BC%88%E9%99%95%EF%BC%89"><span class="nav-text">7. 陕西省（陕）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;陕西高速12122&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%95%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">陕西高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%94%98%E8%82%83%E7%9C%81%EF%BC%88%E7%94%98%EF%BC%89"><span class="nav-text">8. 甘肃省（甘）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%98%E8%82%83%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">甘肃高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%AE%81%E5%A4%8F%E5%9B%9E%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E5%AE%81%EF%BC%89"><span class="nav-text">9. 宁夏回族自治区（宁）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%81%E5%A4%8F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">宁夏高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%B2%B3%E5%8C%97%E7%9C%81%EF%BC%88%E5%86%80%EF%BC%89"><span class="nav-text">10. 河北省（冀）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%B3%E5%8C%97%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E5%87%BA%E8%A1%8C%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1%E7%BD%91"><span class="nav-text">河北高速公路出行信息服务网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E6%96%B0%EF%BC%89"><span class="nav-text">11. 新疆维吾尔自治区（新）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%96%86%E4%BA%A4%E9%80%9A%E5%85%AC%E4%BC%97%E5%87%BA%E8%A1%8C%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1%E7%BD%91"><span class="nav-text">新疆交通公众出行信息服务网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%A6%8F%E5%BB%BA%E7%9C%81%EF%BC%88%E9%97%BD%EF%BC%89"><span class="nav-text">12. 福建省（闽）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;福州交警&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%8F%E5%BB%BA%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">福建高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E4%BA%91%E5%8D%97%E7%9C%81%EF%BC%88%E4%BA%91%EF%BC%89"><span class="nav-text">13. 云南省（云）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%91%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">云南高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;云南交投路况&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%B1%B1%E4%B8%9C%E7%9C%81%EF%BC%88%E9%B2%81%EF%BC%89"><span class="nav-text">14. 山东省（鲁）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%B1%E4%B8%9C%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E6%92%AD%E6%8A%A5%E9%A2%84%E8%A7%88"><span class="nav-text">山东高速路况播报预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E8%BE%BD%E5%AE%81%E7%9C%81%EF%BC%88%E8%BE%BD%EF%BC%89"><span class="nav-text">15. 辽宁省（辽）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%BD%E5%AE%81%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">辽宁高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%EF%BC%88%E9%BB%91%EF%BC%89"><span class="nav-text">16. 黑龙江省（黑）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E9%BE%99%E6%B1%9F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">黑龙江高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E8%92%99%EF%BC%89"><span class="nav-text">17. 内蒙古自治区（蒙）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%92%99%E5%8F%A4%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E6%92%AD%E6%8A%A5%E9%A2%84%E8%A7%88"><span class="nav-text">内蒙古高速路况播报预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;内蒙古高速&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E5%8C%97%E4%BA%AC%E5%B8%82%EF%BC%88%E4%BA%AC%EF%BC%89"><span class="nav-text">18. 北京市（京）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%97%E4%BA%AC%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">北京高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;首都高速&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-%E6%B1%9F%E8%A5%BF%E7%9C%81%EF%BC%88%E8%B5%A3%EF%BC%89"><span class="nav-text">19. 江西省（赣）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%9F%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">江西高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;江西高速实时路况&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-%E5%B9%BF%E8%A5%BF%E5%A3%AE%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E6%A1%82%EF%BC%89"><span class="nav-text">20. 广西壮族自治区（桂）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">广西高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E6%B5%B7%E5%8D%97%E7%9C%81%EF%BC%88%E7%90%BC%EF%BC%89"><span class="nav-text">21. 海南省（琼）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%B7%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">海南高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E6%B9%96%E5%8D%97%E7%9C%81%EF%BC%88%E6%B9%98%EF%BC%89"><span class="nav-text">22.湖南省（湘）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;湖南高速警察便民服务平台&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%B9%BF%E4%B8%9C%E7%9C%81%EF%BC%88%E7%B2%A4%EF%BC%89"><span class="nav-text">23.广东省（粤）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;广东粤通行&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-%E5%90%89%E6%9E%97%E7%9C%81%EF%BC%88%E5%90%89%EF%BC%89"><span class="nav-text">24.吉林省（吉）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;吉行高速&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E9%9D%92%E6%B5%B7%E7%9C%81%EF%BC%88%E9%9D%92%EF%BC%89"><span class="nav-text">25.青海省（青）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开青海&quot;高速V服&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E5%B1%B1%E8%A5%BF%E7%9C%81%EF%BC%88%E6%99%8B%EF%BC%89"><span class="nav-text">26.山西省（晋）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;晋e行&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-%E5%A4%A9%E6%B4%A5%E5%B8%82%EF%BC%88%E6%B4%A5%EF%BC%89-%E6%94%B6%E9%9B%86%E4%B8%AD"><span class="nav-text">27. 天津市（津）-收集中天津市高速路况预览
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1%E6%93%8D%E4%BD%9C%E6%9F%A5%E7%9C%8B%E8%AF%B4%E6%98%8E"><span class="nav-text">手机微信操作查看说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8A%E6%B5%B7%E5%B8%82%EF%BC%88%E6%B2%AA%EF%BC%89"><span class="nav-text">1. 上海市（沪）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">上海高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B5%99%E6%B1%9F%E7%9C%81%EF%BC%88%E6%B5%99%EF%BC%89"><span class="nav-text">2. 浙江省（浙）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;浙里畅行&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%99%E6%B1%9F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">浙江高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B1%9F%E8%8B%8F%E7%9C%81%EF%BC%88%E8%8B%8F%EF%BC%89"><span class="nav-text">3. 江苏省（苏）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;江苏路网&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%9F%E8%8B%8F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">江苏高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B2%B3%E5%8D%97%E7%9C%81%EF%BC%88%E8%B1%AB%EF%BC%89"><span class="nav-text">4. 河南省（豫）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%B3%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">河南高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%89%E5%BE%BD%E7%9C%81%EF%BC%88%E7%9A%96%EF%BC%89"><span class="nav-text">5. 安徽省（皖）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%BE%BD%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">安徽高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%9B%9B%E5%B7%9D%E7%9C%81%EF%BC%88%E5%B7%9D%EF%BC%89"><span class="nav-text">6. 四川省（川）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%B7%9D%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">四川高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%99%95%E8%A5%BF%E7%9C%81%EF%BC%88%E9%99%95%EF%BC%89"><span class="nav-text">7. 陕西省（陕）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;陕西高速12122&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%95%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">陕西高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%94%98%E8%82%83%E7%9C%81%EF%BC%88%E7%94%98%EF%BC%89"><span class="nav-text">8. 甘肃省（甘）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%98%E8%82%83%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">甘肃高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%AE%81%E5%A4%8F%E5%9B%9E%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E5%AE%81%EF%BC%89"><span class="nav-text">9. 宁夏回族自治区（宁）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%81%E5%A4%8F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">宁夏高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%B2%B3%E5%8C%97%E7%9C%81%EF%BC%88%E5%86%80%EF%BC%89"><span class="nav-text">10. 河北省（冀）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%B3%E5%8C%97%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E5%87%BA%E8%A1%8C%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1%E7%BD%91"><span class="nav-text">河北高速公路出行信息服务网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E6%96%B0%EF%BC%89"><span class="nav-text">11. 新疆维吾尔自治区（新）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%96%86%E4%BA%A4%E9%80%9A%E5%85%AC%E4%BC%97%E5%87%BA%E8%A1%8C%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1%E7%BD%91"><span class="nav-text">新疆交通公众出行信息服务网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%A6%8F%E5%BB%BA%E7%9C%81%EF%BC%88%E9%97%BD%EF%BC%89"><span class="nav-text">12. 福建省（闽）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信中打开&quot;福州交警&quot;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%8F%E5%BB%BA%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">福建高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E4%BA%91%E5%8D%97%E7%9C%81%EF%BC%88%E4%BA%91%EF%BC%89"><span class="nav-text">13. 云南省（云）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%91%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">云南高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;云南交投路况&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%B1%B1%E4%B8%9C%E7%9C%81%EF%BC%88%E9%B2%81%EF%BC%89"><span class="nav-text">14. 山东省（鲁）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%B1%E4%B8%9C%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E6%92%AD%E6%8A%A5%E9%A2%84%E8%A7%88"><span class="nav-text">山东高速路况播报预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E8%BE%BD%E5%AE%81%E7%9C%81%EF%BC%88%E8%BE%BD%EF%BC%89"><span class="nav-text">15. 辽宁省（辽）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%BD%E5%AE%81%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">辽宁高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%EF%BC%88%E9%BB%91%EF%BC%89"><span class="nav-text">16. 黑龙江省（黑）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E9%BE%99%E6%B1%9F%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">黑龙江高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E8%92%99%EF%BC%89"><span class="nav-text">17. 内蒙古自治区（蒙）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%92%99%E5%8F%A4%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E6%92%AD%E6%8A%A5%E9%A2%84%E8%A7%88"><span class="nav-text">内蒙古高速路况播报预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;内蒙古高速&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E5%8C%97%E4%BA%AC%E5%B8%82%EF%BC%88%E4%BA%AC%EF%BC%89"><span class="nav-text">18. 北京市（京）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%97%E4%BA%AC%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">北京高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;首都高速&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-%E6%B1%9F%E8%A5%BF%E7%9C%81%EF%BC%88%E8%B5%A3%EF%BC%89"><span class="nav-text">19. 江西省（赣）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%9F%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">江西高速路况预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#website-redirect"><span class="nav-text">点击访问&quot;江西高速实时路况&quot;网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-%E5%B9%BF%E8%A5%BF%E5%A3%AE%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%EF%BC%88%E6%A1%82%EF%BC%89"><span class="nav-text">20. 广西壮族自治区（桂）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E8%A5%BF%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">广西高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E6%B5%B7%E5%8D%97%E7%9C%81%EF%BC%88%E7%90%BC%EF%BC%89"><span class="nav-text">21. 海南省（琼）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%B7%E5%8D%97%E9%AB%98%E9%80%9F%E8%B7%AF%E5%86%B5%E9%A2%84%E8%A7%88"><span class="nav-text">海南高速路况预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DeepSeek-1"><span class="nav-text">DeepSeek 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;湖南高速警察便民服务平台&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DeepSeek-2"><span class="nav-text">DeepSeek 2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">湖南高速警察便民服务平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E6%B9%96%E5%8D%97%E7%9C%81%EF%BC%88%E6%B9%98%EF%BC%89"><span class="nav-text">22.湖南省（湘）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;湖南高速警察便民服务平台&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E5%B9%BF%E4%B8%9C%E7%9C%81%EF%BC%88%E7%B2%A4%EF%BC%89"><span class="nav-text">23.广东省（粤）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;广东粤通行&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-%E5%90%89%E6%9E%97%E7%9C%81%EF%BC%88%E5%90%89%EF%BC%89"><span class="nav-text">24.吉林省（吉）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;吉行高速&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E9%9D%92%E6%B5%B7%E7%9C%81%EF%BC%88%E9%9D%92%EF%BC%89"><span class="nav-text">25.青海省（青）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开青海&quot;高速V服&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-%E5%B1%B1%E8%A5%BF%E7%9C%81%EF%BC%88%E6%99%8B%EF%BC%89"><span class="nav-text">26.山西省（晋）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">请在微信·小程序中打开&quot;晋e行&quot;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-%E5%A4%A9%E6%B4%A5%E5%B8%82%EF%BC%88%E6%B4%A5%EF%BC%89-%E6%94%B6%E9%9B%86%E4%B8%AD"><span class="nav-text">27. 天津市（津）-收集中天津市高速路况预览
 
 28. 重庆市（渝）-收集中重庆市高速路况预览
 
@@ -1967,7 +2078,7 @@ function copyToClipboard9() {
                     </span>
                     
                         <span>
-                            共 231.2k 字
+                            共 231.6k 字
                         </span>
                     
                 </p>
