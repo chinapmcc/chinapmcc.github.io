@@ -827,7 +827,7 @@
 <p><strong>高速原则：不要龟速占用第一车道，不要占用应急车道，不要长时间簇拥并排行驶</strong></p>
 <p>全国高速公路摄像头实时监控，查看方式不太一样，有的须微信打开，有的用第三方浏览器打开链接地址，清晰度与流畅度各不相同。最后提醒出行安全第一。</p>
 <div align="right">
-    <strong>2026年5月4日更新</strong>
+    <strong>2026年5月4日更新（Ctrl+F5刷新）</strong>
     <ul style="list-style-position: inside; padding-left: 0; margin: 0;">
         <strong>۰新增微信小程序链接5省</strong><br>
         <strong>۰修复2省网页无法浏览问题</strong><br>
@@ -1250,7 +1250,7 @@ function copyToClipboard4() {
 </div>
 
 
-<h2 id="20-广西壮族自治区（桂）"><a href="#20-广西壮族自治区（桂）" class="headerlink" title="20. 广西壮族自治区（桂）"></a>20. 广西壮族自治区（桂）</h2><h3 id="广西高速路况预览"><a href="#广西高速路况预览" class="headerlink" title="广西高速路况预览"></a>广西高速路况预览</h3><iframe src="http://221.7.196.191:9002/gxgscx-public/#/home/homePage" style="width:100%; aspect-ratio:4/3; border:0;"></iframe>
+<h2 id="20-广西壮族自治区（桂）"><a href="#20-广西壮族自治区（桂）" class="headerlink" title="20. 广西壮族自治区（桂）"></a>20. 广西壮族自治区（桂）</h2><h3 id="广西高速路况预览"><a href="#广西高速路况预览" class="headerlink" title="广西高速路况预览"></a>广西高速路况预览</h3><iframe src="http://221.7.196.191:9002/gxgscx-public-wechat/#/roadNet" style="width:100%; aspect-ratio:4/3; border:0;"></iframe>
 
 <h2 id="21-海南省（琼）"><a href="#21-海南省（琼）" class="headerlink" title="21. 海南省（琼）"></a>21. 海南省（琼）</h2><h3 id="海南高速路况预览"><a href="#海南高速路况预览" class="headerlink" title="海南高速路况预览"></a>海南高速路况预览</h3><iframe src="http://hnglj.tianyait.net:8189/lkxx/index.jhtml" style="width:100%; aspect-ratio:4/3; border:0;"></iframe>
 
@@ -1287,15 +1287,7 @@ function copyToClipboard4() {
 function copyToClipboard5() {
   const text = '#小程序://湖南高速警察便民服务平台/dGhPz9Bc8Knk75g';
   
-  // 方法1: 尝试使用微信专用API (推荐)
-  if (window.WeixinJSBridge) {
-    window.WeixinJSBridge.invoke('getBrandWCPayRequest', {
-      // 注意：这里是调用复制功能，不是支付
-      // 微信没有直接提供copy API，但可以通过创建input元素实现
-    });
-  }
-  
-  // 通用降级方案：创建临时输入框（在微信中可行）
+  // 创建临时输入框
   const tempInput = document.createElement('input');
   tempInput.value = text;
   document.body.appendChild(tempInput);
@@ -1311,10 +1303,10 @@ function copyToClipboard5() {
       throw new Error('execCommand failed');
     }
   } catch (err) {
-    // 最后的降级方案：提示用户手动复制
-    document.getElementById('copyStatus5').innerHTML = '⚠️ 复制失败，请长按上方口令手动复制';
+    document.getElementById('copyStatus5').innerHTML = '⚠️ 复制失败，请长按口令手动复制';
     document.getElementById('copyStatus5').style.color = '#ff6b6b';
-    // 显示口令文本供用户手动长按复制
+    
+    // 显示口令文本供手动长按复制
     const existingHint = document.getElementById('manualCopyText');
     if (!existingHint) {
       const manualDiv = document.createElement('div');
@@ -1326,7 +1318,7 @@ function copyToClipboard5() {
       manualDiv.style.fontSize = '14px';
       manualDiv.style.wordBreak = 'break-all';
       manualDiv.style.color = '#333';
-      manualDiv.innerHTML = `📋 小程序口令：<span style="user-select:all; font-family:monospace;">${text}</span>`;
+      manualDiv.innerHTML = `📋 小程序口令：<span style="user-select:all; font-family:monospace;">${text}</span><br><span style="font-size:12px; color:#999;">长按上方文字即可复制</span>`;
       document.querySelector('#copyBtn').parentNode.parentNode.appendChild(manualDiv);
     }
   }
@@ -1334,8 +1326,13 @@ function copyToClipboard5() {
   document.body.removeChild(tempInput);
 }
 
-// 绑定到页面元素
-document.getElementById('copyBtn').addEventListener('click', copyToClipboard5);
+// 确保DOM加载完成后再绑定事件
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('copyBtn');
+  if (btn) {
+    btn.addEventListener('click', copyToClipboard5);
+  }
+});
 </script>
 
 
@@ -1350,20 +1347,27 @@ document.getElementById('copyBtn').addEventListener('click', copyToClipboard5);
   <h3 style="color:#333; margin-bottom:10px;">湖南高速警察便民服务平台</h3>
   
   <p style="color:#666; margin-bottom:20px;">
-    点击下方按钮，直接跳转小程序
+    👇 点击下方按钮直接打开小程序
   </p>
   
-<p>  <button onclick="openMiniProgram()" 
+<p>  <button id="openBtn" 
           style="padding:12px 24px; background:#07c160; color:white; border:none; border-radius:6px; cursor:pointer; font-size:16px;"><br>    打开小程序<br>  </button></p>
+  <p id="openHint" style="font-size:12px; color:#999; margin-top:15px;">
+    如无法跳转，请点击右上角“...”在浏览器中打开
+  </p>
 </div>
 
 <script>
-function openMiniProgram() {
-  // 微信环境下直接跳转
+document.getElementById('openBtn').addEventListener('click', function() {
   window.location.href = '#小程序://湖南高速警察便民服务平台/dGhPz9Bc8Knk75g';
-}
+  
+  // 5秒后如果未跳转，提示降级方案
+  setTimeout(function() {
+    document.getElementById('openHint').innerHTML = '⚠️ 跳转失败？请长按复制：#小程序://湖南高速警察便民服务平台/dGhPz9Bc8Knk75g';
+    document.getElementById('openHint').style.color = '#ff6b6b';
+  }, 5000);
+});
 </script>
-
 
 
 <h2 id="22-湖南省（湘）"><a href="#22-湖南省（湘）" class="headerlink" title="22.湖南省（湘）"></a>22.湖南省（湘）</h2>
